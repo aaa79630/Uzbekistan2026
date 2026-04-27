@@ -650,11 +650,114 @@
     font-family: 'Fraunces', serif;
     font-weight: 300;
   }
+  /* ===== 修正後：浮動導覽選單樣式 ===== */
+  html {
+    scroll-behavior: smooth;
+  }
+
+/* ===== 修正後：絕對置中的浮動按鈕 ===== */
+  .nav-toggle {
+    position: fixed;
+    bottom: 30px;
+    right: 25px;
+    width: 52px;
+    height: 52px;
+    background: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 8px 20px rgba(30, 58, 95, 0.15);
+    border: 1px solid var(--line);
+    transition: all 0.3s ease;
+    padding: 0; /* 確保沒有內距干擾 */
+  }
+
+  /* 用 CSS 畫出三條槓 */
+  .burger-icon {
+    width: 20px;
+    height: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .burger-icon span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--persian-blue); /* 使用原本的波斯藍 */
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  /* 當選單開啟時，三條槓轉動變成 X 的動畫 (選配，視覺更精緻) */
+  .nav-toggle.active .burger-icon span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .nav-toggle.active .burger-icon span:nth-child(2) { opacity: 0; }
+  .nav-toggle.active .burger-icon span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+  /* 選單面板：改為更柔和的圓角與陰影 */
+  .nav-menu {
+    position: fixed;
+    bottom: 95px;
+    right: 25px;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px); /* 增加毛玻璃質感 */
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 10px 0;
+    width: 180px;
+    box-shadow: 0 15px 35px rgba(30, 58, 95, 0.12);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px);
+    transition: all 0.3s ease;
+  }
+
+  .nav-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .nav-item {
+    display: block;
+    padding: 12px 22px;
+    color: var(--persian-blue);
+    text-decoration: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+
+  .nav-item:not(:last-child) {
+    border-bottom: 1px solid rgba(30, 58, 95, 0.05);
+  }
+
+  .nav-item:hover {
+    background: var(--turquoise-light);
+    color: var(--turquoise);
+    padding-left: 28px; /* 滑鼠經過時的小位移特效 */
+  }
+
+  /* 遮罩層：讓視覺焦點集中在選單 */
+  .nav-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(26, 20, 16, 0.2); /* 使用你的 --ink 顏色作為底色 */
+    z-index: 998;
+    display: none;
+    backdrop-filter: blur(2px);
+  }
+  .nav-overlay.active { display: block; }
 </style>
 </head>
 <body>
 
-<section class="hero">
+<section class="hero" id="hero">
   <svg class="city-skyline" viewBox="0 0 1200 150" preserveAspectRatio="none">
     <path d="M0,150 L0,120 L50,120 L55,40 L65,40 L70,120 L150,120 L170,80 L230,80 L250,120 L300,120 L310,20 L325,20 L335,120 L450,120 C480,60 520,60 550,120 L650,120 L665,10 L685,10 L700,120 L850,120 C880,50 940,50 970,120 L1200,120 L1200,150 Z" />
   </svg>
@@ -671,7 +774,7 @@
   </div>
 </section>
 
-<section class="added-info">
+<section class="added-info" id="intro">
   <h2>🇺🇿 認識烏茲別克</h2>
   
   <div class="intro-quote">
@@ -732,7 +835,7 @@
 
 </section>
 
-<section class="overview">
+<section class="overview" id="route">
   <div class="section-label">Route Overview / 路線規劃</div>
   <h2 class="section-title">The Silk Road Loop</h2>
   <div class="route-flow">
@@ -780,7 +883,7 @@
   </div>
 </section>
 
-<section class="days">
+<section class="days" id="itinerary">
 
   <div class="day-card">
     <div class="day-info">
@@ -913,7 +1016,7 @@
     </div>
   </div>
 </section>
-<section class="accommodation">
+<section class="accommodation" id="lodging">
   <div class="accom-inner">
     <div class="section-label">Accommodation / 住宿規劃</div>
     <h2 class="section-title">住宿安排</h2>
@@ -956,7 +1059,7 @@
   </div>
 </section>
 
-<section class="visa-section">
+<section class="visa-section" id="visa">
   <div class="visa-inner">
     <div class="section-label">Visa Guide / 簽證指南</div>
     <h2 class="section-title">台灣人辦簽證</h2>
@@ -1016,7 +1119,7 @@
   </div>
 </section>
 
-<section class="practical">
+<section class="practical" id="practical">
   <div class="section-label">Practical Info / 實用資訊</div>
   <h2 class="section-title">換匯 · 網卡 · 交通</h2>
 
@@ -1117,7 +1220,7 @@
 
 
 <!-- ===== 新增：攜帶清單勾選區塊 ===== -->
-<section class="packing-section">
+<section class="packing-section" id="packing">
   <div class="packing-inner">
     <div class="section-label">Packing List / 準備清單</div>
     <h2 class="section-title">行李必備清單</h2>
@@ -1279,6 +1382,50 @@
 
   map.fitBounds(L.polyline(latlngs).getBounds(), {padding: [40, 50]});
 </script>
+<div class="nav-overlay" id="navOverlay"></div>
+<nav class="nav-menu" id="navMenu">
+  <a href="#hero" class="nav-item">🏠 回到頂部</a>
+  <a href="#intro" class="nav-item">🇺🇿 認識烏茲別克</a>
+  <a href="#route" class="nav-item">🗺️ 路線規劃</a>
+  <a href="#itinerary" class="nav-item">🗓️ 11天行程</a>
+  <a href="#lodging" class="nav-item">🏨 住宿安排</a>
+  <a href="#visa" class="nav-item">🛂 簽證指南</a>
+  <a href="#practical" class="nav-item">💵 實用資訊</a>
+  <a href="#packing" class="nav-item">🎒 行李清單</a>
+</nav>
 
+<div class="nav-toggle" id="navToggle">
+  <div class="burger-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navMenu = document.getElementById('navMenu');
+  const navOverlay = document.getElementById('navOverlay');
+  const navItems = document.querySelectorAll('.nav-item');
+
+  // 切換選單顯示/隱藏
+function toggleMenu() {
+    navMenu.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+    navToggle.classList.toggle('active'); // 讓按鈕自己切換 active 狀態
+    // 移除原本改 innerHTML 的那一行
+  }
+  navToggle.addEventListener('click', toggleMenu);
+  navOverlay.addEventListener('click', toggleMenu);
+
+  // 點擊選項後自動關閉選單
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      navMenu.classList.remove('active');
+      navOverlay.classList.remove('active');
+      navToggle.innerHTML = '☰';
+    });
+  });
+</script>
 </body>
 </html>

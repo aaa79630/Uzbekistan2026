@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uzbekistan · 烏茲別克絲路 11 天行程</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,400&family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --turquoise: #00A9B8;
+    --turquoise-light: #E0F7F8;
+    --uzbek-gold: #D4AF37;
+    --persian-blue: #1E3A5F;
+    --sky-blue: #6B8FB5;
+    --earth-brown: #5C4A33;
+    --tile-blue: #005696;
+    --sand: #F5EEDC;
+    --ink: #1A1410;
+    --accent-red: #A8322A;
+    --line: rgba(30, 58, 95, 0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; font-style: normal !important; }
+
+  body {
+    font-family: 'Noto Serif TC', serif;
+    background: var(--sand);
+    color: var(--ink);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ===== 標題通用設定 ===== */
+  .section-title, .day-route, .added-info h2, .prac-card h3, .visa-card h4, .visa-steps h4, .note-card h4, .accom-name, .info-card-new h4, .block-title, .packing-category h4 {
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 700;
+  }
+
+  /* ===== Hero ===== */
+  .hero {
+    min-height: 80vh;
+    background: 
+      radial-gradient(ellipse at top, rgba(0, 169, 184, 0.05) 0%, var(--sand) 70%),
+      linear-gradient(180deg, #D4C8A8 0%, #E8DCC4 40%, #F5EEDC 100%);
+    position: relative;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .city-skyline {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 150px;
+    opacity: 0.12;
+    pointer-events: none;
+    fill: var(--persian-blue);
+  }
+
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+    z-index: 2;
+  }
+
+  .eyebrow {
+    font-family: 'Manrope', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--tile-blue);
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .eyebrow::before, .eyebrow::after {
+    content: '';
+    height: 1px;
+    background: var(--tile-blue);
+    flex: 0 0 30px;
+    opacity: 0.5;
+  }
+
+  h1.hero-title {
+    font-size: clamp(48px, 8vw, 100px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--persian-blue);
+    margin-bottom: 20px;
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+  }
+  h1.hero-title .zh {
+    display: block;
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 500;
+    font-size: 0.58em;
+    letter-spacing: 0.05em;
+    color: var(--turquoise);
+    margin-top: 6px;
+  }
+
+  .hero-sub {
+    font-size: clamp(15px, 2vw, 22px);
+    color: var(--earth-brown);
+    max-width: 900px;
+    margin-bottom: 50px;
+    white-space: nowrap;
+  }
+  @media (max-width: 768px) {
+    .hero-sub { white-space: normal; font-size: 15px; }
+  }
+
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 40px;
+    max-width: 900px;
+    border-top: 1px solid var(--line);
+    padding-top: 30px;
+  }
+  .meta-label {
+    font-family: 'Manrope', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--tile-blue);
+    margin-bottom: 8px;
+  }
+  .meta-value {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 22px;
+    color: var(--ink);
+  }
+
+  /* ===== Added Background Info Section ===== */
+  .added-info {
+    padding: 50px 40px;
+    max-width: 1200px;
+    margin: 40px auto 0;
+    background: #fff;
+    border-radius: 8px;
+    position: relative;
+    z-index: 10;
+    border: 1px solid var(--line);
+  }
+  .added-info h2 {
+    color: var(--persian-blue);
+    font-size: 28px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--uzbek-gold);
+    display: inline-block;
+    padding-bottom: 8px;
+  }
+  .intro-quote {
+    color: var(--persian-blue);
+    border-left: 4px solid var(--uzbek-gold);
+    padding-left: 16px;
+    margin-bottom: 30px;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 35px;
+  }
+  .info-card-new {
+    background: #fcfcfc;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 24px;
+  }
+  .info-card-new h4 {
+    color: var(--persian-blue);
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+  .info-card-new ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .info-card-new li {
+    position: relative;
+    padding-left: 16px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.6;
+  }
+  .info-card-new li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--uzbek-gold);
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  .block-title {
+    color: var(--persian-blue);
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+  .city-briefs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+  .brief-card {
+    background: var(--turquoise-light);
+    padding: 20px;
+    border-radius: 6px;
+  }
+  .brief-card h4 {
+    color: var(--tile-blue);
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-family: 'Manrope', 'Noto Serif TC', sans-serif;
+  }
+  .brief-card p {
+    font-size: 14px;
+    margin: 0;
+  }
+
+  /* ===== Overview ===== */
+  .overview { padding: 80px 40px; max-width: 1200px; margin: 0 auto; }
+  .section-label { font-family: 'Manrope', sans-serif; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--tile-blue); margin-bottom: 16px; }
+  .section-title { font-size: clamp(28px, 5vw, 42px); margin-bottom: 40px; color: var(--ink); }
+
+  .route-flow {
+    display: flex; flex-wrap: wrap; gap: 10px 15px; align-items: center; margin-bottom: 30px;
+  }
+  .route-node {
+    padding: 8px 16px; background: #fff; border: 1px solid var(--line); border-radius: 4px; font-size: 14px; font-weight: 500;
+  }
+  .route-node.highlight { background: var(--persian-blue); color: #fff; }
+  .route-arrow { color: var(--turquoise); font-size: 18px; }
+
+  #route-map {
+    width: 100%;
+    height: 350px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    margin-bottom: 30px;
+    z-index: 1;
+  }
+
+  /* ===== Day Cards ===== */
+  .days { padding: 0 40px 60px; max-width: 1200px; margin: 0 auto; }
+  .day-card {
+    display: grid; grid-template-columns: 160px 1fr; gap: 50px; padding: 60px 0; border-top: 1px solid var(--line);
+  }
+
+  .day-number { font-family: 'Fraunces', serif; font-size: 80px; line-height: 1; color: var(--turquoise); opacity: 0.4; }
+  .day-date { font-family: 'Manrope', sans-serif; font-size: 13px; color: var(--tile-blue); margin-top: 10px; }
+
+  .day-route { font-size: 28px; color: var(--persian-blue); margin-bottom: 12px; }
+  .day-tagline { font-size: 18px; color: var(--earth-brown); margin-bottom: 20px; border-left: 3px solid var(--uzbek-gold); padding-left: 15px; }
+  .day-details { font-size: 15px; line-height: 1.75; margin-bottom: 10px; }
+
+  .highlight-box {
+    background: #fff; border: 1px solid var(--line); padding: 20px; margin-top: 15px; position: relative;
+  }
+  .highlight-box::before {
+    content: '重點行程 · HIGHLIGHTS'; position: absolute; top: -10px; left: 15px; background: var(--sand); padding: 0 10px; font-size: 10px; color: var(--tile-blue); font-weight: 700; font-family: 'Manrope', sans-serif; letter-spacing: 0.1em;
+  }
+
+  .food-box {
+    background: var(--turquoise-light); border: 1px solid rgba(0, 169, 184, 0.2); padding: 15px 20px; margin-top: 15px; border-radius: 4px;
+  }
+  .food-box strong { color: var(--tile-blue); font-size: 14px; }
+
+  .ref-links {
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .ref-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 12px;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    color: var(--tile-blue);
+    text-decoration: none;
+    background: #fff;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .ref-link:hover { background: var(--turquoise-light); border-color: var(--turquoise); }
+  .ref-link-yt { border-color: rgba(255,0,0,0.25); color: #c00; }
+  .ref-link-yt:hover { background: #fff0f0; border-color: #c00; }
+
+  /* ===== VISA SECTION ===== */
+  .visa-section {
+    background: linear-gradient(135deg, #1a2e4a 0%, #1E3A5F 100%);
+    color: #fff;
+    padding: 80px 40px;
+  }
+  .visa-inner { max-width: 1200px; margin: 0 auto; }
+  .visa-section .section-label { color: var(--uzbek-gold); }
+  .visa-section .section-title { color: #fff; }
+
+  .visa-alert {
+    background: rgba(212, 175, 55, 0.15);
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    border-left: 4px solid var(--uzbek-gold);
+    padding: 16px 20px;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    font-size: 14px;
+    line-height: 1.65;
+    color: #f0e8d0;
+  }
+  .visa-alert strong { color: var(--uzbek-gold); }
+
+  .visa-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  .visa-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    padding: 22px;
+  }
+  .visa-card h4 {
+    color: var(--uzbek-gold);
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+  .visa-card p, .visa-card li { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.85); }
+  .visa-card ul { padding-left: 16px; margin-top: 8px; }
+  .visa-card li { margin-bottom: 5px; }
+
+  .visa-steps {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px;
+    padding: 22px 24px;
+    margin-bottom: 20px;
+  }
+  .visa-steps h4 { color: var(--uzbek-gold); font-size: 18px; margin-bottom: 16px; }
+  .steps-list { display: flex; flex-direction: column; gap: 10px; }
+  .step {
+    display: flex; gap: 14px; align-items: flex-start;
+    font-size: 14px; color: rgba(255,255,255,0.85); line-height: 1.6;
+  }
+  .step-num {
+    flex-shrink: 0;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--uzbek-gold);
+    color: #1a1208;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .visa-cost-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .cost-chip {
+    background: rgba(212, 175, 55, 0.2);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    border-radius: 4px;
+    padding: 14px 16px;
+    font-size: 13px;
+    color: #f0e8d0;
+    line-height: 1.65;
+  }
+  .cost-chip strong { color: var(--uzbek-gold); display: block; font-size: 17px; margin-bottom: 6px; font-family: 'Noto Serif TC', serif; font-weight: 700; }
+  @media (max-width: 600px) { .visa-cost-row { grid-template-columns: 1fr; } }
+
+  /* ===== PRACTICAL INFO ===== */
+  .practical {
+    padding: 80px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .practical-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 10px;
+  }
+  .prac-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 28px;
+  }
+  .prac-card h3 {
+    font-size: 22px;
+    color: var(--persian-blue);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .prac-card .sub-note {
+    font-family: 'Manrope', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--tile-blue);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .prac-card p, .prac-card li { font-size: 14px; line-height: 1.75; color: #333; }
+  .prac-card ul { padding-left: 16px; margin-top: 6px; }
+  .prac-card li { margin-bottom: 4px; }
+  .prac-divider { border: none; border-top: 1px solid var(--line); margin: 14px 0; }
+  .prac-tag {
+    display: inline-block;
+    background: var(--turquoise-light);
+    color: var(--tile-blue);
+    font-family: 'Manrope', sans-serif;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-right: 4px;
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+  .prac-tag.gold { background: rgba(212,175,55,0.15); color: #8a6500; }
+  .prac-tag.red { background: rgba(168,50,42,0.1); color: var(--accent-red); }
+  .warn-box {
+    background: rgba(168,50,42,0.07);
+    border-left: 3px solid var(--accent-red);
+    padding: 10px 14px;
+    border-radius: 0 4px 4px 0;
+    margin-top: 12px;
+    font-size: 13px;
+    color: #5a1a14;
+  }
+
+  /* ===== ACCOMMODATION ===== */
+  .accommodation {
+    background: #f0ebe0;
+    padding: 70px 40px;
+  }
+
+  
+  .accom-inner { max-width: 1200px; margin: 0 auto; }
+  .accom-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-top: 30px; }
+  .accom-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 22px;
+    position: relative;
+  }
+  .accom-city {
+    font-family: 'Manrope', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--tile-blue);
+    margin-bottom: 8px;
+  }
+  .accom-name {
+    font-size: 20px;
+    color: var(--persian-blue);
+    margin-bottom: 4px;
+  }
+  .accom-nights {
+    font-size: 13px;
+    color: var(--earth-brown);
+    margin-bottom: 12px;
+  }
+  .accom-placeholder {
+    border: 1.5px dashed rgba(0,86,150,0.25);
+    border-radius: 4px;
+    padding: 14px;
+    text-align: center;
+    color: rgba(0,86,150,0.5);
+    font-size: 13px;
+  }
+  .accom-tip {
+    margin-top: 12px;
+    font-size: 12px;
+    color: #666;
+    line-height: 1.55;
+  }
+ /* ===== PACKING LIST SECTION (NEW) ===== */
+  /* 行李清單外層容器 */
+.packing-section {
+  padding: 80px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.packing-inner {
+  width: 100%;
+}
+
+/* 網格設定：在大螢幕上顯示兩列或四列 */
+.packing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin-top: 30px;
+}
+
+/* 分類卡片樣式：比照住宿安排的白框設計 */
+.packing-category {
+  background: #ffffff; /* 白底 */
+  border: 1px solid var(--line); /* 與住宿安排相同的細邊框 */
+  padding: 25px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.3s ease;
+}
+
+.packing-category:hover {
+  transform: translateY(-5px); /* 滑鼠懸停效果 */
+}
+
+.packing-category h4 {
+  font-family: 'Fraunces', serif;
+  color: var(--persian-blue);
+  font-size: 20px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 8px;
+}
+
+/* 勾選項目樣式 */
+.check-item {
+  font-size: 14px;
+  color: var(--earth-brown);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.check-item input[type="checkbox"] {
+  accent-color: var(--turquoise); /* 使用你的主題藍綠色 */
+}
+  
+  /* ===== Notes ===== */
+  .notes { padding: 100px 40px; background: var(--persian-blue); color: #fff; }
+  .notes-inner { max-width: 1200px; margin: 0 auto; }
+  .note-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
+  .note-card { padding: 25px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); border-radius: 4px; }
+  .note-card h4 { color: var(--uzbek-gold); margin-bottom: 15px; font-size: 18px; }
+  .note-card p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.82); }
+
+  @media (max-width: 768px) {
+    .day-card { grid-template-columns: 1fr; gap: 16px; padding: 36px 0; }
+    .hero { padding: 40px 20px; min-height: auto; }
+    .overview, .days, .practical, .visa-section, .accommodation, .notes { padding-left: 18px; padding-right: 18px; }
+    .visa-grid { grid-template-columns: 1fr; }
+    .practical-grid { grid-template-columns: 1fr; }
+    .info-grid { grid-template-columns: 1fr; }
+  }
+
+
+  /* ===== City Cards in Overview ===== */
+  .city-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  .city-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 18px 20px;
+  }
+  .city-card-tag {
+    font-family: 'Manrope', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .city-card-name {
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .city-card p {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    line-height: 1.65;
+    color: #555;
+    margin: 0;
+  }
+  @media (max-width: 900px) {
+    .city-cards-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .city-cards-grid { grid-template-columns: 1fr; }
+  } @media (max-width: 768px) {
+    .day-card { grid-template-columns: 1fr; gap: 16px; padding: 36px 0; }
+    .hero { padding: 40px 20px; min-height: auto; }
+    .overview, .days, .practical, .visa-section, .accommodation, .notes, .packing-section { padding-left: 18px; padding-right: 18px; }
+    .visa-grid, .practical-grid, .info-grid, .city-cards-grid { grid-template-columns: 1fr; }
+  }
+
+  
+  /* ===== 內文用細黑體增加英文易讀性 ===== */
+  .day-details, .highlight-box ul li, .food-box,
+  .prac-card p, .prac-card li, .prac-card .sub-note,
+  .visa-card p, .visa-card li,
+  .visa-steps .step, .note-card p,
+  .accom-tip, .accom-nights, .accom-placeholder,
+  .info-card-new li, .intro-quote, .brief-card p,
+  .ref-links, .warn-box, .visa-alert,
+  .section-label, .eyebrow, .meta-label, .day-date,
+  .cost-chip, footer p {
+    font-family: 'Noto Sans TC', 'Noto Serif TC', sans-serif;
+    font-weight: 400;
+  }
+  /* 日期數字保留 Fraunces */
+  .day-number {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <svg class="city-skyline" viewBox="0 0 1200 150" preserveAspectRatio="none">
+    <path d="M0,150 L0,120 L50,120 L55,40 L65,40 L70,120 L150,120 L170,80 L230,80 L250,120 L300,120 L310,20 L325,20 L335,120 L450,120 C480,60 520,60 550,120 L650,120 L665,10 L685,10 L700,120 L850,120 C880,50 940,50 970,120 L1200,120 L1200,150 Z" />
+  </svg>
+  <div class="hero-inner">
+    <div class="eyebrow">Silk Road Journey · 烏茲別克</div>
+    <h1 class="hero-title">Uzbekistan<span class="zh">11天絲路之旅</span></h1>
+    <p class="hero-sub">穿越三千年的永恆之藍，走進希瓦、布哈拉與撒馬爾罕的史詩篇章。</p>
+    <div class="hero-meta" style="grid-template-columns: auto;">
+      <div class="meta-item">
+        <div class="meta-label">Duration</div>
+        <div class="meta-value" style="white-space:nowrap;">11 Days <small>/ 2026年9月18日–28日</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="added-info">
+  <h2>🇺🇿 認識烏茲別克</h2>
+  
+  <div class="intro-quote">
+    「烏茲別克」之名源自中世紀蒙古烏茲別克汗。這片土地是古絲綢之路最重要的樞紐，曾是帖木兒帝國的璀璨核心，也是人類文明史上天文、數學、詩歌、建築齊放異彩的黃金地帶。今日，它以那無可比擬的藍色琉璃穹頂靜待世界的目光。
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card-new">
+      <h4>🌍 基本概況</h4>
+      <ul>
+        <li>首都：塔什干 Tashkent</li>
+        <li>面積：44.8萬 km²（約台灣的12倍）</li>
+        <li>人口：約 3,600 萬 (2025)</li>
+        <li>語言：烏茲別克語 (官方)、俄語 (廣泛使用)</li>
+        <li>宗教：遜尼派伊斯蘭教為主 (約 93%)</li>
+        <li>時區：UTC+5 (比台灣慢 3 小時)</li>
+        <li>貨幣：烏茲別克蘇姆 UZS (需帶美金換匯)</li>
+      </ul>
+    </div>
+    
+    <div class="info-card-new">
+      <h4>📜 歷史脈絡</h4>
+      <ul>
+        <li>古代：粟特人建立絲路貿易城邦</li>
+        <li>8 世紀：阿拉伯帝國征服，伊斯蘭文化傳入</li>
+        <li>13 世紀：成吉思汗橫掃，撒馬爾罕幾近廢墟</li>
+        <li>14–15 世紀：帖木兒大帝重建帝國，絲路文明最輝煌時代</li>
+        <li>19 世紀：淪為沙俄帝國附庸</li>
+        <li>1991 年：蘇聯解體，宣布獨立至今</li>
+      </ul>
+    </div>
+
+    <div class="info-card-new">
+      <h4>🏛️ 值得一去的看點</h4>
+      <ul>
+        <li>全球保存最完整的中世紀伊斯蘭古城群</li>
+        <li>雷吉斯坦廣場：人類建築史上最壯麗廣場之一</li>
+        <li>物價低廉，旅行預算極為友善</li>
+        <li>台灣旅客少，充滿真實探索感</li>
+        <li>羊肉、烤餅、抓飯飲食獨特令人難忘</li>
+        <li>9 月氣候舒適，正值石榴、葡萄盛產季</li>
+      </ul>
+    </div>
+
+    <div class="info-card-new">
+      <h4>🌡️ 9月旅行環境</h4>
+      <ul>
+        <li>日間 25–35°C，晴天為主，乾燥少雨</li>
+        <li>早晚溫差大 (約 10°C)，需備薄外套</li>
+        <li>旅遊旺季，景點人多，需提前預訂</li>
+        <li>9 月是水果季：石榴、葡萄、哈密瓜最甜</li>
+        <li>中亞日照強烈，防曬乳必備</li>
+        <li>自來水不可直飲，隨時購買瓶裝水</li>
+      </ul>
+    </div>
+  </div>
+
+
+</section>
+
+<section class="overview">
+  <div class="section-label">Route Overview / 路線規劃</div>
+  <h2 class="section-title">The Silk Road Loop</h2>
+  <div class="route-flow">
+    <span class="route-node" style="background:#1E3A5F;color:#fff;border-color:#1E3A5F;">塔什干</span><span class="route-arrow">→</span>
+    <span class="route-node" style="background:#C9973A;color:#fff;border-color:#C9973A;">希瓦 Khiva</span><span class="route-arrow">→</span>
+    <span class="route-node" style="background:#A8322A;color:#fff;border-color:#A8322A;">布哈拉 Bukhara</span><span class="route-arrow">→</span>
+    <span class="route-node" style="background:#5A30A0;color:#fff;border-color:#5A30A0;">撒馬爾罕</span><span class="route-arrow">→</span>
+    <span class="route-node" style="background:#1E3A5F;color:#fff;border-color:#1E3A5F;">塔什干</span><span class="route-arrow">→</span>
+    <span class="route-node">曼谷/首爾</span><span class="route-arrow">→</span>
+     <span class="route-node">台北/東京</span>
+  </div>
+
+  <div class="city-cards-grid">
+    <div class="city-card" style="border-top:3px solid #1E3A5F;">
+      <div class="city-card-tag" style="color:#1E3A5F;">🔵 Day 1 · 10–11</div>
+      <div class="city-card-name">塔什干 Tashkent</div>
+      <p>現代化首都，蘇聯風格地鐵藝術站是中亞獨一無二的地下宮殿；喬爾蘇市集是進入烏茲別克氣息的最佳入口。</p>
+    </div>
+    <div class="city-card" style="border-top:3px solid #C9973A;">
+      <div class="city-card-tag" style="color:#8a6500;">🟡 Day 2–3</div>
+      <div class="city-card-name">希瓦 Khiva</div>
+      <p>整座城是露天博物館，伊坎卡拉古城保留最完整的土磚城牆與迷宮般的絲路巷弄，如穿越千年的夢境。</p>
+    </div>
+    <div class="city-card" style="border-top:3px solid #A8322A;">
+      <div class="city-card-tag" style="color:#A8322A;">🟠 Day 4–6</div>
+      <div class="city-card-name">布哈拉 Bukhara</div>
+      <p>曾是宗教與學術重鎮，卡揚宣禮塔是其不朽標誌；連成吉思汗都不忍拆毀的聖地，擁有兩千年歷史。</p>
+    </div>
+    <div class="city-card" style="border-top:3px solid #5A30A0;">
+      <div class="city-card-tag" style="color:#5A30A0;">🟣 Day 7–9</div>
+      <div class="city-card-name">撒馬爾罕 Samarkand</div>
+      <p>帖木兒帝國的心臟，「東方的明珠」。雷吉斯坦廣場三座神學院的藍色陶磚，在陽光下閃耀著文明的巔峰。</p>
+    </div>
+  </div>
+
+  <div id="route-map"></div>
+
+  <div class="ref-links" style="margin-top: 20px;">
+    <span style="font-family:'Manrope',sans-serif;font-size:12px;color:var(--tile-blue);align-self:center;">🎬 參考影片：</span>
+    <a class="ref-link ref-link-yt" href="https://www.youtube.com/results?search_query=%E7%83%8F%E8%8C%B2%E5%88%A5%E5%85%8B+%E8%87%AA%E7%94%B1%E8%A1%8C" target="_blank" rel="noopener">▶ YouTube 搜尋「烏茲別克自由行」</a>
+    <a class="ref-link ref-link-yt" href="https://www.youtube.com/results?search_query=Uzbekistan+travel+vlog" target="_blank" rel="noopener">▶ Uzbekistan Travel Vlog</a>
+    <a class="ref-link ref-link-yt" href="https://www.youtube.com/results?search_query=%E6%92%92%E9%A6%AC%E7%88%BE%E7%BD%95+%E9%9B%B7%E5%90%89%E6%96%AF%E5%9D%A6+Registan" target="_blank" rel="noopener">▶ 雷吉斯坦廣場介紹</a>
+    <a class="ref-link" href="https://nanashares.com/%E4%B8%AD%E4%BA%9E%E6%97%85%E9%81%8A-%E7%83%8F%E8%8C%B2%E5%88%A5%E5%85%8B%E6%97%85%E9%81%8A-%E9%82%80%E8%AB%8B%E5%87%BD%E3%80%81%E7%B0%BD%E8%AD%89%E7%94%B3%E8%AB%8B%EF%BD%9C2026%E6%9C%80%E6%96%B0/" target="_blank" rel="noopener">📋 2026 簽證攻略（娜娜來了）</a>
+    <a class="ref-link" href="https://yuho1314.com/uzbekistan-travel-budget-guide/" target="_blank" rel="noopener">📋 2026 自由行懶人包（悠活人生）</a>
+  </div>
+</section>
+
+<section class="days">
+
+  <div class="day-card">
+    <div class="day-info">
+      <div class="day-number">01</div>
+      <div class="day-date">09 / 18 (五)</div>
+    </div>
+    <div class="day-content">
+      <div class="day-route">抵達塔什干 Tashkent</div>
+      <div class="day-tagline">踏上中亞心臟，感受現代與傳統的交織。</div>
+      <div class="day-details">13:10 落地後入住飯店。前往喬爾蘇市集 (Chorsu Bazaar) 感受道地氛圍，黃昏於獨立廣場散步。</div>
+      <div class="highlight-box">
+        <ul style="list-style: none; font-size: 14px;">
+          <li>• <strong>Chorsu Bazaar</strong>：中亞最著名的圓頂市集，香料、堅果、乾果應有盡有</li>
+          <li>• <strong>Broadway Street</strong>：體驗塔什干夜生活</li>
+          <li>• <strong>獨立廣場</strong>：黃昏散步，感受現代塔什干的氣息</li>
+        </ul>
+      </div>
+      <div class="food-box">
+        <strong>🍽 推薦美食：</strong>Besh Qozon 傳統抓飯 (Plov)、剛出爐的烏茲別克麵包 (Non)、烤羊肉串 Shashlik。
+      </div>
+      <div class="ref-links">
+        <a class="ref-link ref-link-yt" href="https://www.youtube.com/results?search_query=Chorsu+Bazaar+Tashkent" target="_blank" rel="noopener">▶ Chorsu Bazaar 影片</a>
+        <a class="ref-link ref-link-yt" href="https://www.youtube.com/results?search_query=%E5%A1%94%E4%BB%80%E5%B9%B2+%E5%9C%B0%E9%90%B5+%E8%97%9D%E8%A1%93" target="_blank" rel="noopener">▶ 塔什干地鐵藝術</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-info">
+      <div class="day-number">02–03</div>
+      <div class="day-date">09 / 19–20</div>
+    </div>
+    <div class="day-content">
+      <div class="day-route">塔什干 ✈ 希瓦 Khiva</div>
+      <div class="day-tagline">走進保存最完整的絲路「露天博物館」。</div>
+      <div class="day-details">搭乘早班機飛往烏爾根奇轉希瓦（約1.5h）。深度探索伊坎卡拉內城、朱瑪清真寺的古老木柱與藍色未完成塔。</div>
+      <div class="highlight-box">
+        <ul style="list-style: none; font-size: 14px;">
+          <li>• <strong>伊斯蘭霍賈宣禮塔</strong>：俯瞰古城最佳制高點，日落前上去拍照</li>
+          <li>• <strong>朱瑪清真寺</strong>：213根古老木柱，光線美到令人窒息</li>
+          <li>• <strong>西門城牆</strong>：看一場如史詩般的古城夕陽</li>
+        </ul>
+      </div>
+      <div class="food-box">
+        <strong>🍽 推薦美食：</strong>Terrassa Café 景觀餐、希瓦限定蜂蜜薄餅 (Katlama)、希瓦烤羊腿配扁豆湯。
+      </div>
+      <div class="ref-links">
+        <a class="ref-link ref-link-yt" href="https://www.youtube.com/results?search_query=Khiva+Uzbekistan+travel" target="_blank" rel="noopener">▶ Khiva 希瓦旅遊影片</a>
+        <a class="ref-link ref-link-yt" href="https://www.youtube.com/results?search_query=%E5%B8%8C%E7%93%A6+%E7%83%8F%E8%8C%B2%E5%88%A5%E5%85%8B" target="_blank" rel="noopener">▶ 希瓦中文介紹</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-info">
+      <div class="day-number">04–06</div>
+      <div class="day-date">09 / 21–23</div>
+    </div>
+    <div class="day-content">
+      <div class="day-route">希瓦 🚌 布哈拉 Bukhara</div>
+      <div class="day-tagline">聖地布哈拉：清真寺、宣禮塔與千年巴札。</div>
+      <div class="day-details">翻越紅沙漠來到布哈拉（共乘車約5h）。朝聖中亞最雄偉的卡揚宣禮塔，在萊比豪斯廣場水池旁享受悠閒。近郊亦有夏宮與聖祠值得半日遊。</div>
+      <div class="highlight-box">
+        <ul style="list-style: none; font-size: 14px;">
+          <li>• <strong>Mir-i-Arab 神學院</strong>：至今仍在運行的活建築，卡揚宣禮塔正對面</li>
+          <li>• <strong>三圓頂市集</strong>：挑選精美的手工剪刀與地毯</li>
+          <li>• <strong>夏宮 Sitorai Mohi Xosa</strong>：末代可汗的俄式豪華行宮，近郊半日遊</li>
+        </ul>
+      </div>
+      <div class="food-box">
+        <strong>🍽 推薦美食：</strong>Minzifa 景觀餐廳（花園環境極美）、布哈拉油香抓飯、鮮榨石榴汁（9月石榴季！）、Chinar Café。
+      </div>
+      <div class="ref-links">
+        <a class="ref-link ref-link-yt" href="https://www.youtube.com/results?search_query=Bukhara+Uzbekistan+travel" target="_blank" rel="noopener">▶ Bukhara 布哈拉影片</a>
+        <a class="ref-link ref-link-yt" href="https://www.youtube.com/results?search_query=%E5%B8%83%E5%93%88%E6%8B%89+%E7%B5%B2%E8%B7%AF+%E6%97%85%E9%81%8A" target="_blank" rel="noopener">▶ 布哈拉中文介紹</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-info">
+      <div class="day-number">07–09</div>
+      <div class="day-date">09 / 24–26</div>
+    </div>
+    <div class="day-content">
+      <div class="day-route">布哈拉 🚄 撒馬爾罕 Samarkand</div>
+      <div class="day-tagline">撒馬爾罕：絲路最閃耀的藍色寶石。</div>
+      <div class="day-details">搭乘 Afrosiyob 高鐵（約1.5h）快速抵達。走進令人震撼的雷吉斯坦廣場與沙赫靜達藍色陶磚走廊。近郊可參觀千年造紙坊與絲綢工坊。</div>
+      <div class="highlight-box">
+        <ul style="list-style: none; font-size: 14px;">
+          <li>• <strong>雷吉斯坦廣場</strong>：清晨無人時拍照最美；夜晚燈光秀 ★ 必看</li>
+          <li>• <strong>夏赫靜達陵墓群</strong>：全球最美藍色陶磚走廊，穿越千年</li>
+          <li>• <strong>Meros Paper Mill</strong>：體驗傳承千年的手工造紙術</li>
+        </ul>
+      </div>
+      <div class="food-box">
+        <strong>🍽 推薦美食：</strong>Nargiza 餐廳的拉麵 (Lagman)、撒馬爾罕薄脆烤饢（比布哈拉版更薄脆）、9月新鮮葡萄。
+      </div>
+      <div class="ref-links">
+        <a class="ref-link ref-link-yt" href="https://www.youtube.com/results?search_query=Registan+Samarkand+light+show" target="_blank" rel="noopener">▶ 雷吉斯坦燈光秀</a>
+        <a class="ref-link ref-link-yt" href="https://www.youtube.com/results?search_query=Shah-i-Zinda+Samarkand" target="_blank" rel="noopener">▶ 夏赫靜達走廊</a>
+        <a class="ref-link ref-link-yt" href="https://www.youtube.com/results?search_query=%E6%92%92%E9%A6%AC%E7%88%BE%E7%BD%95+%E8%87%AA%E7%94%B1%E8%A1%8C" target="_blank" rel="noopener">▶ 撒馬爾罕中文介紹</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-info">
+      <div class="day-number">10–11</div>
+      <div class="day-date">09 / 27–28</div>
+    </div>
+    <div class="day-content">
+      <div class="day-route">回歸塔什干 ✈ 賦歸</div>
+      <div class="day-tagline">最後的地鐵藝術之旅與天山風光。</div>
+      <div class="day-details">搭高鐵返塔什干（約2h）。進行「地鐵藝術站之旅」，每一站都是不同風格的地下宮殿。最後一天可前往天山 Chimgan 或 Charvak 水庫。23:00 搭機返程。</div>
+      <div class="highlight-box">
+        <ul style="list-style: none; font-size: 14px;">
+          <li>• <strong>塔什干地鐵</strong>：Kosmonavtlar（太空主題）、Alisher Navoi（伊斯蘭穹頂）必看兩站</li>
+          <li>• <strong>Charvak 水庫</strong>：碧藍湖景，距市區約 1.5h，輕鬆選項</li>
+          <li>• <strong>Chimgan 天山</strong>：壯麗山景，適合喜歡健行的旅人</li>
+        </ul>
+      </div>
+      <div class="food-box">
+        <strong>🎁 必買伴手禮：</strong>烏茲別克乾果禮盒（杏乾、開心果、核桃）、果醬夾心餅乾、真空包裝 Non 烤餅。機場前：Caravan 餐廳最後一餐。
+      </div>
+      <div class="ref-links">
+        <a class="ref-link ref-link-yt" href="https://www.youtube.com/results?search_query=Tashkent+metro+art+stations" target="_blank" rel="noopener">▶ 塔什干地鐵藝術站</a>
+        <a class="ref-link ref-link-yt" href="https://www.youtube.com/results?search_query=Charvak+lake+Uzbekistan" target="_blank" rel="noopener">▶ Charvak 水庫</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="accommodation">
+  <div class="accom-inner">
+    <div class="section-label">Accommodation / 住宿規劃</div>
+    <h2 class="section-title">住宿安排</h2>
+    <p style="font-size:15px;color:var(--earth-brown);margin-bottom:10px;">9月為旺季，強烈建議提前 3 個月以上預訂！老城區 Guesthouse 是最有特色的選擇。</p>
+    <div class="accom-grid">
+
+      <div class="accom-card">
+        <div class="accom-city">🔵 塔什干 Tashkent</div>
+        <div class="accom-name">Day 1 · Day 10–11</div>
+        <div class="accom-nights">共 3 晚（9/18, 9/27–28）</div>
+        <div class="accom-placeholder">🏨 住宿待訂<br>建議：市中心或地鐵站附近</div>
+        <div class="accom-tip">💡 推薦住在 Chorsu Bazaar 附近或地鐵 Alisher Navoi 站周邊，交通最方便。</div>
+      </div>
+
+      <div class="accom-card">
+        <div class="accom-city">🟡 希瓦 Khiva</div>
+        <div class="accom-name">Day 2–3</div>
+        <div class="accom-nights">共 2 晚（9/19–20）</div>
+        <div class="accom-placeholder">🏨 住宿待訂<br>強烈建議：住在<strong>伊坎卡拉內城</strong>內</div>
+        <div class="accom-tip">💡 古城內 Guesthouse 是絕佳體驗，夜晚燈光非常夢幻，步行至所有景點皆可。</div>
+      </div>
+
+      <div class="accom-card">
+        <div class="accom-city">🟠 布哈拉 Bukhara</div>
+        <div class="accom-name">Day 4–6</div>
+        <div class="accom-nights">共 3 晚（9/21–23）</div>
+        <div class="accom-placeholder">🏨 住宿待訂<br>建議：老城區 Lyabi-Hauz 附近</div>
+        <div class="accom-tip">💡 布哈拉最好住在老城區，一出門就是中世紀氛圍，到所有主要景點步行可達。</div>
+      </div>
+
+      <div class="accom-card">
+        <div class="accom-city">🟣 撒馬爾罕 Samarkand</div>
+        <div class="accom-name">Day 7–9</div>
+        <div class="accom-nights">共 3 晚（9/24–26）</div>
+        <div class="accom-placeholder">🏨 住宿待訂<br>建議：雷吉斯坦廣場步行可達</div>
+        <div class="accom-tip">💡 住在雷吉斯坦廣場附近，可輕鬆在清晨無人時拍照，晚上燈光秀散場後步行回房。</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="visa-section">
+  <div class="visa-inner">
+    <div class="section-label">Visa Guide / 簽證指南</div>
+    <h2 class="section-title">台灣人辦簽證</h2>
+
+    <div class="visa-alert">
+      <strong>⚠️ 重要：</strong>台灣護照<strong>不適用</strong>烏茲別克電子簽 (e-Visa)！雖然有人嘗試成功，但亦有人因此被拒絕入境，風險極高。台灣旅客必須走「邀請函 + 落地簽」的正式流程。
+    </div>
+
+    <div class="visa-grid">
+      <div class="visa-card">
+        <h4>📄 方法 A：邀請函 + 落地簽（最推薦）</h4>
+        <p>出發前向烏茲別克當地旅行社購買邀請函（LOI），抵達塔什干機場後在海關辦落地簽，是目前最多台灣旅客採用的方式。</p>
+        <ul>
+          <li>落地簽<strong>僅限塔什干機場</strong>辦理</li>
+          <li>邀請函費用約 $55–$90 美金（視旅行社和入境次數）</li>
+          <li>落地簽費用 <strong>$65 美金現金</strong>（需準備足額美金！）</li>
+          <li>有效期 30 天，單次入境</li>
+          <li>建議提前 1–3 個月申請邀請函</li>
+        </ul>
+      </div>
+      <div class="visa-card">
+        <h4>🏛️ 方法 B：大使館申請簽證</h4>
+        <p>持邀請函至鄰近國家的烏茲別克大使館辦理簽證（台灣無大使館）。適合已計畫轉機曼谷或首爾的旅客。</p>
+        <ul>
+          <li>曼谷大使館：Phloen Chit 捷運站附近</li>
+          <li>首爾、東京、吉隆坡等地亦可辦理</li>
+          <li>需事先 Email 大使館預約時間</li>
+          <li>準備文件：邀請函、申請表、護照正本、2吋大頭照</li>
+          <li>費用依使館規定，通常比落地簽便宜</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="visa-steps">
+      <h4>📋 落地簽辦理步驟（塔什干機場）</h4>
+      <div class="steps-list">
+        <div class="step"><div class="step-num">1</div><div>向旅行社取得邀請函（LOI），<strong>列印紙本</strong>隨身攜帶——機場航空櫃台可能會查驗</div></div>
+        <div class="step"><div class="step-num">2</div><div>抵達塔什干機場後，找「<strong>Visa on Arrival</strong>」窗口排隊，移民官可能需稍待</div></div>
+        <div class="step"><div class="step-num">3</div><div>出示：<strong>邀請函紙本 + 護照正本</strong>，繳交 <strong>$65 美金現金</strong>（準備剛好金額）</div></div>
+        <div class="step"><div class="step-num">4</div><div>移民官在護照上貼落地簽貼紙（印章較多，很正常），取得簽證後移動到入境審核窗口</div></div>
+        <div class="step"><div class="step-num">5</div><div>入關後先辦 SIM 卡、再換匯，整個流程通常不超過 30–40 分鐘</div></div>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+      <p style="font-size:14px;color:rgba(255,255,255,0.8);margin-bottom:14px;">🏢 推薦邀請函旅行社（台灣旅客常用）：</p>
+      <div class="visa-cost-row">
+        <div class="cost-chip"><strong>Global Connect</strong>背包客棧高評價，可議價，4人以上有折扣。有折扣碼。</div>
+        <div class="cost-chip"><strong>Citytours Uzbekistan</strong>網站資訊清楚，WhatsApp 回覆快，可刷卡。</div>
+        <div class="cost-chip"><strong>費用概估</strong>邀請函 $55–$90<br>落地簽 $65（現金）<br>合計約 NT$3,800–4,800</div>
+      </div>
+    </div>
+
+    <div class="visa-alert" style="margin-top:0;">
+      <strong>📌 住宿登記注意：</strong>在烏茲別克每晚必須有「住宿登記證明（Registration Slip）」。入住飯店時，前台會自動開立，請<strong>妥善保留至出境</strong>，海關有機率抽查，遺失可能面臨罰款。
+    </div>
+  </div>
+</section>
+
+<section class="practical">
+  <div class="section-label">Practical Info / 實用資訊</div>
+  <h2 class="section-title">換匯 · 網卡 · 交通</h2>
+
+  <div class="practical-grid">
+
+    <div class="prac-card">
+      <h3>💵 換匯攻略</h3>
+      <div class="sub-note">Currency · 烏茲別克蘇姆 UZS</div>
+      <p>烏茲別克以<strong>現金為主</strong>，刷卡通常會額外加收手續費，建議以現金美金換取當地蘇姆 (UZS) 消費。</p>
+      <hr class="prac-divider">
+      <p><strong>在台灣出發前：</strong></p>
+      <ul>
+        <li>台灣銀行<strong>不直接兌換蘇姆</strong>，請準備<strong>美金現鈔</strong>帶出去</li>
+        <li>建議攜帶小面額美金：<span class="prac-tag">$5</span><span class="prac-tag">$10</span><span class="prac-tag">$20</span>，方便使用</li>
+        <li>紙鈔請選<strong>新版、無摺痕、無破損</strong>，否則可能被拒絕</li>
+      </ul>
+      <hr class="prac-divider">
+      <p><strong>在烏茲別克換匯：</strong></p>
+      <ul>
+        <li><span class="prac-tag gold">推薦</span> <strong>塔什干機場匯率最好</strong>，落地後直接換足旅程所需現金</li>
+        <li>若機場沒換到，可於住宿處或銀行換匯</li>
+        <li>部分 ATM 提供美金/歐元換匯，但可能無鈔可換</li>
+        <li>最大面額 100,000 UZS ≈ NT$262（2026年3月匯率）</li>
+      </ul>
+      <div class="warn-box">⚠️ 旅行後期若有剩餘蘇姆，可搭配美金或信用卡組合付款，有些店家接受混合支付。</div>
+    </div>
+
+    <div class="prac-card">
+      <h3>📱 網路 · SIM卡</h3>
+      <div class="sub-note">SIM Card · Internet</div>
+      <p>烏茲別克主要城市（塔什干、希瓦、布哈拉、撒馬爾罕）4G 訊號良好，當地 SIM 卡<strong>超划算</strong>，強烈建議落地即購買。</p>
+      <hr class="prac-divider">
+      <p><strong>方案 A：落地買當地 SIM（最推薦）</strong></p>
+      <ul>
+        <li><span class="prac-tag gold">推薦</span> <strong>Beeline</strong>：機場出關後即可購買，約 <strong>$5 美金 / 25GB</strong>，全國統一價，可刷卡</li>
+        <li><strong>Ucell</strong>：覆蓋最廣，含偏遠地區，但稍貴；另有 UMS (Mobiuz) 也是不錯選擇</li>
+        <li>買 SIM 卡後需綁定號碼才能使用 <strong>Yandex Go</strong> 叫車 App</li>
+      </ul>
+      <hr class="prac-divider">
+      <p><strong>方案 B：台灣出發前買 eSIM</strong></p>
+      <ul>
+        <li>適合支援 eSIM 的機型（iPhone XS 以上、Samsung S20+ 等）</li>
+        <li>Airalo、Holafly 等平台皆有烏茲別克方案，連接 Beeline / Ucell</li>
+        <li>優點：落地即用，無需換卡；缺點：費用比當地貴</li>
+      </ul>
+      <hr class="prac-divider">
+      <p><strong>叫車 App：</strong></p>
+      <ul>
+        <li><span class="prac-tag">必裝</span> <strong>Yandex Go</strong>：中亞版 Uber，價格透明、10分鐘車程約 NT$30</li>
+        <li>台灣信用卡無法直接綁定，選<strong>「現金付款」</strong>即可，或用 Wise 綁卡</li>
+        <li>建議在台灣先下載好，落地後用當地 SIM 號碼完成設定</li>
+      </ul>
+      <div class="warn-box">⚠️ 市區不要直接在路邊攔計程車，用 Yandex Go 才能避免被坑。</div>
+    </div>
+
+    <div class="prac-card">
+      <h3>🚄 高鐵搶票</h3>
+      <div class="sub-note">Afrosiyob Train · 官網購票</div>
+      <p>Afrosiyob 高鐵是布哈拉↔撒馬爾罕↔塔什干的主力交通，舒適且快速，<strong>但非常搶手！</strong></p>
+      <hr class="prac-divider">
+      <ul>
+        <li><span class="prac-tag red">緊急</span> 開放購票：<strong>出發前 60 天</strong>，每天台灣時間<strong>下午 1 點</strong>准時放票</li>
+        <li>官網：<a href="https://eticket.railway.uz" target="_blank" rel="noopener" style="color:var(--tile-blue);">eticket.railway.uz</a></li>
+        <li>破解刷卡失敗：多試幾張卡、請住宿飯店代訂、改買 Sharq 特快車</li>
+        <li>搶不到也別慌：Sharq 特快車 + 夜鋪火車是很好的替代方案</li>
+      </ul>
+      <hr class="prac-divider">
+      <p><strong>本次行程需要的票段：</strong></p>
+      <ul>
+        <li>布哈拉 → 撒馬爾罕（Afrosiyob，約1.5h）</li>
+        <li>撒馬爾罕 → 塔什干（Afrosiyob，約2h）</li>
+      </ul>
+      <div class="ref-links" style="margin-top:12px;">
+        <a class="ref-link ref-link-yt" href="https://www.youtube.com/results?search_query=Afrosiyob+train+Uzbekistan" target="_blank" rel="noopener">▶ Afrosiyob 高鐵影片</a>
+        <a class="ref-link" href="https://eticket.railway.uz" target="_blank" rel="noopener">🎫 官網購票</a>
+      </div>
+    </div>
+
+    <div class="prac-card">
+      <h3>📌 其他提醒</h3>
+      <div class="sub-note">Tips · 注意事項</div>
+      <p><strong>語言：</strong>烏茲別克語為主，英文在景點區尚可溝通，俄語在中老年人中更通用。Google 翻譯離線包可事先下載。</p>
+      <hr class="prac-divider">
+      <p><strong>拍照禁忌：</strong>進清真寺及神學院前確認是否允許拍攝，部分神聖場所不可攝影。機場及政府建築勿拍。</p>
+      <hr class="prac-divider">
+      <p><strong>穿著：</strong>參觀宗教場所請著長袖、長褲，女性建議攜帶頭巾備用。</p>
+      <hr class="prac-divider">
+      <p><strong>9月天氣：</strong>日間 25–35°C，早晚溫差大，建議帶薄外套。乾燥少雨，防曬必備。</p>
+      <hr class="prac-divider">
+      <p><strong>飲水：</strong>自來水不可直飲，購買瓶裝水，多數住宿提供無限量飲用水。</p>
+      <hr class="prac-divider">
+      <p><strong>外交部旅遊警示：</strong>烏茲別克目前為<span class="prac-tag">一般注意</span>，整體治安良好，但請保管好護照及現金。</p>
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- ===== 新增：攜帶清單勾選區塊 ===== -->
+<section class="packing-section">
+  <div class="packing-inner">
+    <div class="section-label">Packing List / 準備清單</div>
+    <h2 class="section-title">行李必備清單</h2>
+    
+    <div class="packing-grid">
+      <div class="packing-category">
+        <h4>📄 重要文件</h4>
+        <label class="check-item"><input type="checkbox"> 護照正本 (效期6個月以上) </label>
+        <label class="check-item"><input type="checkbox"> LOI 邀請函 (紙本列印)</label>
+        <label class="check-item"><input type="checkbox"> 美金現鈔 (新版、無損、足額)</label>
+        <label class="check-item"><input type="checkbox"> 英文版旅遊保險證明</label>
+        <label class="check-item"><input type="checkbox"> 飯店預訂證明 (備用)</label>
+      </div>
+
+      <div class="packing-category">
+        <h4>🔌 電子設備</h4>
+        <label class="check-item"><input type="checkbox"> 轉接頭 (Type C / F 兩圓孔)</label>
+        <label class="check-item"><input type="checkbox"> 行動電源 (容量需符合規範)</label>
+        <label class="check-item"><input type="checkbox"> 萬國插頭 / 延長線</label>
+        <label class="check-item"><input type="checkbox"> 退卡針 (換 SIM 卡用)</label>
+        <label class="check-item"><input type="checkbox"> 下載好離線 Google 地圖</label>
+      </div>
+
+      <div class="packing-category">
+        <h4>👕 衣物穿著</h4>
+        <label class="check-item"><input type="checkbox"> 輕薄防曬外套</label>
+        <label class="check-item"><input type="checkbox"> 舒適健行鞋 (需大量步行)</label>
+        <label class="check-item"><input type="checkbox"> 太陽眼鏡與遮陽帽</label>
+        <label class="check-item"><input type="checkbox"> 大披肩/頭巾 (進清真寺用)</label>
+        <label class="check-item"><input type="checkbox"> 9月溫差大，備一件薄毛衣 </label>
+      </div>
+
+      <div class="packing-category">
+        <h4>💊 個人護理</h4>
+        <label class="check-item"><input type="checkbox"> 腸胃藥、止痛藥、感冒藥</label>
+        <label class="check-item"><input type="checkbox"> 護唇膏、乳液 (氣候極乾燥)</label>
+        <label class="check-item"><input type="checkbox"> 高係數防曬乳</label>
+        <label class="check-item"><input type="checkbox"> 濕紙巾、個人清潔用品</label>
+        <label class="check-item"><input type="checkbox"> 喉片 (防沙塵或乾燥不適)</label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="notes">
+  <div class="notes-inner">
+    <div class="section-label" style="color: var(--uzbek-gold)">Essentials / 行前清單</div>
+    <h2 class="section-title" style="color:#fff;">出發前確認事項</h2>
+    <div class="note-grid">
+      <div class="note-card">
+        <h4>🛂 簽證（最優先）</h4>
+        <p>台灣護照需「邀請函 + 落地簽」，不可用 e-Visa。建議出發前 2–3 個月向 Global Connect 或 Citytours Uzbekistan 申請邀請函，落地簽費 $65 美金（現金）於塔什干機場繳付。</p>
+      </div>
+      <div class="note-card">
+        <h4>🚄 高鐵票（出發前60天搶）</h4>
+        <p>Afrosiyob 票極搶手，開放購票後當天即可能售罄。台灣時間下午 1 點准時上官網 eticket.railway.uz 搶票，外國卡刷不過可請當地住宿代訂。</p>
+      </div>
+      <div class="note-card">
+        <h4>🏨 住宿（提前3個月訂）</h4>
+        <p>9月旺季，古城內特色 Guesthouse 房量有限。希瓦住古城內、布哈拉住老城區、撒馬爾罕住雷吉斯坦廣場步行距離，是最佳選擇。</p>
+      </div>
+      <div class="note-card">
+        <h4>💵 美金現鈔</h4>
+        <p>台灣銀行不換蘇姆，請帶足美金（$5、$10、$20 小面額），落地簽需 $65 現金，邀請函費用另計。落地後在機場換匯匯率最好。</p>
+      </div>
+      <div class="note-card">
+        <h4>📱 落地辦 SIM 卡</h4>
+        <p>出關後即可在機場購買 Beeline SIM（約 $5 / 25GB），落地即搞定網路，方便使用 Yandex Go 叫車與查景點。</p>
+      </div>
+      <div class="note-card">
+        <h4>📋 住宿登記收據</h4>
+        <p>每晚住宿登記單（Registration Slip）需妥善保留至出境，海關可能抽查。若住在非正式住宿，需確認對方有協助登記。</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<footer style="padding: 60px 40px; text-align: center; font-family: 'Fraunces'; color: var(--earth-brown); font-size: 14px; background: var(--sand);">
+  <p style="font-size:22px;margin-bottom:8px;">🕌</p>
+  <p>⬥ Uzbekistan Silk Road Journey · 2026 ⬥</p>
+  <p style="margin-top:8px;opacity:0.6;font-size:12px;">9月18日 — 9月28日 · 塔什干 · 希瓦 · 布哈拉 · 撒馬爾罕</p>
+</footer>
+
+<script>
+  var map = L.map('route-map').setView([40.5, 64.5], 6);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  var locations = [
+    { name: "塔什干 Tashkent", day: "Day 1 · 10–11", coords: [41.2995, 69.2401], color: "#1E3A5F" },
+    { name: "希瓦 Khiva",      day: "Day 2–3",       coords: [41.3775, 60.3589], color: "#C9973A" },
+    { name: "布哈拉 Bukhara",  day: "Day 4–6",       coords: [39.7747, 64.4286], color: "#A8322A" },
+    { name: "撒馬爾罕 Samarkand", day: "Day 7–9",    coords: [39.6270, 66.9750], color: "#5A30A0" },
+    { name: "塔什干 Tashkent", day: "Day 10–11",     coords: [41.2995, 69.2401], color: "#1E3A5F" }
+  ];
+
+  var latlngs = locations.map(function(loc) { return loc.coords; });
+
+  L.polyline(latlngs, {
+    color: '#00A9B8',
+    weight: 4,
+    opacity: 0.8,
+    dashArray: '10, 10'
+  }).addTo(map);
+
+  locations.forEach(function(loc, index) {
+    if (index === locations.length - 1) return; // skip duplicate Tashkent end point
+
+    // Solid dot marker
+    var dotIcon = L.divIcon({
+      className: '',
+      html: '<div style="' +
+        'width:14px;height:14px;' +
+        'background:' + loc.color + ';' +
+        'border-radius:50%;' +
+        'border:3px solid #fff;' +
+        'box-shadow:0 2px 6px rgba(0,0,0,0.35);' +
+        '"></div>',
+      iconSize: [14, 14],
+      iconAnchor: [7, 7]
+    });
+
+    // City name label (offset above the dot)
+    var labelIcon = L.divIcon({
+      className: '',
+      html: '<div style="' +
+        'background:rgba(255,255,255,0.92);' +
+        'color:' + loc.color + ';' +
+        'font-family:\'Noto Sans TC\',sans-serif;' +
+        'font-size:11px;' +
+        'font-weight:700;' +
+        'padding:2px 8px;' +
+        'border-radius:4px;' +
+        'white-space:nowrap;' +
+        'text-align:center;' +
+        'display:inline-block;' +
+        'transform:translateX(-50%);' +
+        'box-shadow:0 1px 4px rgba(0,0,0,0.15);' +
+        'pointer-events:none;' +
+        '">' + loc.name + '</div>',
+      iconSize: [0, 0],
+      iconAnchor: [0, 26]  // label floats above the dot
+    });
+
+    L.marker(loc.coords, { icon: dotIcon }).addTo(map)
+      .bindPopup(
+        '<div style="font-family:\'Noto Serif TC\',serif;min-width:160px;">' +
+        '<strong style="color:' + loc.color + ';font-size:14px;">' + loc.name + '</strong><br>' +
+        '<span style="font-size:12px;color:#888;">' + loc.day + '</span>' +
+        '</div>'
+      );
+
+    L.marker(loc.coords, { icon: labelIcon, interactive: false }).addTo(map);
+  });
+
+  map.fitBounds(L.polyline(latlngs).getBounds(), {padding: [40, 50]});
+</script>
+
+</body>
+</html>

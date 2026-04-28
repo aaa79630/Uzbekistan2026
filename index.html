@@ -906,6 +906,43 @@
     margin-bottom: 0;              /* 取消原本的底部間距 */
     box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* 增加一點陰影層次感 */
   }
+
+  /* ===== 住宿 Carousel ===== */
+  .accom-grid {
+    display: flex !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    padding: 12px 4px 16px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 20px;
+  }
+  .accom-grid::-webkit-scrollbar { display: none; }
+  .accom-card {
+    flex: 0 0 82%;
+    scroll-snap-align: center;
+    min-width: 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+  }
+
+  /* ===== 簽證方法 A/B Carousel ===== */
+  .visa-grid {
+    display: flex !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    padding: 12px 4px 16px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .visa-grid::-webkit-scrollbar { display: none; }
+  .visa-card {
+    flex: 0 0 85%;
+    scroll-snap-align: center;
+    min-width: 0;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  }
   }
 
   /* 4. 針對「認識烏茲別克」區塊的修正 */

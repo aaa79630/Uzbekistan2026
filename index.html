@@ -753,6 +753,52 @@
     backdrop-filter: blur(2px);
   }
   .nav-overlay.active { display: block; }
+  /* ===== 行動版寬度與溢出修正補丁 ===== */
+  
+  /* 1. 強制讓 html 也隱藏橫向溢出，並確保 100% 寬度 */
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+    -webkit-overflow-scrolling: touch; /* 讓 iOS 滑動更順暢 */
+  }
+
+  /* 2. 修正 Hero 區塊可能的寬度問題 */
+  .hero-meta {
+    grid-template-columns: 1fr; /* 在極小螢幕強迫單欄，避免 minmax(180px) 撐開 */
+  }
+
+  /* 3. 調整行動版整體的左右內距，預留更多空間 */
+  @media (max-width: 768px) {
+    /* 確保所有區塊都不會因為 40px 的大邊距而擠壓內容 */
+    .hero, .added-info, .overview, .days, .practical, 
+    .visa-section, .accommodation, .notes, .packing-section {
+      padding-left: 20px !important; 
+      padding-right: 20px !important;
+    }
+
+    /* 修正地圖寬度，確保不會溢出 */
+    #route-map {
+      width: 100% !important;
+      max-width: calc(100vw - 40px); /* 螢幕寬度減去左右 Padding */
+    }
+
+    /* 防止長單字或網址撐破版面 */
+    * {
+      word-wrap: break-word !important;
+      overflow-wrap: break-word !important;
+    }
+    
+    /* 確保 SVG 背景寬度正常 */
+    .city-skyline {
+      width: 100vw;
+    }
+  }
+
+  /* 4. 針對「認識烏茲別克」區塊的修正 */
+  .info-grid {
+    width: 100%;
+  }
 </style>
 </head>
 <body>

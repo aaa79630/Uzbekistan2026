@@ -243,14 +243,105 @@
   .section-label { font-family: 'Manrope', sans-serif; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--tile-blue); margin-bottom: 16px; }
   .section-title { font-size: clamp(28px, 5vw, 42px); margin-bottom: 40px; color: var(--ink); }
 
-  .route-flow {
-    display: flex; flex-wrap: wrap; gap: 10px 15px; align-items: center; margin-bottom: 30px;
+  /* ===== Route Timeline ===== */
+  .route-timeline {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    margin-bottom: 36px;
+    overflow-x: auto;
+    padding-bottom: 8px;
   }
-  .route-node {
-    padding: 8px 16px; background: #fff; border: 1px solid var(--line); border-radius: 4px; font-size: 14px; font-weight: 500;
+  .route-timeline::-webkit-scrollbar { height: 4px; }
+  .route-timeline::-webkit-scrollbar-track { background: transparent; }
+  .route-timeline::-webkit-scrollbar-thumb { background: var(--line); border-radius: 2px; }
+  /* ===== Route Timeline ===== */
+  .route-timeline {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    gap: 0;
+    margin-bottom: 36px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 8px;
   }
-  .route-node.highlight { background: var(--persian-blue); color: #fff; }
-  .route-arrow { color: var(--turquoise); font-size: 18px; }
+  .route-timeline::-webkit-scrollbar { height: 4px; }
+  .route-timeline::-webkit-scrollbar-track { background: transparent; }
+  .route-timeline::-webkit-scrollbar-thumb { background: var(--line); border-radius: 2px; }
+
+  /* Each stop: dot on top, label below */
+  .rt-stop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .rt-connector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    height: 42px;
+    width: 32px;
+    color: var(--turquoise);
+    font-size: 18px;
+    opacity: 0.7;
+    user-select: none;
+  }
+
+  .rt-dot {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.13);
+    flex-shrink: 0;
+  }
+  .rt-dot.muted {
+    background: #fff;
+    border: 2px solid var(--line);
+    font-size: 9px;
+    line-height: 1.3;
+    text-align: center;
+    color: var(--earth-brown);
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+  }
+  .rt-label { text-align: center; }
+  .rt-label-zh {
+    display: block;
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .rt-label-en {
+    display: block;
+    font-family: 'Manrope', sans-serif;
+    font-size: 10px;
+    color: var(--earth-brown);
+    opacity: 0.65;
+    white-space: nowrap;
+    margin-top: 1px;
+  }
+  .rt-label-day {
+    display: block;
+    font-family: 'Manrope', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 4px;
+    white-space: nowrap;
+  }
 
   #route-map {
     width: 100%;
@@ -793,6 +884,28 @@
     .city-skyline {
       width: 100vw;
     }
+  
+  #intro .info-grid {
+    display: flex !important;      /* 將格狀佈局切換為橫向排列 */
+    overflow-x: auto;             /* 開啟橫向溢出捲動 */
+    scroll-snap-type: x mandatory; /* 啟動自動對齊（最關鍵的 Carousel 效果） */
+    gap: 16px;                     /* 卡片間距 */
+    padding: 15px 5px;             /* 留一點空間給陰影，避免被切掉 */
+    scrollbar-width: none;         /* 隱藏橫向捲軸 (Firefox) */
+    -webkit-overflow-scrolling: touch; /* 讓 iOS 滑動更滑順 */
+  }
+
+  /* 隱藏橫向捲軸 (Chrome, Safari) */
+  #intro .info-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  #intro .info-card-new {
+    flex: 0 0 85%;                 /* 每張卡片佔螢幕寬度 85%，刻意露出下一張的邊緣提示可以滑動 */
+    scroll-snap-align: center;     /* 滑動停止後自動對齊中心 */
+    margin-bottom: 0;              /* 取消原本的底部間距 */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* 增加一點陰影層次感 */
+  }
   }
 
   /* 4. 針對「認識烏茲別克」區塊的修正 */
@@ -884,14 +997,78 @@
 <section class="overview" id="route">
   <div class="section-label">Route Overview / 路線規劃</div>
   <h2 class="section-title">The Silk Road Loop</h2>
-  <div class="route-flow">
-    <span class="route-node" style="background:#1E3A5F;color:#fff;border-color:#1E3A5F;">塔什干</span><span class="route-arrow">→</span>
-    <span class="route-node" style="background:#C9973A;color:#fff;border-color:#C9973A;">希瓦 Khiva</span><span class="route-arrow">→</span>
-    <span class="route-node" style="background:#A8322A;color:#fff;border-color:#A8322A;">布哈拉 Bukhara</span><span class="route-arrow">→</span>
-    <span class="route-node" style="background:#5A30A0;color:#fff;border-color:#5A30A0;">撒馬爾罕</span><span class="route-arrow">→</span>
-    <span class="route-node" style="background:#1E3A5F;color:#fff;border-color:#1E3A5F;">塔什干</span><span class="route-arrow">→</span>
-    <span class="route-node">曼谷/首爾</span><span class="route-arrow">→</span>
-     <span class="route-node">台北/東京</span>
+  <div class="route-timeline">
+    <div class="rt-stop">
+      <div class="rt-dot muted">BKK<br>ICN</div>
+      <div class="rt-label">
+        <span class="rt-label-zh">曼谷/首爾</span>
+        <span class="rt-label-en">Bangkok / Seoul</span>
+        <span class="rt-label-day" style="color:var(--earth-brown);">轉機集合</span>
+      </div>
+    </div>
+    <div class="rt-connector">→</div>
+    <div class="rt-stop">
+      <div class="rt-dot" style="background:#1E3A5F;">🏙</div>
+      <div class="rt-label">
+        <span class="rt-label-zh">塔什干</span>
+        <span class="rt-label-en">Tashkent</span>
+        <span class="rt-label-day" style="color:#1E3A5F;">Day 1</span>
+      </div>
+    </div>
+    <div class="rt-connector">→</div>
+    <div class="rt-stop">
+      <div class="rt-dot" style="background:#C9973A;">🕌</div>
+      <div class="rt-label">
+        <span class="rt-label-zh">希瓦</span>
+        <span class="rt-label-en">Khiva</span>
+        <span class="rt-label-day" style="color:#9a6e1a;">Day 2–3</span>
+      </div>
+    </div>
+    <div class="rt-connector">→</div>
+    <div class="rt-stop">
+      <div class="rt-dot" style="background:#A8322A;">🏛</div>
+      <div class="rt-label">
+        <span class="rt-label-zh">布哈拉</span>
+        <span class="rt-label-en">Bukhara</span>
+        <span class="rt-label-day" style="color:#A8322A;">Day 4–6</span>
+      </div>
+    </div>
+    <div class="rt-connector">→</div>
+    <div class="rt-stop">
+      <div class="rt-dot" style="background:#5A30A0;">✨</div>
+      <div class="rt-label">
+        <span class="rt-label-zh">撒馬爾罕</span>
+        <span class="rt-label-en">Samarkand</span>
+        <span class="rt-label-day" style="color:#5A30A0;">Day 7–9</span>
+      </div>
+    </div>
+    <div class="rt-connector">→</div>
+    <div class="rt-stop">
+      <div class="rt-dot" style="background:#1E3A5F;">🏙</div>
+      <div class="rt-label">
+        <span class="rt-label-zh">塔什干</span>
+        <span class="rt-label-en">Tashkent</span>
+        <span class="rt-label-day" style="color:#1E3A5F;">Day 10–11</span>
+      </div>
+    </div>
+    <div class="rt-connector">→</div>
+    <div class="rt-stop">
+      <div class="rt-dot muted">BKK<br>ICN</div>
+      <div class="rt-label">
+        <span class="rt-label-zh">曼谷/首爾</span>
+        <span class="rt-label-en">Bangkok / Seoul</span>
+        <span class="rt-label-day" style="color:var(--earth-brown);">轉機</span>
+      </div>
+    </div>
+    <div class="rt-connector">→</div>
+    <div class="rt-stop">
+      <div class="rt-dot muted">TPE<br>TYO</div>
+      <div class="rt-label">
+        <span class="rt-label-zh">台北/東京</span>
+        <span class="rt-label-en">Taipei / Tokyo</span>
+        <span class="rt-label-day" style="color:var(--earth-brown);">返程</span>
+      </div>
+    </div>
   </div>
 
   <div class="city-cards-grid">

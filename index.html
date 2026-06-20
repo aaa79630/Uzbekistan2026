@@ -615,23 +615,31 @@
   .accom-confirmed {
     border: 1.5px solid rgba(0,169,184,0.3);
     border-radius: 4px;
-    padding: 14px;
+    padding: 14px 16px;
     background: var(--turquoise-light);
     font-size: 13px;
     color: var(--ink);
-    line-height: 1.7;
   }
+  .accom-confirmed .ac-row {
+    padding: 6px 0;
+    border-bottom: 1px dashed rgba(0,86,150,0.15);
+  }
+  .accom-confirmed .ac-row:last-child { border-bottom: none; }
+  .accom-confirmed .ac-hotel-row { padding-top: 0; }
   .accom-confirmed a { color: var(--tile-blue); }
   .accom-confirmed .ac-price { color: var(--accent-red); font-weight: 700; }
-  .accom-confirmed .ac-code { color: #666; font-size: 12px; }
+  .accom-confirmed .ac-code { color: #666; font-size: 12px; display: block; margin-top: 2px; }
+  .accom-confirmed .ac-note { display: block; color: #888; font-size: 11px; margin-top: 4px; }
   /* ===== Flight Info ===== */
   .flight-section { padding: 50px 40px 0; max-width: 1200px; margin: 0 auto; }
   .flight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-top: 24px; }
-  .flight-card { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 20px 22px; }
-  .flight-route { font-family: 'Fraunces', serif; font-weight: 500; font-size: 18px; color: var(--persian-blue); margin-bottom: 6px; }
-  .flight-time { font-size: 14px; color: var(--earth-brown); margin-bottom: 8px; }
-  .flight-meta { font-size: 12px; color: #888; }
-  .flight-tag { display: inline-block; background: var(--turquoise-light); color: var(--tile-blue); font-size: 11px; padding: 2px 8px; border-radius: 10px; margin-right: 6px; }
+  .flight-card { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 22px; display: flex; flex-direction: column; gap: 8px; }
+  .flight-route { font-family: 'Fraunces', serif; font-weight: 500; font-size: 19px; color: var(--persian-blue); }
+  .flight-date { font-size: 13px; color: var(--earth-brown); font-weight: 500; }
+  .flight-time { font-size: 14px; color: var(--earth-brown); }
+  .flight-duration { font-size: 12px; color: var(--tile-blue); }
+  .flight-meta { font-size: 12px; color: #888; padding-top: 8px; margin-top: 4px; border-top: 1px dashed var(--line); }
+  .flight-tag { display: inline-block; background: var(--turquoise-light); color: var(--tile-blue); font-size: 11px; padding: 2px 8px; border-radius: 10px; margin-right: 6px; width: fit-content; }
  /* ===== PACKING LIST SECTION (NEW) ===== */
   /* 行李清單外層容器 */
 .packing-section {
@@ -1011,20 +1019,26 @@
     <div class="flight-card">
       <span class="flight-tag">去程</span>
       <div class="flight-route">曼谷 BKK → 塔什干 TAS</div>
-      <div class="flight-time">9/18（五）08:10 – 13:10　飛行 7 小時</div>
-      <div class="flight-meta">HY 532 烏茲別克航空・機型 A321neo</div>
+      <div class="flight-date">9/18（五）</div>
+      <div class="flight-time">08:10 – 13:10</div>
+      <div class="flight-duration">飛行時間 7 小時</div>
+      <div class="flight-meta">HY 532・烏茲別克航空・機型 A321neo</div>
     </div>
     <div class="flight-card">
       <span class="flight-tag">國內線</span>
       <div class="flight-route">塔什干 TAS → 烏爾根奇 UGC</div>
-      <div class="flight-time">9/19（六）13:45 – 15:15　飛行 1.5 小時</div>
-      <div class="flight-meta">HY 55 烏茲別克航空・機型 A320（烏爾根奇為前往希瓦最近機場）</div>
+      <div class="flight-date">9/19（六）</div>
+      <div class="flight-time">13:45 – 15:15</div>
+      <div class="flight-duration">飛行時間 1.5 小時</div>
+      <div class="flight-meta">HY 55・烏茲別克航空・機型 A320<br>（烏爾根奇為前往希瓦最近機場）</div>
     </div>
     <div class="flight-card">
       <span class="flight-tag">回程</span>
       <div class="flight-route">塔什干 TAS → 曼谷 BKK</div>
-      <div class="flight-time">9/28（一）23:00 – 9/29（二）07:10　飛行 6 小時 10 分</div>
-      <div class="flight-meta">HY 531 烏茲別克航空・機型 A321neo</div>
+      <div class="flight-date">9/28（一）夜間出發</div>
+      <div class="flight-time">23:00 – 隔日 07:10（9/29）</div>
+      <div class="flight-duration">飛行時間 6 小時 10 分</div>
+      <div class="flight-meta">HY 531・烏茲別克航空・機型 A321neo</div>
     </div>
   </div>
 </section>
@@ -1348,11 +1362,14 @@
         <div class="accom-nights">共 1 晚（9/18）</div>
         <span class="confirmed-badge">✓ 已訂房</span>
         <div class="accom-confirmed">
-          <strong>Hotel Marwa Tashkent Pool&amp;Spa</strong><br>
-          3間2人房（1間加床）・1間4人房・含早餐・每位成人每天 SPA 1 小時<br>
-          訂單：<span class="ac-code">6261116649（Booking.com）</span><br>
-          <span class="ac-price">376.49 USD ≈ 11,877 TWD</span><br>
-          9/16 23:59 前可免費取消・<span class="ac-code">扣款：Kyle 信用卡 / 可臨櫃 VISA・Master</span>
+          <div class="ac-row ac-hotel-row"><strong>Hotel Marwa Tashkent Pool&amp;Spa</strong><br><a href="https://www.booking.com/Share-fgy9USV" target="_blank" rel="noopener">訂房連結 →</a></div>
+          <div class="ac-row">3間2人房（1間加床）<br>1間4人房<br>含早餐・每位成人每天 SPA 1 小時</div>
+          <div class="ac-row"><span class="ac-price">376.49 USD ≈ 11,877 TWD</span></div>
+          <div class="ac-row">
+            <span class="ac-code">訂單編號：6261116649（Booking.com）</span>
+            <span class="ac-code">9/16 23:59 前可免費取消</span>
+            <span class="ac-code">扣款：Kyle 信用卡 / 可臨櫃 VISA・Master</span>
+          </div>
         </div>
       </div>
 
@@ -1362,11 +1379,13 @@
         <div class="accom-nights">共 2 晚（9/19–20）</div>
         <span class="confirmed-badge">✓ 已訂房</span>
         <div class="accom-confirmed">
-          <strong>Grand Vizir Hotel</strong>（<a href="https://grandvizirhotel.com/" target="_blank" rel="noopener">官網</a>）<br>
-          3間2人房（1King／2Twin）・2間3人房（其中1間限2人）・含早餐<br>
-          訂單：<span class="ac-code">20260919-508227-1256327462</span><br>
-          <span class="ac-price">9,540,000 UZS ≈ 25,125 TWD</span><br>
-          <span class="ac-code">現場付現・Derek 已訂</span>
+          <div class="ac-row ac-hotel-row"><strong>Grand Vizir Hotel</strong><br><a href="https://grandvizirhotel.com/" target="_blank" rel="noopener">官網 →</a></div>
+          <div class="ac-row">3間2人房（1King／2Twin）<br>2間3人房（其中1間限2人）<br>含早餐</div>
+          <div class="ac-row"><span class="ac-price">9,540,000 UZS ≈ 25,125 TWD</span></div>
+          <div class="ac-row">
+            <span class="ac-code">訂單編號：20260919-508227-1256327462</span>
+            <span class="ac-code">現場付現・Derek 已訂</span>
+          </div>
         </div>
       </div>
 
@@ -1376,11 +1395,14 @@
         <div class="accom-nights">共 3 晚（9/21–23）</div>
         <span class="confirmed-badge">✓ 已訂房</span>
         <div class="accom-confirmed">
-          <strong>Asl Boutique Hotel</strong><br>
-          1間2人房（Twin）・1間3人家庭房（雙人+單人）・2間3人房（3單人床）・含早餐<br>
-          訂單：<span class="ac-code">5858118971（Booking.com）</span><br>
-          <span class="ac-price">853.74 USD ≈ 26,934 TWD</span><br>
-          9/21 18:00 前可免費取消・<span class="ac-code">現場付現・Kyle 已訂</span>
+          <div class="ac-row ac-hotel-row"><strong>Asl Boutique Hotel</strong><br><a href="https://www.booking.com/hotel/uz/asl-boutique-bukhara.zh-tw.html" target="_blank" rel="noopener">訂房連結 →</a></div>
+          <div class="ac-row">1間2人房（Twin）<br>1間3人家庭房（雙人+單人）<br>2間3人房（3單人床）<br>含早餐</div>
+          <div class="ac-row"><span class="ac-price">853.74 USD ≈ 26,934 TWD</span></div>
+          <div class="ac-row">
+            <span class="ac-code">訂單編號：5858118971（Booking.com）</span>
+            <span class="ac-code">9/21 18:00 前可免費取消</span>
+            <span class="ac-code">現場付現・Kyle 已訂</span>
+          </div>
         </div>
       </div>
 
@@ -1390,11 +1412,15 @@
         <div class="accom-nights">共 3 晚（9/24–26）</div>
         <span class="confirmed-badge">✓ 已訂房</span>
         <div class="accom-confirmed">
-          <strong>SULTANAT Samarkand</strong>（備案 Bibikhanum Hotel）<br>
-          4間雙人房・1間3人房・含早餐<br>
-          訂單：<span class="ac-code">5669327980（Booking.com）</span><br>
-          <span class="ac-price">1,239.24 USD ≈ 39,303 TWD</span><br>
-          9/21 前可免費取消・<span class="ac-code">現場付現・Kyle 已訂</span>　<small>※Derek 已詢問改訂 Bibikhanum，待回覆</small>
+          <div class="ac-row ac-hotel-row"><strong>SULTANAT Samarkand</strong><br><a href="https://www.booking.com/hotel/uz/sultanat-samarkand-samarkand.zh-tw.html" target="_blank" rel="noopener">訂房連結 →</a></div>
+          <div class="ac-row">4間雙人房<br>1間3人房<br>含早餐</div>
+          <div class="ac-row"><span class="ac-price">1,239.24 USD ≈ 39,303 TWD</span></div>
+          <div class="ac-row">
+            <span class="ac-code">訂單編號：5669327980（Booking.com）</span>
+            <span class="ac-code">9/21 前可免費取消</span>
+            <span class="ac-code">現場付現・Kyle 已訂</span>
+            <span class="ac-note">※ 備案 Bibikhanum Hotel，Derek 已詢問改訂，待回覆</span>
+          </div>
         </div>
       </div>
 
@@ -1404,11 +1430,14 @@
         <div class="accom-nights">共 2 晚（9/27–28）</div>
         <span class="confirmed-badge">✓ 已訂房</span>
         <div class="accom-confirmed">
-          <strong>NOVA HOME Apartments – NEST ONE, Tashkent City</strong><br>
-          3間4人房（無早餐）<br>
-          訂單：<span class="ac-code">6301927286（Booking.com）</span><br>
-          <span class="ac-price">396.05 USD ≈ 12,560 TWD</span><br>
-          9/23 23:59 前可免費取消・<span class="ac-code">現場付現・Kyle 已訂</span>
+          <div class="ac-row ac-hotel-row"><strong>NOVA HOME Apartments – NEST ONE, Tashkent City</strong><br><a href="https://www.booking.com/Share-onDNghz" target="_blank" rel="noopener">訂房連結 →</a></div>
+          <div class="ac-row">3間4人房（無早餐）</div>
+          <div class="ac-row"><span class="ac-price">396.05 USD ≈ 12,560 TWD</span></div>
+          <div class="ac-row">
+            <span class="ac-code">訂單編號：6301927286（Booking.com）</span>
+            <span class="ac-code">9/23 23:59 前可免費取消</span>
+            <span class="ac-code">現場付現・Kyle 已訂</span>
+          </div>
         </div>
       </div>
 

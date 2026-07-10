@@ -398,6 +398,126 @@
     transition: background 0.2s, border-color 0.2s;
   }
   .ref-link:hover { background: var(--turquoise-light); border-color: var(--turquoise); }
+
+  .day-map {
+    margin-top: 16px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .day-map-label {
+    padding: 10px 14px;
+    background: var(--turquoise-light);
+    font-family: 'Manrope', sans-serif;
+  }
+  .day-map-label .title {
+    display: block;
+    font-size: 13px;
+    color: var(--tile-blue);
+    font-weight: 700;
+  }
+  .day-map-label .hint {
+    display: block;
+    margin-top: 3px;
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--earth-brown);
+    opacity: 0.75;
+  }
+  .day-map iframe {
+    display: block;
+    width: 100%;
+    height: 380px;
+    border: 0;
+  }
+  @media (max-width: 768px) {
+    .day-map iframe { height: 300px; }
+  }
+
+  /* 裁掉 Google 我的地圖內嵌版頂部的標題列（地圖名稱／擁有者資訊） */
+  .day-map-crop {
+    height: 380px;
+    overflow: hidden;
+    position: relative;
+  }
+  .day-map-crop iframe {
+    position: absolute;
+    top: -59px;
+    left: 0;
+    width: 100%;
+    height: calc(100% + 59px);
+    border: 0;
+  }
+  @media (max-width: 768px) {
+    .day-map-crop { height: 300px; }
+    .day-map-crop iframe { height: calc(100% + 59px); }
+  }
+
+  /* ===== YouTube 影片縮圖卡片（點擊開新分頁播放） ===== */
+  .yt-embeds {
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+  }
+  .yt-embed-item {
+    display: block;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    text-decoration: none;
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+  .yt-embed-item:hover {
+    border-color: var(--turquoise);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+  }
+  .yt-embed-label {
+    padding: 8px 12px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #c00;
+    background: #fff4f4;
+    border-bottom: 1px solid rgba(255,0,0,0.15);
+  }
+  .yt-embed-thumb {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    overflow: hidden;
+  }
+  .yt-embed-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .yt-embed-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 54px;
+    height: 38px;
+    background: rgba(20,20,20,0.78);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+  .yt-embed-play::after {
+    content: '';
+    border-left: 15px solid #fff;
+    border-top: 9px solid transparent;
+    border-bottom: 9px solid transparent;
+    margin-left: 4px;
+  }
+  .yt-embed-item:hover .yt-embed-play { background: #c00; }
   .ref-link-yt { border-color: rgba(255,0,0,0.25); color: #c00; }
   .ref-link-yt:hover { background: #fff0f0; border-color: #c00; }
 
@@ -1206,11 +1326,12 @@
 
   <div id="route-map"></div>
 
-  <div class="ref-links" style="margin-top: 20px;">
-    <span style="font-family:'Manrope',sans-serif;font-size:12px;color:var(--tile-blue);align-self:center;">🎬 參考影片：</span>
-    <a class="ref-link ref-link-yt" href="https://www.youtube.com/results?search_query=%E7%83%8F%E8%8C%B2%E5%88%A5%E5%85%8B+%E8%87%AA%E7%94%B1%E8%A1%8C" target="_blank" rel="noopener">▶ YouTube 搜尋「烏茲別克自由行」</a>
-    <a class="ref-link ref-link-yt" href="https://www.youtube.com/results?search_query=Uzbekistan+travel+vlog" target="_blank" rel="noopener">▶ Uzbekistan Travel Vlog</a>
-    <a class="ref-link ref-link-yt" href="https://www.youtube.com/results?search_query=%E6%92%92%E9%A6%AC%E7%88%BE%E7%BD%95+%E9%9B%B7%E5%90%89%E6%96%AF%E5%9D%A6+Registan" target="_blank" rel="noopener">▶ 雷吉斯坦廣場介紹</a>
+  <div class="yt-embeds" style="margin-top: 20px;">
+    <a class="yt-embed-item" href="https://www.youtube.com/watch?v=m7eNb-Ju-dk" target="_blank" rel="noopener"><div class="yt-embed-label">▶ 烏茲別克自由行攻略</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/m7eNb-Ju-dk/hqdefault.jpg" alt="▶ 烏茲別克自由行攻略" loading="lazy"><span class="yt-embed-play"></span></div></a>
+    <a class="yt-embed-item" href="https://www.youtube.com/watch?v=yhTaFyiu19g" target="_blank" rel="noopener"><div class="yt-embed-label">▶ The Ultimate Uzbekistan Travel Film</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/yhTaFyiu19g/hqdefault.jpg" alt="▶ The Ultimate Uzbekistan Travel Film" loading="lazy"><span class="yt-embed-play"></span></div></a>
+    <a class="yt-embed-item" href="https://www.youtube.com/watch?v=QWwQagy2l5I" target="_blank" rel="noopener"><div class="yt-embed-label">▶ 雷吉斯坦廣場介紹</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/QWwQagy2l5I/hqdefault.jpg" alt="▶ 雷吉斯坦廣場介紹" loading="lazy"><span class="yt-embed-play"></span></div></a>
+  </div>
+  <div class="ref-links" style="margin-top: 12px;">
     <a class="ref-link" href="https://nanashares.com/%E4%B8%AD%E4%BA%9E%E6%97%85%E9%81%8A-%E7%83%8F%E8%8C%B2%E5%88%A5%E5%85%8B%E6%97%85%E9%81%8A-%E9%82%80%E8%AB%8B%E5%87%BD%E3%80%81%E7%B0%BD%E8%AD%89%E7%94%B3%E8%AB%8B%EF%BD%9C2026%E6%9C%80%E6%96%B0/" target="_blank" rel="noopener">📋 2026 簽證攻略（娜娜來了）</a>
     <a class="ref-link" href="https://yuho1314.com/uzbekistan-travel-budget-guide/" target="_blank" rel="noopener">📋 2026 自由行懶人包（悠活人生）</a>
   </div>
@@ -1237,9 +1358,13 @@
       <div class="food-box">
         <strong>🍽 推薦美食：</strong>Besh Qozon 傳統抓飯 (Plov)、剛出爐的烏茲別克麵包 (Non)、烤羊肉串 Shashlik。
       </div>
-      <div class="ref-links">
-        <a class="ref-link ref-link-yt" href="https://www.youtube.com/results?search_query=Chorsu+Bazaar+Tashkent" target="_blank" rel="noopener">▶ Chorsu Bazaar 影片</a>
-        <a class="ref-link ref-link-yt" href="https://www.youtube.com/results?search_query=%E5%A1%94%E4%BB%80%E5%B9%B2+%E5%9C%B0%E9%90%B5+%E8%97%9D%E8%A1%93" target="_blank" rel="noopener">▶ 塔什干地鐵藝術</a>
+      <div class="yt-embeds">
+        <a class="yt-embed-item" href="https://www.youtube.com/watch?v=9GMJ_2_xZc8" target="_blank" rel="noopener"><div class="yt-embed-label">▶ Chorsu Bazaar 市集walk</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/9GMJ_2_xZc8/hqdefault.jpg" alt="▶ Chorsu Bazaar 市集walk" loading="lazy"><span class="yt-embed-play"></span></div></a>
+        <a class="yt-embed-item" href="https://www.youtube.com/watch?v=eYiLV1mlPRA" target="_blank" rel="noopener"><div class="yt-embed-label">▶ 塔什干地鐵藝術站巡禮</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/eYiLV1mlPRA/hqdefault.jpg" alt="▶ 塔什干地鐵藝術站巡禮" loading="lazy"><span class="yt-embed-play"></span></div></a>
+      </div>
+      <div class="day-map">
+        <div class="day-map-label"><span class="title">📍 塔什干景點地圖</span><span class="hint">可拖曳縮放，點左上角圖示切換圖層／景點清單</span></div>
+        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=1QFySfFlIOixmV0sXCliktt_wXIun7yE&ll=41.2995%2C69.2401&z=12" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
       </div>
     </div>
   </div>
@@ -1263,9 +1388,13 @@
       <div class="food-box">
         <strong>🍽 推薦美食：</strong>Terrassa Café 景觀餐、希瓦限定蜂蜜薄餅 (Katlama)、希瓦烤羊腿配扁豆湯。
       </div>
-      <div class="ref-links">
-        <a class="ref-link ref-link-yt" href="https://www.youtube.com/results?search_query=Khiva+Uzbekistan+travel" target="_blank" rel="noopener">▶ Khiva 希瓦旅遊影片</a>
-        <a class="ref-link ref-link-yt" href="https://www.youtube.com/results?search_query=%E5%B8%8C%E7%93%A6+%E7%83%8F%E8%8C%B2%E5%88%A5%E5%85%8B" target="_blank" rel="noopener">▶ 希瓦中文介紹</a>
+      <div class="yt-embeds">
+        <a class="yt-embed-item" href="https://www.youtube.com/watch?v=2F0-UYhrPDg" target="_blank" rel="noopener"><div class="yt-embed-label">▶ Khiva: Everything You Need to Know</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/2F0-UYhrPDg/hqdefault.jpg" alt="▶ Khiva: Everything You Need to Know" loading="lazy"><span class="yt-embed-play"></span></div></a>
+        <a class="yt-embed-item" href="https://www.youtube.com/watch?v=ujVb11U6v2Q" target="_blank" rel="noopener"><div class="yt-embed-label">▶ 希瓦中文介紹</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/ujVb11U6v2Q/hqdefault.jpg" alt="▶ 希瓦中文介紹" loading="lazy"><span class="yt-embed-play"></span></div></a>
+      </div>
+      <div class="day-map">
+        <div class="day-map-label"><span class="title">📍 希瓦景點地圖</span><span class="hint">可拖曳縮放，點左上角圖示切換圖層／景點清單</span></div>
+        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=1QFySfFlIOixmV0sXCliktt_wXIun7yE&ll=41.3775%2C60.3589&z=14" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
       </div>
     </div>
   </div>
@@ -1289,9 +1418,13 @@
       <div class="food-box">
         <strong>🍽 推薦美食：</strong>Minzifa 景觀餐廳（花園環境極美）、布哈拉油香抓飯、鮮榨石榴汁（9月石榴季！）、Chinar Café。
       </div>
-      <div class="ref-links">
-        <a class="ref-link ref-link-yt" href="https://www.youtube.com/results?search_query=Bukhara+Uzbekistan+travel" target="_blank" rel="noopener">▶ Bukhara 布哈拉影片</a>
-        <a class="ref-link ref-link-yt" href="https://www.youtube.com/results?search_query=%E5%B8%83%E5%93%88%E6%8B%89+%E7%B5%B2%E8%B7%AF+%E6%97%85%E9%81%8A" target="_blank" rel="noopener">▶ 布哈拉中文介紹</a>
+      <div class="yt-embeds">
+        <a class="yt-embed-item" href="https://www.youtube.com/watch?v=lVQOEiFNBtQ" target="_blank" rel="noopener"><div class="yt-embed-label">▶ Bukhara Travel Guide</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/lVQOEiFNBtQ/hqdefault.jpg" alt="▶ Bukhara Travel Guide" loading="lazy"><span class="yt-embed-play"></span></div></a>
+        <a class="yt-embed-item" href="https://www.youtube.com/watch?v=E2Db4NkupSY" target="_blank" rel="noopener"><div class="yt-embed-label">▶ 布哈拉中文介紹</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/E2Db4NkupSY/hqdefault.jpg" alt="▶ 布哈拉中文介紹" loading="lazy"><span class="yt-embed-play"></span></div></a>
+      </div>
+      <div class="day-map">
+        <div class="day-map-label"><span class="title">📍 布哈拉景點地圖</span><span class="hint">可拖曳縮放，點左上角圖示切換圖層／景點清單</span></div>
+        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=1QFySfFlIOixmV0sXCliktt_wXIun7yE&ll=39.7747%2C64.4286&z=14" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
       </div>
     </div>
   </div>
@@ -1315,10 +1448,14 @@
       <div class="food-box">
         <strong>🍽 推薦美食：</strong>Nargiza 餐廳的拉麵 (Lagman)、撒馬爾罕薄脆烤饢（比布哈拉版更薄脆）、9月新鮮葡萄。
       </div>
-      <div class="ref-links">
-        <a class="ref-link ref-link-yt" href="https://www.youtube.com/results?search_query=Registan+Samarkand+light+show" target="_blank" rel="noopener">▶ 雷吉斯坦燈光秀</a>
-        <a class="ref-link ref-link-yt" href="https://www.youtube.com/results?search_query=Shah-i-Zinda+Samarkand" target="_blank" rel="noopener">▶ 夏赫靜達走廊</a>
-        <a class="ref-link ref-link-yt" href="https://www.youtube.com/results?search_query=%E6%92%92%E9%A6%AC%E7%88%BE%E7%BD%95+%E8%87%AA%E7%94%B1%E8%A1%8C" target="_blank" rel="noopener">▶ 撒馬爾罕中文介紹</a>
+      <div class="yt-embeds">
+        <a class="yt-embed-item" href="https://www.youtube.com/watch?v=Ug7ZFfwI904" target="_blank" rel="noopener"><div class="yt-embed-label">▶ 雷吉斯坦燈光秀</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/Ug7ZFfwI904/hqdefault.jpg" alt="▶ 雷吉斯坦燈光秀" loading="lazy"><span class="yt-embed-play"></span></div></a>
+        <a class="yt-embed-item" href="https://www.youtube.com/watch?v=Ml_jJQSgikc" target="_blank" rel="noopener"><div class="yt-embed-label">▶ 夏赫靜達走廊</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/Ml_jJQSgikc/hqdefault.jpg" alt="▶ 夏赫靜達走廊" loading="lazy"><span class="yt-embed-play"></span></div></a>
+        <a class="yt-embed-item" href="https://www.youtube.com/watch?v=2nKrN0wb52g" target="_blank" rel="noopener"><div class="yt-embed-label">▶ 撒馬爾罕中文介紹</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/2nKrN0wb52g/hqdefault.jpg" alt="▶ 撒馬爾罕中文介紹" loading="lazy"><span class="yt-embed-play"></span></div></a>
+      </div>
+      <div class="day-map">
+        <div class="day-map-label"><span class="title">📍 撒馬爾罕景點地圖</span><span class="hint">可拖曳縮放，點左上角圖示切換圖層／景點清單</span></div>
+        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=1QFySfFlIOixmV0sXCliktt_wXIun7yE&ll=39.6270%2C66.9750&z=14" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
       </div>
     </div>
   </div>
@@ -1342,9 +1479,13 @@
       <div class="food-box">
         <strong>🎁 必買伴手禮：</strong>烏茲別克乾果禮盒（杏乾、開心果、核桃）、果醬夾心餅乾、真空包裝 Non 烤餅。機場前：Caravan 餐廳最後一餐。
       </div>
-      <div class="ref-links">
-        <a class="ref-link ref-link-yt" href="https://www.youtube.com/results?search_query=Tashkent+metro+art+stations" target="_blank" rel="noopener">▶ 塔什干地鐵藝術站</a>
-        <a class="ref-link ref-link-yt" href="https://www.youtube.com/results?search_query=Charvak+lake+Uzbekistan" target="_blank" rel="noopener">▶ Charvak 水庫</a>
+      <div class="yt-embeds">
+        <a class="yt-embed-item" href="https://www.youtube.com/watch?v=eYiLV1mlPRA" target="_blank" rel="noopener"><div class="yt-embed-label">▶ 塔什干地鐵藝術站</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/eYiLV1mlPRA/hqdefault.jpg" alt="▶ 塔什干地鐵藝術站" loading="lazy"><span class="yt-embed-play"></span></div></a>
+        <a class="yt-embed-item" href="https://www.youtube.com/watch?v=atavkqeNdfk" target="_blank" rel="noopener"><div class="yt-embed-label">▶ Charvak 水庫風光</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/atavkqeNdfk/hqdefault.jpg" alt="▶ Charvak 水庫風光" loading="lazy"><span class="yt-embed-play"></span></div></a>
+      </div>
+      <div class="day-map">
+        <div class="day-map-label"><span class="title">📍 塔什干景點地圖</span><span class="hint">可拖曳縮放，點左上角圖示切換圖層／景點清單</span></div>
+        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=1QFySfFlIOixmV0sXCliktt_wXIun7yE&ll=41.2995%2C69.2401&z=12" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
       </div>
     </div>
   </div>
@@ -1402,6 +1543,7 @@
             <span class="ac-code">訂單編號：5858118971（Booking.com）</span>
             <span class="ac-code">9/21 18:00 前可免費取消</span>
             <span class="ac-code">現場付現・Kyle 已訂</span>
+            <span class="ac-note" style="color: var(--accent-red); font-weight: 700;">⚠️ Google Maps 上顯示為「Hotel ASL」，同城市另有一間較遠的「Asl Boutique Hotel」，啟程前請務必再次核對地點。訂房地址：Lyabi Khauz, Levi boboxonov 2, 200100 布哈拉，烏茲別克</span>
           </div>
         </div>
       </div>
@@ -1419,7 +1561,6 @@
             <span class="ac-code">訂單編號：5669327980（Booking.com）</span>
             <span class="ac-code">9/21 前可免費取消</span>
             <span class="ac-code">現場付現・Kyle 已訂</span>
-            <span class="ac-note">※ 備案 Bibikhanum Hotel，Derek 已詢問改訂，待回覆</span>
           </div>
         </div>
       </div>
@@ -1427,7 +1568,7 @@
       <div class="accom-card">
         <div class="accom-city">🔵 塔什干 Tashkent</div>
         <div class="accom-name">Day 10–11</div>
-        <div class="accom-nights">共 2 晚（9/27–28）</div>
+        <div class="accom-nights">共 1 晚（9/27）・9/28 退房</div>
         <span class="confirmed-badge">✓ 已訂房</span>
         <div class="accom-confirmed">
           <div class="ac-row ac-hotel-row"><strong>NOVA HOME Apartments – NEST ONE, Tashkent City</strong><br><a href="https://www.booking.com/Share-onDNghz" target="_blank" rel="noopener">訂房連結 →</a></div>
@@ -1578,8 +1719,10 @@
         <li>布哈拉 → 撒馬爾罕（Afrosiyob，約1.5h）</li>
         <li>撒馬爾罕 → 塔什干（Afrosiyob，約2h）</li>
       </ul>
-      <div class="ref-links" style="margin-top:12px;">
-        <a class="ref-link ref-link-yt" href="https://www.youtube.com/results?search_query=Afrosiyob+train+Uzbekistan" target="_blank" rel="noopener">▶ Afrosiyob 高鐵影片</a>
+      <div class="yt-embeds" style="margin-top:12px;">
+        <a class="yt-embed-item" href="https://www.youtube.com/watch?v=L4r_6XADuHQ" target="_blank" rel="noopener"><div class="yt-embed-label">▶ Afrosiyob 高鐵搭乘體驗</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/L4r_6XADuHQ/hqdefault.jpg" alt="▶ Afrosiyob 高鐵搭乘體驗" loading="lazy"><span class="yt-embed-play"></span></div></a>
+      </div>
+      <div class="ref-links" style="margin-top:8px;">
         <a class="ref-link" href="https://eticket.railway.uz" target="_blank" rel="noopener">🎫 官網購票</a>
       </div>
     </div>

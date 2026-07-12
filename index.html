@@ -377,6 +377,53 @@
   }
   .food-box strong { color: var(--tile-blue); font-size: 14px; }
 
+  /* ===== 推薦餐廳（含訂位資訊） ===== */
+  .restaurant-list {
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+  }
+  .restaurant-card {
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 14px 16px;
+    background: #fff;
+  }
+  .restaurant-card .r-name {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    color: var(--persian-blue);
+    margin-bottom: 4px;
+  }
+  .restaurant-card .r-tag {
+    display: inline-block;
+    font-family: 'Manrope', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    color: #8a6500;
+    background: rgba(212,175,55,0.15);
+    border: 1px solid rgba(212,175,55,0.4);
+    padding: 1px 7px;
+    border-radius: 20px;
+    margin-bottom: 6px;
+  }
+  .restaurant-card p {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--earth-brown);
+    margin: 0;
+  }
+  .restaurant-card .r-book {
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--tile-blue);
+    background: var(--turquoise-light);
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: block;
+  }
+
   .ref-links {
     margin-top: 14px;
     display: flex;
@@ -1396,6 +1443,7 @@
       </div>
       <div class="food-box">
         <strong>🍽 推薦美食：</strong>Besh Qozon 傳統抓飯 (Plov)、剛出爐的烏茲別克麵包 (Non)、烤羊肉串 Shashlik。
+        <br><span style="font-size:12px;opacity:0.75;">※ Besh Qozon 是大型自助式抓飯食堂（每天現煮數千人份的大鍋飯），不接受訂位、現場排隊點餐即可，10人不用特別預約，建議避開正中午人潮尖峰。</span>
       </div>
       <div class="yt-embeds">
         <a class="yt-embed-item" href="https://www.youtube.com/watch?v=9GMJ_2_xZc8" target="_blank" rel="noopener"><div class="yt-embed-label">▶ Chorsu Bazaar 市集walk</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/9GMJ_2_xZc8/hqdefault.jpg" alt="▶ Chorsu Bazaar 市集walk" loading="lazy"><span class="yt-embed-play"></span></div></a>
@@ -1429,6 +1477,19 @@
       </div>
       <div class="food-box">
         <strong>🍽 推薦美食：</strong>Terrassa Café 景觀餐、希瓦限定蜂蜜薄餅 (Katlama)、希瓦烤羊腿配扁豆湯。
+      </div>
+      <div class="restaurant-list">
+        <div class="restaurant-card">
+          <span class="r-tag">★ 網友激推</span>
+          <div class="r-name">Terrassa Cafe & Restaurant</div>
+          <p>希瓦古城景觀第一排，二樓露台可俯瞰 Kalta Minor 矮宣禮塔與古城全景，日落藍調時刻最美。必點希瓦限定綠麵 Shivit Oshi、希瓦八味套餐（人多划算）。<br>📍 Chiva, Khorezm, 220900（西門 Ota Darvoza 步行約2分鐘）<br>📞 +998 55 603 9111・🕐 07:00–23:00</p>
+          <span class="r-book">10人訂位：露台景觀座位競爭激烈，強烈建議<strong>出發前先電話或請飯店協助預訂</strong>，並指定「露台區 Terrace」＋告知人數10人；若訂不到露台，室內區也能透過大片景觀窗看到矮塔。</span>
+        </div>
+        <div class="restaurant-card">
+          <div class="r-name">Cafe Zarafshon</div>
+          <p>緊鄰伊斯蘭霍賈宣禮塔旁的古蹟建築餐廳，露台正對宣禮塔，夜晚打燈氣氛絕佳。招牌蒔蘿餃子、南瓜湯評價高。<br>📍 Islomxoʻja ko'chasi 89/3, Khiva（伊斯蘭霍賈宣禮塔旁）<br>📞 +998 62 375 7051・🕐 08:00–22:00</p>
+          <span class="r-book">10人訂位：晚餐時段常客滿，建議提前電話預訂或請飯店代訂，並抓寬鬆一點的用餐時間避免撲空。</span>
+        </div>
       </div>
       <div class="yt-embeds">
         <a class="yt-embed-item" href="https://www.youtube.com/watch?v=2F0-UYhrPDg" target="_blank" rel="noopener"><div class="yt-embed-label">▶ Khiva: Everything You Need to Know</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/2F0-UYhrPDg/hqdefault.jpg" alt="▶ Khiva: Everything You Need to Know" loading="lazy"><span class="yt-embed-play"></span></div></a>
@@ -1466,6 +1527,24 @@
       </div>
       <div class="food-box">
         <strong>🍽 推薦美食：</strong>Minzifa 景觀餐廳（花園環境極美）、布哈拉油香抓飯、鮮榨石榴汁（9月石榴季！）、Chinar Café。
+      </div>
+      <div class="restaurant-list">
+        <div class="restaurant-card">
+          <div class="r-name">Xon Atlas Restaurant</div>
+          <p>二樓露台區＋玻璃屋，可俯瞰古城圓頂建築與宣禮塔，古城風情濃厚。招牌手抓飯 Plov 約45,000 som，湯品22,000–28,000 som，價格透明實在。<br>📍 Ibadova 8, Bukhara（距亞克要塞約600公尺，步行7-10分鐘；入口藏在小巷，建議用 Google Maps 導航或搭 Yandex Go 直接導航店名）</p>
+          <span class="r-book">10人訂位：入口低調巷弄不易找，建議請飯店協助電話預訂並確認10人座位，用車前往時提醒司機把巷口位置抓準。</span>
+        </div>
+        <div class="restaurant-card">
+          <span class="r-tag">★ 需提前訂位</span>
+          <div class="r-name">Labi Hovuz</div>
+          <p>就在拉比豪茲水池畔，布哈拉老城最經典的地標餐廳，戶外水池座位＋夜晚live music，適合團體聚餐氣氛。招牌烤肉串份量大。<br>📍 Lyabi-Hauz 廣場（老城核心，步行可達所有主要景點）</p>
+          <span class="r-book">10人訂位：熱門時段（晚餐、有live music的夜晚）常客滿，且服務生忙碌時較難招呼到，建議提前透過飯店或當地包車司機協助電話占位，或提早30分鐘到場候位。</span>
+        </div>
+        <div class="restaurant-card">
+          <div class="r-name">Oriental Tea House</div>
+          <p>藏在老城巷弄裡的絲路風情茶館，木雕天花板很美，主打道地烤包子（Samsa）與手拉麵，氣氛悠閒適合中午休息。<br>📍 布哈拉老城區中心，距市集（Bazaar）步行數分鐘</p>
+          <span class="r-book">10人訂位：屬於較悠閒的中小型茶館，人多建議提前告知店家或請飯店代訂，避免現場併桌久候。</span>
+        </div>
       </div>
       <div class="yt-embeds">
         <a class="yt-embed-item" href="https://www.youtube.com/watch?v=lVQOEiFNBtQ" target="_blank" rel="noopener"><div class="yt-embed-label">▶ Bukhara Travel Guide</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/lVQOEiFNBtQ/hqdefault.jpg" alt="▶ Bukhara Travel Guide" loading="lazy"><span class="yt-embed-play"></span></div></a>
@@ -1513,6 +1592,19 @@
       </div>
       <div class="food-box">
         <strong>🍽 推薦美食：</strong>Nargiza 餐廳的拉麵 (Lagman)、撒馬爾罕薄脆烤饢（比布哈拉版更薄脆）、9月新鮮葡萄。
+      </div>
+      <div class="restaurant-list">
+        <div class="restaurant-card">
+          <span class="r-tag">★ 雷吉斯坦景觀</span>
+          <div class="r-name">Emirhan Restaurant</div>
+          <p>就在雷吉斯坦廣場旁，三樓露台可正對廣場全景，日落時分是撒馬爾罕最搶手的位子。招牌撒馬爾罕抓飯、烤羊舌評價高，可刷卡。網友評價服務尖峰時段較慢，需耐心。<br>📍 Makhmudzhanova 1/18, Samarkand（雷吉斯坦廣場正後方）<br>📞 +998 88 891 6000・🕐 11:00–23:00</p>
+          <span class="r-book">10人訂位：<strong>強烈建議提前電話預訂並指定「廣場邊露台座位」</strong>，日落前（約18:00前）入座才搶得到最佳邊角位；10人建議提早15-30分鐘到，避免旺季客滿被拆桌。</span>
+        </div>
+        <div class="restaurant-card">
+          <div class="r-name">Bibikhanum Teahouse</div>
+          <p>比比哈努姆清真寺正南側，傳統 Tapchan 高台座位（盤腿或桌椅區皆有），適合團體圍坐用餐，抓飯、拉格曼、烤蔬菜串選擇多。<br>📍 Street 22A, Samarkand（比比哈努姆清真寺旁）<br>📞 +998 91 537 8473・🕐 11:00–23:00</p>
+          <span class="r-book">10人訂位：戶外棚架座位多、彈性大，10人團體較容易併桌安排，仍建議提前致電告知人數，尖峰時段（中午參觀完清真寺後）容易滿座。</span>
+        </div>
       </div>
       <div class="yt-embeds">
         <a class="yt-embed-item" href="https://www.youtube.com/watch?v=Ug7ZFfwI904" target="_blank" rel="noopener"><div class="yt-embed-label">▶ 雷吉斯坦燈光秀</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/Ug7ZFfwI904/hqdefault.jpg" alt="▶ 雷吉斯坦燈光秀" loading="lazy"><span class="yt-embed-play"></span></div></a>
@@ -1799,7 +1891,15 @@
         <li>布哈拉 → 撒馬爾罕：<strong>Afrosiyob 高鐵</strong>（約1h40m，建議搭 769Ф 14:58 車次）</li>
         <li>撒馬爾罕 → 塔什干：<strong>包車</strong>（約4–4.5h，時間彈性配合最後一天行程）</li>
       </ul>
-      <div class="warn-box">⚠️ 高鐵票開放購票：出發前 60 天，每天台灣時間下午 1 點准時放票，官網 <a href="https://eticket.railway.uz" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline;">eticket.railway.uz</a>，非常搶手請盡快下手；刷卡失敗可請當地住宿代訂。</div>
+      <div class="warn-box">⚠️ 高鐵票開放購票：出發前 <strong>45 天</strong>（多方資料交叉核對後修正，先前寫的60天不準確），確切放票時刻依系統而定、建議開賣當天盡早搶，官網 <a href="https://eticket.railway.uz" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline;">eticket.railway.uz</a>，非常搶手請盡快下手；刷卡失敗可請當地住宿代訂。</div>
+      <hr class="prac-divider">
+      <p><strong>🛂 車站安檢流程（10人建議提前30-45分鐘抵達）：</strong></p>
+      <ul>
+        <li>進站前：行李過 X 光機、人走金屬探測門（類似機場安檢），無票者不可進站</li>
+        <li>進站後：工作人員掃描電子車票 QR code＋核對<strong>護照正本</strong>（影本不接受）才能進月台，護照建議隨身放外套或隨身包，不要收進大件託運行李裡</li>
+        <li>車廂號碼標示在車廂外側，Afrosiyob 有時比月台長，10人建議先確認自己車廂大概停靠位置</li>
+      </ul>
+      <p style="font-size:12px;opacity:0.75;">💊 用藥提醒：含可待因（Codeine）、偽麻黃鹼（Pseudoephedrine，常見台灣鼻塞感冒藥成分）的藥品，在<strong>入境烏茲別克海關</strong>（塔什干機場入境時）需要申報，這點務必注意；但國內段火車站安檢只檢查危險物品，不會特別盤查藥品成分，不用過度擔心國內移動這段。</p>
       <div class="yt-embeds" style="margin-top:12px;">
         <a class="yt-embed-item" href="https://www.youtube.com/watch?v=L4r_6XADuHQ" target="_blank" rel="noopener"><div class="yt-embed-label">▶ Afrosiyob 高鐵搭乘體驗</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/L4r_6XADuHQ/hqdefault.jpg" alt="▶ Afrosiyob 高鐵搭乘體驗" loading="lazy"><span class="yt-embed-play"></span></div></a>
       </div>
@@ -1885,8 +1985,8 @@
         <p>台灣護照需「邀請函 + 落地簽」，不可用 e-Visa。建議出發前 2–3 個月向 Global Connect 或 Citytours Uzbekistan 申請邀請函，落地簽費 $65 美金（現金）於塔什干機場繳付。</p>
       </div>
       <div class="note-card">
-        <h4>🚄 高鐵票（出發前60天搶）</h4>
-        <p>Afrosiyob 票極搶手，開放購票後當天即可能售罄。台灣時間下午 1 點准時上官網 eticket.railway.uz 搶票，外國卡刷不過可請當地住宿代訂。</p>
+        <h4>🚄 高鐵票（出發前45天搶）</h4>
+        <p>Afrosiyob 票極搶手，開放購票後當天即可能售罄。建議開賣當天盡早上官網 eticket.railway.uz 搶票，外國卡刷不過可請當地住宿代訂。</p>
       </div>
       <div class="note-card">
         <h4>🏨 住宿（提前3個月訂）</h4>

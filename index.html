@@ -500,6 +500,28 @@
   .phrase-play:active { transform: scale(0.92); }
   .phrase-play.playing { background: var(--accent-red); color: #fff; }
 
+  @media (max-width: 600px) {
+    .phrase-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .phrase-card {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 10px 12px;
+      gap: 4px;
+    }
+    .phrase-card .p-cn { font-size: 12.5px; margin-bottom: 1px; }
+    .phrase-card .p-orig { font-size: 13px; }
+    .phrase-card .p-latin { font-size: 10px; }
+    .phrase-card .p-kongear { font-size: 10.5px; padding: 1px 6px; margin-top: 2px; }
+    .phrase-play {
+      align-self: flex-end;
+      width: 30px;
+      height: 30px;
+      font-size: 13px;
+      margin-top: 2px;
+    }
+    .phrase-cat { font-size: 16px; margin: 24px 0 10px; }
+  }
+
   .ref-links {
     margin-top: 14px;
     display: flex;
@@ -641,6 +663,27 @@
     margin-left: 4px;
   }
   .yt-embed-item:hover .yt-embed-play { background: #c00; }
+
+  @media (max-width: 600px) {
+    .yt-embeds {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 10px;
+      padding-bottom: 8px;
+      margin-left: -4px;
+      margin-right: -4px;
+      padding-left: 4px;
+      padding-right: 4px;
+    }
+    .yt-embeds::-webkit-scrollbar { height: 5px; }
+    .yt-embeds::-webkit-scrollbar-thumb { background: var(--line); border-radius: 10px; }
+    .yt-embed-item {
+      flex: 0 0 78%;
+      scroll-snap-align: center;
+    }
+  }
   .ref-link-yt { border-color: rgba(255,0,0,0.25); color: #c00; }
   .ref-link-yt:hover { background: #fff0f0; border-color: #c00; }
 
@@ -2024,6 +2067,14 @@
         <div><div class="p-cn">不好意思／借過</div><div class="p-orig">Извините</div><div class="p-latin">Izvinite</div><span class="p-kongear">空耳：意茲維尼傑</span></div>
         <button class="phrase-play" onclick="playPhrase(this,'Извините','ru-RU')">🔊</button>
       </div>
+      <div class="phrase-card">
+        <div><div class="p-cn">我們是台灣人</div><div class="p-orig">Мы тайваньцы</div><div class="p-latin">My tayvantsy</div><span class="p-kongear">空耳：麥 台彎次</span></div>
+        <button class="phrase-play" onclick="playPhrase(this,'Мы тайваньцы','ru-RU')">🔊</button>
+      </div>
+      <div class="phrase-card">
+        <div><div class="p-cn">我們從台灣來</div><div class="p-orig">Мы из Тайваня</div><div class="p-latin">My iz Tayvanya</div><span class="p-kongear">空耳：麥 意茲 台彎亞</span></div>
+        <button class="phrase-play" onclick="playPhrase(this,'Мы из Тайваня','ru-RU')">🔊</button>
+      </div>
     </div>
 
     <div class="phrase-cat">🛍️ 市集殺價</div>
@@ -2188,6 +2239,10 @@
       <div class="phrase-card">
         <div><div class="p-cn">再見</div><div class="p-orig">Xayr</div><div class="p-latin">Xayr</div><span class="p-kongear">空耳：海爾</span></div>
         <button class="phrase-play" onclick="playPhrase(this,'Xayr','uz-UZ')">🔊</button>
+      </div>
+      <div class="phrase-card">
+        <div><div class="p-cn">我們從台灣來</div><div class="p-orig">Biz Tayvandanmiz</div><div class="p-latin">Biz Tayvandanmiz</div><span class="p-kongear">空耳：比茲 台灣單米茲</span></div>
+        <button class="phrase-play" onclick="playPhrase(this,'Biz Tayvandanmiz','uz-UZ')">🔊</button>
       </div>
     </div>
     <p style="font-size:12px;color:var(--earth-brown);opacity:0.7;margin-top:14px;">※ 烏茲別克語發音在部分手機/瀏覽器可能沒有對應語音庫、按了沒聲音是正常的，這種狀況請直接參考「空耳」欄位念出來即可；俄語發音支援度普遍較好。</p>

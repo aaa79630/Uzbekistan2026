@@ -449,7 +449,12 @@
     align-items: center;
     justify-content: space-between;
     gap: 10px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.15s, border-color 0.15s;
   }
+  .phrase-card:hover { background: var(--turquoise-light); border-color: var(--turquoise); }
+  .phrase-card:active { background: rgba(0,169,184,0.15); }
   .phrase-card .p-cn {
     font-family: 'Noto Serif TC', serif;
     font-size: 15px;
@@ -490,14 +495,14 @@
     background: var(--turquoise-light);
     color: var(--tile-blue);
     font-size: 16px;
-    cursor: pointer;
+    pointer-events: none;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: background 0.2s, transform 0.15s;
   }
-  .phrase-play:hover { background: var(--tile-blue); color: #fff; }
-  .phrase-play:active { transform: scale(0.92); }
+  .phrase-card:hover .phrase-play { background: var(--tile-blue); color: #fff; }
+  .phrase-card:active .phrase-play { transform: scale(0.9); }
   .phrase-play.playing { background: var(--accent-red); color: #fff; }
 
   @media (max-width: 600px) {
@@ -1201,6 +1206,37 @@
     padding-left: 28px; /* 滑鼠經過時的小位移特效 */
   }
 
+  .nav-item-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+  .nav-caret {
+    font-size: 11px;
+    opacity: 0.55;
+    transition: transform 0.25s;
+  }
+  .nav-item-toggle.open .nav-caret { transform: rotate(180deg); }
+  .nav-submenu {
+    max-height: 0;
+    overflow: hidden;
+    background: rgba(0,169,184,0.05);
+    transition: max-height 0.3s ease;
+  }
+  .nav-submenu.open { max-height: 320px; }
+  .nav-subitem {
+    display: block;
+    padding: 10px 22px 10px 40px;
+    color: var(--tile-blue);
+    text-decoration: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(30, 58, 95, 0.05);
+    transition: all 0.2s;
+  }
+  .nav-subitem:hover { background: var(--turquoise-light); padding-left: 44px; }
+
   /* 遮罩層：讓視覺焦點集中在選單 */
   .nav-overlay {
     position: fixed;
@@ -1549,7 +1585,7 @@
 
 <section class="days" id="itinerary">
 
-  <div class="day-card">
+  <div class="day-card" id="day1">
     <div class="day-info">
       <div class="day-number">01</div>
       <div class="day-date">09 / 18 (五)</div>
@@ -1560,6 +1596,9 @@
       <div class="day-details">13:10 落地後入住飯店。前往喬爾蘇市集 (Chorsu Bazaar) 感受道地氛圍，黃昏於獨立廣場散步。</div>
       <div class="highlight-box">
         <ul style="list-style: none; font-size: 14px;">
+          <li>• <strong>哈斯特伊瑪目建築群 Hazrati Imam Complex</strong>：塔什干最美的伊斯蘭建築群，收藏世界最古老古蘭經手抄本之一（奧斯曼古蘭經），清晨陽光下的藍色圓頂特別亮眼，建議上午前往
+            <span class="ticket-info">🎫 廣場本身免費參觀，Muyi Muborak 圖書館博物館（存放奧斯曼古蘭經處）另收門票 30,000 UZS（約 $2.4 美金／NT$79）・開放約 09:00–18:00，建議上午9-11點或下午4點後參觀人較少</span>
+          </li>
           <li>• <strong>Chorsu Bazaar</strong>：中亞最著名的圓頂市集，香料、堅果、乾果應有盡有</li>
           <li>• <strong>Broadway Street</strong>：體驗塔什干夜生活</li>
           <li>• <strong>獨立廣場</strong>：黃昏散步，感受現代塔什干的氣息</li>
@@ -1580,7 +1619,7 @@
     </div>
   </div>
 
-  <div class="day-card">
+  <div class="day-card" id="day2-3">
     <div class="day-info">
       <div class="day-number">02–03</div>
       <div class="day-date">09 / 19–20</div>
@@ -1626,7 +1665,7 @@
     </div>
   </div>
 
-  <div class="day-card">
+  <div class="day-card" id="day4-6">
     <div class="day-info">
       <div class="day-number">04–06</div>
       <div class="day-date">09 / 21–23</div>
@@ -1643,6 +1682,9 @@
           </li>
           <li>• <strong>卡揚宣禮塔＋卡揚清真寺 Po-i-Kalyan</strong>：布哈拉地標，46.5公尺高塔
             <span class="ticket-info">🎫 清真寺約 20,000 UZS／人（約 $1.6 美金／NT$52）；宣禮塔目前不開放攀登</span>
+          </li>
+          <li>• <strong>Bolo Hauz 清真寺</strong>：20根木柱倒映水池的經典畫面，人稱「布哈拉的鏡子清真寺」，就在阿爾克城堡正對面，順路必拍
+            <span class="ticket-info">🎫 免費參觀（仍為運作中的清真寺，可隨喜捐獻）・開放約 08:00–19:00，請注意當地祈禱時間、保持安靜與服裝端莊</span>
           </li>
           <li>• <strong>Mir-i-Arab 神學院</strong>：至今仍在運行的活建築，卡揚宣禮塔正對面</li>
           <li>• <strong>三圓頂市集</strong>：挑選精美的手工剪刀與地毯</li>
@@ -1681,7 +1723,7 @@
     </div>
   </div>
 
-  <div class="day-card">
+  <div class="day-card" id="day7-9">
     <div class="day-info">
       <div class="day-number">07–09</div>
       <div class="day-date">09 / 24–26</div>
@@ -1742,7 +1784,7 @@
     </div>
   </div>
 
-  <div class="day-card">
+  <div class="day-card" id="day10-11">
     <div class="day-info">
       <div class="day-number">10–11</div>
       <div class="day-date">09 / 27–28</div>
@@ -1753,8 +1795,16 @@
       <div class="day-details">包車返塔什干（約4–4.5h，時間彈性配合撒馬爾罕最後行程）。進行「地鐵藝術站之旅」，每一站都是不同風格的地下宮殿。最後一天可前往天山 Chimgan 或 Charvak 水庫。23:00 搭機返程。</div>
       <div class="highlight-box">
         <ul style="list-style: none; font-size: 14px;">
-          <li>• <strong>🚇 塔什干地鐵</strong>：Kosmonavtlar（太空主題）、Alisher Navoi（伊斯蘭穹頂）必看兩站
-            <span class="ticket-info">🎫 單程 1,400 UZS（約 $0.1 美金／NT$3.7，投幣或感應卡），無需另外購票拍照，僅需搭乘</span>
+          <li>• <strong>🚇 塔什干地鐵</strong>：中亞第一座地鐵，蘇聯時期建造，每站都是不同風格的地下宮殿，2018年6月才解禁開放拍照（禁拍超過40年，因為兼具核子避難所功能）
+            <span class="ticket-info">🎫 單程 1,400 UZS（約 $0.1 美金／NT$3.7，投幣或感應卡），不限時間距離、票價不因搭乘站數變動，無需另外購票拍照，僅需搭乘</span>
+            <div style="margin-top:8px;padding:10px 12px;background:var(--turquoise-light);border-radius:6px;font-size:13px;line-height:1.8;">
+              <strong style="color:var(--tile-blue);">必去7站：</strong><br>
+              🔵 藍線：<strong>Toshkent</strong> 塔什干站・<strong>Kosmonavtlar</strong> 太空人站（宇航員主題）・<strong>Alisher Navoiy</strong> 詩人站（藍色伊斯蘭穹頂）<br>
+              🔴 紅線：<strong>Paxtakor</strong> 棉花站・<strong>Mustaqillik Maydoni</strong> 獨立廣場站<br>
+              🟢 綠線：<strong>Bodomzor</strong> 杏樹林站・<strong>Yunus Rajabiy</strong> 音樂家站<br>
+              <span style="opacity:0.75;">7站排一趟約需2–3小時，建議上午或平日離峰時段前往，站內仍有安檢與警衛，拍照請保持禮貌、避免拍到執勤人員。</span><br>
+              <a href="https://www.instagram.com/p/DasRiLpnQjG/" target="_blank" rel="noopener" class="ref-link" style="margin-top:6px;">📷 參考路線圖與實拍照片</a>
+            </div>
           </li>
           <li>• <strong>Charvak 水庫</strong><span class="optional-tag">選配</span><span class="unesco-badge nature">🌲 UNESCO 2016 自然遺產（部分涵蓋）</span>：碧藍湖景，距市區約 1.5h，輕鬆選項
             <span class="ticket-info">📍 位於 Ugam-Chatkal 國家公園內，即「西天山」世界自然遺產範圍（與哈薩克、吉爾吉斯共有）・湖區本身免費，部分景點/國家公園入口需付環境維護費</span>
@@ -1920,13 +1970,13 @@
     </div>
 
     <div style="margin-bottom: 20px;">
-      <p style="font-size:14px;color:rgba(255,255,255,0.8);margin-bottom:14px;">🏢 推薦邀請函旅行社（台灣旅客常用）：</p>
+      <p style="font-size:14px;color:rgba(255,255,255,0.8);margin-bottom:14px;">🏢 邀請函（LOI）＋落地簽費用：</p>
       <div class="visa-cost-row">
-        <div class="cost-chip"><strong>Global Connect</strong>背包客棧高評價，可議價，4人以上有折扣。有折扣碼。<br><span style="display:inline-block;margin-top:4px;background:rgba(255,255,255,0.12);border-radius:4px;padding:3px 8px;font-weight:700;">⚠️ 計價為 €55 歐元（非美金），另加旅行社手續費</span></div>
-        <div class="cost-chip"><strong>Citytours Uzbekistan</strong>網站資訊清楚，WhatsApp 回覆快，可刷卡。</div>
-        <div class="cost-chip"><strong>費用概估</strong>邀請函 $55–$90（依旅行社報價幣別而定，Global Connect 為歐元計價）<br>落地簽 $65（現金）<br>合計約 NT$3,800–4,800</div>
+        <div class="cost-chip"><strong>LOI 邀請函</strong>跟 Global Connect 訂，10人 €512.89（含手續費、已用折扣碼）<br>平均每人約 NT$1,770</div>
+        <div class="cost-chip"><strong>落地簽</strong>$65 美金／人（現金，塔什干機場繳付）<br>10人共 $650，約 NT$20,500</div>
+        <div class="cost-chip"><strong>合計</strong>每人約 NT$3,800<br>10人總計約 NT$38,000</div>
       </div>
-      <p style="font-size:12px;color:rgba(255,255,255,0.6);margin-top:8px;">※ 我們這次是跟 Global Connect 訂邀請函，實際報價是 <strong style="color:#fff;">€55 歐元</strong>（+ 旅行社手續費），付款時請注意匯率換算，不是 $55 美金。</p>
+      <p style="font-size:12px;color:rgba(255,255,255,0.6);margin-top:8px;">※ Global Connect 計價為歐元（非美金），付款時注意匯率換算；非歐洲信用卡刷卡會加收平台手續費，屬正常機制。</p>
     </div>
 
     <div class="visa-alert" style="margin-top:0;">
@@ -2042,207 +2092,163 @@
 
   <div class="phrase-cat">👋 打招呼</div>
   <div class="phrase-grid">
-    <div class="phrase-card">
+    <div class="phrase-card" onclick="playPhrase(this,'Привет','ru-RU')">
         <div><div class="p-cn">你好（輕鬆場合）</div><div class="p-orig">Привет</div><div class="p-latin">Privet</div><span class="p-kongear">空耳：普利偉特</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Привет','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Здравствуйте','ru-RU')">
         <div><div class="p-cn">你好（正式／長輩）</div><div class="p-orig">Здравствуйте</div><div class="p-latin">Zdravstvuyte</div><span class="p-kongear">空耳：茲搭拉斯特烏伊接</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Здравствуйте','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Спасибо','ru-RU')">
         <div><div class="p-cn">謝謝</div><div class="p-orig">Спасибо</div><div class="p-latin">Spasibo</div><span class="p-kongear">空耳：斯巴西巴</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Спасибо','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Пожалуйста','ru-RU')">
         <div><div class="p-cn">不客氣／請</div><div class="p-orig">Пожалуйста</div><div class="p-latin">Pozhaluysta</div><span class="p-kongear">空耳：巴讓露斯塔</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Пожалуйста','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'До свидания','ru-RU')">
         <div><div class="p-cn">再見</div><div class="p-orig">До свидания</div><div class="p-latin">Do svidaniya</div><span class="p-kongear">空耳：搭斯維達尼亞</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'До свидания','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Извините','ru-RU')">
         <div><div class="p-cn">不好意思／借過</div><div class="p-orig">Извините</div><div class="p-latin">Izvinite</div><span class="p-kongear">空耳：意茲維尼傑</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Извините','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Мы тайваньцы','ru-RU')">
         <div><div class="p-cn">我們是台灣人</div><div class="p-orig">Мы тайваньцы</div><div class="p-latin">My tayvantsy</div><span class="p-kongear">空耳：麥 台彎次</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Мы тайваньцы','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Мы из Тайваня','ru-RU')">
         <div><div class="p-cn">我們從台灣來</div><div class="p-orig">Мы из Тайваня</div><div class="p-latin">My iz Tayvanya</div><span class="p-kongear">空耳：麥 意茲 台彎亞</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Мы из Тайваня','ru-RU')">🔊</button>
-      </div>
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
     </div>
 
     <div class="phrase-cat">🛍️ 市集殺價</div>
     <div class="phrase-grid">
-      <div class="phrase-card">
+      <div class="phrase-card" onclick="playPhrase(this,'Сколько стоит?','ru-RU')">
         <div><div class="p-cn">多少錢？</div><div class="p-orig">Сколько стоит?</div><div class="p-latin">Skolko stoit?</div><span class="p-kongear">空耳：斯摳里科 斯多以特</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Сколько стоит?','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Это дорого','ru-RU')">
         <div><div class="p-cn">太貴了</div><div class="p-orig">Это дорого</div><div class="p-latin">Eto dorogo</div><span class="p-kongear">空耳：誒拓 多拉夠</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Это дорого','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Можно дешевле?','ru-RU')">
         <div><div class="p-cn">可以便宜一點嗎？</div><div class="p-orig">Можно дешевле?</div><div class="p-latin">Mozhno deshevle?</div><span class="p-kongear">空耳：摸許諾 借謝夫類</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Можно дешевле?','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Хорошо','ru-RU')">
         <div><div class="p-cn">好的／可以</div><div class="p-orig">Хорошо</div><div class="p-latin">Horosho</div><span class="p-kongear">空耳：哈拉受</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Хорошо','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Да, Нет','ru-RU')">
         <div><div class="p-cn">是／不是</div><div class="p-orig">Да／Нет</div><div class="p-latin">Da / Nyet</div><span class="p-kongear">空耳：打／涅特</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Да, Нет','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Счёт, пожалуйста','ru-RU')">
         <div><div class="p-cn">結帳／買單</div><div class="p-orig">Счёт, пожалуйста</div><div class="p-latin">Schyot, pozhaluysta</div><span class="p-kongear">空耳：休特 巴讓露斯塔</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Счёт, пожалуйста','ru-RU')">🔊</button>
-      </div>
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
     </div>
 
     <div class="phrase-cat">🍽 用餐</div>
     <div class="phrase-grid">
-      <div class="phrase-card">
+      <div class="phrase-card" onclick="playPhrase(this,'Вкусно','ru-RU')">
         <div><div class="p-cn">好吃！</div><div class="p-orig">Вкусно</div><div class="p-latin">Vkusno</div><span class="p-kongear">空耳：夫估斯諾</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Вкусно','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Вода','ru-RU')">
         <div><div class="p-cn">水</div><div class="p-orig">Вода</div><div class="p-latin">Voda</div><span class="p-kongear">空耳：沃達</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Вода','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'За здоровье','ru-RU')">
         <div><div class="p-cn">乾杯</div><div class="p-orig">За здоровье</div><div class="p-latin">Za zdorovye</div><span class="p-kongear">空耳：雜 茲多羅維耶</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'За здоровье','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Где туалет?','ru-RU')">
         <div><div class="p-cn">洗手間在哪裡？</div><div class="p-orig">Где туалет?</div><div class="p-latin">Gde tualet?</div><span class="p-kongear">空耳：個爹 圖阿列特</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Где туалет?','ru-RU')">🔊</button>
-      </div>
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
     </div>
 
     <div class="phrase-cat">🆘 求助與其他</div>
     <div class="phrase-grid">
-      <div class="phrase-card">
+      <div class="phrase-card" onclick="playPhrase(this,'Я не понимаю','ru-RU')">
         <div><div class="p-cn">我不懂</div><div class="p-orig">Я не понимаю</div><div class="p-latin">Ya ne ponimayu</div><span class="p-kongear">空耳：亞 涅 帕尼馬又</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Я не понимаю','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Помогите','ru-RU')">
         <div><div class="p-cn">救命／幫忙</div><div class="p-orig">Помогите</div><div class="p-latin">Pomogite</div><span class="p-kongear">空耳：帕摸個一捷</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Помогите','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Можно сфотографировать?','ru-RU')">
         <div><div class="p-cn">可以拍照嗎？</div><div class="p-orig">Можно сфотографировать?</div><div class="p-latin">Mozhno sfotografirovat?</div><span class="p-kongear">空耳：摸許諾 斯佛拓格拉飛拉瓦特</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Можно сфотографировать?','ru-RU')">🔊</button>
-      </div>
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
     </div>
 
     <div class="phrase-cat">🔢 數字（討論價錢、人數必備）</div>
     <div class="phrase-grid">
-      <div class="phrase-card">
+      <div class="phrase-card" onclick="playPhrase(this,'Один','ru-RU')">
         <div><div class="p-cn">1</div><div class="p-orig">Один</div><div class="p-latin">Odin</div><span class="p-kongear">空耳：阿金</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Один','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Два','ru-RU')">
         <div><div class="p-cn">2</div><div class="p-orig">Два</div><div class="p-latin">Dva</div><span class="p-kongear">空耳：德瓦</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Два','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Три','ru-RU')">
         <div><div class="p-cn">3</div><div class="p-orig">Три</div><div class="p-latin">Tri</div><span class="p-kongear">空耳：特里</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Три','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Четыре','ru-RU')">
         <div><div class="p-cn">4</div><div class="p-orig">Четыре</div><div class="p-latin">Chetyre</div><span class="p-kongear">空耳：切特耶勒</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Четыре','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Пять','ru-RU')">
         <div><div class="p-cn">5</div><div class="p-orig">Пять</div><div class="p-latin">Pyat</div><span class="p-kongear">空耳：皮亞特</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Пять','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Шесть','ru-RU')">
         <div><div class="p-cn">6</div><div class="p-orig">Шесть</div><div class="p-latin">Shest</div><span class="p-kongear">空耳：舍斯特</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Шесть','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Семь','ru-RU')">
         <div><div class="p-cn">7</div><div class="p-orig">Семь</div><div class="p-latin">Sem</div><span class="p-kongear">空耳：謝姆</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Семь','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Восемь','ru-RU')">
         <div><div class="p-cn">8</div><div class="p-orig">Восемь</div><div class="p-latin">Vosem</div><span class="p-kongear">空耳：沃謝姆</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Восемь','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Девять','ru-RU')">
         <div><div class="p-cn">9</div><div class="p-orig">Девять</div><div class="p-latin">Devyat</div><span class="p-kongear">空耳：借維亞特</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Девять','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Десять','ru-RU')">
         <div><div class="p-cn">10</div><div class="p-orig">Десять</div><div class="p-latin">Desyat</div><span class="p-kongear">空耳：借西亞特</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Десять','ru-RU')">🔊</button>
-      </div>
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
     </div>
 
     <div class="phrase-cat" style="border-bottom:none;font-size:14px;color:var(--earth-brown);opacity:0.8;margin:16px 0 10px;">個・十・百・千・萬（殺價、算金額時常用）</div>
     <div class="phrase-grid">
-      <div class="phrase-card">
+      <div class="phrase-card" onclick="playPhrase(this,'Двадцать','ru-RU')">
         <div><div class="p-cn">20</div><div class="p-orig">Двадцать</div><div class="p-latin">Dvadtsat</div><span class="p-kongear">空耳：德瓦查特</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Двадцать','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Тридцать','ru-RU')">
         <div><div class="p-cn">30</div><div class="p-orig">Тридцать</div><div class="p-latin">Tridtsat</div><span class="p-kongear">空耳：特里查特</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Тридцать','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Сорок','ru-RU')">
         <div><div class="p-cn">40</div><div class="p-orig">Сорок</div><div class="p-latin">Sorok</div><span class="p-kongear">空耳：收羅克</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Сорок','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Пятьдесят','ru-RU')">
         <div><div class="p-cn">50</div><div class="p-orig">Пятьдесят</div><div class="p-latin">Pyatdesyat</div><span class="p-kongear">空耳：皮亞捷西亞特</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Пятьдесят','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Сто','ru-RU')">
         <div><div class="p-cn">100（百）</div><div class="p-orig">Сто</div><div class="p-latin">Sto</div><span class="p-kongear">空耳：斯拓</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Сто','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Тысяча','ru-RU')">
         <div><div class="p-cn">1,000（千）</div><div class="p-orig">Тысяча</div><div class="p-latin">Tysyacha</div><span class="p-kongear">空耳：特西亞洽</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Тысяча','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Десять тысяч','ru-RU')">
         <div><div class="p-cn">10,000（萬）</div><div class="p-orig">Десять тысяч</div><div class="p-latin">Desyat tysyach</div><span class="p-kongear">空耳：借西亞特 特西亞取</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Десять тысяч','ru-RU')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Нас десять человек','ru-RU')">
         <div><div class="p-cn">我們有10個人</div><div class="p-orig">Нас десять человек</div><div class="p-latin">Nas desyat chelovek</div><span class="p-kongear">空耳：那斯 借西亞特 切拉維克</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Нас десять человек','ru-RU')">🔊</button>
-      </div>
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
     </div>
     <p style="font-size:12px;color:var(--earth-brown);opacity:0.7;margin-top:8px;">💡 小技巧：烏茲別克蘇姆金額都很大（例如 50,000 UZS），當地人殺價常常直接說「幾十千」（如 Пятьдесят тысяч 皮亞捷西亞特 特西亞洽＝5萬），聽到大數字不用慌，通常就是「幾個千」的組合，把上面數字聽懂再組合起來就能抓到大概金額。</p>
 
     <div class="phrase-cat">🇺🇿 加碼：烏茲別克語（跟當地人更有親切感）</div>
     <div class="phrase-grid">
-      <div class="phrase-card">
+      <div class="phrase-card" onclick="playPhrase(this,'Salom','uz-UZ')">
         <div><div class="p-cn">你好</div><div class="p-orig">Salom</div><div class="p-latin">Salom</div><span class="p-kongear">空耳：撒龍姆</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Salom','uz-UZ')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Rahmat','uz-UZ')">
         <div><div class="p-cn">謝謝</div><div class="p-orig">Rahmat</div><div class="p-latin">Rahmat</div><span class="p-kongear">空耳：拉赫馬特</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Rahmat','uz-UZ')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Zo r','uz-UZ')">
         <div><div class="p-cn">很棒／太美了</div><div class="p-orig">Zo'r</div><div class="p-latin">Zo'r</div><span class="p-kongear">空耳：湊爾</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Zo r','uz-UZ')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Xayr','uz-UZ')">
         <div><div class="p-cn">再見</div><div class="p-orig">Xayr</div><div class="p-latin">Xayr</div><span class="p-kongear">空耳：海爾</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Xayr','uz-UZ')">🔊</button>
-      </div>
-      <div class="phrase-card">
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
+      <div class="phrase-card" onclick="playPhrase(this,'Biz Tayvandanmiz','uz-UZ')">
         <div><div class="p-cn">我們從台灣來</div><div class="p-orig">Biz Tayvandanmiz</div><div class="p-latin">Biz Tayvandanmiz</div><span class="p-kongear">空耳：比茲 台灣單米茲</span></div>
-        <button class="phrase-play" onclick="playPhrase(this,'Biz Tayvandanmiz','uz-UZ')">🔊</button>
-      </div>
+        <button class="phrase-play" tabindex="-1">🔊</button></div>
     </div>
     <p style="font-size:12px;color:var(--earth-brown);opacity:0.7;margin-top:14px;">※ 烏茲別克語發音在部分手機/瀏覽器可能沒有對應語音庫、按了沒聲音是正常的，這種狀況請直接參考「空耳」欄位念出來即可；俄語發音支援度普遍較好。</p>
 </section>
@@ -2256,40 +2262,43 @@
     <div class="packing-grid">
       <div class="packing-category">
         <h4>📄 重要文件</h4>
-        <label class="check-item"><input type="checkbox"> 護照正本 (效期6個月以上) </label>
-        <label class="check-item"><input type="checkbox"> LOI 邀請函 (紙本列印)</label>
-        <label class="check-item"><input type="checkbox"> 美金現鈔 (新版、無損、足額)</label>
-        <label class="check-item"><input type="checkbox"> 英文版旅遊保險證明</label>
-        <label class="check-item"><input type="checkbox"> 飯店預訂證明 (備用)</label>
+        <label class="check-item"><input type="checkbox" data-pk="doc1"> 護照正本 (效期6個月以上) </label>
+        <label class="check-item"><input type="checkbox" data-pk="doc2"> LOI 邀請函 (紙本列印)</label>
+        <label class="check-item"><input type="checkbox" data-pk="doc3"> 美金現鈔 (新版、無損、足額)</label>
+        <label class="check-item"><input type="checkbox" data-pk="doc4"> 英文版旅遊保險證明</label>
+        <label class="check-item"><input type="checkbox" data-pk="doc5"> 飯店預訂證明 (備用)</label>
+        <label class="check-item"><input type="checkbox" data-pk="doc6"> 每間住宿退房時記得索取住宿證明 (出境海關可能查驗)</label>
+        <label class="check-item"><input type="checkbox" data-pk="doc7"> 出國前先向台灣發卡銀行確認/設定信用卡預設 PIN 碼</label>
       </div>
 
       <div class="packing-category">
         <h4>🔌 電子設備</h4>
-        <label class="check-item"><input type="checkbox"> 轉接頭 (Type C / F 兩圓孔)</label>
-        <label class="check-item"><input type="checkbox"> 行動電源 (容量需符合規範)</label>
-        <label class="check-item"><input type="checkbox"> 萬國插頭 / 延長線</label>
-        <label class="check-item"><input type="checkbox"> 退卡針 (換 SIM 卡用)</label>
-        <label class="check-item"><input type="checkbox"> 下載好離線 Google 地圖</label>
+        <label class="check-item"><input type="checkbox" data-pk="elec1"> 轉接頭 (Type C / F 兩圓孔)</label>
+        <label class="check-item"><input type="checkbox" data-pk="elec2"> 行動電源 (容量需符合規範)</label>
+        <label class="check-item"><input type="checkbox" data-pk="elec3"> 萬國插頭 / 延長線</label>
+        <label class="check-item"><input type="checkbox" data-pk="elec4"> 退卡針 (換 SIM 卡用)</label>
+        <label class="check-item"><input type="checkbox" data-pk="elec5"> 下載好離線 Google 地圖</label>
       </div>
 
       <div class="packing-category">
         <h4>👕 衣物穿著</h4>
-        <label class="check-item"><input type="checkbox"> 輕薄防曬外套</label>
-        <label class="check-item"><input type="checkbox"> 舒適健行鞋 (需大量步行)</label>
-        <label class="check-item"><input type="checkbox"> 太陽眼鏡與遮陽帽</label>
-        <label class="check-item"><input type="checkbox"> 大披肩/頭巾 (進清真寺用)</label>
-        <label class="check-item"><input type="checkbox"> 9月溫差大，備一件薄毛衣 </label>
+        <label class="check-item"><input type="checkbox" data-pk="cloth1"> 輕薄防曬外套</label>
+        <label class="check-item"><input type="checkbox" data-pk="cloth2"> 舒適健行鞋 (需大量步行)</label>
+        <label class="check-item"><input type="checkbox" data-pk="cloth3"> 太陽眼鏡與遮陽帽</label>
+        <label class="check-item"><input type="checkbox" data-pk="cloth4"> 大披肩/頭巾 (進清真寺用)</label>
+        <label class="check-item"><input type="checkbox" data-pk="cloth5"> 9月溫差大，備一件薄毛衣 </label>
       </div>
 
       <div class="packing-category">
         <h4>💊 個人護理</h4>
-        <label class="check-item"><input type="checkbox"> 腸胃藥、止痛藥、感冒藥</label>
-        <label class="check-item"><input type="checkbox"> 護唇膏、乳液 (氣候極乾燥)</label>
-        <label class="check-item"><input type="checkbox"> 高係數防曬乳</label>
-        <label class="check-item"><input type="checkbox"> 濕紙巾、個人清潔用品</label>
-        <label class="check-item"><input type="checkbox"> 喉片 (防沙塵或乾燥不適)</label>
+        <label class="check-item"><input type="checkbox" data-pk="care1"> 腸胃藥、止痛藥、感冒藥</label>
+        <label class="check-item"><input type="checkbox" data-pk="care2"> 護唇膏、乳液 (氣候極乾燥)</label>
+        <label class="check-item"><input type="checkbox" data-pk="care3"> 高係數防曬乳</label>
+        <label class="check-item"><input type="checkbox" data-pk="care4"> 濕紙巾、個人清潔用品</label>
+        <label class="check-item"><input type="checkbox" data-pk="care5"> 喉片 (防沙塵或乾燥不適)</label>
       </div>
     </div>
+    <p style="font-size:12px;color:var(--earth-brown);opacity:0.7;margin-top:16px;">💾 勾選狀態會自動儲存在你這台裝置的瀏覽器裡，下次打開同一個瀏覽器不會消失；但因為是存在「你自己」的裝置上，換一台手機/電腦或清除瀏覽器資料就會重置，每個人看到的勾選狀態也不會互相同步。</p>
   </div>
 </section>
 
@@ -2453,7 +2462,15 @@
   <a href="#intro" class="nav-item">🇺🇿 認識烏茲別克</a>
   <a href="#flights" class="nav-item">✈️ 航班資訊</a>
   <a href="#route" class="nav-item">🗺️ 路線規劃</a>
-  <a href="#itinerary" class="nav-item">🗓️ 11天行程</a>
+  <div class="nav-item nav-item-toggle" id="itineraryToggle">🗓️ 11天行程 <span class="nav-caret">▾</span></div>
+  <div class="nav-submenu" id="itinerarySubmenu">
+    <a href="#itinerary" class="nav-subitem">📍 行程總覽</a>
+    <a href="#day1" class="nav-subitem">Day1・塔什干</a>
+    <a href="#day2-3" class="nav-subitem">Day2-3・希瓦</a>
+    <a href="#day4-6" class="nav-subitem">Day4-6・布哈拉</a>
+    <a href="#day7-9" class="nav-subitem">Day7-9・撒馬爾罕</a>
+    <a href="#day10-11" class="nav-subitem">Day10-11・塔什干</a>
+  </div>
   <a href="#lodging" class="nav-item">🏨 住宿安排</a>
   <a href="#visa" class="nav-item">🛂 簽證指南</a>
   <a href="#practical" class="nav-item">💵 實用資訊</a>
@@ -2473,7 +2490,6 @@
   const navToggle = document.getElementById('navToggle');
   const navMenu = document.getElementById('navMenu');
   const navOverlay = document.getElementById('navOverlay');
-  const navItems = document.querySelectorAll('.nav-item');
 
   // 切換選單顯示/隱藏
 function toggleMenu() {
@@ -2485,19 +2501,31 @@ function toggleMenu() {
   navToggle.addEventListener('click', toggleMenu);
   navOverlay.addEventListener('click', toggleMenu);
 
-  // 點擊選項後自動關閉選單
+  // 11天行程 子選單：點擊展開/收合，不觸發跳轉或關閉整個選單
+  const itineraryToggle = document.getElementById('itineraryToggle');
+  const itinerarySubmenu = document.getElementById('itinerarySubmenu');
+  itineraryToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    itineraryToggle.classList.toggle('open');
+    itinerarySubmenu.classList.toggle('open');
+  });
+
+  // 點擊選項後自動關閉選單（一般項目 + 子選單裡的日期項目）
+  const navItems = document.querySelectorAll('.nav-item:not(#itineraryToggle), .nav-subitem');
   navItems.forEach(item => {
     item.addEventListener('click', () => {
       navMenu.classList.remove('active');
       navOverlay.classList.remove('active');
-      navToggle.innerHTML = '☰';
+      navToggle.classList.remove('active');
+      itineraryToggle.classList.remove('open');
+      itinerarySubmenu.classList.remove('open');
     });
   });
 </script>
 
 <script>
   // 實用會話發音功能（使用瀏覽器內建 Web Speech API，無須額外音訊檔）
-  function playPhrase(btn, text, lang) {
+  function playPhrase(card, text, lang) {
     if (!('speechSynthesis' in window)) {
       alert('抱歉，這個瀏覽器不支援語音朗讀功能，請直接參考空耳注音發音。');
       return;
@@ -2507,6 +2535,7 @@ function toggleMenu() {
     utter.lang = lang;
     utter.rate = 0.85; // 稍微放慢速度，聽得更清楚
 
+    var btn = card.querySelector('.phrase-play') || card;
     btn.classList.add('playing');
     utter.onend = function () { btn.classList.remove('playing'); };
     utter.onerror = function () {
@@ -2517,6 +2546,28 @@ function toggleMenu() {
     };
     window.speechSynthesis.speak(utter);
   }
+</script>
+
+<script>
+  // 行李清單勾選狀態存在瀏覽器 localStorage，重新整理/下次打開不會消失
+  (function () {
+    var STORAGE_PREFIX = 'uzbek-packing-';
+    var checkboxes = document.querySelectorAll('.check-item input[type="checkbox"][data-pk]');
+
+    checkboxes.forEach(function (box) {
+      var key = STORAGE_PREFIX + box.dataset.pk;
+      try {
+        var saved = localStorage.getItem(key);
+        if (saved === '1') box.checked = true;
+      } catch (e) { /* localStorage 不可用（例如無痕模式），略過即可 */ }
+
+      box.addEventListener('change', function () {
+        try {
+          localStorage.setItem(key, box.checked ? '1' : '0');
+        } catch (e) { /* 略過 */ }
+      });
+    });
+  })();
 </script>
 </body>
 </html>

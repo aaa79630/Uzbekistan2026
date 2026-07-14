@@ -942,6 +942,30 @@
     border-radius: 20px;
     margin-bottom: 10px;
   }
+  .backup-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(212,175,55,0.18);
+    color: #8a6500;
+    font-family: 'Manrope', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  .accom-compare {
+    margin-top: 10px;
+    padding: 10px 12px;
+    background: #fcfcfc;
+    border: 1px dashed var(--line);
+    border-radius: 4px;
+    font-size: 12px;
+    color: #555;
+    line-height: 1.7;
+  }
   .accom-confirmed {
     border: 1.5px solid rgba(0,169,184,0.3);
     border-radius: 4px;
@@ -1856,15 +1880,34 @@
         <div class="accom-city">🟡 希瓦 Khiva</div>
         <div class="accom-name">Day 2–3</div>
         <div class="accom-nights">共 2 晚（9/19–20）</div>
+
         <span class="confirmed-badge">✓ 已訂房</span>
         <div class="accom-confirmed">
           <div class="ac-row ac-hotel-row"><strong>Grand Vizir Hotel</strong><br><a href="https://grandvizirhotel.com/" target="_blank" rel="noopener">官網 →</a></div>
-          <div class="ac-row">3間2人房（1King／2Twin）<br>2間3人房（其中1間限2人）<br>含早餐</div>
+          <div class="ac-row">2間雙床房（Twin）＋1間豪華雙人房（Deluxe Double）<br>2間3人房（Triple，其中1間限2人）<br>含早餐</div>
           <div class="ac-row"><span class="ac-price">9,540,000 UZS ≈ 25,125 TWD</span></div>
           <div class="ac-row">
             <span class="ac-code">訂單編號：20260919-508227-1256327462</span>
             <span class="ac-code">現場付現・Derek 已訂</span>
           </div>
+        </div>
+
+        <span class="backup-badge" style="margin-top:12px;">🔄 備用・可免費取消</span>
+        <div class="accom-confirmed">
+          <div class="ac-row ac-hotel-row"><strong>Orient Star Khiva Hotel</strong><br><a href="https://hotelorientstarkhiva.uz/" target="_blank" rel="noopener">官網 →</a></div>
+          <div class="ac-row">2間雙床房＋2間三床房（10人）<br>含早餐</div>
+          <div class="ac-row"><span class="ac-price">900 USD ≈ 28,350 TWD</span></div>
+          <div class="ac-row">
+            <span class="ac-code">訂單編號：20260919-508294-1258354873</span>
+            <span class="ac-note">18/09/2026 14:00 (UTC+5) 前可免費取消，逾期收取第一晚房費</span>
+          </div>
+        </div>
+
+        <div class="accom-compare">
+          <strong>兩間評價比較：</strong><br>
+          <strong>Grand Vizir</strong>：Booking 8.7-8.8分（約56則評論）、Tripadvisor 4/5（22則）。新開幕小型精品旅館，主打乾淨、新穎、老闆親切、早餐豐富，走路到古城入口很近；缺點是<strong>僅收現金</strong>，有房客反映床偏硬。<br>
+          <strong>Orient Star</strong>：Booking 8.6分（<strong>951則評論，量體大很多、口碑更穩定</strong>）、Tripadvisor 3/5（約500則）。位置最大優勢是<strong>直接住在古城牆內、改建自1855年神學院</strong>，建築本身就是景點，中庭很美；缺點是房間偏小偏暗（前身是學生宿舍隔間）、房內WiFi弱、也是現金為主，且因常接待大型旅行團，早餐時段人多容易擠。<br>
+          <span style="opacity:0.75;">簡單說：Grand Vizir 較新較安靜、服務更貼心；Orient Star 位置與建築本身更有特色、但房間較小、評論量大更具參考性。兩間都有一定水準，可以先保留 Orient Star 當備案，9/18前決定要不要取消。</span>
         </div>
       </div>
 
@@ -1972,11 +2015,10 @@
     <div style="margin-bottom: 20px;">
       <p style="font-size:14px;color:rgba(255,255,255,0.8);margin-bottom:14px;">🏢 邀請函（LOI）＋落地簽費用：</p>
       <div class="visa-cost-row">
-        <div class="cost-chip"><strong>LOI 邀請函</strong>跟 Global Connect 訂，10人 €512.89（含手續費、已用折扣碼）<br>平均每人約 NT$1,770</div>
-        <div class="cost-chip"><strong>落地簽</strong>$65 美金／人（現金，塔什干機場繳付）<br>10人共 $650，約 NT$20,500</div>
-        <div class="cost-chip"><strong>合計</strong>每人約 NT$3,800<br>10人總計約 NT$38,000</div>
+        <div class="cost-chip"><strong>LOI 邀請函</strong>跟 Global Connect 訂，4人以上團體優惠 + 折扣碼<br>每人 €51.3（已含線上支付平台服務費）</div>
+        <div class="cost-chip"><strong>落地簽</strong>$65 美金／人（現金，塔什干機場繳付）</div>
       </div>
-      <p style="font-size:12px;color:rgba(255,255,255,0.6);margin-top:8px;">※ Global Connect 計價為歐元（非美金），付款時注意匯率換算；非歐洲信用卡刷卡會加收平台手續費，屬正常機制。</p>
+      <p style="font-size:12px;color:rgba(255,255,255,0.6);margin-top:8px;">※ Global Connect 計價為歐元（非美金），付款時注意匯率換算；線上支付平台service fee是平台向刷卡人收取的固定機制，非旅行社或代收人加收。</p>
     </div>
 
     <div class="visa-alert" style="margin-top:0;">

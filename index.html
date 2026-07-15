@@ -2803,7 +2803,7 @@ function toggleMenu() {
   var guideData = {
     hazratiImam: {
       title: '哈斯特伊瑪目建築群 · 奧斯曼古蘭經',
-      body: '漫步在廣場上，前方這座 Muyi Muborak 圖書館就是我們的起點。你可以直接走向正中央的玻璃展示櫃，那本巨大、泛黃的手抄本，就是傳說中的「奧斯曼古蘭經」。<br><br><strong>流傳千年的聖血傳說：</strong>這本經書歷史可追溯至西元 7 世紀至 9 世紀（約等同於唐朝初年至中葉），是世界上現存最古老的古蘭經手抄本之一。傳說中，第三任哈里發奧斯曼在西元 656 年（唐高宗永徽末年，正是玄奘三藏大師在長安翻譯佛經的時期）閱讀它時遇刺，鮮血滴落在經頁上，紙上至今仍留有深褐色的血跡。雖然現代碳定年法檢測顯示它實際上是 8-9 世紀的作品，可能並非其親筆原本，但其歷史重要性依然不減。<br><br><strong>課本上的西域綠洲記憶：</strong>在唐朝時期，這裡屬於「西域」的範圍。當初透過絲路往來的祆教（拜火教）、佛教、景教與新興的伊斯蘭教，都在這片土地上交會。看著這本千年經書，你其實正站在東西方文明信仰碰撞的歷史最前線。'
+      body: '漫步在廣場上，前方這座 Muyi Muborak 圖書館就是我們的起點。你可以直接走向正中央的玻璃展示櫃，那本巨大、泛黃的手抄本，就是傳說中的「奧斯曼古蘭經」。<br><br><strong>流傳千年的聖血傳說：</strong>這本經書歷史可追溯至西元 7 世紀至 9 世紀（約等同於唐朝初年至中葉），是世界上現存最古老的古蘭經手抄本之一。傳說中，第三任哈里發奧斯曼在西元 656 年（唐高宗永徽末年，正是玄奘三藏大師在長安翻譯佛經的時期）閱讀它時遇刺，鮮血滴落在經頁上，紙上至今仍留有深褐色的血跡。雖然現代碳定年法檢測顯示它實際上是 8-9 世紀的作品，可能並非其親筆原本，但其歷史重要性依然不減。<br><br><strong>課本上的西域綠洲記憶：</strong>在唐朝時期，這裡屬於「西域」的範圍。當初透過絲路往來的拜火教（波斯瑣羅亞斯德教）、佛教、景教與新興的伊斯蘭教，都在這片土地上交會。看著這本千年經書，你其實正站在東西方文明信仰碰撞的歷史最前線。'
     },
     tashkentMetro: {
       title: '塔什干地鐵之旅 · 地面下的核防空洞美學',
@@ -2859,8 +2859,9 @@ function toggleMenu() {
     if (e.key === 'Escape') closeGuide();
   });
 
-  // 語音導覽：優先挑選聽起來像男聲的中文語音，並把音調稍微調低增加低沉感
-  // （實際音色仍取決於使用者裝置內建的語音庫，蘋果/安卓/Windows聽起來會不同）
+  // 語音導覽：優先挑選聽起來像男聲、且音質較好的中文語音，並把音調稍微調低增加低沉感
+  // （實際音色仍取決於使用者裝置內建的語音庫，蘋果/安卓/Windows聽起來會不同，
+  //  网頁沒有標準化的方式能「強制解鎖」iOS的進階Siri語音，以下是盡力而為的篩選邏輯）
   var guideVoiceBtn = document.getElementById('guideVoiceBtn');
   var guideUtterance = null;
 
@@ -2869,6 +2870,21 @@ function toggleMenu() {
     var voices = window.speechSynthesis.getVoices();
     var zhVoices = voices.filter(function (v) { return /zh/i.test(v.lang); });
     if (zhVoices.length === 0) return null;
+
+    // 1. 名稱裡標示「進階/優質/自然」等關鍵字的語音（部分裝置會有這類命名，但非標準、不保證每台裝置都有）
+    var premiumHints = /premium|enhanced|neural|natural|siri|進階|優質|自然/i;
+    var premium = zhVoices.find(function (v) { return premiumHints.test(v.name); });
+    if (premium) return premium;
+
+    // 2. 非本機（雲端）語音：Android Chrome 上，localService===false 代表 Google 雲端語音，
+    //    音質通常明顯優於裝置內建語音，這是目前唯一有documented依據的品質篩選方式
+    var network = zhVoices.filter(function (v) { return v.localService === false; });
+    if (network.length > 0) {
+      var networkMale = network.find(function (v) { return /male|男/i.test(v.name); });
+      return networkMale || network[0];
+    }
+
+    // 3. 都找不到的話，退回原本的男聲關鍵字比對
     var maleHints = /male|男|yunyang|yunjian|kangkang|云扬|云健/i;
     var male = zhVoices.find(function (v) { return maleHints.test(v.name); });
     var twVoice = zhVoices.find(function (v) { return /TW/i.test(v.lang); });
@@ -2895,8 +2911,8 @@ function toggleMenu() {
     window.speechSynthesis.cancel();
     guideUtterance = new SpeechSynthesisUtterance(text);
     guideUtterance.lang = 'zh-TW';
-    guideUtterance.rate = 0.95;
-    guideUtterance.pitch = 0.82; // 調低音調，聽起來更低沉
+    guideUtterance.rate = 1.08;
+    guideUtterance.pitch = 0.88; // 微調音調與語速，聽起來更沉穩
     var voice = pickNarratorVoice();
     if (voice) guideUtterance.voice = voice;
 

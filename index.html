@@ -979,11 +979,33 @@
     font-family: 'Fraunces', serif;
     font-size: 24px;
     color: var(--persian-blue);
-    margin-bottom: 18px;
+    margin-bottom: 14px;
     padding-bottom: 14px;
     border-bottom: 2px solid var(--uzbek-gold);
     padding-right: 30px;
   }
+  .guide-voice-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+    background: var(--persian-blue);
+    color: #fff;
+    border: none;
+    border-radius: 24px;
+    padding: 9px 18px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .guide-voice-btn:hover { background: var(--tile-blue); }
+  .guide-voice-btn:active { transform: scale(0.97); }
+  .guide-voice-btn .gv-icon { font-size: 15px; }
+  .guide-voice-btn.playing { background: var(--accent-red); }
+  .guide-voice-btn.playing .gv-icon { animation: gvPulse 1s ease-in-out infinite; }
+  @keyframes gvPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
   .guide-modal-body {
     font-family: 'Noto Serif TC', 'Noto Sans TC', sans-serif;
     font-size: 15px;
@@ -993,6 +1015,7 @@
   @media (max-width: 600px) {
     .guide-modal { padding: 26px 20px 22px; max-height: 85vh; }
     .guide-modal-title { font-size: 20px; }
+    .guide-voice-btn { font-size: 12px; padding: 8px 15px; }
     .guide-modal-body { font-size: 14px; line-height: 1.9; }
   }
 
@@ -2764,6 +2787,7 @@ function toggleMenu() {
     <button class="guide-modal-close" id="guideModalClose">✕</button>
     <div class="guide-modal-eyebrow">深度導覽 · ON-SITE GUIDE</div>
     <div class="guide-modal-title" id="guideModalTitle"></div>
+    <button class="guide-voice-btn" id="guideVoiceBtn"><span class="gv-icon">🔊</span><span class="gv-label">語音導覽</span></button>
     <div class="guide-modal-body" id="guideModalBody"></div>
   </div>
 </div>
@@ -2777,11 +2801,11 @@ function toggleMenu() {
     },
     tashkentMetro: {
       title: '塔什干地鐵之旅 · 地面下的核防空洞美學',
-      body: '<strong>親手觸摸冷戰時期的重裝美學：</strong>拿出你的手機，在月台上可以摸摸那厚實的大理石柱，感受這座地鐵獨特的歷史氣息。<br><br><strong>嚴格禁止拍照整整 41 年的軍事機密：</strong>塔什干地鐵建於西元 1977 年（對照台灣歷史，此時是民國 66 年，正值十大建設推動、蔣經國先生擔任行政院長的時期）。因為它兼具了蘇聯冷戰時期的「核子避難所」軍事功能，被列為國家最高機密，直到 2018 年 6 月才終於解禁。<br><br><strong>李白筆下的長安胡姬與地鐵美學：</strong>在藍線的 Alisher Navoiy（詩人站），一排排藍色的伊斯蘭穹頂在頭頂綻放。李白曾寫過「胡姬貌如花，當壚笑春風」，那些在長安城裡讓無數詩人傾倒、擅長歌舞的「胡姬」，大半就是從地鐵站所在的這片綠洲，沿著絲綢之路一路向東走進唐朝。站在這座地鐵站，頭頂的圓頂花紋正是那段繁華胡風的現代延續。'
+      body: '<strong>親手觸摸冷戰時期的重裝美學：</strong>拿出你的手機，在月台上可以摸摸那厚實的大理石柱，感受這座地鐵獨特的歷史氣息。<br><br><strong>嚴格禁止拍照整整 41 年的軍事機密：</strong>塔什干地鐵建於西元 1977 年（對照台灣歷史，此時是民國 66 年，正值十大建設推動、蔣經國先生擔任行政院長的時期）。因為它兼具了蘇聯冷戰時期的「核子避難所」軍事功能，被列為國家最高機密，直到 2018 年 6 月才終於解禁。<br><br><strong>李白筆下的長安胡姬與地鐵美學：</strong>在藍線的 Alisher Navoiy（詩人站），一排排藍色的伊斯蘭穹頂在頭頂綻放。李白曾寫過「胡姬貌如花，當壚笑春風」，那些在長安城裡讓無數詩人傾倒、擅長歌舞的「胡姬」，大半就是從中亞這片綠洲一帶，沿著絲綢之路一路向東走進唐朝。站在這座地鐵站，頭頂的圓頂花紋正是那段繁華胡風的現代延續。'
     },
     kaltaMinor: {
       title: '卡爾塔米諾爾矮塔 · 未完成的藍色巨塔',
-      body: '<strong>希瓦古城的第一眼震撼：</strong>一從西門（Ota Darvoza）進入古城，你的視線立刻會被右側這座「胖胖的」、貼滿寶藍色琉璃磁磚的巨塔奪走。請走近它，伸手摸摸外牆精緻的釉陶。<br><br><strong>UNESCO 極力保護的沙漠綠洲典範：</strong>UNESCO 在 1990 年將這裡列為世界遺產，因為希瓦內城（Itchan Kala）是中亞保存最完整的伊斯蘭城市典範。這座古城大體定型於西元 16 至 17 世紀（等同於明朝末年至清朝康熙年間，正是鄭成功渡海來台、台灣進入明鄭時期的時代）。它以獨特的雙層土磚防禦體系，完整呈現了古人如何在中亞嚴酷的乾旱沙漠與鹹海門戶之間，構築出一座功能齊全、空間緊湊的絲路綠洲城邦。<br><br><strong>可汗未竟的中亞第一高塔夢：</strong>這座矮塔動工於西元 1851 年（清朝咸豐元年，也是中國南方爆發太平天國之亂的那一年）。它原本計畫要建到 70 公尺以上，好讓可汗能站在塔頂直接一眼望到百公里外、前往布哈拉的絲路駝隊。然而在 1855 年（清咸豐五年），發起建塔的可汗穆罕默德·阿明汗在戰鬥中身亡，工程當場停擺，只留下了這座約 26 公尺高的「未完成品」。<br><br><strong>射鵰英雄傳裡的花剌子模大漠：</strong>希瓦所在的這片「花剌子模」綠洲，歷史超過兩千年。西元 13 世紀初（南宋嘉定年間），正是金庸《射鵰英雄傳》中郭靖隨成吉思汗西征花剌子模的敵國核心！當年蒙古鐵騎橫掃這片大漠時，這片土地歷經戰火。看著這座美麗的未完成矮塔，它彷彿在訴說著千百年來，絲路綠洲在帝國崛起與隕落之間的無奈與美麗。'
+      body: '<strong>希瓦古城的第一眼震撼：</strong>一從西門（Ota Darvoza）進入古城，你的視線立刻會被右側這座「胖胖的」、貼滿寶藍色琉璃磁磚的巨塔奪走。請走近它，伸手摸摸外牆精緻的釉陶。<br><br><strong>UNESCO 極力保護的沙漠綠洲典範：</strong>UNESCO 在 1990 年將這裡列為世界遺產，因為希瓦內城（Itchan Kala）是中亞保存最完整的伊斯蘭城市典範。它以獨特的雙層土磚防禦體系，完整呈現了古人如何在中亞嚴酷的乾旱沙漠與鹹海門戶之間，構築出一座功能齊全、空間緊湊的絲路綠洲城邦。<br><br><strong>可汗未竟的中亞第一高塔夢：</strong>這座矮塔動工於西元 1851 年（清朝咸豐元年，也是中國南方爆發太平天國之亂的那一年）。它原本計畫要建到 70 公尺以上，志在成為中亞第一高塔——當地流傳著一個浪漫但物理上不可能的傳說：可汗希望塔蓋好後能站在塔頂直接看到近400公里外、前往布哈拉的絲路駝隊（這個距離就算地球是平的，也遠遠超出人眼能看見的極限，是個美麗的誇飾說法）。1855年（清咸豐五年），發起建塔的可汗穆罕默德·阿明汗在戰鬥中身亡，工程當場停擺，只留下了這座約 26 公尺高的「未完成品」。<br><br><strong>射鵰英雄傳裡的花剌子模大漠：</strong>希瓦所在的這片「花剌子模」綠洲，歷史超過兩千年。西元 13 世紀初（南宋嘉定年間），正是金庸《射鵰英雄傳》中郭靖隨成吉思汗西征花剌子模的敵國核心！當年蒙古鐵騎橫掃這片大漠時，這片土地歷經戰火。看著這座美麗的未完成矮塔，它彷彿在訴說著千百年來，絲路綠洲在帝國崛起與隕落之間的無奈與美麗。'
     },
     jumaMosque: {
       title: '朱瑪清真寺 · 木雕密林',
@@ -2797,11 +2821,11 @@ function toggleMenu() {
     },
     registan: {
       title: '雷吉斯坦廣場 · 帖木兒帝國的藍色心臟',
-      body: '<strong>震撼眼球的「永恆之藍」包圍網：</strong>站在廣闊的廣場中央，環顧三座巨大的神學院，你會被滿城的寶藍磁磚深深震撼。請走向右側的 Sher-Dor（謝爾多爾）神學院，抬頭看看入口巨大拱門上方、左右對稱的彩色浮雕。<br><br><strong>UNESCO 認定的東西方文化十字路口：</strong>這三座神學院建於西元 15 至 17 世紀之間（左側的兀魯伯神學院建於 1420 年，等同於明朝永樂年間，正是明成祖遷都北京、鄭和下西洋的絲路大航海時代）。UNESCO 官方評定撒馬爾罕為「文化交匯的十字路口」。雷吉斯坦廣場傾注了帖木兒文藝復興時期的都市規劃巔峰，其建築工藝更融合了來自中國的陶瓷技術、波斯的鈷藍色料與印度的石雕美學，成為伊斯蘭世界中最具紀念碑意義的公共空間傑作。<br><br><strong>伊斯蘭世界中最叛逆的野獸浮雕：</strong>在右側建於西元 1636 年（明朝崇禎九年）的 Sher-Dor 神學院拱門上，竟然雕刻著兩隻追逐白鹿的神獸（似獅似虎），背後襯托著帶有人臉的太陽！這在嚴格禁止偶像崇拜的伊斯蘭傳統中極為大膽，融合了波斯拜火教的太陽崇拜。<br><br><strong>金庸小說《射鵰英雄傳》的終極決戰地：</strong>對於華語讀者來說，這裡更是金庸筆下郭靖、黃蓉隨成吉思汗西征花剌子模的終極決戰之地——「撒麻爾罕」！西元 1221 年（南宋嘉定十四年），蒙古大軍合圍這座當時花剌子模的帝國新都。小說後半段，黃蓉用風箏「空降奇兵」奇襲此城，而郭靖與「西毒」歐陽鋒著名的「雪山頂三度交手」，背景正是這座古城。站在這個廣場上，小說裡的刀光劍影瞬間在眼前真實上演。'
+      body: '<strong>震撼眼球的「永恆之藍」包圍網：</strong>站在廣闊的廣場中央，環顧三座巨大的神學院，你會被滿城的寶藍磁磚深深震撼。請走向右側的 Sher-Dor（謝爾多爾）神學院，抬頭看看入口巨大拱門上方、左右對稱的彩色浮雕。<br><br><strong>UNESCO 認定的東西方文化十字路口：</strong>這三座神學院建於西元 15 至 17 世紀之間（左側的兀魯伯神學院建於 1420 年，等同於明朝永樂年間，正是明成祖遷都北京、鄭和下西洋的絲路大航海時代）。UNESCO 官方評定撒馬爾罕為「文化交匯的十字路口」。雷吉斯坦廣場傾注了帖木兒文藝復興時期的都市規劃巔峰，其建築工藝更融合了來自中國的陶瓷技術、波斯的鈷藍色料與印度的石雕美學，成為伊斯蘭世界中最具紀念碑意義的公共空間傑作。<br><br><strong>伊斯蘭世界中最叛逆的野獸浮雕：</strong>在右側建於西元 1636 年（明朝崇禎九年）的 Sher-Dor 神學院拱門上，竟然雕刻著兩隻追逐白鹿的神獸（似獅似虎），背後襯托著帶有人臉的太陽！這在嚴格禁止偶像崇拜的伊斯蘭傳統中極為大膽，融合了波斯拜火教的太陽崇拜。<br><br><strong>金庸小說《射鵰英雄傳》的終極決戰地：</strong>對於華語讀者來說，這裡更是金庸筆下郭靖、黃蓉隨成吉思汗西征花剌子模的終極決戰之地——「撒麻爾罕」！西元 1220 年（南宋嘉定十三年），蒙古大軍合圍這座當時花剌子模的帝國新都。小說後半段，黃蓉用風箏「空降奇兵」奇襲此城，而郭靖與「西毒」歐陽鋒著名的「雪山頂三度交手」，背景正是這座古城。站在這個廣場上，小說裡的刀光劍影瞬間在眼前真實上演。'
     },
     shahIZinda: {
       title: '夏赫靜達陵墓群 · 走進一千零一夜的藍色深處',
-      body: '<strong>默數石階的靈魂小考驗：</strong>在踏進那條窄長的藍色峽谷前，請在心中默數腳下的階梯。傳說中，如果你走上去和走下來數到的階梯數完全一致，代表你的靈魂非常純潔。<br><br><strong>流傳千載的「活王之墓」傳說：</strong>這裡最早的陵墓始建於西元 11 世紀（北宋中葉，大約是范仲淹推動慶曆新政、王安石變法的北宋輝煌時期）。相傳先知穆罕默德的堂弟庫薩姆在此傳教時被異教徒斬首，但他抱著自己的頭顱跳入深井中，至今仍隱居地下守護聖地。這條寶藍色的深邃峽谷，是帖木兒大帝家族成員與愛將的長眠處。<br><br><strong>中亞陶藝與釉彩技術的最高巔峰：</strong>UNESCO 指出，夏赫靜達陵墓群完整保留了 14 至 15 世紀（明朝初年）中亞陶藝與建築裝飾技術的演變軌跡。在唐代，撒馬爾罕在中國史書中被稱為康國。唐代大詩人李白（出生於中亞碎葉城）詩中的無數「胡商」、「胡姬」，其家鄉就在你腳下的這片土地。這裡的藍磁磚拼貼技術，更是經由絲路西傳的中國陶瓷燒製技術，與波斯引進的鈷藍原料融合後的頂峰之作。'
+      body: '<strong>默數石階的靈魂小考驗：</strong>在踏進那條窄長的藍色峽谷前，請在心中默數腳下的階梯。傳說中，如果你走上去和走下來數到的階梯數完全一致，代表你的靈魂非常純潔。<br><br><strong>流傳千載的「活王之墓」傳說：</strong>這裡最早的陵墓始建於西元 11 世紀（北宋中葉，大約是范仲淹推動慶曆新政、王安石變法的北宋輝煌時期）。相傳先知穆罕默德的堂弟庫薩姆在此傳教時被異教徒斬首，但他抱著自己的頭顱跳入深井中，至今仍隱居地下守護聖地。這條寶藍色的深邃峽谷，是帖木兒大帝家族成員與愛將的長眠處。<br><br><strong>中亞陶藝與釉彩技術的最高巔峰：</strong>UNESCO 指出，夏赫靜達陵墓群完整保留了 14 至 15 世紀（明朝初年）中亞陶藝與建築裝飾技術的演變軌跡。在唐代，撒馬爾罕在中國史書中被稱為康國。這片中亞絲路綠洲孕育了無數唐詩裡的「胡商」、「胡姬」形象；有一派學說認為唐代大詩人李白出生於中亞的碎葉城（今吉爾吉斯托克馬克，與撒馬爾罕分屬不同城市，但同屬絲路文明圈），這個說法至今仍是學界討論的話題。這裡的藍磁磚拼貼技術，更是經由絲路西傳的中國陶瓷燒製技術，與波斯引進的鈷藍原料融合後的頂峰之作。'
     },
     gurEAmir: {
       title: '古爾埃米爾陵墓 · 帝王之墓與「帖木兒的詛咒」',
@@ -2812,11 +2836,13 @@ function toggleMenu() {
   function openGuide(key) {
     var data = guideData[key];
     if (!data) return;
+    stopGuideVoice();
     document.getElementById('guideModalTitle').textContent = data.title;
     document.getElementById('guideModalBody').innerHTML = data.body;
     document.getElementById('guideModalOverlay').classList.add('active');
   }
   function closeGuide() {
+    stopGuideVoice();
     document.getElementById('guideModalOverlay').classList.remove('active');
   }
   document.getElementById('guideModalClose').addEventListener('click', closeGuide);
@@ -2826,6 +2852,59 @@ function toggleMenu() {
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') closeGuide();
   });
+
+  // 語音導覽：優先挑選聽起來像男聲的中文語音，並把音調稍微調低增加低沉感
+  // （實際音色仍取決於使用者裝置內建的語音庫，蘋果/安卓/Windows聽起來會不同）
+  var guideVoiceBtn = document.getElementById('guideVoiceBtn');
+  var guideUtterance = null;
+
+  function pickNarratorVoice() {
+    if (!('speechSynthesis' in window)) return null;
+    var voices = window.speechSynthesis.getVoices();
+    var zhVoices = voices.filter(function (v) { return /zh/i.test(v.lang); });
+    if (zhVoices.length === 0) return null;
+    var maleHints = /male|男|yunyang|yunjian|kangkang|云扬|云健/i;
+    var male = zhVoices.find(function (v) { return maleHints.test(v.name); });
+    var twVoice = zhVoices.find(function (v) { return /TW/i.test(v.lang); });
+    return male || twVoice || zhVoices[0];
+  }
+
+  function stopGuideVoice() {
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    guideVoiceBtn.classList.remove('playing');
+    guideVoiceBtn.querySelector('.gv-label').textContent = '語音導覽';
+  }
+
+  guideVoiceBtn.addEventListener('click', function () {
+    if (!('speechSynthesis' in window)) {
+      alert('抱歉，這個瀏覽器不支援語音朗讀功能，請直接閱讀文字內容。');
+      return;
+    }
+    if (guideVoiceBtn.classList.contains('playing')) {
+      stopGuideVoice();
+      return;
+    }
+    var text = document.getElementById('guideModalBody').innerText || document.getElementById('guideModalBody').textContent;
+    if (!text) return;
+    window.speechSynthesis.cancel();
+    guideUtterance = new SpeechSynthesisUtterance(text);
+    guideUtterance.lang = 'zh-TW';
+    guideUtterance.rate = 0.95;
+    guideUtterance.pitch = 0.82; // 調低音調，聽起來更低沉
+    var voice = pickNarratorVoice();
+    if (voice) guideUtterance.voice = voice;
+
+    guideVoiceBtn.classList.add('playing');
+    guideVoiceBtn.querySelector('.gv-label').textContent = '暫停朗讀';
+    guideUtterance.onend = function () { stopGuideVoice(); };
+    guideUtterance.onerror = function () { stopGuideVoice(); };
+    window.speechSynthesis.speak(guideUtterance);
+  });
+  // 部分瀏覽器（如 Chrome）語音庫是非同步載入，先觸發一次確保稍後選得到聲音
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.getVoices();
+    window.speechSynthesis.onvoiceschanged = function () { window.speechSynthesis.getVoices(); };
+  }
 </script>
 </body>
 </html>

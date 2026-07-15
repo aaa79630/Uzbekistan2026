@@ -369,7 +369,7 @@
     background: #fff; border: 1px solid var(--line); padding: 20px; margin-top: 15px; position: relative;
   }
   .highlight-box::before {
-    content: '重點行程 · HIGHLIGHTS'; position: absolute; top: -10px; left: 15px; background: var(--sand); padding: 0 10px; font-size: 10px; color: var(--tile-blue); font-weight: 700; font-family: 'Manrope', sans-serif; letter-spacing: 0.1em;
+    content: '重點行程 · HIGHLIGHTS'; position: absolute; top: -10px; left: 15px; background: #EAE0C4; padding: 0 10px; font-size: 10px; color: var(--tile-blue); font-weight: 700; font-family: 'Manrope', sans-serif; letter-spacing: 0.1em;
   }
 
   .food-box {
@@ -378,22 +378,27 @@
   .food-box strong { color: var(--tile-blue); font-size: 14px; }
 
   /* ===== 推薦餐廳（含訂位資訊） ===== */
-  .restaurant-section-tag {
-    display: inline-block;
-    font-family: 'Manrope', sans-serif;
+  .restaurant-box {
+    border: 1px solid var(--line);
+    padding: 20px 20px 8px;
+    margin-top: 15px;
+    position: relative;
+  }
+  .restaurant-box::before {
+    content: '推薦餐廳 · RESTAURANTS';
+    position: absolute;
+    top: -10px;
+    left: 15px;
+    background: #EAE0C4;
+    padding: 0 10px;
     font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
     color: var(--tile-blue);
-    background: var(--turquoise-light);
-    border: 1px solid rgba(0,169,184,0.3);
-    padding: 3px 12px;
-    border-radius: 20px;
-    margin-top: 18px;
-    margin-bottom: -4px;
+    font-weight: 700;
+    font-family: 'Manrope', sans-serif;
+    letter-spacing: 0.1em;
   }
   .restaurant-list {
-    margin-top: 15px;
+    margin-top: 0;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 12px;
@@ -915,16 +920,17 @@
     font-family: 'Manrope', sans-serif;
     font-size: 11px;
     font-weight: 700;
-    color: #8a6500;
-    background: rgba(212,175,55,0.15);
-    border: 1px solid rgba(212,175,55,0.45);
-    padding: 2px 10px;
+    color: #fff;
+    background: var(--persian-blue);
+    border: 1px solid var(--persian-blue);
+    padding: 3px 11px;
     border-radius: 20px;
     cursor: pointer;
     vertical-align: middle;
-    transition: background 0.2s;
+    transition: background 0.2s, transform 0.15s;
   }
-  .deep-guide-btn:hover { background: rgba(212,175,55,0.3); }
+  .deep-guide-btn:hover { background: var(--tile-blue); border-color: var(--tile-blue); }
+  .deep-guide-btn:active { transform: scale(0.96); }
 
   .guide-modal-overlay {
     position: fixed;
@@ -1832,8 +1838,7 @@
       <div class="food-box">
         <strong>🍽 推薦美食：</strong>Terrassa Café 景觀餐、希瓦限定蜂蜜薄餅 (Katlama)、希瓦烤羊腿配扁豆湯。
       </div>
-      <div class="restaurant-section-tag">🍽 推薦餐廳 · RESTAURANTS</div>
-      <div class="restaurant-list">
+      <div class="restaurant-box"><div class="restaurant-list">
         <div class="restaurant-card">
           <span class="r-tag">★ 網友激推</span>
           <div class="r-name">Terrassa Cafe & Restaurant</div>
@@ -1845,6 +1850,7 @@
           <p>緊鄰伊斯蘭霍賈宣禮塔旁的古蹟建築餐廳，露台正對宣禮塔，夜晚打燈氣氛絕佳。招牌蒔蘿餃子、南瓜湯評價高。<br>📍 Islomxoʻja ko'chasi 89/3, Khiva（伊斯蘭霍賈宣禮塔旁）<br>📞 +998 62 375 7051・🕐 08:00–22:00</p>
           <span class="r-book">10人訂位：晚餐時段常客滿，建議提前電話預訂或請飯店代訂，並抓寬鬆一點的用餐時間避免撲空。</span>
         </div>
+      </div>
       </div>
       <div class="yt-embeds">
         <a class="yt-embed-item" href="https://www.youtube.com/watch?v=2F0-UYhrPDg" target="_blank" rel="noopener"><div class="yt-embed-label">▶ Khiva: Everything You Need to Know</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/2F0-UYhrPDg/hqdefault.jpg" alt="▶ Khiva: Everything You Need to Know" loading="lazy"><span class="yt-embed-play"></span></div></a>
@@ -1886,8 +1892,7 @@
       <div class="food-box">
         <strong>🍽 推薦美食：</strong>Minzifa 景觀餐廳（花園環境極美）、布哈拉油香抓飯、鮮榨石榴汁（9月石榴季！）、Chinar Café。
       </div>
-      <div class="restaurant-section-tag">🍽 推薦餐廳 · RESTAURANTS</div>
-      <div class="restaurant-list">
+      <div class="restaurant-box"><div class="restaurant-list">
         <div class="restaurant-card">
           <div class="r-name">Xon Atlas Restaurant</div>
           <p>二樓露台區＋玻璃屋，可俯瞰古城圓頂建築與宣禮塔，古城風情濃厚。招牌手抓飯 Plov 約45,000 som，湯品22,000–28,000 som，價格透明實在。<br>📍 Ibadova 8, Bukhara（距亞克要塞約600公尺，步行7-10分鐘；入口藏在小巷，建議用 Google Maps 導航或搭 Yandex Go 直接導航店名）</p>
@@ -1904,6 +1909,7 @@
           <p>藏在老城巷弄裡的絲路風情茶館，木雕天花板很美，主打道地烤包子（Samsa）與手拉麵，氣氛悠閒適合中午休息。<br>📍 布哈拉老城區中心，距市集（Bazaar）步行數分鐘</p>
           <span class="r-book">10人訂位：屬於較悠閒的中小型茶館，人多建議提前告知店家或請飯店代訂，避免現場併桌久候。</span>
         </div>
+      </div>
       </div>
       <div class="yt-embeds">
         <a class="yt-embed-item" href="https://www.youtube.com/watch?v=lVQOEiFNBtQ" target="_blank" rel="noopener"><div class="yt-embed-label">▶ Bukhara Travel Guide</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/lVQOEiFNBtQ/hqdefault.jpg" alt="▶ Bukhara Travel Guide" loading="lazy"><span class="yt-embed-play"></span></div></a>
@@ -1952,8 +1958,7 @@
       <div class="food-box">
         <strong>🍽 推薦美食：</strong>Nargiza 餐廳的拉麵 (Lagman)、撒馬爾罕薄脆烤饢（比布哈拉版更薄脆）、9月新鮮葡萄。
       </div>
-      <div class="restaurant-section-tag">🍽 推薦餐廳 · RESTAURANTS</div>
-      <div class="restaurant-list">
+      <div class="restaurant-box"><div class="restaurant-list">
         <div class="restaurant-card">
           <span class="r-tag">★ 雷吉斯坦景觀</span>
           <div class="r-name">Emirhan Restaurant</div>
@@ -1965,6 +1970,7 @@
           <p>比比哈努姆清真寺正南側，傳統 Tapchan 高台座位（盤腿或桌椅區皆有），適合團體圍坐用餐，抓飯、拉格曼、烤蔬菜串選擇多。<br>📍 Street 22A, Samarkand（比比哈努姆清真寺旁）<br>📞 +998 91 537 8473・🕐 11:00–23:00</p>
           <span class="r-book">10人訂位：戶外棚架座位多、彈性大，10人團體較容易併桌安排，仍建議提前致電告知人數，尖峰時段（中午參觀完清真寺後）容易滿座。</span>
         </div>
+      </div>
       </div>
       <div class="yt-embeds">
         <a class="yt-embed-item" href="https://www.youtube.com/watch?v=Ug7ZFfwI904" target="_blank" rel="noopener"><div class="yt-embed-label">▶ 雷吉斯坦燈光秀</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/Ug7ZFfwI904/hqdefault.jpg" alt="▶ 雷吉斯坦燈光秀" loading="lazy"><span class="yt-embed-play"></span></div></a>

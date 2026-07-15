@@ -378,6 +378,20 @@
   .food-box strong { color: var(--tile-blue); font-size: 14px; }
 
   /* ===== 推薦餐廳（含訂位資訊） ===== */
+  .restaurant-section-tag {
+    display: inline-block;
+    font-family: 'Manrope', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--tile-blue);
+    background: var(--turquoise-light);
+    border: 1px solid rgba(0,169,184,0.3);
+    padding: 3px 12px;
+    border-radius: 20px;
+    margin-top: 18px;
+    margin-bottom: -4px;
+  }
   .restaurant-list {
     margin-top: 15px;
     display: grid;
@@ -422,6 +436,26 @@
     padding: 4px 8px;
     border-radius: 4px;
     display: block;
+  }
+  @media (max-width: 600px) {
+    .restaurant-list {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 10px;
+      padding-bottom: 8px;
+      margin-left: -4px;
+      margin-right: -4px;
+      padding-left: 4px;
+      padding-right: 4px;
+    }
+    .restaurant-list::-webkit-scrollbar { height: 5px; }
+    .restaurant-list::-webkit-scrollbar-thumb { background: var(--line); border-radius: 10px; }
+    .restaurant-card {
+      flex: 0 0 82%;
+      scroll-snap-align: center;
+    }
   }
 
   /* ===== 實用會話（俄語／烏茲別克語） ===== */
@@ -556,6 +590,7 @@
     overflow: hidden;
     background: #fff;
   }
+
   .day-map-label {
     padding: 10px 14px;
     background: var(--turquoise-light);
@@ -870,6 +905,97 @@
     border-radius: 20px;
     margin-left: 6px;
   }
+
+  /* ===== 深度導覽按鈕與跳窗 ===== */
+  .deep-guide-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: 8px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: #8a6500;
+    background: rgba(212,175,55,0.15);
+    border: 1px solid rgba(212,175,55,0.45);
+    padding: 2px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    vertical-align: middle;
+    transition: background 0.2s;
+  }
+  .deep-guide-btn:hover { background: rgba(212,175,55,0.3); }
+
+  .guide-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(26,20,16,0.55);
+    backdrop-filter: blur(2px);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .guide-modal-overlay.active { display: flex; }
+  .guide-modal {
+    background: var(--sand);
+    border-radius: 12px;
+    max-width: 560px;
+    width: 100%;
+    max-height: 82vh;
+    overflow-y: auto;
+    position: relative;
+    padding: 32px 28px 28px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  }
+  .guide-modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(30,58,95,0.08);
+    color: var(--persian-blue);
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+  .guide-modal-close:hover { background: rgba(30,58,95,0.18); }
+  .guide-modal-eyebrow {
+    font-family: 'Manrope', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--uzbek-gold);
+    margin-bottom: 8px;
+  }
+  .guide-modal-title {
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    color: var(--persian-blue);
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--uzbek-gold);
+    padding-right: 30px;
+  }
+  .guide-modal-body {
+    font-family: 'Noto Serif TC', 'Noto Sans TC', sans-serif;
+    font-size: 15px;
+    line-height: 2;
+    color: #333;
+  }
+  @media (max-width: 600px) {
+    .guide-modal { padding: 26px 20px 22px; max-height: 85vh; }
+    .guide-modal-title { font-size: 20px; }
+    .guide-modal-body { font-size: 14px; line-height: 1.9; }
+  }
+
   .warn-box {
     background: rgba(168,50,42,0.07);
     border-left: 3px solid var(--accent-red);
@@ -1370,6 +1496,24 @@
     min-width: 0;
     box-shadow: 0 4px 16px rgba(0,0,0,0.12);
   }
+
+  /* ===== 實用資訊 4 張卡片 Carousel ===== */
+  .practical-grid {
+    display: flex !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    padding: 12px 4px 16px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .practical-grid::-webkit-scrollbar { display: none; }
+  .prac-card {
+    flex: 0 0 88%;
+    scroll-snap-align: center;
+    min-width: 0;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  }
   }
 
   /* 4. 針對「認識烏茲別克」區塊的修正 */
@@ -1620,7 +1764,7 @@
       <div class="day-details">13:10 落地後入住飯店。前往喬爾蘇市集 (Chorsu Bazaar) 感受道地氛圍，黃昏於獨立廣場散步。</div>
       <div class="highlight-box">
         <ul style="list-style: none; font-size: 14px;">
-          <li>• <strong>哈斯特伊瑪目建築群 Hazrati Imam Complex</strong>：塔什干最美的伊斯蘭建築群，收藏世界最古老古蘭經手抄本之一（奧斯曼古蘭經），清晨陽光下的藍色圓頂特別亮眼，建議上午前往
+          <li>• <strong>哈斯特伊瑪目建築群 Hazrati Imam Complex</strong>：塔什干最美的伊斯蘭建築群，收藏世界最古老古蘭經手抄本之一（奧斯曼古蘭經），清晨陽光下的藍色圓頂特別亮眼，建議上午前往<button class="deep-guide-btn" onclick="openGuide('hazratiImam')">📖 深度導覽</button>
             <span class="ticket-info">🎫 廣場本身免費參觀，Muyi Muborak 圖書館博物館（存放奧斯曼古蘭經處）另收門票 30,000 UZS（約 $2.4 美金／NT$79）・開放約 09:00–18:00，建議上午9-11點或下午4點後參觀人較少</span>
           </li>
           <li>• <strong>Chorsu Bazaar</strong>：中亞最著名的圓頂市集，香料、堅果、乾果應有盡有</li>
@@ -1654,17 +1798,18 @@
       <div class="day-details">搭乘早班機飛往烏爾根奇轉希瓦（約1.5h）。深度探索伊坎卡拉內城、朱瑪清真寺的古老木柱與藍色未完成塔。</div>
       <div class="highlight-box">
         <ul style="list-style: none; font-size: 14px;">
-          <li>• <strong>伊欽卡拉內城 Itchan Kala</strong><span class="unesco-badge">🏛️ UNESCO 1990</span>：希瓦古城牆內的露天博物館，希瓦所有主要景點皆位於城內
+          <li>• <strong>伊欽卡拉內城 Itchan Kala</strong><span class="unesco-badge">🏛️ UNESCO 1990</span>：希瓦古城牆內的露天博物館，希瓦所有主要景點皆位於城內，一進西門就會看到最搶眼的「卡爾塔米諾爾矮塔」<button class="deep-guide-btn" onclick="openGuide('kaltaMinor')">📖 深度導覽</button>
             <span class="ticket-info">🎫 聯票 250,000 UZS／人（約 $20 美金／NT$655），效期48小時，涵蓋城內大多數清真寺・經學院・宮殿；伊斯蘭霍賈宣禮塔登頂、城牆攀登需另購票（各約 40,000–100,000 UZS，約 $3–8 美金／NT$105–262）</span>
           </li>
           <li>• <strong>伊斯蘭霍賈宣禮塔</strong>：俯瞰古城最佳制高點，日落前上去拍照</li>
-          <li>• <strong>朱瑪清真寺</strong>：213根古老木柱，光線美到令人窒息</li>
+          <li>• <strong>朱瑪清真寺</strong>：213根古老木柱，光線美到令人窒息<button class="deep-guide-btn" onclick="openGuide('jumaMosque')">📖 深度導覽</button></li>
           <li>• <strong>西門城牆</strong>：看一場如史詩般的古城夕陽</li>
         </ul>
       </div>
       <div class="food-box">
         <strong>🍽 推薦美食：</strong>Terrassa Café 景觀餐、希瓦限定蜂蜜薄餅 (Katlama)、希瓦烤羊腿配扁豆湯。
       </div>
+      <div class="restaurant-section-tag">🍽 推薦餐廳 · RESTAURANTS</div>
       <div class="restaurant-list">
         <div class="restaurant-card">
           <span class="r-tag">★ 網友激推</span>
@@ -1704,10 +1849,10 @@
           <li>• <strong>阿爾克城堡 Ark Fortress</strong>：布哈拉最古老建築，內有多座小型博物館
             <span class="ticket-info">🎫 約 60,000 UZS／人（約 $5 美金／NT$157）・開放 09:00–20:00（全年）</span>
           </li>
-          <li>• <strong>卡揚宣禮塔＋卡揚清真寺 Po-i-Kalyan</strong>：布哈拉地標，46.5公尺高塔
+          <li>• <strong>卡揚宣禮塔＋卡揚清真寺 Po-i-Kalyan</strong>：布哈拉地標，46.5公尺高塔<button class="deep-guide-btn" onclick="openGuide('kalyanMinaret')">📖 深度導覽</button>
             <span class="ticket-info">🎫 清真寺約 20,000 UZS／人（約 $1.6 美金／NT$52）；宣禮塔目前不開放攀登</span>
           </li>
-          <li>• <strong>Bolo Hauz 清真寺</strong>：20根木柱倒映水池的經典畫面，人稱「布哈拉的鏡子清真寺」，就在阿爾克城堡正對面，順路必拍
+          <li>• <strong>Bolo Hauz 清真寺</strong>：20根木柱倒映水池的經典畫面，人稱「布哈拉的鏡子清真寺」，就在阿爾克城堡正對面，順路必拍<button class="deep-guide-btn" onclick="openGuide('boloHauz')">📖 深度導覽</button>
             <span class="ticket-info">🎫 免費參觀（仍為運作中的清真寺，可隨喜捐獻）・開放約 08:00–19:00，請注意當地祈禱時間、保持安靜與服裝端莊</span>
           </li>
           <li>• <strong>Mir-i-Arab 神學院</strong>：至今仍在運行的活建築，卡揚宣禮塔正對面</li>
@@ -1718,6 +1863,7 @@
       <div class="food-box">
         <strong>🍽 推薦美食：</strong>Minzifa 景觀餐廳（花園環境極美）、布哈拉油香抓飯、鮮榨石榴汁（9月石榴季！）、Chinar Café。
       </div>
+      <div class="restaurant-section-tag">🍽 推薦餐廳 · RESTAURANTS</div>
       <div class="restaurant-list">
         <div class="restaurant-card">
           <div class="r-name">Xon Atlas Restaurant</div>
@@ -1759,16 +1905,16 @@
       <div class="highlight-box">
         <ul style="list-style: none; font-size: 14px;">
           <li>• <strong>撒馬爾罕：文化交匯的十字路口</strong><span class="unesco-badge">🏛️ UNESCO 2001</span>：撒馬爾罕舊城整體被列為遺產，以下景點皆屬其中</li>
-          <li>• <strong>雷吉斯坦廣場 Registan</strong>：清晨無人時拍照最美；夜晚燈光秀 ★ 必看
+          <li>• <strong>雷吉斯坦廣場 Registan</strong>：清晨無人時拍照最美；夜晚燈光秀 ★ 必看<button class="deep-guide-btn" onclick="openGuide('registan')">📖 深度導覽</button>
             <span class="ticket-info">🎫 100,000 UZS／人（約 $8 美金／NT$262）・開放約 08:00–19:00・夜晚燈光秀約 20:00–21:00 於廣場外免費觀賞</span>
           </li>
-          <li>• <strong>夏赫靜達陵墓群 Shah-i-Zinda</strong>：全球最美藍色陶磚走廊，穿越千年
+          <li>• <strong>夏赫靜達陵墓群 Shah-i-Zinda</strong>：全球最美藍色陶磚走廊，穿越千年<button class="deep-guide-btn" onclick="openGuide('shahIZinda')">📖 深度導覽</button>
             <span class="ticket-info">🎫 約 50,000–75,000 UZS／人（約 $4–6 美金／NT$131–197）・開放約 08:00–19:00</span>
           </li>
           <li>• <strong>比比哈努姆清真寺 Bibi-Khanym</strong>：帖木兒為愛妻建造的宏偉清真寺
             <span class="ticket-info">🎫 約 75,000 UZS／人（約 $6 美金／NT$197）</span>
           </li>
-          <li>• <strong>古爾埃米爾陵墓 Gur-e-Amir</strong>：帖木兒長眠之處，藍色肋骨圓頂
+          <li>• <strong>古爾埃米爾陵墓 Gur-e-Amir</strong>：帖木兒長眠之處，藍色肋骨圓頂<button class="deep-guide-btn" onclick="openGuide('gurEAmir')">📖 深度導覽</button>
             <span class="ticket-info">🎫 約 75,000 UZS／人（約 $6 美金／NT$197）</span>
           </li>
           <li>• <strong>兀魯伯天文台 Ulugbek Observatory</strong>：帖木兒孫兀魯伯建造的15世紀天文台遺址，內有小型博物館
@@ -1783,6 +1929,7 @@
       <div class="food-box">
         <strong>🍽 推薦美食：</strong>Nargiza 餐廳的拉麵 (Lagman)、撒馬爾罕薄脆烤饢（比布哈拉版更薄脆）、9月新鮮葡萄。
       </div>
+      <div class="restaurant-section-tag">🍽 推薦餐廳 · RESTAURANTS</div>
       <div class="restaurant-list">
         <div class="restaurant-card">
           <span class="r-tag">★ 雷吉斯坦景觀</span>
@@ -1819,7 +1966,7 @@
       <div class="day-details">包車返塔什干（約4–4.5h，時間彈性配合撒馬爾罕最後行程）。進行「地鐵藝術站之旅」，每一站都是不同風格的地下宮殿。最後一天可前往天山 Chimgan 或 Charvak 水庫。23:00 搭機返程。</div>
       <div class="highlight-box">
         <ul style="list-style: none; font-size: 14px;">
-          <li>• <strong>🚇 塔什干地鐵</strong>：中亞第一座地鐵，蘇聯時期建造，每站都是不同風格的地下宮殿，2018年6月才解禁開放拍照（禁拍超過40年，因為兼具核子避難所功能）
+          <li>• <strong>🚇 塔什干地鐵</strong>：中亞第一座地鐵，蘇聯時期建造，每站都是不同風格的地下宮殿，2018年6月才解禁開放拍照（禁拍超過40年，因為兼具核子避難所功能）<button class="deep-guide-btn" onclick="openGuide('tashkentMetro')">📖 深度導覽</button>
             <span class="ticket-info">🎫 單程 1,400 UZS（約 $0.1 美金／NT$3.7，投幣或感應卡），不限時間距離、票價不因搭乘站數變動，無需另外購票拍照，僅需搭乘</span>
             <div style="margin-top:8px;padding:10px 12px;background:var(--turquoise-light);border-radius:6px;font-size:13px;line-height:1.8;">
               <strong style="color:var(--tile-blue);">必去7站：</strong><br>
@@ -2610,6 +2757,75 @@ function toggleMenu() {
       });
     });
   })();
+</script>
+
+<div class="guide-modal-overlay" id="guideModalOverlay">
+  <div class="guide-modal">
+    <button class="guide-modal-close" id="guideModalClose">✕</button>
+    <div class="guide-modal-eyebrow">深度導覽 · ON-SITE GUIDE</div>
+    <div class="guide-modal-title" id="guideModalTitle"></div>
+    <div class="guide-modal-body" id="guideModalBody"></div>
+  </div>
+</div>
+
+<script>
+  // 景點深度導覽跳窗
+  var guideData = {
+    hazratiImam: {
+      title: '哈斯特伊瑪目建築群 · 奧斯曼古蘭經',
+      body: '站在這片寬闊的廣場上，先抬頭看看那高聳的雙藍色圓頂——這裡雖然歷經多次重建，依然是塔什干的信仰心臟。走向外觀典雅的 Muyi Muborak 圖書館博物館，館內中央展示櫃裡，那本巨大的手抄本就是著名的「奧斯曼古蘭經」。<br><br>相傳這是伊斯蘭教第三任哈里發奧斯曼生前所持的古蘭經，他被刺殺時鮮血滴落經頁，因此得名。不過現代放射性碳定年法檢測顯示，這本手抄本實際上是西元8-9世紀的作品，比奧斯曼所處的7世紀晚了一兩百年——嚴格來說它可能不是奧斯曼的親筆原本，而是後世傳抄、承載著這個美麗傳說的版本。但無論科學怎麼說，它仍是世界現存最古老的古蘭經手抄本之一，這份跨越千年的份量，站在它面前依然會讓人屏息。'
+    },
+    tashkentMetro: {
+      title: '塔什干地鐵之旅 · 地面下的核防空洞美學',
+      body: '買好單程票刷卡進站，準備潛入這座「地下藝術宮殿」。在月台上，留意身旁厚重的防空氣息——這座地鐵建於1977年蘇聯時期，因兼具「核子避難所」的軍事功能，冷戰時期被列為最高機密，嚴格禁止拍照長達41年，直到2018年6月才終於解禁。<br><br><strong>Kosmonavtlar（太空人站）</strong>月台兩側是深邃漸層的藍色圓形飾板，牆上貼著蘇聯太空英雄們的肖像；<strong>Alisher Navoiy（詩人站）</strong>抬頭一排排精緻的藍色伊斯蘭穹頂在頭頂綻放，完美對稱的結構與吊燈，讓人忘記自己正站在地底下。'
+    },
+    kaltaMinor: {
+      title: '卡爾塔米諾爾矮塔 · 未完成的藍色巨塔',
+      body: '穿過西門走進城內，最引人注目的莫過於那座通體貼滿藍綠琉璃磁磚的「卡爾塔米諾爾矮塔」。這座塔原本計畫要建到70公尺高（部分史料甚至說到110公尺），足以成為中亞第一高塔。<br><br>1855年，發起建塔的可汗穆罕默德·阿明汗在與土庫曼人的戰鬥中身亡，工程當場停擺，只留下這座約26公尺高、像個精緻藍色大煙囪的「未完成品」。也因為這個歷史的意外，它成了希瓦最美、最令人難忘的遺憾。'
+    },
+    jumaMosque: {
+      title: '朱瑪清真寺 · 木雕密林',
+      body: '走進朱瑪清真寺，沒有一般宏偉的穹頂，取而代之的是由213根古老雕刻木柱撐起的平頂空間。陽光從天井斜射進來，照亮木柱上繁複的幾何雕紋，這座「木雕森林」的光影美得讓人屏住呼吸。'
+    },
+    kalyanMinaret: {
+      title: '卡揚宣禮塔 · 成吉思汗也屈膝的不朽高塔',
+      body: '站在這座高達46.5公尺的巨大磚塔下，仰望那一圈圈用泥磚拼貼、完全不重複的幾何浮雕花紋。這座塔建於1127年，曾是荒漠旅人的燈塔，也是處決犯人時將人從塔頂拋下的「死亡之塔」。<br><br>1220年成吉思汗橫掃中亞、將布哈拉夷為平地時，相傳他來到塔前仰頭觀望，頭盔不慎滑落。他彎腰撿起頭盔，感嘆道：「這座塔竟然能讓我向它低頭，它不該被摧毀。」這座宣禮塔因而奇蹟般在蒙古鐵騎下存活，靜靜矗立了近九百年。'
+    },
+    boloHauz: {
+      title: 'Bolo Hauz 清真寺 · 國王的專用祈禱所',
+      body: '就在阿爾克城堡正對面，站在清真寺前的方形水池旁，欣賞那20根精雕細琢的木柱。這座清真寺被稱為「鏡子清真寺」——平靜無風時，20根雕刻木柱倒映水池中，虛實相映，視覺上湊成「40根木柱」。這裡曾是布哈拉埃米爾（國王）從城堡走來進行週五禮拜的專用場所，雕飾極盡奢華。'
+    },
+    registan: {
+      title: '雷吉斯坦廣場 · 帖木兒帝國的藍色心臟',
+      body: '站在廣闊的廣場中央，環顧三座巨大神學院，你會被鋪天蓋地的「永恆之藍」包圍。走向右側的 Sher-Dor（謝爾多爾）神學院，抬頭看入口拱門上方的浮雕——兩隻鬃毛似獅、身紋似虎的神獸追逐著白鹿，背後襯托著帶有人臉的太陽。<br><br>在嚴格禁止偶像與動物崇拜的伊斯蘭傳統建築中，這樣大膽的裝飾極為罕見，學者推測可能融合了波斯瑣羅亞斯德教的太陽崇拜元素，如今這幅圖案已成為烏茲別克的國家象徵之一。'
+    },
+    shahIZinda: {
+      title: '夏赫靜達陵墓群 · 走進一千零一夜的藍色深處',
+      body: '走上陡峭的階梯（傳說上下階梯數若一致，代表靈魂純潔），映入眼簾的是一條窄長的藍色峽谷。兩側陵墓貼滿當時技術最頂尖的釉面陶磚，孔雀藍、土耳其藍到深海藍交織著幾何花紋與庫法體書法。<br><br>相傳先知穆罕默德的堂弟庫薩姆在此傳教時被異教徒斬首，但他沒有死去，而是抱著自己的頭顱跳入深井中，至今仍隱居地下守護聖地——這是流傳千年的傳說，也是「活王之墓」之名的由來。這裡也是帖木兒大帝家族女性成員與愛將的長眠處，每一座藍色穹頂背後，都藏著一個帝國故事。'
+    },
+    gurEAmir: {
+      title: '古爾埃米爾陵墓 · 帝王之墓與「帖木兒的詛咒」',
+      body: '這座擁有深藍色肋骨狀瓦楞穹頂的陵墓，就是一代天驕帖木兒長眠之處。走進陵墓內部，牆面鋪滿黃金與青金石裝飾。地板中央的石棺群中，那塊罕見的墨綠色碧玉，就是帖木兒的墓碑，相傳刻著一句咒語：「誰若打擾我的安寧，將釋放出比我更可怕的戰爭惡魔。」<br><br>1941年6月19日，蘇聯考古學家格拉西莫夫不顧當地耆老勸阻，開棺研究帖木兒遺骸——3天後的6月22日，納粹德國便對蘇聯發動了史上規模最大的「巴巴羅薩」侵略戰爭。這個時間點的巧合，讓「帖木兒的詛咒」成了絲路上最著名的神祕傳說，至今仍是史學家和遊客津津樂道的話題。'
+    }
+  };
+
+  function openGuide(key) {
+    var data = guideData[key];
+    if (!data) return;
+    document.getElementById('guideModalTitle').textContent = data.title;
+    document.getElementById('guideModalBody').innerHTML = data.body;
+    document.getElementById('guideModalOverlay').classList.add('active');
+  }
+  function closeGuide() {
+    document.getElementById('guideModalOverlay').classList.remove('active');
+  }
+  document.getElementById('guideModalClose').addEventListener('click', closeGuide);
+  document.getElementById('guideModalOverlay').addEventListener('click', function (e) {
+    if (e.target.id === 'guideModalOverlay') closeGuide();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeGuide();
+  });
 </script>
 </body>
 </html>

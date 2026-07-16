@@ -47,23 +47,14 @@
   /* ===== Hero ===== */
   .hero {
     min-height: 80vh;
-    background: 
-      radial-gradient(ellipse at top, rgba(0, 169, 184, 0.05) 0%, var(--sand) 70%),
-      linear-gradient(180deg, #D4C8A8 0%, #E8DCC4 40%, #F5EEDC 100%);
+    background:
+      linear-gradient(180deg, rgba(245,238,220,0.5) 0%, rgba(245,238,220,0.72) 55%, var(--sand) 100%),
+      url('https://images.unsplash.com/photo-1664602078796-68ee76b3fc59?fm=jpg&q=80&w=2400&auto=format&fit=crop') center 18%/cover no-repeat;
     position: relative;
     padding: 60px 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-  }
-
-  .city-skyline {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 150px;
-    opacity: 0.12;
-    pointer-events: none;
-    fill: var(--persian-blue);
   }
 
   .hero-inner {
@@ -173,6 +164,51 @@
     line-height: 1.8;
   }
 
+  .photo-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 14px;
+    margin-bottom: 8px;
+  }
+  .gallery-item {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(30,58,95,0.1);
+  }
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  .gallery-item:hover img { transform: scale(1.06); }
+  .gallery-caption {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 18px 12px 10px;
+    background: linear-gradient(0deg, rgba(26,20,16,0.75) 0%, rgba(26,20,16,0) 100%);
+    color: #fff;
+    font-family: 'Manrope', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.02em;
+  }
+  @media (max-width: 600px) {
+    .photo-gallery { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; }
+    .gallery-caption { font-size: 10px; padding: 14px 8px 8px; }
+  }
+
+  .day-photo-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 10px;
+    margin-top: 14px;
+  }
+  .day-photo-strip .gallery-item { aspect-ratio: 3 / 2; border-radius: 6px; }
+  .day-photo-strip .gallery-caption { font-size: 10px; padding: 12px 8px 6px; }
+
   .info-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -239,7 +275,7 @@
   }
 
   /* ===== Overview ===== */
-  .overview { padding: 80px 40px; max-width: 1200px; margin: 0 auto; }
+  .overview { padding: 48px 40px; max-width: 1200px; margin: 0 auto; }
   .section-label { font-family: 'Manrope', sans-serif; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--tile-blue); margin-bottom: 16px; }
   .section-title { font-size: clamp(28px, 5vw, 42px); margin-bottom: 40px; color: var(--ink); }
 
@@ -353,7 +389,7 @@
   }
 
   /* ===== Day Cards ===== */
-  .days { padding: 0 40px 60px; max-width: 1200px; margin: 0 auto; }
+  .days { padding: 0 40px 36px; max-width: 1200px; margin: 0 auto; }
   .day-card {
     display: grid; grid-template-columns: 160px 1fr; gap: 50px; padding: 60px 0; border-top: 1px solid var(--line);
   }
@@ -736,7 +772,7 @@
   .visa-section {
     background: linear-gradient(135deg, #1a2e4a 0%, #1E3A5F 100%);
     color: #fff;
-    padding: 80px 40px;
+    padding: 48px 40px;
   }
   .visa-inner { max-width: 1200px; margin: 0 auto; }
   .visa-section .section-label { color: var(--uzbek-gold); }
@@ -821,9 +857,10 @@
 
   /* ===== PRACTICAL INFO ===== */
   .practical {
-    padding: 80px 40px;
+    padding: 48px 40px;
     max-width: 1200px;
     margin: 0 auto;
+    border-top: 1px solid rgba(30,58,95,0.08);
   }
   .practical-grid {
     display: grid;
@@ -831,6 +868,110 @@
     gap: 30px;
     margin-top: 10px;
   }
+  /* ===== 即時換匯小工具 ===== */
+  .currency-converter {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: end;
+    gap: 14px;
+    max-width: 900px;
+  }
+  .currency-field {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .currency-field label {
+    display: block;
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--tile-blue);
+    margin-bottom: 8px;
+  }
+  .currency-field input {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid var(--line);
+    background: transparent;
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    color: var(--persian-blue);
+    padding: 4px 0;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .currency-field input:focus { border-color: var(--tile-blue); }
+  .currency-eq {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    color: var(--line);
+    padding-bottom: 20px;
+    text-align: center;
+  }
+  .currency-status {
+    margin-top: 16px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    color: var(--earth-brown);
+    background: var(--turquoise-light);
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+  }
+  @media (max-width: 700px) {
+    .currency-converter { grid-template-columns: 1fr; }
+    .currency-eq { display: none; }
+  }
+
+  /* ===== 天氣預報卡片 ===== */
+  .weather-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 16px;
+  }
+  .weather-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .weather-city {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    color: var(--persian-blue);
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  .weather-body { font-size: 13px; color: var(--earth-brown); }
+  .weather-current {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .weather-current .w-emoji { font-size: 32px; }
+  .weather-current .w-temp { font-family: 'Fraunces', serif; font-size: 26px; color: var(--persian-blue); }
+  .weather-daily {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+  .weather-day {
+    flex: 0 0 auto;
+    text-align: center;
+    font-size: 11px;
+    background: var(--sand);
+    border-radius: 6px;
+    padding: 6px 8px;
+  }
+  .weather-day.trip-day { background: rgba(212,175,55,0.25); border: 1px solid rgba(212,175,55,0.6); }
+  .weather-day .wd-date { font-weight: 700; color: var(--tile-blue); }
+  .weather-day .wd-emoji { font-size: 16px; margin: 2px 0; }
+
   .prac-card {
     background: #fff;
     border: 1px solid var(--line);
@@ -1038,7 +1179,7 @@
   /* ===== ACCOMMODATION ===== */
   .accommodation {
     background: #f0ebe0;
-    padding: 70px 40px;
+    padding: 44px 40px;
   }
 
   
@@ -1152,9 +1293,10 @@
  /* ===== PACKING LIST SECTION (NEW) ===== */
   /* 行李清單外層容器 */
 .packing-section {
-  padding: 80px 40px;
+  padding: 48px 40px;
   max-width: 1200px;
   margin: 0 auto;
+  border-top: 1px solid rgba(30,58,95,0.08);
 }
 
 .packing-inner {
@@ -1209,7 +1351,7 @@
 }
   
   /* ===== Notes ===== */
-  .notes { padding: 100px 40px; background: var(--persian-blue); color: #fff; }
+  .notes { padding: 56px 40px; background: var(--persian-blue); color: #fff; }
   .notes-inner { max-width: 1200px; margin: 0 auto; }
   .note-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
   .note-card { padding: 25px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); border-radius: 4px; }
@@ -1340,6 +1482,104 @@
   .nav-toggle.active .burger-icon span:nth-child(2) { opacity: 0; }
   .nav-toggle.active .burger-icon span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
   /* 選單面板：改為更柔和的圓角與陰影 */
+  /* ===== 桌機版水平導覽列（直接展開，不用點漢堡選單） ===== */
+  .desktop-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1500;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 2px 12px rgba(30,58,95,0.06);
+  }
+  .dn-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 28px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .dn-brand {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--persian-blue);
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .dn-links {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    flex-wrap: nowrap;
+  }
+  .dn-links > a, .dn-dropdown-label {
+    display: inline-block;
+    padding: 8px 9px;
+    color: var(--persian-blue);
+    text-decoration: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12.5px;
+    font-weight: 500;
+    white-space: nowrap;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .dn-links > a:hover, .dn-dropdown:hover .dn-dropdown-label {
+    background: var(--turquoise-light);
+    color: var(--turquoise);
+  }
+  .dn-dropdown {
+    position: relative;
+  }
+  .dn-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    box-shadow: 0 12px 30px rgba(30,58,95,0.15);
+    padding: 8px 0;
+    min-width: 170px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition: all 0.2s;
+  }
+  .dn-dropdown:hover .dn-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .dn-dropdown-menu a {
+    display: block;
+    padding: 9px 18px;
+    color: var(--persian-blue);
+    text-decoration: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  .dn-dropdown-menu a:hover { background: var(--turquoise-light); color: var(--turquoise); }
+
+  body.has-desktop-nav { padding-top: 58px; }
+
+  @media (max-width: 1080px) {
+    .desktop-navbar { display: none; }
+    body.has-desktop-nav { padding-top: 0; }
+  }
+  @media (min-width: 1081px) {
+    .nav-toggle, .nav-menu, .nav-overlay { display: none !important; }
+  }
+
   .nav-menu {
     position: fixed;
     bottom: 95px;
@@ -1462,11 +1702,6 @@
       overflow-wrap: break-word !important;
     }
     
-    /* 確保 SVG 背景寬度正常 */
-    .city-skyline {
-      width: 100vw;
-    }
-  
   #intro .info-grid {
     display: flex !important;      /* 將格狀佈局切換為橫向排列 */
     overflow-x: auto;             /* 開啟橫向溢出捲動 */
@@ -1551,12 +1786,38 @@
   }
 </style>
 </head>
-<body>
+<body class="has-desktop-nav">
+
+<nav class="desktop-navbar" id="desktopNavbar">
+  <div class="dn-inner">
+    <a href="#hero" class="dn-brand">🇺🇿 烏茲別克11天</a>
+    <div class="dn-links">
+      <a href="#intro">認識烏茲別克</a>
+      <a href="#flights">航班資訊</a>
+      <a href="#route">路線規劃</a>
+      <div class="dn-dropdown">
+        <span class="dn-dropdown-label">11天行程 ▾</span>
+        <div class="dn-dropdown-menu">
+          <a href="#day1">Day1・塔什干</a>
+          <a href="#day2-3">Day2-3・希瓦</a>
+          <a href="#day4-6">Day4-6・布哈拉</a>
+          <a href="#day7-9">Day7-9・撒馬爾罕</a>
+          <a href="#day10-11">Day10-11・塔什干</a>
+        </div>
+      </div>
+      <a href="#lodging">住宿安排</a>
+      <a href="#visa">簽證指南</a>
+      <a href="#practical">實用資訊</a>
+      <a href="#weather">天氣預報</a>
+      <a href="#currency">換算匯率</a>
+      <a href="#phrases">實用會話</a>
+      <a href="#packing">行李清單</a>
+    </div>
+  </div>
+</nav>
+
 
 <section class="hero" id="hero">
-  <svg class="city-skyline" viewBox="0 0 1200 150" preserveAspectRatio="none">
-    <path d="M0,150 L0,120 L50,120 L55,40 L65,40 L70,120 L150,120 L170,80 L230,80 L250,120 L300,120 L310,20 L325,20 L335,120 L450,120 C480,60 520,60 550,120 L650,120 L665,10 L685,10 L700,120 L850,120 C880,50 940,50 970,120 L1200,120 L1200,150 Z" />
-  </svg>
   <div class="hero-inner">
     <div class="eyebrow">Silk Road Journey · 烏茲別克</div>
     <h1 class="hero-title">Uzbekistan<span class="zh">11天絲路之旅</span></h1>
@@ -1567,6 +1828,9 @@
         <div class="meta-value" style="white-space:nowrap;">11 Days <small>/ 2026年9月18日–28日</small></div>
       </div>
     </div>
+  </div>
+  <div style="position:absolute;bottom:10px;right:16px;font-family:'Manrope',sans-serif;font-size:10px;color:rgba(30,58,95,0.5);">
+    Photo by <a href="https://unsplash.com/@demac_csgo" target="_blank" rel="noopener" style="color:inherit;">Ozodbek Erkinov</a> on <a href="https://unsplash.com" target="_blank" rel="noopener" style="color:inherit;">Unsplash</a>
   </div>
 </section>
 
@@ -1791,6 +2055,12 @@
       <div class="day-route">抵達塔什干 Tashkent</div>
       <div class="day-tagline">踏上中亞心臟，感受現代與傳統的交織。</div>
       <div class="day-details">13:10 落地後入住飯店。前往喬爾蘇市集 (Chorsu Bazaar) 感受道地氛圍，黃昏於獨立廣場散步。</div>
+      <div class="day-photo-strip">
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1743416982500-cd1f71ad7bb1?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="塔什干 Chorsu 市集蔬果攤" loading="lazy">
+          <div class="gallery-caption">Chorsu 市集 · Dasha Novikova</div>
+        </div>
+      </div>
       <div class="highlight-box">
         <ul style="list-style: none; font-size: 14px;">
           <li>• <strong>哈斯特伊瑪目建築群 Hazrati Imam Complex</strong>：塔什干最美的伊斯蘭建築群，收藏世界最古老古蘭經手抄本之一（奧斯曼古蘭經），清晨陽光下的藍色圓頂特別亮眼，建議上午前往<button class="deep-guide-btn" onclick="openGuide('hazratiImam')">📖 深度導覽</button>
@@ -1825,6 +2095,24 @@
       <div class="day-route">塔什干 🛫 希瓦 Khiva</div>
       <div class="day-tagline">走進保存最完整的絲路「露天博物館」。</div>
       <div class="day-details">搭乘早班機飛往烏爾根奇轉希瓦（約1.5h）。深度探索伊坎卡拉內城、朱瑪清真寺的古老木柱與藍色未完成塔。</div>
+      <div class="day-photo-strip">
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1728281522185-0c06b2d7a598?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="希瓦老城窄巷" loading="lazy">
+          <div class="gallery-caption">希瓦老城 · Farkhod Saydullaev</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1744177332376-4c2e64c201a8?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="希瓦木雕天花板" loading="lazy">
+          <div class="gallery-caption">木雕天花板 · Tim Broadbent</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1728281522192-b9718eff3041?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="希瓦清真寺柱列" loading="lazy">
+          <div class="gallery-caption">清真寺柱列 · Farkhod Saydullaev</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1766133334847-7a9cd4dfca8f?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="希瓦傳統服飾人群" loading="lazy">
+          <div class="gallery-caption">傳統服飾 · Nicola Poluzzi</div>
+        </div>
+      </div>
       <div class="highlight-box">
         <ul style="list-style: none; font-size: 14px;">
           <li>• <strong>伊欽卡拉內城 Itchan Kala</strong><span class="unesco-badge">🏛️ UNESCO 1990</span>：希瓦古城牆內的露天博物館，希瓦所有主要景點皆位於城內，一進西門就會看到最搶眼的「卡爾塔米諾爾矮塔」<button class="deep-guide-btn" onclick="openGuide('kaltaMinor')">📖 深度導覽</button>
@@ -1872,6 +2160,16 @@
       <div class="day-route">希瓦 <span style="display:inline-block;transform:scaleX(-1);">🚌</span> 布哈拉 Bukhara</div>
       <div class="day-tagline">聖地布哈拉：清真寺、宣禮塔與千年巴札。</div>
       <div class="day-details">翻越紅沙漠來到布哈拉（共乘車約5h）。朝聖中亞最雄偉的卡揚宣禮塔，在萊比豪斯廣場水池旁享受悠閒。近郊亦有夏宮與聖祠值得半日遊。</div>
+      <div class="day-photo-strip">
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1670514535515-e7af911bdadb?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="布哈拉磚牆巷弄" loading="lazy">
+          <div class="gallery-caption">布哈拉老城 · Evgeny Matveev</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1742463116209-2b2cd0190396?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="布哈拉木窗雕花建築" loading="lazy">
+          <div class="gallery-caption">歷史建築內院 · Olga Kovalski</div>
+        </div>
+      </div>
       <div class="highlight-box">
         <ul style="list-style: none; font-size: 14px;">
           <li>• <strong>布哈拉歷史中心</strong><span class="unesco-badge">🏛️ UNESCO 1993</span>：老城區整體被列為遺產，以下景點皆在步行範圍內</li>
@@ -1931,6 +2229,16 @@
       <div class="day-route">布哈拉 <span style="display:inline-block;transform:scaleX(-1);">🚄</span> 撒馬爾罕 Samarkand</div>
       <div class="day-tagline">撒馬爾罕：絲路最閃耀的藍色寶石。</div>
       <div class="day-details">搭乘 Afrosiyob 高鐵（約1.5h）快速抵達。走進令人震撼的雷吉斯坦廣場與沙赫靜達藍色陶磚走廊。近郊可參觀千年造紙坊與絲綢工坊。</div>
+      <div class="day-photo-strip">
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1733586092622-1b3201e802a5?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="雷吉斯坦廣場藍色圓頂" loading="lazy">
+          <div class="gallery-caption">雷吉斯坦廣場 · Hans-Jürgen Weinhardt</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1728565721620-fefb198160be?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="夏赫靜達陵墓群清晨" loading="lazy">
+          <div class="gallery-caption">夏赫靜達陵墓群 · Aleksander Stypczynski</div>
+        </div>
+      </div>
       <div class="highlight-box">
         <ul style="list-style: none; font-size: 14px;">
           <li>• <strong>撒馬爾罕：文化交匯的十字路口</strong><span class="unesco-badge">🏛️ UNESCO 2001</span>：撒馬爾罕舊城整體被列為遺產，以下景點皆屬其中</li>
@@ -2300,6 +2608,53 @@
       <p><strong>外交部旅遊警示：</strong>烏茲別克目前為<span class="prac-tag">一般注意</span>，整體治安良好，但請保管好護照及現金。</p>
     </div>
 
+  </div>
+</section>
+
+<section class="practical" id="currency">
+  <div class="section-label">Currency / 換算匯率</div>
+  <h2 class="section-title" style="margin-bottom:10px;">即時換匯小工具</h2>
+  <p style="font-size:14px;color:var(--earth-brown);margin-bottom:20px;">輸入任一欄位金額，其他兩欄會自動換算，抓不到即時匯率時會改用參考匯率備援。</p>
+  <div class="currency-converter">
+    <div class="currency-field">
+      <label for="curUZS">🇺🇿 烏茲別克蘇姆 UZS</label>
+      <input type="number" id="curUZS" inputmode="decimal" placeholder="0">
+    </div>
+    <div class="currency-eq">＝</div>
+    <div class="currency-field">
+      <label for="curUSD">🇺🇸 美金 USD</label>
+      <input type="number" id="curUSD" inputmode="decimal" placeholder="0">
+    </div>
+    <div class="currency-eq">＝</div>
+    <div class="currency-field">
+      <label for="curTWD">🇹🇼 新台幣 TWD</label>
+      <input type="number" id="curTWD" inputmode="decimal" placeholder="0">
+    </div>
+  </div>
+  <div class="currency-status" id="currencyStatus">正在載入即時匯率...</div>
+</section>
+
+<section class="practical" id="weather">
+  <div class="section-label">Weather / 天氣預報</div>
+  <h2 class="section-title" style="margin-bottom:10px;">當地天氣預報</h2>
+  <p style="font-size:14px;color:var(--earth-brown);margin-bottom:20px;">資料來源 Open-Meteo，出發前約2週內打開會顯示實際預報，太早查看只能先參考當下天氣當作氣候概況。</p>
+  <div class="weather-grid" id="weatherGrid">
+    <div class="weather-card" data-lat="41.2995" data-lon="69.2401">
+      <div class="weather-city">塔什干 Tashkent</div>
+      <div class="weather-body">載入中...</div>
+    </div>
+    <div class="weather-card" data-lat="41.3775" data-lon="60.3589">
+      <div class="weather-city">希瓦 Khiva</div>
+      <div class="weather-body">載入中...</div>
+    </div>
+    <div class="weather-card" data-lat="39.7747" data-lon="64.4286">
+      <div class="weather-city">布哈拉 Bukhara</div>
+      <div class="weather-body">載入中...</div>
+    </div>
+    <div class="weather-card" data-lat="39.6270" data-lon="66.9750">
+      <div class="weather-city">撒馬爾罕 Samarkand</div>
+      <div class="weather-body">載入中...</div>
+    </div>
   </div>
 </section>
 
@@ -2682,7 +3037,6 @@
   <a href="#route" class="nav-item">🗺️ 路線規劃</a>
   <div class="nav-item nav-item-toggle" id="itineraryToggle">🗓️ 11天行程 <span class="nav-caret">▾</span></div>
   <div class="nav-submenu" id="itinerarySubmenu">
-    <a href="#itinerary" class="nav-subitem">📍 行程總覽</a>
     <a href="#day1" class="nav-subitem">Day1・塔什干</a>
     <a href="#day2-3" class="nav-subitem">Day2-3・希瓦</a>
     <a href="#day4-6" class="nav-subitem">Day4-6・布哈拉</a>
@@ -2692,6 +3046,8 @@
   <a href="#lodging" class="nav-item">🏨 住宿安排</a>
   <a href="#visa" class="nav-item">🛂 簽證指南</a>
   <a href="#practical" class="nav-item">💵 實用資訊</a>
+  <a href="#weather" class="nav-item">🌤️ 天氣預報</a>
+  <a href="#currency" class="nav-item">💱 換算匯率</a>
   <a href="#phrases" class="nav-item">🗣️ 實用會話</a>
   <a href="#packing" class="nav-item">🎒 行李清單</a>
 </nav>
@@ -2871,24 +3227,28 @@ function toggleMenu() {
     var zhVoices = voices.filter(function (v) { return /zh/i.test(v.lang); });
     if (zhVoices.length === 0) return null;
 
-    // 1. 名稱裡標示「進階/優質/自然」等關鍵字的語音（部分裝置會有這類命名，但非標準、不保證每台裝置都有）
-    var premiumHints = /premium|enhanced|neural|natural|siri|進階|優質|自然/i;
-    var premium = zhVoices.find(function (v) { return premiumHints.test(v.name); });
-    if (premium) return premium;
+    // 1. 先篩出所有「明確標示或已知是男聲」的中文語音（各平台常見男聲名稱）
+    var maleHints = /male|男|yunyang|yunjian|yunxi|yunhao|kangkang|zhiwei|云扬|云健|云希|云皓|康康|志偉/i;
+    var maleVoices = zhVoices.filter(function (v) { return maleHints.test(v.name); });
 
-    // 2. 非本機（雲端）語音：Android Chrome 上，localService===false 代表 Google 雲端語音，
-    //    音質通常明顯優於裝置內建語音，這是目前唯一有documented依據的品質篩選方式
-    var network = zhVoices.filter(function (v) { return v.localService === false; });
-    if (network.length > 0) {
-      var networkMale = network.find(function (v) { return /male|男/i.test(v.name); });
-      return networkMale || network[0];
+    if (maleVoices.length > 0) {
+      // 男聲候選裡，再優先挑音質較好的（進階/優質關鍵字，或Android上的雲端語音）
+      var premiumHints = /premium|enhanced|neural|natural|進階|優質|自然/i;
+      var premiumMale = maleVoices.find(function (v) { return premiumHints.test(v.name); });
+      if (premiumMale) return premiumMale;
+      var networkMale = maleVoices.find(function (v) { return v.localService === false; });
+      if (networkMale) return networkMale;
+      return maleVoices[0];
     }
 
-    // 3. 都找不到的話，退回原本的男聲關鍵字比對
-    var maleHints = /male|男|yunyang|yunjian|kangkang|云扬|云健/i;
-    var male = zhVoices.find(function (v) { return maleHints.test(v.name); });
+    // 2. 這台裝置的中文語音庫裡完全沒有可辨識的男聲時，才退回音質優先（可能還是女聲）
+    var premiumHints2 = /premium|enhanced|neural|natural|siri|進階|優質|自然/i;
+    var premium = zhVoices.find(function (v) { return premiumHints2.test(v.name); });
+    if (premium) return premium;
+    var network = zhVoices.filter(function (v) { return v.localService === false; });
+    if (network.length > 0) return network[0];
     var twVoice = zhVoices.find(function (v) { return /TW/i.test(v.lang); });
-    return male || twVoice || zhVoices[0];
+    return twVoice || zhVoices[0];
   }
 
   function stopGuideVoice() {
@@ -2927,6 +3287,135 @@ function toggleMenu() {
     window.speechSynthesis.getVoices();
     window.speechSynthesis.onvoiceschanged = function () { window.speechSynthesis.getVoices(); };
   }
+</script>
+
+<script>
+  // ===== 即時換匯小工具 =====
+  (function () {
+    var rates = { UZS_PER_USD: 12800, TWD_PER_USD: 31.5 }; // 備援參考匯率，抓不到即時匯率時使用
+    var statusEl = document.getElementById('currencyStatus');
+    var uzsInput = document.getElementById('curUZS');
+    var usdInput = document.getElementById('curUSD');
+    var twdInput = document.getElementById('curTWD');
+    if (!uzsInput || !usdInput || !twdInput) return;
+
+    function clearOthers(except) {
+      if (except !== 'UZS') uzsInput.value = '';
+      if (except !== 'USD') usdInput.value = '';
+      if (except !== 'TWD') twdInput.value = '';
+    }
+
+    uzsInput.addEventListener('input', function () {
+      var v = parseFloat(uzsInput.value);
+      if (isNaN(v)) { clearOthers('UZS'); return; }
+      var usd = v / rates.UZS_PER_USD;
+      usdInput.value = usd.toFixed(2);
+      twdInput.value = (usd * rates.TWD_PER_USD).toFixed(0);
+    });
+    usdInput.addEventListener('input', function () {
+      var v = parseFloat(usdInput.value);
+      if (isNaN(v)) { clearOthers('USD'); return; }
+      uzsInput.value = (v * rates.UZS_PER_USD).toFixed(0);
+      twdInput.value = (v * rates.TWD_PER_USD).toFixed(0);
+    });
+    twdInput.addEventListener('input', function () {
+      var v = parseFloat(twdInput.value);
+      if (isNaN(v)) { clearOthers('TWD'); return; }
+      var usd = v / rates.TWD_PER_USD;
+      usdInput.value = usd.toFixed(2);
+      uzsInput.value = (usd * rates.UZS_PER_USD).toFixed(0);
+    });
+
+    statusEl.textContent = '⏳ 正在載入即時匯率...';
+    fetch('https://open.er-api.com/v6/latest/USD')
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data && data.result === 'success' && data.rates && data.rates.UZS && data.rates.TWD) {
+          rates.UZS_PER_USD = data.rates.UZS;
+          rates.TWD_PER_USD = data.rates.TWD;
+          statusEl.textContent = '✅ 即時匯率（' + (data.time_last_update_utc || '剛剛更新') + '）・1 USD ≈ ' + rates.UZS_PER_USD.toFixed(0) + ' UZS ≈ ' + rates.TWD_PER_USD.toFixed(1) + ' TWD';
+        } else {
+          throw new Error('rates missing');
+        }
+      })
+      .catch(function () {
+        statusEl.textContent = '⚠️ 無法取得即時匯率，改用參考匯率（1 USD ≈ 12,800 UZS ≈ 31.5 TWD），實際匯率請以現場兌換為準';
+      });
+  })();
+
+  // ===== 天氣預報 =====
+  (function () {
+    var cards = document.querySelectorAll('.weather-card');
+    if (cards.length === 0) return;
+
+    var weatherEmoji = function (code) {
+      if (code === 0) return '☀️';
+      if (code === 1) return '🌤️';
+      if (code === 2) return '⛅';
+      if (code === 3) return '☁️';
+      if (code === 45 || code === 48) return '🌫️';
+      if (code >= 51 && code <= 57) return '🌦️';
+      if (code >= 61 && code <= 67) return '🌧️';
+      if (code >= 71 && code <= 77) return '🌨️';
+      if (code >= 80 && code <= 82) return '🌧️';
+      if (code >= 95) return '⛈️';
+      return '🌡️';
+    };
+
+    // 這趟旅程日期範圍，用來在預報表裡標示出來
+    var tripStart = new Date('2026-09-18');
+    var tripEnd = new Date('2026-09-28');
+
+    cards.forEach(function (card) {
+      var lat = card.dataset.lat, lon = card.dataset.lon;
+      var body = card.querySelector('.weather-body');
+      var url = 'https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon +
+        '&current_weather=true&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=auto&forecast_days=10';
+
+      fetch(url)
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (!data || !data.current_weather || !data.daily) throw new Error('no data');
+          var cur = data.current_weather;
+          var daily = data.daily;
+          var html = '<div class="weather-current">' +
+            '<span class="w-emoji">' + weatherEmoji(cur.weathercode) + '</span>' +
+            '<span class="w-temp">' + Math.round(cur.temperature) + '°C</span>' +
+            '<span style="font-size:12px;">現在</span></div>';
+
+          html += '<div class="weather-daily">';
+          for (var i = 0; i < daily.time.length; i++) {
+            var d = new Date(daily.time[i]);
+            var inTrip = d >= tripStart && d <= tripEnd;
+            var label = (d.getMonth() + 1) + '/' + d.getDate();
+            html += '<div class="weather-day' + (inTrip ? ' trip-day' : '') + '">' +
+              '<div class="wd-date">' + label + '</div>' +
+              '<div class="wd-emoji">' + weatherEmoji(daily.weathercode[i]) + '</div>' +
+              '<div>' + Math.round(daily.temperature_2m_max[i]) + '° / ' + Math.round(daily.temperature_2m_min[i]) + '°</div>' +
+              '</div>';
+          }
+          html += '</div>';
+
+          // 依預報高低溫產生簡單的穿搭建議（規則式判斷，非AI生成）
+          var maxTemps = daily.temperature_2m_max, minTemps = daily.temperature_2m_min;
+          var avgMax = maxTemps.reduce(function (a, b) { return a + b; }, 0) / maxTemps.length;
+          var avgMin = minTemps.reduce(function (a, b) { return a + b; }, 0) / minTemps.length;
+          var tips = [];
+          if (avgMax >= 35) tips.push('☀️ 正午高溫炎熱，避免中午時段外出、大量補水');
+          else if (avgMax >= 28) tips.push('☀️ 日間炎熱，防曬乳、遮陽帽、透氣衣物必備');
+          else if (avgMax >= 20) tips.push('🙂 日間舒適，輕便衣物即可');
+          else tips.push('🧥 日間偏涼，建議準備薄外套');
+          if (avgMin <= 10) tips.push('🧥 早晚偏冷，務必準備保暖外套');
+          else if (avgMin <= 18) tips.push('🧣 早晚溫差大，建議攜帶薄外套備用');
+          html += '<div style="margin-top:10px;padding-top:8px;border-top:1px dashed var(--line);font-size:12px;">👕 ' + tips.join('・') + '</div>';
+
+          body.innerHTML = html;
+        })
+        .catch(function () {
+          body.innerHTML = '<p style="font-size:12px;">⚠️ 目前無法取得天氣資料，可能是網路問題，稍後重新整理頁面再試。</p>';
+        });
+    });
+  })();
 </script>
 </body>
 </html>

@@ -936,6 +936,8 @@
     border: 1px solid var(--line);
     border-radius: 10px;
     padding: 20px;
+    min-width: 0;
+    overflow: hidden;
   }
   .weather-city {
     font-family: 'Fraunces', serif;
@@ -959,6 +961,8 @@
     gap: 8px;
     overflow-x: auto;
     padding-bottom: 4px;
+    max-width: 100%;
+    min-width: 0;
   }
   .weather-day {
     flex: 0 0 auto;
@@ -971,6 +975,87 @@
   .weather-day.trip-day { background: rgba(212,175,55,0.25); border: 1px solid rgba(212,175,55,0.6); }
   .weather-day .wd-date { font-weight: 700; color: var(--tile-blue); }
   .weather-day .wd-emoji { font-size: 16px; margin: 2px 0; }
+
+  /* ===== 歷史月均溫/降雨參考表 ===== */
+  .climate-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px 16px;
+    background: var(--turquoise-light);
+    border: 1px solid rgba(0,169,184,0.3);
+    border-radius: 8px;
+    color: var(--tile-blue);
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .climate-toggle .ct-caret { transition: transform 0.25s; font-size: 11px; }
+  .climate-toggle.open .ct-caret { transform: rotate(180deg); }
+  .climate-table-wrap {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+  .climate-table-wrap.open { max-height: 900px; }
+  .climate-table-scroll {
+    overflow-x: auto;
+    margin-top: 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+  .climate-table {
+    width: 100%;
+    min-width: 480px;
+    border-collapse: collapse;
+    font-size: 12px;
+    background: #fff;
+  }
+  .climate-table th {
+    background: var(--persian-blue);
+    color: #fff;
+    padding: 8px 10px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    text-align: left;
+    white-space: nowrap;
+  }
+  .climate-table td {
+    padding: 7px 10px;
+    border-top: 1px solid var(--line);
+    white-space: nowrap;
+    color: var(--earth-brown);
+  }
+  .climate-table tr.trip-month td {
+    background: rgba(212,175,55,0.15);
+    font-weight: 700;
+    color: var(--tile-blue);
+  }
+  .climate-source {
+    font-size: 11px;
+    color: var(--earth-brown);
+    opacity: 0.7;
+    margin-top: 8px;
+  }
+
+  @media (max-width: 600px) {
+    .weather-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .weather-card { padding: 12px; }
+    .weather-city { font-size: 14px; margin-bottom: 6px; padding-bottom: 6px; }
+    .weather-current { gap: 6px; margin-bottom: 8px; }
+    .weather-current .w-emoji { font-size: 24px; }
+    .weather-current .w-temp { font-size: 20px; }
+    .weather-daily { gap: 6px; }
+    .weather-day { padding: 5px 6px; font-size: 10px; }
+  }
 
   .prac-card {
     background: #fff;
@@ -2264,7 +2349,7 @@
         </div>
         <div class="gallery-item">
           <img src="https://commons.wikimedia.org/wiki/Special:FilePath/%D0%92%D0%B5%D1%87%D0%B5%D1%80%D0%BD%D0%B8%D0%B9%20%D0%93%D1%83%D1%80-%D0%AD%D0%BC%D0%B8%D1%80.jpg?width=1200" alt="古爾埃米爾陵墓" loading="lazy">
-          <div class="gallery-caption">古爾埃米爾陵墓 · Wikimedia Commons</div>
+          <div class="gallery-caption">古爾埃米爾陵墓 · Wikimedia Commons（CC BY-SA 4.0）</div>
         </div>
         <div class="gallery-item">
           <img src="https://images.unsplash.com/photo-1728565721620-fefb198160be?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="夏赫靜達陵墓群清晨" loading="lazy">
@@ -2338,8 +2423,8 @@
       <div class="day-details">包車返塔什干（約4–4.5h，時間彈性配合撒馬爾罕最後行程）。進行「地鐵藝術站之旅」，每一站都是不同風格的地下宮殿。最後一天可前往天山 Chimgan 或 Charvak 水庫。23:00 搭機返程。</div>
       <div class="day-photo-strip">
         <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1659469688035-d4381fd67b8f?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="塔什干地鐵拱廊" loading="lazy">
-          <div class="gallery-caption">塔什干地鐵 · Salohiddin Kamolov</div>
+          <img src="https://images.unsplash.com/photo-1659469688035-d4381fd67b8f?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="詩人站 Alisher Navoiy" loading="lazy">
+          <div class="gallery-caption">詩人站 Alisher Navoiy · Salohiddin Kamolov</div>
         </div>
         <div class="gallery-item">
           <img src="https://images.pexels.com/photos/19227981/pexels-photo-19227981.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="獨立廣場地鐵站" loading="lazy">
@@ -2359,11 +2444,11 @@
           <li>• <strong>🚇 塔什干地鐵</strong>：中亞第一座地鐵，蘇聯時期建造，每站都是不同風格的地下宮殿，2018年6月才解禁開放拍照（禁拍超過40年，因為兼具核子避難所功能）<button class="deep-guide-btn" onclick="openGuide('tashkentMetro')">📖 深度導覽</button>
             <span class="ticket-info">🎫 單程 1,400 UZS（約 $0.1 美金／NT$3.7，投幣或感應卡），不限時間距離、票價不因搭乘站數變動，無需另外購票拍照，僅需搭乘</span>
             <div style="margin-top:8px;padding:10px 12px;background:var(--turquoise-light);border-radius:6px;font-size:13px;line-height:1.8;">
-              <strong style="color:var(--tile-blue);">必去7站：</strong><br>
-              🔵 藍線：<strong>Toshkent</strong> 塔什干站・<strong>Kosmonavtlar</strong> 太空人站（宇航員主題）・<strong>Alisher Navoiy</strong> 詩人站（藍色伊斯蘭穹頂）<br>
+              <strong style="color:var(--tile-blue);">必去8站：</strong><br>
+              🔵 藍線：<strong>Toshkent</strong> 塔什干站・<strong>Kosmonavtlar</strong> 太空人站（宇航員主題）・<strong>Alisher Navoiy</strong> 詩人站（藍色伊斯蘭穹頂）・<strong>Beruniy</strong> 貝魯尼站（大理石紋圓頂＋水晶吊燈，紀念中世紀波斯博學家花拉子米）<br>
               🔴 紅線：<strong>Paxtakor</strong> 棉花站・<strong>Mustaqillik Maydoni</strong> 獨立廣場站<br>
               🟢 綠線：<strong>Bodomzor</strong> 杏樹林站・<strong>Yunus Rajabiy</strong> 音樂家站<br>
-              <span style="opacity:0.75;">7站排一趟約需2–3小時，建議上午或平日離峰時段前往，站內仍有安檢與警衛，拍照請保持禮貌、避免拍到執勤人員。</span><br>
+              <span style="opacity:0.75;">8站排一趟約需2–3小時，建議上午或平日離峰時段前往，站內仍有安檢與警衛，拍照請保持禮貌、避免拍到執勤人員。</span><br>
               <a href="https://www.instagram.com/p/DasRiLpnQjG/" target="_blank" rel="noopener" class="ref-link" style="margin-top:6px;">📷 參考路線圖與實拍照片</a>
             </div>
           </li>
@@ -2708,6 +2793,33 @@
       <div class="weather-city">撒馬爾罕 Samarkand</div>
       <div class="weather-body">載入中...</div>
     </div>
+  </div>
+
+  <button class="climate-toggle" id="climateToggle">📊 查看全年12個月氣候參考 <span class="ct-caret">▾</span></button>
+  <div class="climate-table-wrap" id="climateTableWrap">
+    <div class="climate-table-scroll">
+      <table class="climate-table">
+        <thead>
+          <tr><th>月份</th><th>塔什干</th><th>希瓦</th><th>布哈拉</th><th>撒馬爾罕</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1月</td><td>6° / -5°・63mm</td><td>4° / -6°・12mm</td><td>8° / -2°・12mm</td><td>7° / -4°・61mm</td></tr>
+          <tr><td>2月</td><td>8° / -4°・75mm</td><td>7° / -3°・10mm</td><td>11° / 0°・14mm</td><td>9° / -3°・80mm</td></tr>
+          <tr><td>3月</td><td>15° / 2°・92mm</td><td>13° / 3°・19mm</td><td>18° / 5°・34mm</td><td>15° / 2°・100mm</td></tr>
+          <tr><td>4月</td><td>21° / 7°・103mm</td><td>22° / 9°・12mm</td><td>25° / 11°・18mm</td><td>20° / 7°・94mm</td></tr>
+          <tr><td>5月</td><td>27° / 13°・76mm</td><td>30° / 16°・8mm</td><td>31° / 17°・8mm</td><td>26° / 11°・57mm</td></tr>
+          <tr><td>6月</td><td>32° / 17°・30mm</td><td>35° / 20°・3mm</td><td>37° / 22°・3mm</td><td>31° / 16°・16mm</td></tr>
+          <tr><td>7月</td><td>35° / 20°・11mm</td><td>37° / 22°・1mm</td><td>39° / 24°・1mm</td><td>33° / 18°・4mm</td></tr>
+          <tr><td>8月</td><td>34° / 18°・5mm</td><td>34° / 20°・0.8mm</td><td>37° / 22°・0.5mm</td><td>32° / 17°・2mm</td></tr>
+          <tr class="trip-month"><td>9月 ✈️</td><td>29° / 13°・10mm</td><td>29° / 14°・2mm</td><td>32° / 16°・2mm</td><td>28° / 13°・5mm</td></tr>
+          <tr><td>10月</td><td>21° / 7°・34mm</td><td>20° / 8°・8mm</td><td>25° / 10°・7mm</td><td>21° / 7°・22mm</td></tr>
+          <tr><td>11月</td><td>13° / 1°・58mm</td><td>12° / 1°・10mm</td><td>16° / 4°・14mm</td><td>13° / 1°・52mm</td></tr>
+          <tr><td>12月</td><td>7° / -4°・66mm</td><td>6° / -3°・12mm</td><td>9° / 0°・13mm</td><td>8° / -3°・57mm</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="climate-source">格式為「日間最高 / 夜間最低・當月平均降雨量」，資料來源 climate-data.org、weather-and-climate.com 近30年（1991–2021）歷史平均值，僅供其他季節安排行程參考，不是即時預報。9月（✈️標示列）正是我們此行出發的月份。</p>
+    <p class="climate-source" style="margin-top:6px;">⚠️ 如果你發現上方即時預報的溫度明顯比這張表格同月份的數字高：一部分是正常的「單日高溫 vs 整月平均」落差（月均溫本來就會被較涼的日子拉低，單一熱天飆比月均高5-8°C很常見），另一部分則可能反映近年氣候暖化趨勢——中亞近30年均溫確實有上升，且這份表格用的是30年平均值，會比最近幾年實際狀況稍微保守一點。建議把表格數字當作「大概區間」而非精確預測，越接近出發日以上方即時預報為準最準確。</p>
   </div>
 </section>
 
@@ -3442,6 +3554,17 @@ function toggleMenu() {
       });
   })();
 
+  // ===== 歷史氣候參考表 展開/收合 =====
+  (function () {
+    var toggle = document.getElementById('climateToggle');
+    var wrap = document.getElementById('climateTableWrap');
+    if (!toggle || !wrap) return;
+    toggle.addEventListener('click', function () {
+      toggle.classList.toggle('open');
+      wrap.classList.toggle('open');
+    });
+  })();
+
   // ===== 天氣預報 =====
   (function () {
     var cards = document.querySelectorAll('.weather-card');
@@ -3469,7 +3592,7 @@ function toggleMenu() {
       var lat = card.dataset.lat, lon = card.dataset.lon;
       var body = card.querySelector('.weather-body');
       var url = 'https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon +
-        '&current_weather=true&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=auto&forecast_days=10';
+        '&current_weather=true&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max&timezone=auto&forecast_days=10';
 
       fetch(url)
         .then(function (r) { return r.json(); })
@@ -3487,10 +3610,12 @@ function toggleMenu() {
             var d = new Date(daily.time[i]);
             var inTrip = d >= tripStart && d <= tripEnd;
             var label = (d.getMonth() + 1) + '/' + d.getDate();
+            var pop = (daily.precipitation_probability_max && daily.precipitation_probability_max[i] != null) ? daily.precipitation_probability_max[i] : null;
             html += '<div class="weather-day' + (inTrip ? ' trip-day' : '') + '">' +
               '<div class="wd-date">' + label + '</div>' +
               '<div class="wd-emoji">' + weatherEmoji(daily.weathercode[i]) + '</div>' +
               '<div>' + Math.round(daily.temperature_2m_max[i]) + '° / ' + Math.round(daily.temperature_2m_min[i]) + '°</div>' +
+              (pop !== null ? '<div style="color:var(--tile-blue);">☔ ' + pop + '%</div>' : '') +
               '</div>';
           }
           html += '</div>';

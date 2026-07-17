@@ -1365,6 +1365,32 @@
     color: #555;
     line-height: 1.7;
   }
+  .accom-compare-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: #fcfcfc;
+    border: 1px dashed var(--line);
+    border-radius: 4px;
+    color: var(--tile-blue);
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .accom-compare-toggle .act-caret { transition: transform 0.25s; font-size: 10px; }
+  .accom-compare-toggle.open .act-caret { transform: rotate(180deg); }
+  .accom-compare-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+  .accom-compare-body.open { max-height: 700px; }
+  .accom-compare-body .accom-compare { margin-top: 8px; }
   .accom-confirmed {
     border: 1.5px solid rgba(0,169,184,0.3);
     border-radius: 4px;
@@ -1559,6 +1585,8 @@
   /* ===== 修正後：浮動導覽選單樣式 ===== */
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100%;
   }
 
 /* ===== 修正後：絕對置中的浮動按鈕 ===== */
@@ -2563,11 +2591,14 @@
           </div>
         </div>
 
+        <button class="accom-compare-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open');">⭐ 兩間住宿評價比較（點開查看） <span class="act-caret">▾</span></button>
+        <div class="accom-compare-body">
         <div class="accom-compare">
           <strong>兩間評價比較：</strong><br>
           <strong>Grand Vizir</strong>：Booking 8.7-8.8分（約56則評論）、Tripadvisor 4/5（22則）。新開幕小型精品旅館，主打乾淨、新穎、老闆親切、早餐豐富，走路到古城入口很近；缺點是<strong>僅收現金</strong>，有房客反映床偏硬。<br>
           <strong>Orient Star</strong>：Booking 8.6分（<strong>951則評論，量體大很多、口碑更穩定</strong>）、Tripadvisor 3/5（約500則）。位置最大優勢是<strong>直接住在古城牆內、改建自1855年神學院</strong>，建築本身就是景點，中庭很美；缺點是房間偏小偏暗（前身是學生宿舍隔間）、房內WiFi弱、也是現金為主，且因常接待大型旅行團，早餐時段人多容易擠。<br>
           <span style="opacity:0.75;">簡單說：Grand Vizir 較新較安靜、服務更貼心；Orient Star 位置與建築本身更有特色、但房間較小、評論量大更具參考性。兩間都有一定水準，可以先保留 Orient Star 當備案。<strong style="color:var(--accent-red);">⚠️ 實務提醒：免費取消期限是9/18當地時間14:00（UTC+5），但你們9/18當天13:10才落地塔什干，等於根本來不及在期限內決定——必須在9/18曼谷登機前（約當地時間清晨5-6點左右，即烏茲別克時間）就先決定好要不要取消，不能想說「當天到了再處理」。</strong></span>
+        </div>
         </div>
       </div>
 

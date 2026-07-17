@@ -202,12 +202,19 @@
 
   .day-photo-strip {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     margin-top: 14px;
   }
   .day-photo-strip .gallery-item { aspect-ratio: 3 / 2; border-radius: 6px; }
+  .day-photo-strip .gallery-item.featured {
+    grid-column: 1 / -1;
+    aspect-ratio: 21 / 9;
+  }
   .day-photo-strip .gallery-caption { font-size: 10px; padding: 12px 8px 6px; }
+  @media (max-width: 500px) {
+    .day-photo-strip .gallery-item.featured { aspect-ratio: 16 / 9; }
+  }
 
   .info-grid {
     display: grid;
@@ -1380,6 +1387,25 @@
   .flight-section { padding: 50px 40px 0; max-width: 1200px; margin: 0 auto; }
   .flight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-top: 24px; }
   .flight-card { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 22px; display: flex; flex-direction: column; gap: 8px; }
+  @media (max-width: 600px) {
+    .flight-grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 12px;
+      padding-bottom: 8px;
+      margin-left: -4px;
+      margin-right: -4px;
+      padding-left: 4px;
+      padding-right: 4px;
+    }
+    .flight-grid::-webkit-scrollbar { display: none; }
+    .flight-card {
+      flex: 0 0 85%;
+      scroll-snap-align: center;
+    }
+  }
   .flight-route { font-family: 'Fraunces', serif; font-weight: 500; font-size: 19px; color: var(--persian-blue); }
   .flight-date { font-size: 13px; color: var(--earth-brown); font-weight: 500; }
   .flight-time { font-size: 14px; color: var(--earth-brown); }
@@ -3578,6 +3604,16 @@ function toggleMenu() {
     toggle.addEventListener('click', function () {
       toggle.classList.toggle('open');
       wrap.classList.toggle('open');
+    });
+  })();
+
+  // ===== 日程照片牆：奇數張時第一張自動放大滿版，避免留白缺角 =====
+  (function () {
+    document.querySelectorAll('.day-photo-strip').forEach(function (strip) {
+      var items = strip.querySelectorAll('.gallery-item');
+      if (items.length % 2 === 1) {
+        items[0].classList.add('featured');
+      }
     });
   })();
 

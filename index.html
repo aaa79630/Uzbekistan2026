@@ -1126,44 +1126,55 @@
     font-family: 'Fraunces', serif;
     font-size: 24px;
     color: var(--persian-blue);
-    margin-bottom: 14px;
+    margin-bottom: 8px;
     padding-bottom: 14px;
     border-bottom: 2px solid var(--uzbek-gold);
     padding-right: 30px;
   }
-  .guide-voice-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 18px;
-    background: var(--persian-blue);
-    color: #fff;
-    border: none;
-    border-radius: 24px;
-    padding: 9px 18px;
-    font-family: 'Manrope', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
-  }
-  .guide-voice-btn:hover { background: var(--tile-blue); }
-  .guide-voice-btn:active { transform: scale(0.97); }
-  .guide-voice-btn .gv-icon { font-size: 15px; }
-  .guide-voice-btn.playing { background: var(--accent-red); }
-  .guide-voice-btn.playing .gv-icon { animation: gvPulse 1s ease-in-out infinite; }
-  @keyframes gvPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
   .guide-modal-body {
     font-family: 'Noto Serif TC', 'Noto Sans TC', sans-serif;
     font-size: 15px;
     line-height: 2;
     color: #333;
   }
+  .guide-segment {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .guide-segment-play {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    margin-top: 3px;
+    border-radius: 50%;
+    border: 1.5px solid var(--uzbek-gold);
+    background: #fff;
+    color: #8a6500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 11px;
+    padding: 0;
+    transition: background 0.2s, color 0.2s, transform 0.15s;
+  }
+  .guide-segment-play .gsp-icon {
+    display: inline-block;
+    transform: translateX(1px);
+  }
+  .guide-segment-play:hover { background: var(--uzbek-gold); color: #fff; }
+  .guide-segment-play:active { transform: scale(0.9); }
+  .guide-segment-play.playing { background: var(--accent-red); border-color: var(--accent-red); color: #fff; }
+  .guide-segment-play.playing .gsp-icon { animation: gvPulse 1s ease-in-out infinite; }
+  @keyframes gvPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .guide-segment-text { flex: 1; min-width: 0; }
   @media (max-width: 600px) {
     .guide-modal { padding: 26px 20px 22px; max-height: 85vh; }
     .guide-modal-title { font-size: 20px; }
-    .guide-voice-btn { font-size: 12px; padding: 8px 15px; }
     .guide-modal-body { font-size: 14px; line-height: 1.9; }
+    .guide-segment-play { width: 26px; height: 26px; }
   }
 
   .warn-box {
@@ -1889,13 +1900,14 @@
     <div class="info-card-new">
       <h4>📜 歷史脈絡</h4>
       <ul>
-        <li>古代：粟特人建立絲路貿易城邦</li>
+        <li>古代：粟特人建立絲路貿易城邦，漢唐史書統稱此地為「西域」，康國（撒馬爾罕）、安國（布哈拉）、石國（塔什干）、火尋（希瓦）皆在其中</li>
         <li>8 世紀：阿拉伯帝國征服，伊斯蘭文化傳入</li>
         <li>13 世紀：成吉思汗橫掃，撒馬爾罕幾近廢墟</li>
         <li>14–15 世紀：帖木兒大帝重建帝國，絲路文明最輝煌時代</li>
         <li>19 世紀：淪為沙俄帝國附庸</li>
         <li>1991 年：蘇聯解體，宣布獨立至今</li>
       </ul>
+      <p style="font-size:12px;opacity:0.7;margin-top:8px;">💡 小知識：「西域」一詞在漢代原指玉門關、陽關以西的區域，到了唐代範圍擴展到整個中亞——換句話說，行程裡會去的撒馬爾罕、布哈拉、塔什干，在千年前的漢唐史書裡，統統都算是「西域」的一部分。</p>
     </div>
 
     <div class="info-card-new">
@@ -2057,6 +2069,10 @@
       <div class="day-details">13:10 落地後入住飯店。前往喬爾蘇市集 (Chorsu Bazaar) 感受道地氛圍，黃昏於獨立廣場散步。</div>
       <div class="day-photo-strip">
         <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1654861857666-1e8c438cbe4a?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="哈斯特伊瑪目建築群" loading="lazy">
+          <div class="gallery-caption">哈斯特伊瑪目建築群 · Dmitriy Efimov</div>
+        </div>
+        <div class="gallery-item">
           <img src="https://images.unsplash.com/photo-1743416982500-cd1f71ad7bb1?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="塔什干 Chorsu 市集蔬果攤" loading="lazy">
           <div class="gallery-caption">Chorsu 市集 · Dasha Novikova</div>
         </div>
@@ -2162,6 +2178,10 @@
       <div class="day-details">翻越紅沙漠來到布哈拉（共乘車約5h）。朝聖中亞最雄偉的卡揚宣禮塔，在萊比豪斯廣場水池旁享受悠閒。近郊亦有夏宮與聖祠值得半日遊。</div>
       <div class="day-photo-strip">
         <div class="gallery-item">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/La%20mosqu%C3%A9e%20Bolo-Khaouz%20(Boukhara%2C%20Ouzb%C3%A9kistan)%20(5720017982).jpg?width=1200" alt="Bolo Hauz 清真寺" loading="lazy">
+          <div class="gallery-caption">Bolo Hauz 清真寺 · Jean-Pierre Dalbéra（CC BY 2.0）</div>
+        </div>
+        <div class="gallery-item">
           <img src="https://images.unsplash.com/photo-1601963251218-816ff32e2baf?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="卡揚宣禮塔" loading="lazy">
           <div class="gallery-caption">卡揚宣禮塔 · Zuyet Awarmatik</div>
         </div>
@@ -2239,18 +2259,29 @@
           <div class="gallery-caption">雷吉斯坦廣場 · Hans-Jürgen Weinhardt</div>
         </div>
         <div class="gallery-item">
+          <img src="https://images.pexels.com/photos/19439183/pexels-photo-19439183.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="比比哈努姆清真寺藍色圓頂" loading="lazy">
+          <div class="gallery-caption">比比哈努姆清真寺 · AXP Photography</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/%D0%92%D0%B5%D1%87%D0%B5%D1%80%D0%BD%D0%B8%D0%B9%20%D0%93%D1%83%D1%80-%D0%AD%D0%BC%D0%B8%D1%80.jpg?width=1200" alt="古爾埃米爾陵墓" loading="lazy">
+          <div class="gallery-caption">古爾埃米爾陵墓 · Wikimedia Commons</div>
+        </div>
+        <div class="gallery-item">
           <img src="https://images.unsplash.com/photo-1728565721620-fefb198160be?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="夏赫靜達陵墓群清晨" loading="lazy">
           <div class="gallery-caption">夏赫靜達陵墓群 · Aleksander Stypczynski</div>
         </div>
       </div>
       <div class="highlight-box">
         <ul style="list-style: none; font-size: 14px;">
-          <li>• <strong>撒馬爾罕：文化交匯的十字路口</strong><span class="unesco-badge">🏛️ UNESCO 2001</span>：撒馬爾罕舊城整體被列為遺產，以下景點皆屬其中</li>
+          <li>• <strong>撒馬爾罕：文化交匯的十字路口</strong><span class="unesco-badge">🏛️ UNESCO 2001</span>：撒馬爾罕舊城整體被列為遺產，以下景點皆屬其中<button class="deep-guide-btn" onclick="openGuide('samarkandCity')">📖 深度導覽</button></li>
           <li>• <strong>雷吉斯坦廣場 Registan</strong>：清晨無人時拍照最美；夜晚燈光秀 ★ 必看<button class="deep-guide-btn" onclick="openGuide('registan')">📖 深度導覽</button>
             <span class="ticket-info">🎫 100,000 UZS／人（約 $8 美金／NT$262）・開放約 08:00–19:00・夜晚燈光秀約 20:00–21:00 於廣場外免費觀賞</span>
           </li>
           <li>• <strong>夏赫靜達陵墓群 Shah-i-Zinda</strong>：全球最美藍色陶磚走廊，穿越千年<button class="deep-guide-btn" onclick="openGuide('shahIZinda')">📖 深度導覽</button>
             <span class="ticket-info">🎫 約 50,000–75,000 UZS／人（約 $4–6 美金／NT$131–197）・開放約 08:00–19:00</span>
+          </li>
+          <li>• <strong>阿弗拉西阿卜博物館 Afrasiyab Museum</strong>：典藏7世紀粟特壁畫「大使廳」，就在夏赫靜達陵墓群旁，順遊性高<button class="deep-guide-btn" onclick="openGuide('afrasiyabMuseum')">📖 深度導覽</button>
+            <span class="ticket-info">🎫 約 80,000 UZS／人（約 $6 美金／NT$210，外國人票價）・開放約 09:00–18:00</span>
           </li>
           <li>• <strong>比比哈努姆清真寺 Bibi-Khanym</strong>：帖木兒為愛妻建造的宏偉清真寺
             <span class="ticket-info">🎫 約 75,000 UZS／人（約 $6 美金／NT$197）</span>
@@ -2309,6 +2340,18 @@
         <div class="gallery-item">
           <img src="https://images.unsplash.com/photo-1659469688035-d4381fd67b8f?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="塔什干地鐵拱廊" loading="lazy">
           <div class="gallery-caption">塔什干地鐵 · Salohiddin Kamolov</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.pexels.com/photos/19227981/pexels-photo-19227981.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="獨立廣場地鐵站" loading="lazy">
+          <div class="gallery-caption">獨立廣場站 · AXP Photography</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.pexels.com/photos/19227947/pexels-photo-19227947.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="地鐵幾何圖案內裝" loading="lazy">
+          <div class="gallery-caption">Beruni站幾何內裝 · AXP Photography</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.pexels.com/photos/19227972/pexels-photo-19227972.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="太空人站" loading="lazy">
+          <div class="gallery-caption">太空人站 Kosmonavtlar · AXP Photography</div>
         </div>
       </div>
       <div class="highlight-box">
@@ -3159,7 +3202,7 @@ function toggleMenu() {
     <button class="guide-modal-close" id="guideModalClose">✕</button>
     <div class="guide-modal-eyebrow">深度導覽 · ON-SITE GUIDE</div>
     <div class="guide-modal-title" id="guideModalTitle"></div>
-    <button class="guide-voice-btn" id="guideVoiceBtn"><span class="gv-icon">🔊</span><span class="gv-label">語音導覽</span></button>
+    <p style="font-size:11px;color:var(--earth-brown);opacity:0.65;margin-bottom:14px;">🔊 點段落旁的圓鈕可單獨播放該段語音</p>
     <div class="guide-modal-body" id="guideModalBody"></div>
   </div>
 </div>
@@ -3173,7 +3216,7 @@ function toggleMenu() {
     },
     tashkentMetro: {
       title: '塔什干地鐵之旅 · 地面下的核防空洞美學',
-      body: '<strong>親手觸摸冷戰時期的重裝美學：</strong>拿出你的手機，在月台上可以摸摸那厚實的大理石柱，感受這座地鐵獨特的歷史氣息。<br><br><strong>嚴格禁止拍照整整 41 年的軍事機密：</strong>塔什干地鐵建於西元 1977 年（對照台灣歷史，此時是民國 66 年，正值十大建設推動、蔣經國先生擔任行政院長的時期）。因為它兼具了蘇聯冷戰時期的「核子避難所」軍事功能，被列為國家最高機密，直到 2018 年 6 月才終於解禁。<br><br><strong>李白筆下的長安胡姬與地鐵美學：</strong>在藍線的 Alisher Navoiy（詩人站），一排排藍色的伊斯蘭穹頂在頭頂綻放。李白曾寫過「胡姬貌如花，當壚笑春風」，那些在長安城裡讓無數詩人傾倒、擅長歌舞的「胡姬」，大半就是從中亞這片綠洲一帶，沿著絲綢之路一路向東走進唐朝。站在這座地鐵站，頭頂的圓頂花紋正是那段繁華胡風的現代延續。'
+      body: '<strong>親手觸摸冷戰時期的重裝美學：</strong>拿出你的手機，在月台上可以摸摸那厚實的大理石柱，感受這座地鐵獨特的歷史氣息。<br><br><strong>嚴格禁止拍照整整 41 年的軍事機密：</strong>塔什干地鐵建於西元 1977 年（對照台灣歷史，此時是民國 66 年，正值十大建設推動、蔣經國先生擔任行政院長的時期）。因為它兼具了蘇聯冷戰時期的「核子避難所」軍事功能，被列為國家最高機密，直到 2018 年 6 月才終於解禁。<br><br><strong>藍線詩人站的伊斯蘭穹頂：</strong>在藍線的 Alisher Navoiy（詩人站），一排排藍色的伊斯蘭穹頂在頭頂綻放，完美的對稱結構與吊燈，讓人忘記自己正站在地底下，是整條地鐵最美的一站。'
     },
     kaltaMinor: {
       title: '卡爾塔米諾爾矮塔 · 未完成的藍色巨塔',
@@ -3185,7 +3228,7 @@ function toggleMenu() {
     },
     kalyanMinaret: {
       title: '卡揚宣禮塔 · 成吉思汗也屈膝的不朽高塔',
-      body: '<strong>仰望不重複的十四道幾何浮雕：</strong>來到這座 46.5 公尺的巨大磚塔下，請用力把頭往後仰，欣賞那一圈圈用土磚堆疊、繁複極致的磚雕花紋。<br><br><strong>布哈拉不曾褪色的黃金時代：</strong>這座宣禮塔建成於西元 1127 年（等同於北宋滅亡、南宋建立的「靖康之禍」那一年）。UNESCO 官方指出，布哈拉歷史中心（1993年列入）是中世紀中亞伊斯蘭城市的傑出典範，其城市格局與建築在數百年間未曾改變。卡揚宣禮塔作為這座城市的精神地標，不僅在建築史上代表了 12 世紀早期磚石堆疊結構與幾何美學的巔峰，更見證了布哈拉作為絲綢之路上宗教、科學與文化中心的黃金時代。<br><br><strong>讓成吉思汗低頭鞠躬的奇蹟：</strong>這座高塔曾是荒漠旅人的燈塔。西元 1220 年（南宋嘉定十三年），成吉思汗橫掃布哈拉將全城夷為平地，但當他來到塔前仰頭觀望時，頭盔不慎滑落。成吉思汗彎腰撿起頭盔，感嘆道：「這座塔竟然能讓我向它低頭，它不該被摧毀。」宣禮塔因而奇蹟般在蒙古鐵騎下存活，矗立了近九百年。<br><br><strong>安國與胡旋舞的絲路迴響：</strong>布哈拉在中國唐代史書中被稱為安國，是活躍於絲路上的「昭武九姓」粟特人領地。西元 7 至 8 世紀（大唐盛世），白居易筆下、唐玄宗與楊貴妃最愛跳的、瘋狂旋轉的「胡旋舞」，正是從這裡沿著絲綢之路傳入長安。站在這裡，你耳邊彷彿能聽見千年前粟特樂隊急促的胡鼓聲。'
+      body: '<strong>仰望不重複的十四道幾何浮雕：</strong>來到這座 46.5 公尺的巨大磚塔下，請用力把頭往後仰，欣賞那一圈圈用土磚堆疊、繁複極致的磚雕花紋。<br><br><strong>布哈拉不曾褪色的黃金時代：</strong>這座宣禮塔建成於西元 1127 年（等同於北宋滅亡、南宋建立的「靖康之禍」那一年）。UNESCO 官方指出，布哈拉歷史中心（1993年列入）是中世紀中亞伊斯蘭城市的傑出典範，其城市格局與建築在數百年間未曾改變。卡揚宣禮塔作為這座城市的精神地標，不僅在建築史上代表了 12 世紀早期磚石堆疊結構與幾何美學的巔峰，更見證了布哈拉作為絲綢之路上宗教、科學與文化中心的黃金時代。<br><br><strong>讓成吉思汗低頭鞠躬的奇蹟：</strong>這座高塔曾是荒漠旅人的燈塔。西元 1220 年（南宋嘉定十三年），成吉思汗橫掃布哈拉將全城夷為平地，但當他來到塔前仰頭觀望時，頭盔不慎滑落。成吉思汗彎腰撿起頭盔，感嘆道：「這座塔竟然能讓我向它低頭，它不該被摧毀。」宣禮塔因而奇蹟般在蒙古鐵騎下存活，矗立了近九百年。'
     },
     boloHauz: {
       title: 'Bolo Hauz 清真寺 · 國王的專用祈禱所',
@@ -3193,15 +3236,23 @@ function toggleMenu() {
     },
     registan: {
       title: '雷吉斯坦廣場 · 帖木兒帝國的藍色心臟',
-      body: '<strong>震撼眼球的「永恆之藍」包圍網：</strong>站在廣闊的廣場中央，環顧三座巨大的神學院，你會被滿城的寶藍磁磚深深震撼。請走向右側的 Sher-Dor（謝爾多爾）神學院，抬頭看看入口巨大拱門上方、左右對稱的彩色浮雕。<br><br><strong>UNESCO 認定的東西方文化十字路口：</strong>這三座神學院建於西元 15 至 17 世紀之間（左側的兀魯伯神學院建於 1420 年，等同於明朝永樂年間，正是明成祖遷都北京、鄭和下西洋的絲路大航海時代）。UNESCO 官方評定撒馬爾罕為「文化交匯的十字路口」。雷吉斯坦廣場傾注了帖木兒文藝復興時期的都市規劃巔峰，其建築工藝更融合了來自中國的陶瓷技術、波斯的鈷藍色料與印度的石雕美學，成為伊斯蘭世界中最具紀念碑意義的公共空間傑作。<br><br><strong>伊斯蘭世界中最叛逆的野獸浮雕：</strong>在右側建於西元 1636 年（明朝崇禎九年）的 Sher-Dor 神學院拱門上，竟然雕刻著兩隻追逐白鹿的神獸（似獅似虎），背後襯托著帶有人臉的太陽！這在嚴格禁止偶像崇拜的伊斯蘭傳統中極為大膽，融合了波斯拜火教的太陽崇拜。<br><br><strong>金庸小說《射鵰英雄傳》的終極決戰地：</strong>對於華語讀者來說，這裡更是金庸筆下郭靖、黃蓉隨成吉思汗西征花剌子模的終極決戰之地——「撒麻爾罕」！西元 1220 年（南宋嘉定十三年），蒙古大軍合圍這座當時花剌子模的帝國新都。小說後半段，黃蓉用風箏「空降奇兵」奇襲此城，而郭靖與「西毒」歐陽鋒著名的「雪山頂三度交手」，背景正是這座古城。站在這個廣場上，小說裡的刀光劍影瞬間在眼前真實上演。'
+      body: '<strong>震撼眼球的「永恆之藍」包圍網：</strong>站在廣闊的廣場中央，環顧三座巨大的神學院，你會被滿城的寶藍磁磚深深震撼。請走向右側的 Sher-Dor（謝爾多爾）神學院，抬頭看看入口巨大拱門上方、左右對稱的彩色浮雕。<br><br><strong>UNESCO 認定的東西方文化十字路口：</strong>這三座神學院建於西元 15 至 17 世紀之間（左側的兀魯伯神學院建於 1420 年，等同於明朝永樂年間，正是明成祖遷都北京、鄭和下西洋的絲路大航海時代）。UNESCO 官方評定撒馬爾罕為「文化交匯的十字路口」。雷吉斯坦廣場傾注了帖木兒文藝復興時期的都市規劃巔峰，其建築工藝更融合了來自中國的陶瓷技術、波斯的鈷藍色料與印度的石雕美學，成為伊斯蘭世界中最具紀念碑意義的公共空間傑作。<br><br><strong>伊斯蘭世界中最叛逆的野獸浮雕：</strong>在右側建於西元 1636 年（明朝崇禎九年）的 Sher-Dor 神學院拱門上，竟然雕刻著兩隻追逐白鹿的神獸（似獅似虎），背後襯托著帶有人臉的太陽！這在嚴格禁止偶像崇拜的伊斯蘭傳統中極為大膽，融合了波斯拜火教的太陽崇拜。'
     },
     shahIZinda: {
       title: '夏赫靜達陵墓群 · 走進一千零一夜的藍色深處',
-      body: '<strong>默數石階的靈魂小考驗：</strong>在踏進那條窄長的藍色峽谷前，請在心中默數腳下的階梯。傳說中，如果你走上去和走下來數到的階梯數完全一致，代表你的靈魂非常純潔。<br><br><strong>流傳千載的「活王之墓」傳說：</strong>這裡最早的陵墓始建於西元 11 世紀（北宋中葉，大約是范仲淹推動慶曆新政、王安石變法的北宋輝煌時期）。相傳先知穆罕默德的堂弟庫薩姆在此傳教時被異教徒斬首，但他抱著自己的頭顱跳入深井中，至今仍隱居地下守護聖地。這條寶藍色的深邃峽谷，是帖木兒大帝家族成員與愛將的長眠處。<br><br><strong>中亞陶藝與釉彩技術的最高巔峰：</strong>UNESCO 指出，夏赫靜達陵墓群完整保留了 14 至 15 世紀（明朝初年）中亞陶藝與建築裝飾技術的演變軌跡。在唐代，撒馬爾罕在中國史書中被稱為康國。這片中亞絲路綠洲孕育了無數唐詩裡的「胡商」、「胡姬」形象；有一派學說認為唐代大詩人李白出生於中亞的碎葉城（今吉爾吉斯托克馬克，與撒馬爾罕分屬不同城市，但同屬絲路文明圈），這個說法至今仍是學界討論的話題。這裡的藍磁磚拼貼技術，更是經由絲路西傳的中國陶瓷燒製技術，與波斯引進的鈷藍原料融合後的頂峰之作。'
+      body: '<strong>默數石階的靈魂小考驗：</strong>在踏進那條窄長的藍色峽谷前，請在心中默數腳下的階梯。傳說中，如果你走上去和走下來數到的階梯數完全一致，代表你的靈魂非常純潔。<br><br><strong>流傳千載的「活王之墓」傳說：</strong>這裡最早的陵墓始建於西元 11 世紀（北宋中葉，大約是范仲淹推動慶曆新政、王安石變法的北宋輝煌時期）。相傳先知穆罕默德的堂弟庫薩姆在此傳教時被異教徒斬首，但他抱著自己的頭顱跳入深井中，至今仍隱居地下守護聖地。這條寶藍色的深邃峽谷，是帖木兒大帝家族成員與愛將的長眠處。<br><br><strong>中亞陶藝與釉彩技術的最高巔峰：</strong>UNESCO 指出，夏赫靜達陵墓群完整保留了 14 至 15 世紀（明朝初年）中亞陶藝與建築裝飾技術的演變軌跡。這裡的藍磁磚拼貼技術，是經由絲路西傳的中國陶瓷燒製技術，與波斯引進的鈷藍原料融合後的頂峰之作，兩座陵墓之間肉眼可辨的色澤差異，正是不同世紀工匠技藝演進的活教材。'
+    },
+    samarkandCity: {
+      title: '撒馬爾罕 · 兩座城市疊出來的絲路傳奇',
+      body: '<strong>先毀滅，才重生的城市：</strong>你即將遊覽的撒馬爾罕，其實是「兩座城市」疊出來的。西元 1220 年（南宋嘉定十三年），成吉思汗的蒙古大軍合圍當時的舊城「阿弗拉西阿卜」，將這座粟特古城徹底夷為平地，居民幾乎逃散一空。舊城從此廢棄，遺址就是今日阿弗拉西阿卜博物館所在的那座山丘。<br><br><strong>金庸小說《射鵰英雄傳》的終極決戰地：</strong>對於華語讀者來說，這場圍城正是金庸筆下郭靖、黃蓉隨成吉思汗西征花剌子模的終極決戰之地——「撒麻爾罕」！小說後半段，黃蓉用風箏「空降奇兵」奇襲此城，而郭靖與「西毒」歐陽鋒著名的「雪山頂三度交手」，背景正是這場圍城戰役。你們接下來幾天遊覽的雷吉斯坦廣場、夏赫靜達陵墓群，其實都還沒在小說描寫的那個年代誕生——它們是舊城覆滅之後，一百多年後才在南邊空地上重新建起的「新城」。<br><br><strong>帖木兒讓廢墟重生為帝國之心：</strong>直到 14 世紀末，帖木兒大帝定都於此，才在舊城以南的空地上打造出我們今天看到的撒馬爾罕——雷吉斯坦廣場最早的建築（兀魯伯神學院）建於 1417-1420 年，距離蒙古大軍毀城已經過了近兩百年。UNESCO 官方評定撒馬爾罕為「文化交匯的十字路口」，正是因為這座城市經歷過從粟特文明的康國、到蒙古鐵騎的廢墟、再到帖木兒帝國藍色心臟的三段生命。'
+    },
+    afrasiyabMuseum: {
+      title: '阿弗拉西阿卜博物館 · 唐詩裡的粟特女子與胡旋舞',
+      body: '<strong>七世紀的外交盛會，畫在牆上：</strong>這座博物館建在撒馬爾罕舊城「阿弗拉西阿卜」遺址上——1220年被成吉思汗徹底摧毀前，這裡就是康國（撒馬爾罕古名）的王城。館內鎮館之寶是1965年出土的7世紀壁畫「大使廳」，畫著各國使節向康國國王瓦爾胡曼進貢覲見的盛大場面：騎駱駝的中國使者捧著絲綢與蠶繭、突厥貴族、朝鮮使節皆入畫中，是粟特文明留給後世最直接的視覺證據。<br><br><strong>康國，唐詩裡「胡商」與「胡姬」的故鄉：</strong>在唐代，撒馬爾罕在中國史書中被稱為康國，是活躍於絲路上的「昭武九姓」粟特城邦之首。這片文明帶孕育了無數唐詩裡的「胡商」、「胡姬」形象——李白曾寫下「胡姬貌如花，當壚笑春風」，那些在長安酒肆裡讓詩人傾倒、擅長歌舞的異域女子，大半就是從這片綠洲沿著絲綢之路一路向東走進大唐。（有一派學說認為李白本人出生於中亞的碎葉城，即今吉爾吉斯托克馬克，與撒馬爾罕分屬不同城市但同屬絲路文明圈，這個說法至今仍是學界討論的話題。）<br><br><strong>胡旋舞：讓長安為之瘋狂的旋轉之舞：</strong>比胡姬更著名的，是唐代風靡一時、瘋狂旋轉的「胡旋舞」——據《舊唐書》記載，胡旋女多半是由康國等昭武九姓進獻入唐，白居易更為此寫下〈胡旋女〉一詩，記錄楊貴妃與安祿山都以此舞技驚豔宮廷、卻也暗喻大唐由盛轉衰：<br><br><span style="display:block;margin:10px 0;padding:12px 16px;background:rgba(212,175,55,0.12);border-left:3px solid var(--uzbek-gold);font-family:\'Noto Serif TC\',serif;font-style:italic;line-height:2;">胡旋女，胡旋女。心應弦，手應鼓。弦鼓一聲雙袖舉，迴雪飄颻轉蓬舞。左旋右轉不知疲，千匝萬周無已時。人間物類無可比，奔車輪緩旋風遲。<br>——胡旋女，出康居，徒勞東來萬里餘。<br><span style="font-size:12px;opacity:0.75;font-style:normal;">白居易〈胡旋女〉節錄</span></span>詩中「康居」正是漢唐時期對這片中亞綠洲的稱呼——你眼前這座博物館所在的土地，正是這千年前旋轉之舞真正的故鄉。<br><br><strong>順帶一提：安史之亂的安祿山</strong>——那個差點終結大唐盛世的安祿山，本姓「康」，父系正是循著「以國為姓」的慣例，血緣上溯至康國（撒馬爾罕）一帶的粟特移民；他的母親據信具有突厥血統，史料上甚至留下她可能是位巫師的記載。不過安祿山本人其實是在唐朝營州柳城（今遼寧朝陽）出生長大的「唐朝人」，只能說是粟特移民第N代，並非在中亞本地出生——這段身世的曖昧與傳奇，可參考〈<a href="https://storystudio.tw/article/gushi/story-story-night-71-an-lushan" target="_blank" rel="noopener" style="color:var(--tile-blue);text-decoration:underline;">故事 StoryStudio：安祿山｜河北選擇了他，他成就了河北</a>〉。'
     },
     gurEAmir: {
-      title: '古爾埃米爾陵墓 · 帝王之墓與「帖木兒的詛咒」',
-      body: '<strong>一代天驕的墨綠色碧玉棺：</strong>走進這座擁有深藍色肋骨狀穹頂的陵墓內部，牆面鋪滿了黃金與青金石裝飾。看向地板中央的石棺群中，那塊罕見、巨大的墨綠色碧玉，那就是帖木兒大帝的墓碑。<br><br><strong>深遠影響後世的帖木兒美學起點：</strong>這座陵墓建於西元 1404 年（明朝永樂二年，明成祖剛登基不久，北京城與紫禁城也正準備動工興建）。在建築史上，古爾埃米爾陵墓的雙層高穹頂與肋骨狀瓦面結構，是中亞乃至波斯伊斯蘭建築的重要里程碑。UNESCO 將其視為後來印度莫臥兒帝國建築（如泰姬瑪哈陵）的直系美學源頭，其空間規劃的對稱性與宏偉尺度，定義了「帖木兒美學」的極致。<br><br><strong>引發第二次世界大戰的神祕詛咒：</strong>這塊碧玉上刻著一句著名的詛咒：「誰若打擾我的安寧，將釋放出比我更可怕的戰爭惡魔。」西元 1941 年 6 月 19 日（民國 30 年，當時台灣處於日治時期的皇民化運動階段），蘇聯考古學家不顧當地人勸阻，執意開棺研究帖木兒遺骸。結果 3 天後的 6 月 22 日，納粹德國便對蘇聯發動了史上規模最大的「巴巴羅薩」侵略戰爭。這個驚人的時間巧合，讓「帖木兒的詛咒」成了絲路上最著名的神祕傳說。<br><br><strong>造紙術西傳的歷史轉折點：</strong>撒馬爾罕與我們最深的歷史連結，就是西元 751 年（唐玄宗天寶十年，爆發安史之亂的前四年）的「怛羅斯之役」。戰役後，大批唐朝造紙工匠被擄至撒馬爾罕，在這裡建立了中亞第一家造紙廠，並由此透過絲路西傳歐洲，改變了世界。你們這趟行程中要去的 Meros 造紙坊，至今仍在用當年唐朝傳下來的桑樹皮手工造紙技術呢！'
+      title: '古爾埃米爾陵墓 · 帖木兒的詛咒與造紙術西傳',
+      body: '<strong>一代天驕的墨綠色碧玉棺：</strong>走進這座擁有深藍色肋骨狀穹頂的陵墓內部，牆面鋪滿了黃金與青金石裝飾。看向地板中央的石棺群中，那塊罕見、巨大的墨綠色碧玉，那就是帖木兒大帝的墓碑。<br><br><strong>深遠影響後世的帖木兒美學起點：</strong>這座陵墓建於西元 1404 年（明朝永樂二年，明成祖剛登基不久，北京城與紫禁城也正準備動工興建）。在建築史上，古爾埃米爾陵墓的雙層高穹頂與肋骨狀瓦面結構，是中亞乃至波斯伊斯蘭建築的重要里程碑。UNESCO 將其視為後來印度莫臥兒帝國建築（如泰姬瑪哈陵）的直系美學源頭，其空間規劃的對稱性與宏偉尺度，定義了「帖木兒美學」的極致。<br><br><strong>引發第二次世界大戰的神祕詛咒：</strong>這塊碧玉上刻著一句著名的詛咒：「誰若打擾我的安寧，將釋放出比我更可怕的戰爭惡魔。」西元 1941 年 6 月 19 日（民國 30 年，當時台灣處於日治時期的皇民化運動階段），蘇聯考古學家不顧當地人勸阻，執意開棺研究帖木兒遺骸。結果 3 天後的 6 月 22 日，納粹德國便對蘇聯發動了史上規模最大的「巴巴羅薩」侵略戰爭。這個驚人的時間巧合，讓「帖木兒的詛咒」成了絲路上最著名的神祕傳說。<br><br><strong>造紙術西傳的歷史轉折點：</strong>撒馬爾罕與這段歷史最深的連結，來自西元 751 年（唐玄宗天寶十年，爆發安史之亂的前四年）的「怛羅斯之役」。這場戰役的戰場其實不在今天的烏茲別克境內，而是在今天哈薩克與吉爾吉斯交界、塔拉茲市附近的塔拉斯河谷，距離撒馬爾罕約250-300公里。相傳戰敗後，大批唐朝造紙工匠被俘虜押送至撒馬爾罕，在這裡建立了中亞第一家造紙廠，技術由此透過絲路西傳歐洲，改變了世界。<br><br>不過這個廣為流傳的故事有個有趣的地方：唐朝正史（新唐書、舊唐書、通典）其實完全沒有記載「戰俘裡有造紙工匠」這件事，最早的記載來自10世紀阿拉伯史學家塔來比（Thaalibi）的著作，直到1928年才被引介進中文學界。學界至今仍有爭論，造紙術西傳的第一站究竟是撒馬爾罕，還是唐朝宗室羲和公主下嫁的拔汗那（今浩罕）——真相或許比故事本身更曲折。行程中安排的 Meros 造紙坊，至今仍在用當年傳下來的桑樹皮手工造紙技術。'
     }
   };
 
@@ -3210,7 +3261,7 @@ function toggleMenu() {
     if (!data) return;
     stopGuideVoice();
     document.getElementById('guideModalTitle').textContent = data.title;
-    document.getElementById('guideModalBody').innerHTML = data.body;
+    renderGuideBody(data.body);
     document.getElementById('guideModalOverlay').classList.add('active');
   }
   function closeGuide() {
@@ -3225,11 +3276,43 @@ function toggleMenu() {
     if (e.key === 'Escape') closeGuide();
   });
 
+  // 把整段導覽文字，依 <strong>小標題</strong> 的分界拆成好幾個小段，
+  // 每一段各自配一顆小圓鈕，可以單獨播放，不用整篇聽到底
+  function renderGuideBody(bodyHtml) {
+    var container = document.getElementById('guideModalBody');
+    container.innerHTML = '';
+    var parts = bodyHtml.split(/(?=<strong>)/);
+    parts.forEach(function (rawPart) {
+      var part = rawPart.replace(/^(<br\s*\/?>\s*)+/, '').replace(/(<br\s*\/?>\s*)+$/, '').trim();
+      if (!part) return;
+
+      var seg = document.createElement('div');
+      seg.className = 'guide-segment';
+
+      var btn = document.createElement('button');
+      btn.className = 'guide-segment-play';
+      btn.innerHTML = '<span class="gsp-icon">▶</span>';
+
+      var textDiv = document.createElement('div');
+      textDiv.className = 'guide-segment-text';
+      textDiv.innerHTML = part;
+
+      btn.addEventListener('click', function () {
+        var text = textDiv.innerText || textDiv.textContent;
+        playSegment(btn, text);
+      });
+
+      seg.appendChild(btn);
+      seg.appendChild(textDiv);
+      container.appendChild(seg);
+    });
+  }
+
   // 語音導覽：優先挑選聽起來像男聲、且音質較好的中文語音，並把音調稍微調低增加低沉感
   // （實際音色仍取決於使用者裝置內建的語音庫，蘋果/安卓/Windows聽起來會不同，
   //  网頁沒有標準化的方式能「強制解鎖」iOS的進階Siri語音，以下是盡力而為的篩選邏輯）
-  var guideVoiceBtn = document.getElementById('guideVoiceBtn');
   var guideUtterance = null;
+  var currentPlayingBtn = null;
 
   function pickNarratorVoice() {
     if (!('speechSynthesis' in window)) return null;
@@ -3263,22 +3346,26 @@ function toggleMenu() {
 
   function stopGuideVoice() {
     if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-    guideVoiceBtn.classList.remove('playing');
-    guideVoiceBtn.querySelector('.gv-label').textContent = '語音導覽';
+    if (currentPlayingBtn) {
+      currentPlayingBtn.classList.remove('playing');
+      currentPlayingBtn.innerHTML = '<span class="gsp-icon">▶</span>';
+      currentPlayingBtn = null;
+    }
   }
 
-  guideVoiceBtn.addEventListener('click', function () {
+  function playSegment(btn, text) {
     if (!('speechSynthesis' in window)) {
       alert('抱歉，這個瀏覽器不支援語音朗讀功能，請直接閱讀文字內容。');
       return;
     }
-    if (guideVoiceBtn.classList.contains('playing')) {
+    // 如果點的是正在播放中的那顆鈕，視為「停止」
+    if (btn === currentPlayingBtn) {
       stopGuideVoice();
       return;
     }
-    var text = document.getElementById('guideModalBody').innerText || document.getElementById('guideModalBody').textContent;
+    stopGuideVoice();
     if (!text) return;
-    window.speechSynthesis.cancel();
+
     guideUtterance = new SpeechSynthesisUtterance(text);
     guideUtterance.lang = 'zh-TW';
     guideUtterance.rate = 1.08;
@@ -3286,12 +3373,14 @@ function toggleMenu() {
     var voice = pickNarratorVoice();
     if (voice) guideUtterance.voice = voice;
 
-    guideVoiceBtn.classList.add('playing');
-    guideVoiceBtn.querySelector('.gv-label').textContent = '暫停朗讀';
+    btn.classList.add('playing');
+    btn.innerHTML = '<span class="gsp-icon">⏸</span>';
+    currentPlayingBtn = btn;
     guideUtterance.onend = function () { stopGuideVoice(); };
     guideUtterance.onerror = function () { stopGuideVoice(); };
     window.speechSynthesis.speak(guideUtterance);
-  });
+  }
+
   // 部分瀏覽器（如 Chrome）語音庫是非同步載入，先觸發一次確保稍後選得到聲音
   if ('speechSynthesis' in window) {
     window.speechSynthesis.getVoices();

@@ -1851,6 +1851,11 @@
     visibility: visible;
     transform: translateY(0);
   }
+  /* 最右邊的選單（實用資訊）如果還是貼左展開，選單本身會超出視窗右邊界，改成貼右邊界展開 */
+  .dn-dropdown:last-child .dn-dropdown-menu {
+    left: auto;
+    right: 0;
+  }
   .dn-dropdown-menu a {
     display: block;
     padding: 9px 18px;

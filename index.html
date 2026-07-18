@@ -7,6 +7,8 @@
 <meta property="og:description" content="11天的絲路之旅，穿越三千年的永恆之藍，走進希瓦、布哈拉與撒馬爾罕的史詩篇章。">
 <meta property="og:image" content="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcQI6hW0Wt0nJFa8UgkNgflihu4x3ckoM9bIKWu0P6R64WxpRlIjQyrarnsQZDD3bPlcLeVKkQpJ-oDHNfQnBCipSMU&s=19">
 <title>Uzbekistan · 烏茲別克絲路 11 天行程</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
 <!-- ===== PWA 設定 ===== -->
 <link rel="manifest" href="manifest.json">
@@ -2309,12 +2311,7 @@
     </div>
   </div>
 
-  <div id="route-map">
-    <picture>
-      <source srcset="assets/route-map.webp" type="image/webp">
-      <img src="assets/route-map-fallback.jpg" alt="烏茲別克行程地圖：塔什干、希瓦、布哈拉、撒馬爾罕的路線與交通方式" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block;">
-    </picture>
-  </div>
+  <div id="route-map"></div>
   <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:10px;font-family:'Manrope',sans-serif;font-size:12px;color:var(--earth-brown);">
     <span>🛫 國內線班機</span>
     <span>🚌 包車</span>
@@ -3310,6 +3307,123 @@
   <p style="margin-top:8px;opacity:0.6;font-size:12px;">9月18日 — 9月28日 · 塔什干 · 希瓦 · 布哈拉 · 撒馬爾罕</p>
 </footer>
 
+<script>
+  var map = L.map('route-map').setView([40.5, 64.5], 6);
+
+  // 加上 referrerPolicy，確保瀏覽器會帶出來源網址給 OSM 圖磚伺服器，
+  // 符合 OSM 官方圖磚政策的要求（沒有可辨識的 Referer 會被判定為不明來源請求而擋掉）
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    referrerPolicy: 'origin'
+  }).addTo(map);
+
+  var locations = [
+    { name: "塔什干 Tashkent", day: "Day 1 · 10–11", coords: [41.2995, 69.2401], color: "#1E3A5F" },
+    { name: "希瓦 Khiva",      day: "Day 2–3",       coords: [41.3775, 60.3589], color: "#C9973A" },
+    { name: "布哈拉 Bukhara",  day: "Day 4–6",       coords: [39.7747, 64.4286], color: "#A8322A" },
+    { name: "撒馬爾罕 Samarkand", day: "Day 7–9",    coords: [39.6270, 66.9750], color: "#5A30A0" },
+    { name: "塔什干 Tashkent", day: "Day 10–11",     coords: [41.2995, 69.2401], color: "#1E3A5F" }
+  ];
+
+  var latlngs = locations.map(function(loc) { return loc.coords; });
+
+  // 依交通方式分段繪製路線（塔什干→希瓦：飛機／希瓦→布哈拉：包車／布哈拉→撒馬爾罕：高鐵／撒馬爾罕→塔什干：包車）
+  var segments = [
+    { from: locations[0], to: locations[1], mode: "flight", icon: "🛫", color: "#1E3A5F", facing: "right" },
+    { from: locations[1], to: locations[2], mode: "car",    icon: "🚌", color: "#C9973A", facing: "left" },
+    { from: locations[2], to: locations[3], mode: "train",  icon: "🚄", color: "#00A9B8", facing: "left" },
+    { from: locations[3], to: locations[4], mode: "car",    icon: "🚌", color: "#C9973A", facing: "left" }
+  ];
+
+  segments.forEach(function(seg) {
+    L.polyline([seg.from.coords, seg.to.coords], {
+      color: seg.color,
+      weight: 4,
+      opacity: 0.85,
+      dashArray: '1, 10',
+      lineCap: 'round'
+    }).addTo(map);
+
+    var midLat = (seg.from.coords[0] + seg.to.coords[0]) / 2;
+    var midLng = (seg.from.coords[1] + seg.to.coords[1]) / 2;
+
+    // 大多數交通工具 emoji 預設朝左，往東（經度增加）移動時左右鏡射使其朝向正確的行進方向
+    // 交通工具 emoji 預設朝向不同：🚌🚄 預設朝左、🛫 預設朝右，需分別判斷是否需要鏡射以符合實際行進方向
+    var movingEast = seg.to.coords[1] > seg.from.coords[1];
+    var needsFlip = seg.facing === 'right' ? !movingEast : movingEast;
+    var flipStyle = needsFlip ? 'display:inline-block;transform:scaleX(-1);' : 'display:inline-block;';
+
+    var modeIcon = L.divIcon({
+      className: '',
+      html: '<div style="' +
+        'width:30px;height:30px;' +
+        'background:#fff;' +
+        'border:2px solid ' + seg.color + ';' +
+        'border-radius:50%;' +
+        'display:flex;align-items:center;justify-content:center;' +
+        'font-size:15px;' +
+        'box-shadow:0 2px 6px rgba(0,0,0,0.25);' +
+        '"><span style="' + flipStyle + '">' + seg.icon + '</span></div>',
+      iconSize: [30, 30],
+      iconAnchor: [15, 15]
+    });
+
+    L.marker([midLat, midLng], { icon: modeIcon, zIndexOffset: 500 }).addTo(map);
+  });
+
+  locations.forEach(function(loc, index) {
+    if (index === locations.length - 1) return; // skip duplicate Tashkent end point
+
+    // Solid dot marker
+    var dotIcon = L.divIcon({
+      className: '',
+      html: '<div style="' +
+        'width:14px;height:14px;' +
+        'background:' + loc.color + ';' +
+        'border-radius:50%;' +
+        'border:3px solid #fff;' +
+        'box-shadow:0 2px 6px rgba(0,0,0,0.35);' +
+        '"></div>',
+      iconSize: [14, 14],
+      iconAnchor: [7, 7]
+    });
+
+    // City name label (offset above the dot)
+    var labelIcon = L.divIcon({
+      className: '',
+      html: '<div style="' +
+        'background:rgba(255,255,255,0.92);' +
+        'color:' + loc.color + ';' +
+        'font-family:\'Noto Sans TC\',sans-serif;' +
+        'font-size:11px;' +
+        'font-weight:700;' +
+        'padding:2px 8px;' +
+        'border-radius:4px;' +
+        'white-space:nowrap;' +
+        'text-align:center;' +
+        'display:inline-block;' +
+        'transform:translateX(-50%);' +
+        'box-shadow:0 1px 4px rgba(0,0,0,0.15);' +
+        'pointer-events:none;' +
+        '">' + loc.name + '</div>',
+      iconSize: [0, 0],
+      iconAnchor: [0, 26]  // label floats above the dot
+    });
+
+    L.marker(loc.coords, { icon: dotIcon }).addTo(map)
+      .bindPopup(
+        '<div style="font-family:\'Noto Serif TC\',serif;min-width:160px;">' +
+        '<strong style="color:' + loc.color + ';font-size:14px;">' + loc.name + '</strong><br>' +
+        '<span style="font-size:12px;color:#888;">' + loc.day + '</span>' +
+        '</div>'
+      );
+
+    L.marker(loc.coords, { icon: labelIcon, interactive: false }).addTo(map);
+  });
+
+  map.fitBounds(L.polyline(latlngs).getBounds(), {padding: [40, 50]});
+</script>
+
 <nav class="mobile-tabbar" id="mobileTabbar">
   <a href="#intro" class="mtb-item" data-tabkey="intro">
     <svg class="mtb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M4.5 7.5h15M4.5 16.5h15"/></svg>
@@ -3423,6 +3537,11 @@
       document.querySelectorAll('[data-tabkey]').forEach(function (el) {
         el.classList.toggle('nav-current', el.dataset.tabkey === tabKey);
       });
+      // 地圖（route-map）在還沒切到「行程規劃」分頁前是 display:none，Leaflet 抓不到容器尺寸，
+      // 切過去時要手動重新計算一次，不然地圖會空白或錯位
+      if (tabKey === 'trip' && window.map && typeof window.map.invalidateSize === 'function') {
+        setTimeout(function () { window.map.invalidateSize(); }, 60);
+      }
       return tabKey;
     }
 

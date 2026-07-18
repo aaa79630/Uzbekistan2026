@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta property="og:title" content="2026烏茲別克絲路之旅">
 <meta property="og:description" content="11天的絲路之旅，穿越三千年的永恆之藍，走進希瓦、布哈拉與撒馬爾罕的史詩篇章。">
 <meta property="og:image" content="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcQI6hW0Wt0nJFa8UgkNgflihu4x3ckoM9bIKWu0P6R64WxpRlIjQyrarnsQZDD3bPlcLeVKkQpJ-oDHNfQnBCipSMU&s=19">
@@ -16,9 +16,7 @@
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="烏茲別克2026">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<meta name="apple-mobile-web-app-title" content="烏茲別克旅行指南">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -399,10 +397,15 @@
 
   #route-map {
     width: 100%;
-    height: 350px;
-    border-radius: 8px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
     border: 1px solid var(--line);
     margin-bottom: 30px;
+    overflow: hidden;
+    background: var(--sand);
     z-index: 1;
   }
 
@@ -1432,7 +1435,7 @@
   .accom-confirmed .ac-code { color: #666; font-size: 12px; display: block; margin-top: 2px; }
   .accom-confirmed .ac-note { display: block; color: #888; font-size: 11px; margin-top: 4px; }
   /* ===== Flight Info ===== */
-  .flight-section { padding: 50px 40px 0; max-width: 1200px; margin: 0 auto; }
+  .flight-section { padding: 50px 40px 40px; max-width: 1200px; margin: 0 auto; }
   .flight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-top: 24px; }
   .flight-card { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 22px; display: flex; flex-direction: column; gap: 8px; }
   @media (max-width: 600px) {
@@ -1611,6 +1614,18 @@
     max-width: 100%;
   }
 
+/* ===== 分頁系統：依 data-tab 屬性顯示/隱藏內容 ===== */
+  [data-tab] { display: none; }
+  [data-tab].tab-active { display: block; }
+
+  /* 導覽列目前所在分頁的標示 */
+  .dn-links > a.nav-current, .dn-dropdown-label.nav-current {
+    background: var(--turquoise-light);
+    color: var(--turquoise);
+  }
+  .mtb-item.nav-current { color: var(--tile-blue); }
+  .mtb-item.nav-current .mtb-icon { stroke: var(--tile-blue); }
+
 /* ===== 手機版底部固定導覽列 ===== */
   .mobile-tabbar {
     position: fixed;
@@ -1619,6 +1634,7 @@
     right: 0;
     display: none;
     height: 60px;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
     background: #fff;
     border-top: 1px solid var(--line);
     box-shadow: 0 -4px 16px rgba(30,58,95,0.08);
@@ -1644,7 +1660,10 @@
   .mtb-popup-overlay {
     display: none;
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: calc(60px + env(safe-area-inset-bottom, 0px)); /* 蓋到導覽列上緣為止，避免蓋住導覽列本身讓圖示點不到 */
     background: rgba(26,20,16,0.35);
     z-index: 2001;
   }
@@ -1653,7 +1672,7 @@
   .mtb-popup {
     display: none;
     position: fixed;
-    bottom: 60px;
+    bottom: calc(60px + env(safe-area-inset-bottom, 0px));
     left: 0;
     right: 0;
     background: #fff;
@@ -1681,7 +1700,7 @@
   .back-to-top {
     position: fixed;
     right: 14px;
-    bottom: 72px;
+    bottom: calc(72px + env(safe-area-inset-bottom, 0px));
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -1704,7 +1723,7 @@
 
   @media (max-width: 1080px) {
     .mobile-tabbar { display: flex; }
-    body.has-desktop-nav { padding-bottom: 60px; }
+    body.has-desktop-nav { padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px)); }
   }
   @media (min-width: 1081px) {
     .mobile-tabbar, .mtb-popup, .mtb-popup-overlay, .back-to-top { display: none !important; }
@@ -1974,25 +1993,7 @@
     }
     
   #intro .info-grid {
-    display: flex !important;      /* 將格狀佈局切換為橫向排列 */
-    overflow-x: auto;             /* 開啟橫向溢出捲動 */
-    scroll-snap-type: x mandatory; /* 啟動自動對齊（最關鍵的 Carousel 效果） */
-    gap: 16px;                     /* 卡片間距 */
-    padding: 15px 5px;             /* 留一點空間給陰影，避免被切掉 */
-    scrollbar-width: none;         /* 隱藏橫向捲軸 (Firefox) */
-    -webkit-overflow-scrolling: touch; /* 讓 iOS 滑動更滑順 */
-  }
-
-  /* 隱藏橫向捲軸 (Chrome, Safari) */
-  #intro .info-grid::-webkit-scrollbar {
-    display: none;
-  }
-
-  #intro .info-card-new {
-    flex: 0 0 85%;                 /* 每張卡片佔螢幕寬度 85%，刻意露出下一張的邊緣提示可以滑動 */
-    scroll-snap-align: center;     /* 滑動停止後自動對齊中心 */
-    margin-bottom: 0;              /* 取消原本的底部間距 */
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* 增加一點陰影層次感 */
+    grid-template-columns: 1fr;    /* 分頁化後 intro 頁面已經夠短，改回直式堆疊，不用橫滑 carousel */
   }
 
   /* ===== 住宿 Carousel ===== */
@@ -2063,9 +2064,9 @@
   <div class="dn-inner">
     <a href="#hero" class="dn-brand">🇺🇿 烏茲別克絲路之旅</a>
     <div class="dn-links">
-      <a href="#intro">認識烏茲別克</a>
+      <a href="#intro" data-tabkey="intro">認識烏茲別克</a>
       <div class="dn-dropdown">
-        <span class="dn-dropdown-label">行前準備 ▾</span>
+        <span class="dn-dropdown-label" data-tabkey="prep">行前準備 ▾</span>
         <div class="dn-dropdown-menu">
           <a href="#flights">航班資訊</a>
           <a href="#visa">簽證指南</a>
@@ -2074,7 +2075,7 @@
         </div>
       </div>
       <div class="dn-dropdown">
-        <span class="dn-dropdown-label">行程規劃 ▾</span>
+        <span class="dn-dropdown-label" data-tabkey="trip">行程規劃 ▾</span>
         <div class="dn-dropdown-menu">
           <a href="#route">路線規劃</a>
           <a href="#day1">Day1・塔什干</a>
@@ -2086,7 +2087,7 @@
         </div>
       </div>
       <div class="dn-dropdown">
-        <span class="dn-dropdown-label">實用資訊 ▾</span>
+        <span class="dn-dropdown-label" data-tabkey="info">實用資訊 ▾</span>
         <div class="dn-dropdown-menu">
           <a href="#practical">換匯 / 網卡 / 交通</a>
           <a href="#currency">匯率換算機</a>
@@ -2104,19 +2105,13 @@
     <div class="eyebrow">Silk Road Journey · 烏茲別克</div>
     <h1 class="hero-title">Uzbekistan<span class="zh">11天絲路之旅</span></h1>
     <p class="hero-sub">穿越三千年的永恆之藍，走進希瓦、布哈拉與撒馬爾罕的史詩篇章。</p>
-    <div class="hero-meta" style="grid-template-columns: auto;">
-      <div class="meta-item">
-        <div class="meta-label">Duration</div>
-        <div class="meta-value" style="white-space:nowrap;">11 Days <small>/ 2026年9月18日–28日</small></div>
-      </div>
-    </div>
   </div>
   <div style="position:absolute;bottom:10px;right:16px;font-family:'Manrope',sans-serif;font-size:10px;color:rgba(30,58,95,0.5);">
     Photo by <a href="https://unsplash.com/@demac_csgo" target="_blank" rel="noopener" style="color:inherit;">Ozodbek Erkinov</a> on <a href="https://unsplash.com" target="_blank" rel="noopener" style="color:inherit;">Unsplash</a>
   </div>
 </section>
 
-<section class="flight-section" id="flights">
+<section class="flight-section" id="flights" data-tab="prep">
   <div class="section-label">Flights / 已訂航班</div>
   <h2 class="section-title" style="font-size:28px;">✈️ 航班資訊</h2>
   <div class="flight-grid">
@@ -2147,7 +2142,7 @@
   </div>
 </section>
 
-<section class="added-info" id="intro">
+<section class="added-info" id="intro" data-tab="intro">
   <h2>🇺🇿 認識烏茲別克</h2>
   
   <div class="intro-quote">
@@ -2182,7 +2177,7 @@
     </div>
 
     <div class="info-card-new">
-      <h4>🏛️ 值得一去的看點</h4>
+      <h4>🏛️ 旅行亮點</h4>
       <ul>
         <li>全球保存最完整的中世紀伊斯蘭古城群</li>
         <li>雷吉斯坦廣場：人類建築史上最壯麗廣場之一</li>
@@ -2206,10 +2201,15 @@
     </div>
   </div>
 
+  <div style="text-align:center;margin-top:30px;padding-top:30px;border-top:1px solid var(--line);">
+    <a href="#trip" style="display:inline-flex;align-items:center;gap:8px;background:var(--persian-blue);color:#fff;padding:14px 28px;border-radius:30px;text-decoration:none;font-family:'Noto Sans TC',sans-serif;font-size:15px;font-weight:700;box-shadow:0 6px 18px rgba(30,58,95,0.25);">
+      查看行程安排 <span style="font-size:18px;">→</span>
+    </a>
+  </div>
 
 </section>
 
-<section class="overview" id="route">
+<section class="overview" id="route" data-tab="trip">
   <div class="section-label">Route Overview / 路線規劃</div>
   <h2 class="section-title">The Silk Road Loop</h2>
   <div class="route-timeline">
@@ -2309,7 +2309,12 @@
     </div>
   </div>
 
-  <div id="route-map"></div>
+  <div id="route-map">
+    <picture>
+      <source srcset="assets/route-map.webp" type="image/webp">
+      <img src="assets/route-map-fallback.jpg" alt="烏茲別克行程地圖：塔什干、希瓦、布哈拉、撒馬爾罕的路線與交通方式" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block;">
+    </picture>
+  </div>
   <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:10px;font-family:'Manrope',sans-serif;font-size:12px;color:var(--earth-brown);">
     <span>🛫 國內線班機</span>
     <span>🚌 包車</span>
@@ -2326,7 +2331,7 @@
   </div>
 </section>
 
-<section class="days" id="itinerary">
+<section class="days" id="itinerary" data-tab="trip">
 
   <div class="day-card" id="day1">
     <div class="day-info">
@@ -2672,7 +2677,7 @@
     </div>
   </div>
 </section>
-<section class="accommodation" id="lodging">
+<section class="accommodation" id="lodging" data-tab="trip">
   <div class="accom-inner">
     <div class="section-label">Accommodation / 住宿規劃</div>
     <h2 class="section-title">住宿安排</h2>
@@ -2790,7 +2795,7 @@
   </div>
 </section>
 
-<section class="visa-section" id="visa">
+<section class="visa-section" id="visa" data-tab="prep">
   <div class="visa-inner">
     <div class="section-label">Visa Guide / 簽證指南</div>
     <h2 class="section-title">台灣人辦簽證</h2>
@@ -2850,7 +2855,7 @@
   </div>
 </section>
 
-<section class="practical" id="practical">
+<section class="practical" id="practical" data-tab="info">
   <div class="section-label">Practical Info / 實用資訊</div>
   <h2 class="section-title">換匯 · 網卡 · 交通</h2>
 
@@ -2950,7 +2955,7 @@
   </div>
 </section>
 
-<section class="practical" id="currency">
+<section class="practical" id="currency" data-tab="info">
   <div class="section-label">Currency / 換算匯率</div>
   <h2 class="section-title" style="margin-bottom:10px;">即時換匯小工具</h2>
   <p style="font-size:14px;color:var(--earth-brown);margin-bottom:20px;">輸入任一欄位金額，其他兩欄會自動換算；也可以直接輸入算式（例如 150000/4 分帳、5000*6 算總價），按 Enter 或點掉欄位即可算出結果。抓不到即時匯率時會改用參考匯率備援。</p>
@@ -2973,7 +2978,7 @@
   <div class="currency-status" id="currencyStatus">正在載入即時匯率...</div>
 </section>
 
-<section class="practical" id="weather">
+<section class="practical" id="weather" data-tab="info">
   <div class="section-label">Weather / 天氣預報</div>
   <h2 class="section-title" style="margin-bottom:10px;">當地天氣預報</h2>
   <p style="font-size:14px;color:var(--earth-brown);margin-bottom:20px;">資料來源 Open-Meteo，出發前約2週內打開會顯示實際預報，太早查看只能先參考當下天氣當作氣候概況。</p>
@@ -3024,7 +3029,7 @@
   </div>
 </section>
 
-<section class="practical" id="phrases">
+<section class="practical" id="phrases" data-tab="info">
   <div class="section-label">Language / 實用會話</div>
   <h2 class="section-title" style="margin-bottom:10px;">旅遊實用短句</h2>
   <p style="font-size:14px;color:var(--earth-brown);margin-bottom:8px;">烏茲別克官方語言是烏茲別克語，但<strong>俄語在市集、餐廳、司機之間更通用</strong>，建議優先學俄語短句；主要城市飯店/餐廳/景點通常有基本英文，但路牌菜單招牌幾乎只有俄文或烏茲別克文，市集、司機、年長者英文較少，撒馬爾罕、布哈拉、希瓦則有會講英文的觀光警察可求助。每句均附羅馬拼音、「空耳」中文注音及 🔊 發音按鈕。</p>
@@ -3216,7 +3221,7 @@
 </section>
 
 <!-- ===== 新增：攜帶清單勾選區塊 ===== -->
-<section class="packing-section" id="packing">
+<section class="packing-section" id="packing" data-tab="prep">
   <div class="packing-inner">
     <div class="section-label">Packing List / 準備清單</div>
     <h2 class="section-title">行李必備清單</h2>
@@ -3264,7 +3269,7 @@
   </div>
 </section>
 
-<section class="notes" id="checklist">
+<section class="notes" id="checklist" data-tab="prep">
   <div class="notes-inner">
     <div class="section-label" style="color: var(--uzbek-gold)">Essentials / 行前清單</div>
     <h2 class="section-title" style="color:#fff;">出發前確認事項</h2>
@@ -3305,133 +3310,20 @@
   <p style="margin-top:8px;opacity:0.6;font-size:12px;">9月18日 — 9月28日 · 塔什干 · 希瓦 · 布哈拉 · 撒馬爾罕</p>
 </footer>
 
-<script>
-  var map = L.map('route-map').setView([40.5, 64.5], 6);
-
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-  }).addTo(map);
-
-  var locations = [
-    { name: "塔什干 Tashkent", day: "Day 1 · 10–11", coords: [41.2995, 69.2401], color: "#1E3A5F" },
-    { name: "希瓦 Khiva",      day: "Day 2–3",       coords: [41.3775, 60.3589], color: "#C9973A" },
-    { name: "布哈拉 Bukhara",  day: "Day 4–6",       coords: [39.7747, 64.4286], color: "#A8322A" },
-    { name: "撒馬爾罕 Samarkand", day: "Day 7–9",    coords: [39.6270, 66.9750], color: "#5A30A0" },
-    { name: "塔什干 Tashkent", day: "Day 10–11",     coords: [41.2995, 69.2401], color: "#1E3A5F" }
-  ];
-
-  var latlngs = locations.map(function(loc) { return loc.coords; });
-
-  // 依交通方式分段繪製路線（塔什干→希瓦：飛機／希瓦→布哈拉：包車／布哈拉→撒馬爾罕：高鐵／撒馬爾罕→塔什干：包車）
-  var segments = [
-    { from: locations[0], to: locations[1], mode: "flight", icon: "🛫", color: "#1E3A5F", facing: "right" },
-    { from: locations[1], to: locations[2], mode: "car",    icon: "🚌", color: "#C9973A", facing: "left" },
-    { from: locations[2], to: locations[3], mode: "train",  icon: "🚄", color: "#00A9B8", facing: "left" },
-    { from: locations[3], to: locations[4], mode: "car",    icon: "🚌", color: "#C9973A", facing: "left" }
-  ];
-
-  segments.forEach(function(seg) {
-    L.polyline([seg.from.coords, seg.to.coords], {
-      color: seg.color,
-      weight: 4,
-      opacity: 0.85,
-      dashArray: '1, 10',
-      lineCap: 'round'
-    }).addTo(map);
-
-    var midLat = (seg.from.coords[0] + seg.to.coords[0]) / 2;
-    var midLng = (seg.from.coords[1] + seg.to.coords[1]) / 2;
-
-    // 大多數交通工具 emoji 預設朝左，往東（經度增加）移動時左右鏡射使其朝向正確的行進方向
-    // 交通工具 emoji 預設朝向不同：🚌🚄 預設朝左、🛫 預設朝右，需分別判斷是否需要鏡射以符合實際行進方向
-    var movingEast = seg.to.coords[1] > seg.from.coords[1];
-    var needsFlip = seg.facing === 'right' ? !movingEast : movingEast;
-    var flipStyle = needsFlip ? 'display:inline-block;transform:scaleX(-1);' : 'display:inline-block;';
-
-    var modeIcon = L.divIcon({
-      className: '',
-      html: '<div style="' +
-        'width:30px;height:30px;' +
-        'background:#fff;' +
-        'border:2px solid ' + seg.color + ';' +
-        'border-radius:50%;' +
-        'display:flex;align-items:center;justify-content:center;' +
-        'font-size:15px;' +
-        'box-shadow:0 2px 6px rgba(0,0,0,0.25);' +
-        '"><span style="' + flipStyle + '">' + seg.icon + '</span></div>',
-      iconSize: [30, 30],
-      iconAnchor: [15, 15]
-    });
-
-    L.marker([midLat, midLng], { icon: modeIcon, zIndexOffset: 500 }).addTo(map);
-  });
-
-  locations.forEach(function(loc, index) {
-    if (index === locations.length - 1) return; // skip duplicate Tashkent end point
-
-    // Solid dot marker
-    var dotIcon = L.divIcon({
-      className: '',
-      html: '<div style="' +
-        'width:14px;height:14px;' +
-        'background:' + loc.color + ';' +
-        'border-radius:50%;' +
-        'border:3px solid #fff;' +
-        'box-shadow:0 2px 6px rgba(0,0,0,0.35);' +
-        '"></div>',
-      iconSize: [14, 14],
-      iconAnchor: [7, 7]
-    });
-
-    // City name label (offset above the dot)
-    var labelIcon = L.divIcon({
-      className: '',
-      html: '<div style="' +
-        'background:rgba(255,255,255,0.92);' +
-        'color:' + loc.color + ';' +
-        'font-family:\'Noto Sans TC\',sans-serif;' +
-        'font-size:11px;' +
-        'font-weight:700;' +
-        'padding:2px 8px;' +
-        'border-radius:4px;' +
-        'white-space:nowrap;' +
-        'text-align:center;' +
-        'display:inline-block;' +
-        'transform:translateX(-50%);' +
-        'box-shadow:0 1px 4px rgba(0,0,0,0.15);' +
-        'pointer-events:none;' +
-        '">' + loc.name + '</div>',
-      iconSize: [0, 0],
-      iconAnchor: [0, 26]  // label floats above the dot
-    });
-
-    L.marker(loc.coords, { icon: dotIcon }).addTo(map)
-      .bindPopup(
-        '<div style="font-family:\'Noto Serif TC\',serif;min-width:160px;">' +
-        '<strong style="color:' + loc.color + ';font-size:14px;">' + loc.name + '</strong><br>' +
-        '<span style="font-size:12px;color:#888;">' + loc.day + '</span>' +
-        '</div>'
-      );
-
-    L.marker(loc.coords, { icon: labelIcon, interactive: false }).addTo(map);
-  });
-
-  map.fitBounds(L.polyline(latlngs).getBounds(), {padding: [40, 50]});
-</script>
 <nav class="mobile-tabbar" id="mobileTabbar">
-  <a href="#intro" class="mtb-item">
+  <a href="#intro" class="mtb-item" data-tabkey="intro">
     <svg class="mtb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M4.5 7.5h15M4.5 16.5h15"/></svg>
     <span class="mtb-label">烏茲概覽</span>
   </a>
-  <div class="mtb-item mtb-toggle" data-popup="mtbPopupPrep">
+  <div class="mtb-item mtb-toggle" data-popup="mtbPopupPrep" data-tabkey="prep">
     <svg class="mtb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M4 13h16"/></svg>
     <span class="mtb-label">行前準備</span>
   </div>
-  <div class="mtb-item mtb-toggle" data-popup="mtbPopupItinerary">
+  <div class="mtb-item mtb-toggle" data-popup="mtbPopupItinerary" data-tabkey="trip">
     <svg class="mtb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="16" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/><circle cx="8" cy="14.5" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="14.5" r="1" fill="currentColor" stroke="none"/><circle cx="16" cy="14.5" r="1" fill="currentColor" stroke="none"/></svg>
     <span class="mtb-label">行程規劃</span>
   </div>
-  <div class="mtb-item mtb-toggle" data-popup="mtbPopupInfo">
+  <div class="mtb-item mtb-toggle" data-popup="mtbPopupInfo" data-tabkey="info">
     <svg class="mtb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="7.7" r="1.2" fill="currentColor" stroke="none"/><path d="M12 11v5.5"/></svg>
     <span class="mtb-label">實用資訊</span>
   </div>
@@ -3504,6 +3396,102 @@
     backToTop.addEventListener('click', function () {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+  })();
+</script>
+
+<script>
+  // ===== 分頁系統：用 data-tab 屬性切換內容區塊，取代原本的長捲動頁面 =====
+  (function () {
+    // 每個錨點 id 對應的分頁
+    var ANCHOR_TAB = {
+      intro: 'intro',
+      flights: 'prep', visa: 'prep', packing: 'prep', checklist: 'prep',
+      route: 'trip', itinerary: 'trip', lodging: 'trip',
+      day1: 'trip', 'day2-3': 'trip', 'day4-6': 'trip', 'day7-9': 'trip', 'day10-11': 'trip',
+      practical: 'info', currency: 'info', weather: 'info', phrases: 'info'
+    };
+    var TAB_KEYS = ['intro', 'prep', 'trip', 'info'];
+    var DEFAULT_TAB = 'intro';
+    var currentTab = DEFAULT_TAB;
+
+    function setActiveTab(tabKey) {
+      if (TAB_KEYS.indexOf(tabKey) === -1) tabKey = DEFAULT_TAB;
+      currentTab = tabKey;
+      document.querySelectorAll('[data-tab]').forEach(function (el) {
+        el.classList.toggle('tab-active', el.dataset.tab === tabKey);
+      });
+      document.querySelectorAll('[data-tabkey]').forEach(function (el) {
+        el.classList.toggle('nav-current', el.dataset.tabkey === tabKey);
+      });
+      return tabKey;
+    }
+
+    // 導覽到某個 id：可能是分頁本身（intro/prep/trip/info），也可能是分頁裡的小節錨點
+    function goTo(id, opts) {
+      opts = opts || {};
+      if (!id) { setActiveTab(DEFAULT_TAB); return; }
+      if (id === 'hero') {
+        window.scrollTo({ top: 0, behavior: opts.smooth === false ? 'auto' : 'smooth' });
+        return;
+      }
+      var tabKey = TAB_KEYS.indexOf(id) !== -1 ? id : (ANCHOR_TAB[id] || DEFAULT_TAB);
+      setActiveTab(tabKey);
+      if (!history.replaceState) return;
+      history.replaceState(null, '', '#' + id);
+
+      // 分頁本身（沒有指定小節）：捲到頁面最上方
+      if (TAB_KEYS.indexOf(id) !== -1) {
+        window.scrollTo({ top: 0, behavior: opts.smooth === false ? 'auto' : 'smooth' });
+        return;
+      }
+      // 有指定小節錨點：等內容顯示出來後再捲過去
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          var el = document.getElementById(id);
+          if (el) el.scrollIntoView({ behavior: opts.smooth === false ? 'auto' : 'smooth', block: 'start' });
+        });
+      });
+    }
+
+    // 攔截整頁內部錨點連結（導覽列、分頁跳轉按鈕等）
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      var id = a.getAttribute('href').slice(1);
+      e.preventDefault();
+      goTo(id);
+    });
+
+    // 手機底部導覽列的分類圖示：如果是切到不同分頁，切換並捲回頂部；
+    // 如果本來就在這個分頁，只讓原本的彈出選單開啟，不要再強制捲動
+    document.querySelectorAll('.mtb-toggle[data-tabkey]').forEach(function (toggle) {
+      toggle.addEventListener('click', function () {
+        if (toggle.dataset.tabkey !== currentTab) {
+          goTo(toggle.dataset.tabkey);
+        }
+      });
+    });
+
+    // 桌機導覽列的分類標籤（行前準備／行程規劃／實用資訊）：同上，只有真的換分頁才捲動
+    document.querySelectorAll('.dn-dropdown-label[data-tabkey]').forEach(function (label) {
+      label.addEventListener('click', function () {
+        if (label.dataset.tabkey !== currentTab) {
+          goTo(label.dataset.tabkey);
+        }
+      });
+    });
+
+    window.addEventListener('hashchange', function () {
+      goTo(location.hash.slice(1), { smooth: false });
+    });
+
+    // 初始載入：依網址 hash 決定顯示哪個分頁，沒有 hash 就顯示預設分頁
+    var initialId = location.hash ? location.hash.slice(1) : '';
+    if (initialId) {
+      goTo(initialId, { smooth: false });
+    } else {
+      setActiveTab(DEFAULT_TAB);
+    }
   })();
 </script>
 

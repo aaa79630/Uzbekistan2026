@@ -2,7 +2,7 @@
 // 策略：Network-first —— 有網路一律先抓最新版本，只有離線/斷線時才用快取備援
 // 每次「大幅」更新內容（例如新增/刪除頁面檔案）時，建議把 CACHE_VERSION 往上加一版，
 // 讓舊快取自動清掉；單純改文字內容不需要改版號，因為有網路時本來就會抓最新的。
-const CACHE_VERSION = 'v1';
+const CACHE_VERSION = 'v2';
 const CACHE_NAME = 'uzbekistan-trip-' + CACHE_VERSION;
 
 // 開頁時預先快取的「基本骨架」，離線時至少能開起來
@@ -11,7 +11,9 @@ const PRECACHE_URLS = [
   './index.html',
   './manifest.json',
   './icons/icon-192.png',
-  './icons/icon-512.png'
+  './icons/icon-512.png',
+  './assets/route-map.webp',
+  './assets/route-map-fallback.jpg'
 ];
 
 self.addEventListener('install', function (event) {

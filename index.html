@@ -2445,7 +2445,7 @@
       </div>
       <div class="day-map">
         <div class="day-map-label"><span class="title">📍 希瓦景點地圖</span><span class="hint">可拖曳縮放，點左上角圖示切換圖層／景點清單</span></div>
-        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=1QFySfFlIOixmV0sXCliktt_wXIun7yE&ll=41.3775%2C60.3589&z=13" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
+        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=1QFySfFlIOixmV0sXCliktt_wXIun7yE&ll=41.3775%2C60.3589&z=15" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
       </div>
     </div>
   </div>
@@ -2523,7 +2523,7 @@
       </div>
       <div class="day-map">
         <div class="day-map-label"><span class="title">📍 布哈拉景點地圖</span><span class="hint">可拖曳縮放，點左上角圖示切換圖層／景點清單</span></div>
-        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=1QFySfFlIOixmV0sXCliktt_wXIun7yE&ll=39.7747%2C64.4286&z=13" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
+        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=1QFySfFlIOixmV0sXCliktt_wXIun7yE&ll=39.7747%2C64.4286&z=15" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
       </div>
     </div>
   </div>
@@ -2607,7 +2607,7 @@
       </div>
       <div class="day-map">
         <div class="day-map-label"><span class="title">📍 撒馬爾罕景點地圖</span><span class="hint">可拖曳縮放，點左上角圖示切換圖層／景點清單</span></div>
-        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=1QFySfFlIOixmV0sXCliktt_wXIun7yE&ll=39.6550%2C66.9820&z=13" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
+        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=1QFySfFlIOixmV0sXCliktt_wXIun7yE&ll=39.6550%2C66.9820&z=15" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
       </div>
     </div>
   </div>
@@ -3421,7 +3421,9 @@
     L.marker(loc.coords, { icon: labelIcon, interactive: false }).addTo(map);
   });
 
-  map.fitBounds(L.polyline(latlngs).getBounds(), {padding: [40, 50]});
+  // maxZoom 限制初始自動縮放的深度：縮得太深，一次要跟 OSM 抓的圖磚數量會暴增，
+  // 容易被 OSM 的流量政策判定為異常請求而暫時擋掉（灰底）；限制在較淺的層級，圖磚數量少很多，載入也更穩定
+  map.fitBounds(L.polyline(latlngs).getBounds(), {padding: [60, 70], maxZoom: 7});
 </script>
 
 <nav class="mobile-tabbar" id="mobileTabbar">
@@ -3538,9 +3540,15 @@
         el.classList.toggle('nav-current', el.dataset.tabkey === tabKey);
       });
       // 地圖（route-map）在還沒切到「行程規劃」分頁前是 display:none，Leaflet 抓不到容器尺寸，
-      // 切過去時要手動重新計算一次，不然地圖會空白或錯位
+      // 這時候算出來的置中/縮放結果是錯的；invalidateSize 只會修正尺寸，不會重算置中位置，
+      // 所以切過去時 fitBounds 也要跟著重新執行一次，才會用「正確尺寸」重新算置中
       if (tabKey === 'trip' && window.map && typeof window.map.invalidateSize === 'function') {
-        setTimeout(function () { window.map.invalidateSize(); }, 60);
+        setTimeout(function () {
+          window.map.invalidateSize();
+          if (window.latlngs) {
+            window.map.fitBounds(L.polyline(window.latlngs).getBounds(), { padding: [60, 70], maxZoom: 7 });
+          }
+        }, 60);
       }
       return tabKey;
     }

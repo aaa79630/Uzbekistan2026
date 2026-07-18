@@ -2283,7 +2283,7 @@
 
 <section class="overview" id="route" data-tab="trip">
   <div class="section-label">Route Overview / 路線規劃</div>
-  <h2 class="section-title">The Silk Road Loop</h2>
+  <h2 class="section-title">千里絲路古城</h2>
   <div class="route-timeline">
     <div class="rt-stop">
       <div class="rt-dot muted">BKK</div>
@@ -3123,7 +3123,7 @@
 <section class="practical" id="phrases" data-tab="info">
   <div class="section-label">Language / 實用會話</div>
   <h2 class="section-title" style="margin-bottom:10px;">旅遊實用短句</h2>
-  <p style="font-size:14px;color:var(--earth-brown);margin-bottom:8px;">烏茲別克官方語言是烏茲別克語，但<strong>俄語在市集、餐廳、司機之間更通用</strong>，建議優先學俄語短句；主要城市飯店/餐廳/景點通常有基本英文，但路牌菜單招牌幾乎只有俄文或烏茲別克文，市集、司機、年長者英文較少，撒馬爾罕、布哈拉、希瓦則有會講英文的觀光警察可求助。每句均附羅馬拼音、「空耳」中文注音及 🔊 發音按鈕。</p>
+  <p style="font-size:14px;color:var(--earth-brown);margin-bottom:8px;">烏茲別克官方語言是烏茲別克語，但<strong>俄語在市集、餐廳、司機之間更通用</strong>，建議優先學俄語短句；主要城市飯店/餐廳/景點通常有基本英文，但路牌菜單招牌幾乎只有俄文或烏茲別克文，市集攤販、司機、年長者普遍較少通英文，撒馬爾罕、布哈拉、希瓦則有會講英文的觀光警察可求助。每句均附羅馬拼音、「空耳」中文注音及 🔊 發音按鈕。</p>
 
   <div style="background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin-bottom:24px;">
     <button onclick="this.nextElementSibling.classList.toggle('open'); this.querySelector('.tat-caret').style.transform = this.nextElementSibling.classList.contains('open') ? 'rotate(180deg)' : '';" style="display:flex;align-items:center;justify-content:space-between;width:100%;background:none;border:none;padding:0;cursor:pointer;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;color:var(--tile-blue);">
@@ -3578,6 +3578,7 @@
       toggles.forEach(function (t) { t.classList.remove('active'); });
       overlay.classList.remove('active');
     }
+    window.closeAllMobilePopups = closeAllPopups;
 
     toggles.forEach(function (toggle) {
       toggle.addEventListener('click', function () {
@@ -3680,6 +3681,12 @@
       if (!a) return;
       var id = a.getAttribute('href').slice(1);
       e.preventDefault();
+      // 點純連結（例如沒有子選單的「烏茲概覽」、桌機導覽列的子選單項目）時，
+      // 順手關掉手機版可能殘留開著的彈出選單；.mtb-toggle 是 div 不是 a，不會被這裡攔截到，
+      // 所以不影響「點分類圖示展開子選單」的正常行為
+      if (typeof window.closeAllMobilePopups === 'function') {
+        window.closeAllMobilePopups();
+      }
       goTo(id);
     });
 

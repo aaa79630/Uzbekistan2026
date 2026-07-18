@@ -1869,9 +1869,13 @@
 
   body.has-desktop-nav { padding-top: 58px; }
 
+  /* 跳轉到分頁內小節時，預留桌機版 sticky 導覽列的高度，避免標題被蓋住 */
+  [id] { scroll-margin-top: 58px; }
+
   @media (max-width: 1080px) {
     .desktop-navbar { display: none; }
     body.has-desktop-nav { padding-top: 0; }
+    [id] { scroll-margin-top: 0; }
   }
   @media (min-width: 1081px) {
     .nav-toggle, .nav-menu, .nav-overlay { display: none !important; }

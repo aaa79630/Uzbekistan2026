@@ -1313,7 +1313,7 @@
 
   
   .accom-inner { max-width: 1200px; margin: 0 auto; }
-  .accom-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-top: 30px; }
+  .accom-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 30px; }
   .accom-card {
     background: #fff;
     border: 1px solid var(--line);
@@ -1436,6 +1436,65 @@
   .accom-confirmed .ac-price { color: var(--accent-red); font-weight: 700; }
   .accom-confirmed .ac-code { color: #666; font-size: 12px; display: block; margin-top: 2px; }
   .accom-confirmed .ac-note { display: block; color: #888; font-size: 11px; margin-top: 4px; }
+
+  /* 飯店照片 */
+  .ac-photo {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    display: block;
+    background: #eee;
+  }
+
+  /* 訂單編號等補充資訊收合按鈕 */
+  .ac-details-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    margin-top: 8px;
+    padding: 7px 10px;
+    background: rgba(255,255,255,0.6);
+    border: 1px dashed rgba(0,86,150,0.25);
+    border-radius: 4px;
+    color: var(--tile-blue);
+    font-family: 'Manrope', sans-serif;
+    font-size: 11.5px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .ac-details-toggle .adt-caret { transition: transform 0.25s; font-size: 10px; }
+  .ac-details-toggle.open .adt-caret { transform: rotate(180deg); }
+  .ac-details-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+  .ac-details-body.open { max-height: 400px; }
+  .ac-details-body .ac-row:first-child { padding-top: 6px; }
+
+  /* 飯店 Google Maps 按鈕（白底＋邊框，讓紅色圖釘 emoji 看起來自然，文字用 !important 避免被 .accom-confirmed a 的顏色規則蓋掉） */
+  .accom-confirmed a.ac-map-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin: 10px 0 8px;
+    padding: 6px 14px;
+    background: #fff;
+    color: var(--tile-blue) !important;
+    border: 1.5px solid var(--tile-blue);
+    border-radius: 20px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .ac-map-btn:hover { background: var(--turquoise-light); }
+  /* 房型那一行如果後面接的是地圖按鈕，就不需要下方虛線分隔線 */
+  .ac-row:has(+ .ac-map-btn) { border-bottom: none; }
   /* ===== Flight Info ===== */
   .flight-section { padding: 50px 40px 40px; max-width: 1200px; margin: 0 auto; }
   .flight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-top: 24px; }
@@ -2214,7 +2273,7 @@
 
   <div style="text-align:center;margin-top:30px;padding-top:30px;border-top:1px solid var(--line);">
     <a href="#trip" style="display:inline-flex;align-items:center;gap:8px;background:var(--persian-blue);color:#fff;padding:14px 28px;border-radius:30px;text-decoration:none;font-family:'Noto Sans TC',sans-serif;font-size:15px;font-weight:700;box-shadow:0 6px 18px rgba(30,58,95,0.25);">
-      查看行程安排 <span style="font-size:18px;">→</span>
+      查看行程安排 <span style="font-size:14px;color:var(--uzbek-gold);">▶</span>
     </a>
   </div>
 
@@ -2694,47 +2753,58 @@
         <div class="accom-city">🔵 塔什干 Tashkent</div>
         <div class="accom-name">Day 1</div>
         <div class="accom-nights">共 1 晚（9/18）</div>
-        <span class="confirmed-badge">✓ 已訂房</span>
         <div class="accom-confirmed">
-          <div class="ac-row ac-hotel-row"><strong>Hotel Marwa Tashkent Pool&amp;Spa</strong><br><a href="https://www.booking.com/Share-fgy9USV" target="_blank" rel="noopener">訂房連結 →</a></div>
+          <div class="ac-row ac-hotel-row"><strong>Hotel Marwa Tashkent Pool&amp;Spa</strong></div>
+          <img class="ac-photo" src="https://hotelmarwatashkent.uz/img/07d93ef1498fe5e3.webp" alt="Hotel Marwa Tashkent Pool&amp;Spa" loading="lazy">
           <div class="ac-row">3間2人房（1間加床）<br>1間4人房<br>含早餐・每位成人每天 SPA 1 小時</div>
+          <a class="ac-map-btn" href="https://www.google.com/maps/search/?api=1&query=Hotel+Marwa+Tashkent+Pool+Spa" target="_blank" rel="noopener">📍 Google Maps</a>
+          <button class="ac-details-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open');">訂房明細（訂房連結・價格・訂單編號） <span class="adt-caret">▾</span></button>
+          <div class="ac-details-body">
+          <div class="ac-row"><a href="https://www.booking.com/Share-fgy9USV" target="_blank" rel="noopener">訂房連結 →</a></div>
           <div class="ac-row"><span class="ac-price">376.49 USD ≈ 11,877 TWD</span></div>
           <div class="ac-row">
             <span class="ac-code">訂單編號：6261116649（Booking.com）</span>
             <span class="ac-code">9/16 23:59 前可免費取消</span>
             <span class="ac-code">扣款：Kyle 信用卡 / 可臨櫃 VISA・Master</span>
           </div>
-        </div>
-      </div>
+          </div>
+        </div></div>
 
       <div class="accom-card">
         <div class="accom-city">🟡 希瓦 Khiva</div>
         <div class="accom-name">Day 2–3</div>
         <div class="accom-nights">共 2 晚（9/19–20）</div>
-
-        <span class="confirmed-badge">✓ 已訂房</span>
         <div class="accom-confirmed">
-          <div class="ac-row ac-hotel-row"><strong>Grand Vizir Hotel</strong><br><a href="https://grandvizirhotel.com/" target="_blank" rel="noopener">官網 →</a></div>
+          <div class="ac-row ac-hotel-row"><strong>Grand Vizir Hotel</strong></div>
+          <img class="ac-photo" src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/316736042.jpg?k=3f997cf99af998754870248036e6d3d74a929c58c793a5c12cf6d8fe6956a27d&o=" alt="Grand Vizir Hotel Khiva" loading="lazy">
           <div class="ac-row">2間雙床房（Twin）＋1間豪華雙人房（Deluxe Double）<br>2間3人房（Triple，其中1間限2人）<br>含早餐</div>
+          <a class="ac-map-btn" href="https://www.google.com/maps/search/?api=1&query=Grand+Vizir+Hotel+Khiva" target="_blank" rel="noopener">📍 Google Maps</a>
+          <button class="ac-details-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open');">訂房明細（訂房連結・價格・訂單編號） <span class="adt-caret">▾</span></button>
+          <div class="ac-details-body">
+          <div class="ac-row"><a href="https://grandvizirhotel.com/" target="_blank" rel="noopener">官網 →</a></div>
           <div class="ac-row"><span class="ac-price">9,540,000 UZS ≈ 25,125 TWD</span></div>
           <div class="ac-row">
             <span class="ac-code">訂單編號：20260919-508227-1256327462</span>
             <span class="ac-code">現場付現・Derek 已訂</span>
           </div>
+          </div>
         </div>
-
-        <span class="backup-badge" style="margin-top:12px;">🔄 備用・可免費取消</span>
         <div class="accom-confirmed">
-          <div class="ac-row ac-hotel-row"><strong>Orient Star Khiva Hotel</strong><br><a href="https://hotelorientstarkhiva.uz/" target="_blank" rel="noopener">官網 →</a></div>
+          <span class="backup-badge">🔄 備用・可免費取消</span>
+          <div class="ac-row ac-hotel-row"><strong>Orient Star Khiva Hotel</strong></div>
+          <img class="ac-photo" src="https://hotelorientstarkhiva.uz/img/a57923def9d3d4fb.webp" alt="Orient Star Khiva Hotel" loading="lazy">
           <div class="ac-row">2間雙床房＋2間三床房（10人）<br>含早餐</div>
+          <a class="ac-map-btn" href="https://www.google.com/maps/search/?api=1&query=Orient+Star+Khiva+Hotel" target="_blank" rel="noopener">📍 Google Maps</a>
+          <button class="ac-details-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open');">訂房明細（訂房連結・價格・訂單編號） <span class="adt-caret">▾</span></button>
+          <div class="ac-details-body">
+          <div class="ac-row"><a href="https://hotelorientstarkhiva.uz/" target="_blank" rel="noopener">官網 →</a></div>
           <div class="ac-row"><span class="ac-price">900 USD ≈ 28,350 TWD</span></div>
           <div class="ac-row">
             <span class="ac-code">訂單編號：20260919-508294-1258354873</span>
             <span class="ac-note">18/09/2026 14:00 (UTC+5) 前可免費取消，逾期收取第一晚房費</span>
           </div>
-        </div>
-
-        <button class="accom-compare-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open');">⭐ 兩間住宿評價比較（點開查看） <span class="act-caret">▾</span></button>
+          </div>
+        </div><button class="accom-compare-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open');">⭐ 兩間住宿評價比較（點開查看） <span class="act-caret">▾</span></button>
         <div class="accom-compare-body">
         <div class="accom-compare">
           <strong>兩間評價比較：</strong><br>
@@ -2749,50 +2819,63 @@
         <div class="accom-city">🟠 布哈拉 Bukhara</div>
         <div class="accom-name">Day 4–6</div>
         <div class="accom-nights">共 3 晚（9/21–23）</div>
-        <span class="confirmed-badge">✓ 已訂房</span>
         <div class="accom-confirmed">
-          <div class="ac-row ac-hotel-row"><strong>Asl Boutique Hotel</strong><br><a href="https://www.booking.com/hotel/uz/asl-boutique-bukhara.zh-tw.html" target="_blank" rel="noopener">訂房連結 →</a></div>
+          <div class="ac-row ac-hotel-row"><strong>Asl Boutique Hotel</strong></div>
+          <img class="ac-photo" src="https://aslhotel.uz/img/e04fd92095144eb4.webp" alt="Asl Hotel Bukhara" loading="lazy">
           <div class="ac-row">1間2人房（Twin）<br>1間3人家庭房（雙人+單人）<br>2間3人房（3單人床）<br>含早餐</div>
+          <a class="ac-map-btn" href="https://maps.app.goo.gl/P1qrR8n5wqQE8seV8" target="_blank" rel="noopener">📍 Google Maps</a>
+          <button class="ac-details-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open');">訂房明細（訂房連結・價格・訂單編號） <span class="adt-caret">▾</span></button>
+          <div class="ac-details-body">
+          <div class="ac-row"><a href="https://www.booking.com/hotel/uz/asl-boutique-bukhara.zh-tw.html" target="_blank" rel="noopener">訂房連結 →</a></div>
           <div class="ac-row"><span class="ac-price">853.74 USD ≈ 26,934 TWD</span></div>
           <div class="ac-row">
             <span class="ac-code">訂單編號：5858118971（Booking.com）</span>
             <span class="ac-code">9/21 18:00 前可免費取消</span>
             <span class="ac-code">現場付現・Kyle 已訂</span>
-            <span class="ac-note" style="color: var(--accent-red); font-weight: 700;">⚠️ Google Maps 上顯示為「Hotel ASL」，同城市另有一間較遠的「Asl Boutique Hotel」，啟程前請務必再次核對地點。訂房地址：Lyabi Khauz, Levi boboxonov 2, 200100 布哈拉，烏茲別克</span>
+            <span class="ac-note" style="color: var(--accent-red); font-weight: 700;">⚠️ 訂的是 Google Maps 上顯示為「Hotel ASL」、Booking.com 上顯示為「Asl Boutique Hotel」的這間；同城市另有一間名稱很像但地點較遠的「Asal Boutique Hotel」（多一個 a），啟程前請務必再次核對地點，不要跑錯間。訂房地址：Lyabi Khauz, Levi boboxonov 2, 200100 布哈拉，烏茲別克</span>
           </div>
-        </div>
-      </div>
+          </div>
+        </div></div>
 
       <div class="accom-card">
         <div class="accom-city">🟣 撒馬爾罕 Samarkand</div>
         <div class="accom-name">Day 7–9</div>
         <div class="accom-nights">共 3 晚（9/24–26）</div>
-        <span class="confirmed-badge">✓ 已訂房</span>
         <div class="accom-confirmed">
-          <div class="ac-row ac-hotel-row"><strong>SULTANAT Samarkand</strong><br><a href="https://www.booking.com/hotel/uz/sultanat-samarkand-samarkand.zh-tw.html" target="_blank" rel="noopener">訂房連結 →</a></div>
+          <div class="ac-row ac-hotel-row"><strong>SULTANAT Samarkand</strong></div>
+          <img class="ac-photo" src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/473561807.jpg?k=7ca332edae4c9e8fd9f9c7c28ad27bebd463e3f6b102f0c39d96dbc297db6b87&o=" alt="SULTANAT Samarkand" loading="lazy">
           <div class="ac-row">4間雙人房<br>1間3人房<br>含早餐</div>
+          <a class="ac-map-btn" href="https://www.google.com/maps/search/?api=1&query=SULTANAT+Samarkand+hotel" target="_blank" rel="noopener">📍 Google Maps</a>
+          <button class="ac-details-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open');">訂房明細（訂房連結・價格・訂單編號） <span class="adt-caret">▾</span></button>
+          <div class="ac-details-body">
+          <div class="ac-row"><a href="https://www.booking.com/hotel/uz/sultanat-samarkand-samarkand.zh-tw.html" target="_blank" rel="noopener">訂房連結 →</a></div>
           <div class="ac-row"><span class="ac-price">1,239.24 USD ≈ 39,303 TWD</span></div>
           <div class="ac-row">
             <span class="ac-code">訂單編號：5669327980（Booking.com）</span>
             <span class="ac-code">9/21 前可免費取消</span>
             <span class="ac-code">現場付現・Kyle 已訂</span>
           </div>
-        </div>
-      </div>
+          </div>
+        </div></div>
 
       <div class="accom-card">
         <div class="accom-city">🔵 塔什干 Tashkent</div>
         <div class="accom-name">Day 10–11</div>
         <div class="accom-nights">共 1 晚（9/27）・9/28 退房</div>
-        <span class="confirmed-badge">✓ 已訂房</span>
         <div class="accom-confirmed">
-          <div class="ac-row ac-hotel-row"><strong>NOVA HOME Apartments – NEST ONE, Tashkent City</strong><br><a href="https://www.booking.com/Share-onDNghz" target="_blank" rel="noopener">訂房連結 →</a></div>
+          <div class="ac-row ac-hotel-row"><strong>NOVA HOME Apartments – NEST ONE, Tashkent City</strong></div>
+          <img class="ac-photo" src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/825835322.jpg?k=ca64d7dd4311b59e2208a0b4a04c8f2af95543a8a12654fd8f3de71e47b92388&o=" alt="NOVA HOME Apartments NEST ONE Tashkent City" loading="lazy">
           <div class="ac-row">3間4人房（無早餐）</div>
+          <a class="ac-map-btn" href="https://www.google.com/maps/search/?api=1&query=NEST+ONE+Tashkent+City+tower" target="_blank" rel="noopener">📍 Google Maps</a>
+          <button class="ac-details-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open');">訂房明細（訂房連結・價格・訂單編號） <span class="adt-caret">▾</span></button>
+          <div class="ac-details-body">
+          <div class="ac-row"><a href="https://www.booking.com/Share-onDNghz" target="_blank" rel="noopener">訂房連結 →</a></div>
           <div class="ac-row"><span class="ac-price">396.05 USD ≈ 12,560 TWD</span></div>
           <div class="ac-row">
             <span class="ac-code">訂單編號：6301927286（Booking.com）</span>
             <span class="ac-code">9/23 23:59 前可免費取消</span>
             <span class="ac-code">現場付現・Kyle 已訂</span>
+          </div>
           </div>
         </div>
       </div>
@@ -2926,7 +3009,7 @@
         <li>布哈拉 → 撒馬爾罕：<strong>Afrosiyob 高鐵</strong>（769Ф，查證最新時刻表約 15:09→16:56，約1h47m，實際依訂票當下官網時刻為準，車次時刻偶有調整）</li>
         <li>撒馬爾罕 → 塔什干：<strong>包車</strong>（約4–4.5h，時間彈性可配合最後一天行程，不用被火車班次綁住）</li>
       </ul>
-      <div class="warn-box">⚠️ 高鐵票開放購票：出發前 <strong>60 天</strong>（依 seat61.com 2026/6 最新查證，官網與12go皆同）。以你們 9/24 布哈拉→撒馬爾罕這段來算，開賣日大約是 <strong>2026年7月26日（週日）</strong>——距離現在只剩幾天，記得提前準備好10人護照資料，開賣當天盡早搶，非常搶手；刷卡失敗可請當地住宿代訂。<br><a href="https://eticket.railway.uz" target="_blank" rel="noopener" class="ref-link" style="margin-top:6px;">🎫 前往官網購票 eticket.railway.uz</a></div>
+      <div class="warn-box">⚠️ 高鐵票開放購票：出發前 <strong>60 天</strong>（官網與12go皆同；已於 2026/7/19 實測確認官網可查到 9/15 車次，證實是 60 天而非坊間也有人說的 45 天）。以你們 9/24 布哈拉→撒馬爾罕這段來算，開賣日大約是 <strong>2026年7月26日（週日）</strong>——記得提前準備好10人護照資料，開賣當天盡早搶，非常搶手；刷卡失敗可請當地住宿代訂。<br><a href="https://eticket.railway.uz" target="_blank" rel="noopener" class="ref-link" style="margin-top:6px;">🎫 前往官網購票 eticket.railway.uz</a></div>
       <hr class="prac-divider">
       <p><strong>🛂 車站安檢提醒（10人建議提前30-45分鐘抵達）：</strong></p>
       <ul>

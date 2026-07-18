@@ -7,6 +7,16 @@
 <meta property="og:description" content="11天的絲路之旅，穿越三千年的永恆之藍，走進希瓦、布哈拉與撒馬爾罕的史詩篇章。">
 <meta property="og:image" content="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcQI6hW0Wt0nJFa8UgkNgflihu4x3ckoM9bIKWu0P6R64WxpRlIjQyrarnsQZDD3bPlcLeVKkQpJ-oDHNfQnBCipSMU&s=19">
 <title>Uzbekistan · 烏茲別克絲路 11 天行程</title>
+
+<!-- ===== PWA 設定 ===== -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1E3A5F">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<!-- iOS 專用（Android 讀 manifest 裡的 icons，不看這行） -->
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="烏茲別克2026">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
@@ -1011,6 +1021,7 @@
     transition: max-height 0.4s ease;
   }
   .climate-table-wrap.open { max-height: 900px; }
+  #translateAppDetail.open { max-height: 500px !important; }
   .climate-table-scroll {
     overflow-x: auto;
     margin-top: 12px;
@@ -1150,22 +1161,30 @@
   .deep-guide-btn {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    margin-left: 8px;
+    gap: 4px;
+    margin-left: 6px;
+    padding: 4px 9px 4px 11px;
     font-family: 'Manrope', sans-serif;
     font-size: 11px;
     font-weight: 700;
-    color: #fff;
-    background: var(--persian-blue);
-    border: 1px solid var(--persian-blue);
-    padding: 3px 11px;
+    color: var(--persian-blue);
+    background: rgba(30,58,95,0.07);
+    border: 1px solid rgba(30,58,95,0.25);
     border-radius: 20px;
     cursor: pointer;
     vertical-align: middle;
-    transition: background 0.2s, transform 0.15s;
+    transition: background 0.2s, color 0.2s, transform 0.15s;
   }
-  .deep-guide-btn:hover { background: var(--tile-blue); border-color: var(--tile-blue); }
-  .deep-guide-btn:active { transform: scale(0.96); }
+  .deep-guide-btn::after {
+    content: '›';
+    font-size: 13px;
+    font-weight: 900;
+    line-height: 1;
+    transition: transform 0.2s;
+  }
+  .deep-guide-btn:hover { background: var(--persian-blue); color: #fff; border-color: var(--persian-blue); }
+  .deep-guide-btn:hover::after { transform: translateX(2px); }
+  .deep-guide-btn:active { transform: scale(0.95); }
 
   .guide-modal-overlay {
     position: fixed;
@@ -1592,6 +1611,105 @@
     max-width: 100%;
   }
 
+/* ===== 手機版底部固定導覽列 ===== */
+  .mobile-tabbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: none;
+    height: 60px;
+    background: #fff;
+    border-top: 1px solid var(--line);
+    box-shadow: 0 -4px 16px rgba(30,58,95,0.08);
+    z-index: 2000;
+  }
+  .mtb-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    color: var(--earth-brown);
+    text-decoration: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: color 0.2s;
+  }
+  .mtb-item.active { color: var(--tile-blue); }
+  .mtb-icon { width: 22px; height: 22px; }
+  .mtb-label { font-size: 11.5px; font-family: 'Manrope', sans-serif; font-weight: 600; }
+
+  .mtb-popup-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(26,20,16,0.35);
+    z-index: 2001;
+  }
+  .mtb-popup-overlay.active { display: block; }
+
+  .mtb-popup {
+    display: none;
+    position: fixed;
+    bottom: 60px;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -8px 24px rgba(30,58,95,0.15);
+    padding: 10px 0 8px;
+    z-index: 2002;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+  .mtb-popup.active { display: block; animation: mtbSlideUp 0.25s ease; }
+  @keyframes mtbSlideUp { from { transform: translateY(12px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  .mtb-popup a {
+    display: block;
+    padding: 13px 22px;
+    color: var(--persian-blue);
+    text-decoration: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(30,58,95,0.06);
+  }
+  .mtb-popup a:last-child { border-bottom: none; }
+  .mtb-popup a:active { background: var(--turquoise-light); }
+
+  .back-to-top {
+    position: fixed;
+    right: 14px;
+    bottom: 72px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid var(--line);
+    box-shadow: 0 4px 14px rgba(30,58,95,0.15);
+    color: var(--persian-blue);
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1999;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: opacity 0.25s, transform 0.25s, visibility 0.25s;
+  }
+  .back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+
+  @media (max-width: 1080px) {
+    .mobile-tabbar { display: flex; }
+    body.has-desktop-nav { padding-bottom: 60px; }
+  }
+  @media (min-width: 1081px) {
+    .mobile-tabbar, .mtb-popup, .mtb-popup-overlay, .back-to-top { display: none !important; }
+  }
+
 /* ===== 修正後：絕對置中的浮動按鈕 ===== */
   .nav-toggle {
     position: fixed;
@@ -1946,25 +2064,36 @@
     <a href="#hero" class="dn-brand">🇺🇿 烏茲別克絲路之旅</a>
     <div class="dn-links">
       <a href="#intro">認識烏茲別克</a>
-      <a href="#flights">航班資訊</a>
-      <a href="#route">路線規劃</a>
       <div class="dn-dropdown">
-        <span class="dn-dropdown-label">11天行程 ▾</span>
+        <span class="dn-dropdown-label">行前準備 ▾</span>
         <div class="dn-dropdown-menu">
+          <a href="#flights">航班資訊</a>
+          <a href="#visa">簽證指南</a>
+          <a href="#packing">行李清單</a>
+          <a href="#checklist">出發前確認事項</a>
+        </div>
+      </div>
+      <div class="dn-dropdown">
+        <span class="dn-dropdown-label">行程規劃 ▾</span>
+        <div class="dn-dropdown-menu">
+          <a href="#route">路線規劃</a>
           <a href="#day1">Day1・塔什干</a>
           <a href="#day2-3">Day2-3・希瓦</a>
           <a href="#day4-6">Day4-6・布哈拉</a>
           <a href="#day7-9">Day7-9・撒馬爾罕</a>
           <a href="#day10-11">Day10-11・塔什干</a>
+          <a href="#lodging">住宿安排</a>
         </div>
       </div>
-      <a href="#lodging">住宿安排</a>
-      <a href="#visa">簽證指南</a>
-      <a href="#practical">實用資訊</a>
-      <a href="#weather">天氣預報</a>
-      <a href="#currency">換算匯率</a>
-      <a href="#phrases">實用會話</a>
-      <a href="#packing">行李清單</a>
+      <div class="dn-dropdown">
+        <span class="dn-dropdown-label">實用資訊 ▾</span>
+        <div class="dn-dropdown-menu">
+          <a href="#practical">換匯 / 網卡 / 交通</a>
+          <a href="#currency">匯率換算機</a>
+          <a href="#weather">天氣預報</a>
+          <a href="#phrases">旅遊會話（俄語、烏茲別克語）</a>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
@@ -2824,21 +2953,21 @@
 <section class="practical" id="currency">
   <div class="section-label">Currency / 換算匯率</div>
   <h2 class="section-title" style="margin-bottom:10px;">即時換匯小工具</h2>
-  <p style="font-size:14px;color:var(--earth-brown);margin-bottom:20px;">輸入任一欄位金額，其他兩欄會自動換算，抓不到即時匯率時會改用參考匯率備援。</p>
+  <p style="font-size:14px;color:var(--earth-brown);margin-bottom:20px;">輸入任一欄位金額，其他兩欄會自動換算；也可以直接輸入算式（例如 150000/4 分帳、5000*6 算總價），按 Enter 或點掉欄位即可算出結果。抓不到即時匯率時會改用參考匯率備援。</p>
   <div class="currency-converter">
     <div class="currency-field">
       <label for="curUZS">🇺🇿 烏茲別克蘇姆 UZS</label>
-      <input type="number" id="curUZS" inputmode="decimal" placeholder="0">
+      <input type="text" id="curUZS" inputmode="decimal" placeholder="0">
     </div>
     <div class="currency-eq">＝</div>
     <div class="currency-field">
       <label for="curUSD">🇺🇸 美金 USD</label>
-      <input type="number" id="curUSD" inputmode="decimal" placeholder="0">
+      <input type="text" id="curUSD" inputmode="decimal" placeholder="0">
     </div>
     <div class="currency-eq">＝</div>
     <div class="currency-field">
       <label for="curTWD">🇹🇼 新台幣 TWD</label>
-      <input type="number" id="curTWD" inputmode="decimal" placeholder="0">
+      <input type="text" id="curTWD" inputmode="decimal" placeholder="0">
     </div>
   </div>
   <div class="currency-status" id="currencyStatus">正在載入即時匯率...</div>
@@ -2898,7 +3027,30 @@
 <section class="practical" id="phrases">
   <div class="section-label">Language / 實用會話</div>
   <h2 class="section-title" style="margin-bottom:10px;">旅遊實用短句</h2>
-  <p style="font-size:14px;color:var(--earth-brown);margin-bottom:8px;">烏茲別克官方語言是烏茲別克語，但<strong>俄語在市集、餐廳、司機之間更通用</strong>，建議優先學俄語短句。每句都附上羅馬拼音、方便台灣人念的「空耳」中文注音，以及 🔊 發音按鈕（點下去會用手機/電腦內建語音朗讀，第一次使用若沒聲音，請確認裝置音量或稍等語音庫載入）。</p>
+  <p style="font-size:14px;color:var(--earth-brown);margin-bottom:8px;">烏茲別克官方語言是烏茲別克語，但<strong>俄語在市集、餐廳、司機之間更通用</strong>，建議優先學俄語短句；主要城市飯店/餐廳/景點通常有基本英文，但路牌菜單招牌幾乎只有俄文或烏茲別克文，市集、司機、年長者英文較少，撒馬爾罕、布哈拉、希瓦則有會講英文的觀光警察可求助。每句均附羅馬拼音、「空耳」中文注音及 🔊 發音按鈕。</p>
+
+  <div style="background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin-bottom:24px;">
+    <button onclick="this.nextElementSibling.classList.toggle('open'); this.querySelector('.tat-caret').style.transform = this.nextElementSibling.classList.contains('open') ? 'rotate(180deg)' : '';" style="display:flex;align-items:center;justify-content:space-between;width:100%;background:none;border:none;padding:0;cursor:pointer;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;color:var(--tile-blue);">
+      <span>📱 短句背不起來？用 Google 翻譯 App</span>
+      <span class="tat-caret" style="transition:transform 0.2s;">▾</span>
+    </button>
+    <div style="max-height:0;overflow:hidden;transition:max-height 0.4s ease;" id="translateAppDetail">
+      <ul style="font-size:13px;color:var(--earth-brown);line-height:1.9;padding-left:20px;margin:12px 0 8px;">
+        <li><strong>拍照翻譯</strong>：對著菜單、路牌拍照直接疊字翻譯，看不懂俄文西里爾字母時最好用</li>
+        <li><strong>對話模式</strong>：跟當地人各自對手機講話，雙向即時口譯</li>
+        <li><strong>離線翻譯包</strong>：出發前先下載「俄文」「烏茲別克文」離線包，網路不穩也能用——App內開啟後點右上角頭像/設定圖示 →「離線翻譯」→ 點選語言旁的下載箭頭即可，或參考 <a href="https://support.google.com/translate/answer/6142473" target="_blank" rel="noopener" style="color:var(--tile-blue);text-decoration:underline;">Google官方說明</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin-bottom:24px;">
+    <div style="font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;color:var(--tile-blue);letter-spacing:0.05em;margin-bottom:10px;">⚡ 快速開啟 Google 翻譯</div>
+    <textarea id="quickTranslateInput" placeholder="在這裡打中文……" style="width:100%;min-height:60px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-family:'Noto Sans TC',sans-serif;font-size:14px;resize:vertical;margin-bottom:10px;box-sizing:border-box;"></textarea>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <button onclick="quickTranslate('ru')" style="flex:1;min-width:140px;padding:10px 14px;background:var(--persian-blue);color:#fff;border:none;border-radius:8px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;">🇷🇺 翻成俄文 ›</button>
+      <button onclick="quickTranslate('uz')" style="flex:1;min-width:140px;padding:10px 14px;background:var(--persian-blue);color:#fff;border:none;border-radius:8px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;">🇺🇿 翻成烏茲別克文 ›</button>
+    </div>
+  </div>
 
   <div class="phrase-cat">👋 打招呼</div>
   <div class="phrase-grid">
@@ -3112,7 +3264,7 @@
   </div>
 </section>
 
-<section class="notes">
+<section class="notes" id="checklist">
   <div class="notes-inner">
     <div class="section-label" style="color: var(--uzbek-gold)">Essentials / 行前清單</div>
     <h2 class="section-title" style="color:#fff;">出發前確認事項</h2>
@@ -3266,72 +3418,93 @@
 
   map.fitBounds(L.polyline(latlngs).getBounds(), {padding: [40, 50]});
 </script>
-<div class="nav-overlay" id="navOverlay"></div>
-<nav class="nav-menu" id="navMenu">
-  <a href="#hero" class="nav-item">🏠 回到頂部</a>
-  <a href="#intro" class="nav-item">🇺🇿 認識烏茲別克</a>
-  <a href="#flights" class="nav-item">✈️ 航班資訊</a>
-  <a href="#route" class="nav-item">🗺️ 路線規劃</a>
-  <div class="nav-item nav-item-toggle" id="itineraryToggle">🗓️ 11天行程 <span class="nav-caret">▾</span></div>
-  <div class="nav-submenu" id="itinerarySubmenu">
-    <a href="#day1" class="nav-subitem">Day1・塔什干</a>
-    <a href="#day2-3" class="nav-subitem">Day2-3・希瓦</a>
-    <a href="#day4-6" class="nav-subitem">Day4-6・布哈拉</a>
-    <a href="#day7-9" class="nav-subitem">Day7-9・撒馬爾罕</a>
-    <a href="#day10-11" class="nav-subitem">Day10-11・塔什干</a>
+<nav class="mobile-tabbar" id="mobileTabbar">
+  <a href="#intro" class="mtb-item">
+    <svg class="mtb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M4.5 7.5h15M4.5 16.5h15"/></svg>
+    <span class="mtb-label">烏茲概覽</span>
+  </a>
+  <div class="mtb-item mtb-toggle" data-popup="mtbPopupPrep">
+    <svg class="mtb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M4 13h16"/></svg>
+    <span class="mtb-label">行前準備</span>
   </div>
-  <a href="#lodging" class="nav-item">🏨 住宿安排</a>
-  <a href="#visa" class="nav-item">🛂 簽證指南</a>
-  <a href="#practical" class="nav-item">💵 實用資訊</a>
-  <a href="#weather" class="nav-item">🌤️ 天氣預報</a>
-  <a href="#currency" class="nav-item">💱 換算匯率</a>
-  <a href="#phrases" class="nav-item">🗣️ 實用會話</a>
-  <a href="#packing" class="nav-item">🎒 行李清單</a>
+  <div class="mtb-item mtb-toggle" data-popup="mtbPopupItinerary">
+    <svg class="mtb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="16" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/><circle cx="8" cy="14.5" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="14.5" r="1" fill="currentColor" stroke="none"/><circle cx="16" cy="14.5" r="1" fill="currentColor" stroke="none"/></svg>
+    <span class="mtb-label">行程規劃</span>
+  </div>
+  <div class="mtb-item mtb-toggle" data-popup="mtbPopupInfo">
+    <svg class="mtb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="7.7" r="1.2" fill="currentColor" stroke="none"/><path d="M12 11v5.5"/></svg>
+    <span class="mtb-label">實用資訊</span>
+  </div>
 </nav>
 
-<div class="nav-toggle" id="navToggle">
-  <div class="burger-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
+<div class="mtb-popup-overlay" id="mtbPopupOverlay"></div>
+
+<div class="mtb-popup" id="mtbPopupPrep">
+  <a href="#flights">航班資訊</a>
+  <a href="#visa">簽證指南</a>
+  <a href="#packing">行李清單</a>
+  <a href="#checklist">出發前確認事項</a>
+</div>
+<div class="mtb-popup" id="mtbPopupItinerary">
+  <a href="#route">路線規劃</a>
+  <a href="#day1">Day1・塔什干</a>
+  <a href="#day2-3">Day2-3・希瓦</a>
+  <a href="#day4-6">Day4-6・布哈拉</a>
+  <a href="#day7-9">Day7-9・撒馬爾罕</a>
+  <a href="#day10-11">Day10-11・塔什干</a>
+  <a href="#lodging">住宿安排</a>
+</div>
+<div class="mtb-popup" id="mtbPopupInfo">
+  <a href="#practical">換匯 / 網卡 / 交通</a>
+  <a href="#currency">匯率換算機</a>
+  <a href="#weather">天氣預報</a>
+  <a href="#phrases">旅遊會話（俄語、烏茲別克語）</a>
 </div>
 
+<button class="back-to-top" id="backToTop" aria-label="回到頂部">↑</button>
+
 <script>
-  const navToggle = document.getElementById('navToggle');
-  const navMenu = document.getElementById('navMenu');
-  const navOverlay = document.getElementById('navOverlay');
+  (function () {
+    var tabbar = document.getElementById('mobileTabbar');
+    if (!tabbar) return;
+    var toggles = tabbar.querySelectorAll('.mtb-toggle');
+    var overlay = document.getElementById('mtbPopupOverlay');
+    var popups = document.querySelectorAll('.mtb-popup');
 
-  // 切換選單顯示/隱藏
-function toggleMenu() {
-    navMenu.classList.toggle('active');
-    navOverlay.classList.toggle('active');
-    navToggle.classList.toggle('active'); // 讓按鈕自己切換 active 狀態
-    // 移除原本改 innerHTML 的那一行
-  }
-  navToggle.addEventListener('click', toggleMenu);
-  navOverlay.addEventListener('click', toggleMenu);
+    function closeAllPopups() {
+      popups.forEach(function (p) { p.classList.remove('active'); });
+      toggles.forEach(function (t) { t.classList.remove('active'); });
+      overlay.classList.remove('active');
+    }
 
-  // 11天行程 子選單：點擊展開/收合，不觸發跳轉或關閉整個選單
-  const itineraryToggle = document.getElementById('itineraryToggle');
-  const itinerarySubmenu = document.getElementById('itinerarySubmenu');
-  itineraryToggle.addEventListener('click', (e) => {
-    e.stopPropagation();
-    itineraryToggle.classList.toggle('open');
-    itinerarySubmenu.classList.toggle('open');
-  });
-
-  // 點擊選項後自動關閉選單（一般項目 + 子選單裡的日期項目）
-  const navItems = document.querySelectorAll('.nav-item:not(#itineraryToggle), .nav-subitem');
-  navItems.forEach(item => {
-    item.addEventListener('click', () => {
-      navMenu.classList.remove('active');
-      navOverlay.classList.remove('active');
-      navToggle.classList.remove('active');
-      itineraryToggle.classList.remove('open');
-      itinerarySubmenu.classList.remove('open');
+    toggles.forEach(function (toggle) {
+      toggle.addEventListener('click', function () {
+        var target = document.getElementById(toggle.dataset.popup);
+        var wasActive = target.classList.contains('active');
+        closeAllPopups();
+        if (!wasActive) {
+          target.classList.add('active');
+          toggle.classList.add('active');
+          overlay.classList.add('active');
+        }
+      });
     });
-  });
+
+    overlay.addEventListener('click', closeAllPopups);
+    document.querySelectorAll('.mtb-popup a').forEach(function (a) {
+      a.addEventListener('click', closeAllPopups);
+    });
+
+    // 回頂部按鈕：捲動夠深才浮現
+    var backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 400) backToTop.classList.add('show');
+      else backToTop.classList.remove('show');
+    });
+    backToTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
 </script>
 
 <script>
@@ -3502,34 +3675,31 @@ function toggleMenu() {
   var guideUtterance = null;
   var currentPlayingBtn = null;
 
+
   function pickNarratorVoice() {
     if (!('speechSynthesis' in window)) return null;
     var voices = window.speechSynthesis.getVoices();
     var zhVoices = voices.filter(function (v) { return /zh/i.test(v.lang); });
     if (zhVoices.length === 0) return null;
 
-    // 1. 先篩出所有「明確標示或已知是男聲」的中文語音（各平台常見男聲名稱）
-    var maleHints = /male|男|yunyang|yunjian|yunxi|yunhao|kangkang|zhiwei|云扬|云健|云希|云皓|康康|志偉/i;
-    var maleVoices = zhVoices.filter(function (v) { return maleHints.test(v.name); });
+    // 排除 Apple/系統內建的「趣味角色語音」——這些不是正規訓練的中文語音引擎，
+    // 就算用中文字典硬套，發音節奏還是會怪腔怪調，不適合拿來當導覽敘事聲音
+    var noveltyHints = /eddy|flo|grandma|grandpa|reed|rocko|sandy|shelley|kathy|bells|boing|bubbles|trinoids|whisper|wobble|zarvox|albert|bahh|cellos|deranged|hysterical|organ|junior|superstar|bad news|good news/i;
+    var normalVoices = zhVoices.filter(function (v) { return !noveltyHints.test(v.name); });
+    var pool = normalVoices.length > 0 ? normalVoices : zhVoices;
 
-    if (maleVoices.length > 0) {
-      // 男聲候選裡，再優先挑音質較好的（進階/優質關鍵字，或Android上的雲端語音）
-      var premiumHints = /premium|enhanced|neural|natural|進階|優質|自然/i;
-      var premiumMale = maleVoices.find(function (v) { return premiumHints.test(v.name); });
-      if (premiumMale) return premiumMale;
-      var networkMale = maleVoices.find(function (v) { return v.localService === false; });
-      if (networkMale) return networkMale;
-      return maleVoices[0];
-    }
-
-    // 2. 這台裝置的中文語音庫裡完全沒有可辨識的男聲時，才退回音質優先（可能還是女聲）
-    var premiumHints2 = /premium|enhanced|neural|natural|siri|進階|優質|自然/i;
-    var premium = zhVoices.find(function (v) { return premiumHints2.test(v.name); });
-    if (premium) return premium;
-    var network = zhVoices.filter(function (v) { return v.localService === false; });
+    // 1. 雲端語音（如 Google 的中文語音）通常訓練資料更完整、發音自然度最高，優先選這個
+    var network = pool.filter(function (v) { return v.localService === false; });
+    var networkTW = network.find(function (v) { return /TW/i.test(v.lang); });
+    if (networkTW) return networkTW;
     if (network.length > 0) return network[0];
-    var twVoice = zhVoices.find(function (v) { return /TW/i.test(v.lang); });
-    return twVoice || zhVoices[0];
+
+    // 2. 沒有雲端語音可用時，退回裝置內建的正規語音（優先台灣腔）
+    var premiumHints = /premium|enhanced|neural|natural|進階|優質|自然/i;
+    var premium = pool.find(function (v) { return premiumHints.test(v.name); });
+    if (premium) return premium;
+    var twVoice = pool.find(function (v) { return /TW/i.test(v.lang); });
+    return twVoice || pool[0];
   }
 
   function stopGuideVoice() {
@@ -3556,7 +3726,7 @@ function toggleMenu() {
 
     guideUtterance = new SpeechSynthesisUtterance(text);
     guideUtterance.lang = 'zh-TW';
-    guideUtterance.rate = 1.08;
+    guideUtterance.rate = 1.13;
     guideUtterance.pitch = 0.88; // 微調音調與語速，聽起來更沉穩
     var voice = pickNarratorVoice();
     if (voice) guideUtterance.voice = voice;
@@ -3577,6 +3747,18 @@ function toggleMenu() {
 </script>
 
 <script>
+  // ===== 快速開啟 Google 翻譯 =====
+  function quickTranslate(targetLang) {
+    var input = document.getElementById('quickTranslateInput');
+    var text = input ? input.value.trim() : '';
+    if (!text) {
+      alert('請先在框框裡打一些中文再點翻譯。');
+      return;
+    }
+    var url = 'https://translate.google.com/?sl=zh-TW&tl=' + targetLang + '&text=' + encodeURIComponent(text) + '&op=translate';
+    window.open(url, '_blank', 'noopener');
+  }
+
   // ===== 即時換匯小工具 =====
   (function () {
     var rates = { UZS_PER_USD: 12800, TWD_PER_USD: 31.5 }; // 備援參考匯率，抓不到即時匯率時使用
@@ -3592,25 +3774,96 @@ function toggleMenu() {
       if (except !== 'TWD') twdInput.value = '';
     }
 
+    // 千分位格式化：decimals 為小數位數（UZS/TWD 用整數，USD 用小數兩位）
+    function formatNumber(n, decimals) {
+      if (!isFinite(n)) return '';
+      return n.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+    }
+
+    // 只允許數字、小數點、加減乘除、括號與空白，避免執行任意程式碼
+    function isSafeExpr(str) {
+      return /^[0-9+\-*/.() \s]+$/.test(str);
+    }
+
+    // 把輸入字串（可能含千分位逗號或算式）算成一個數字，算不出來回傳 NaN
+    function evalInput(raw) {
+      var str = raw.replace(/,/g, '').trim();
+      if (str === '') return NaN;
+      if (!isSafeExpr(str)) return NaN;
+      try {
+        var result = Function('"use strict"; return (' + str + ')')();
+        return (typeof result === 'number' && isFinite(result)) ? result : NaN;
+      } catch (e) {
+        return NaN;
+      }
+    }
+
+    // 打字時即時同步（純數字才即時換算，含算式符號時先不動，等失焦/Enter再算）
+    function liveSync(input, decimals, toOthers) {
+      var raw = input.value.replace(/,/g, '').trim();
+      if (raw === '') { clearOthers(input._key); return; }
+      if (!/^[0-9.]+$/.test(raw)) return; // 含運算符號，先不即時換算
+      var v = parseFloat(raw);
+      if (isNaN(v)) { clearOthers(input._key); return; }
+      toOthers(v);
+    }
+
+    // 失焦或按 Enter 時：把算式算出結果，並格式化回填（含千分位逗號）
+    function resolveAndFormat(input, decimals, toOthers) {
+      var raw = input.value;
+      if (raw.trim() === '') return;
+      var v = evalInput(raw);
+      if (isNaN(v)) {
+        alert('這個算式看不懂，請確認只用數字和 + - * / ( )，例如 150000/4');
+        return;
+      }
+      input.value = formatNumber(v, decimals);
+      toOthers(v);
+    }
+
+    uzsInput._key = 'UZS'; usdInput._key = 'USD'; twdInput._key = 'TWD';
+
     uzsInput.addEventListener('input', function () {
-      var v = parseFloat(uzsInput.value);
-      if (isNaN(v)) { clearOthers('UZS'); return; }
-      var usd = v / rates.UZS_PER_USD;
-      usdInput.value = usd.toFixed(2);
-      twdInput.value = (usd * rates.TWD_PER_USD).toFixed(0);
+      liveSync(uzsInput, 0, function (v) {
+        var usd = v / rates.UZS_PER_USD;
+        usdInput.value = usd.toFixed(2);
+        twdInput.value = (usd * rates.TWD_PER_USD).toFixed(0);
+      });
     });
     usdInput.addEventListener('input', function () {
-      var v = parseFloat(usdInput.value);
-      if (isNaN(v)) { clearOthers('USD'); return; }
-      uzsInput.value = (v * rates.UZS_PER_USD).toFixed(0);
-      twdInput.value = (v * rates.TWD_PER_USD).toFixed(0);
+      liveSync(usdInput, 2, function (v) {
+        uzsInput.value = (v * rates.UZS_PER_USD).toFixed(0);
+        twdInput.value = (v * rates.TWD_PER_USD).toFixed(0);
+      });
     });
     twdInput.addEventListener('input', function () {
-      var v = parseFloat(twdInput.value);
-      if (isNaN(v)) { clearOthers('TWD'); return; }
+      liveSync(twdInput, 0, function (v) {
+        var usd = v / rates.TWD_PER_USD;
+        usdInput.value = usd.toFixed(2);
+        uzsInput.value = (usd * rates.UZS_PER_USD).toFixed(0);
+      });
+    });
+
+    function bindResolve(input, decimals, toOthers) {
+      input.addEventListener('blur', function () { resolveAndFormat(input, decimals, toOthers); });
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') { e.preventDefault(); resolveAndFormat(input, decimals, toOthers); input.blur(); }
+      });
+    }
+
+    bindResolve(uzsInput, 0, function (v) {
+      var usd = v / rates.UZS_PER_USD;
+      usdInput.value = formatNumber(usd, 2);
+      twdInput.value = formatNumber(usd * rates.TWD_PER_USD, 0);
+    });
+    bindResolve(usdInput, 2, function (v) {
+      uzsInput.value = formatNumber(v * rates.UZS_PER_USD, 0);
+      twdInput.value = formatNumber(v * rates.TWD_PER_USD, 0);
+    });
+    bindResolve(twdInput, 0, function (v) {
       var usd = v / rates.TWD_PER_USD;
-      usdInput.value = usd.toFixed(2);
-      uzsInput.value = (usd * rates.UZS_PER_USD).toFixed(0);
+      usdInput.value = formatNumber(usd, 2);
+      uzsInput.value = formatNumber(usd * rates.UZS_PER_USD, 0);
     });
 
     statusEl.textContent = '⏳ 正在載入即時匯率...';
@@ -3726,6 +3979,17 @@ function toggleMenu() {
         });
     });
   })();
+</script>
+
+<script>
+  // ===== 註冊 Service Worker（PWA 離線快取備援）=====
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('service-worker.js').catch(function (err) {
+        console.warn('Service worker 註冊失敗：', err);
+      });
+    });
+  }
 </script>
 </body>
 </html>

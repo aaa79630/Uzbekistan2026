@@ -1476,6 +1476,39 @@
   .ac-details-body.open { max-height: 400px; }
   .ac-details-body .ac-row:first-child { padding-top: 6px; }
 
+  /* 房型清單：每種房型獨立一行 */
+  .ac-rooms {
+    list-style: none;
+    margin: 2px 0 6px;
+    padding: 0;
+  }
+  .ac-rooms li {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 3px 0;
+    font-size: 13px;
+    color: #4a4038;
+    line-height: 1.4;
+  }
+  .ac-rooms li .ac-room-icon { flex-shrink: 0; }
+
+  /* 含早餐小標籤 */
+  .ac-breakfast-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(212,175,55,0.18);
+    color: #8a6500;
+    font-family: 'Manrope', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin: 2px 0 6px;
+  }
+
   /* 飯店 Google Maps 按鈕（白底＋邊框，讓紅色圖釘 emoji 看起來自然，文字用 !important 避免被 .accom-confirmed a 的顏色規則蓋掉） */
   .accom-confirmed a.ac-map-btn {
     display: inline-flex;
@@ -1493,6 +1526,18 @@
     text-decoration: none;
   }
   .ac-map-btn:hover { background: var(--turquoise-light); }
+
+  /* 景點名稱旁的小型 Google Maps 圖示連結（精簡版，無按鈕外框） */
+  .spot-map-link {
+    text-decoration: none;
+    font-size: 12px;
+    margin-left: 3px;
+    opacity: 0.65;
+  }
+  .spot-map-link:hover { opacity: 1; }
+
+  /* 餐廳地址文字本身可點擊時的樣式 */
+  .addr-link { color: inherit; text-decoration: underline; text-decoration-style: dotted; }
   /* 房型那一行如果後面接的是地圖按鈕，就不需要下方虛線分隔線 */
   .ac-row:has(+ .ac-map-btn) { border-bottom: none; }
   /* ===== Flight Info ===== */
@@ -2275,7 +2320,7 @@
 
   <div style="text-align:center;margin-top:30px;padding-top:30px;border-top:1px solid var(--line);">
     <a href="#trip" style="display:inline-flex;align-items:center;gap:8px;background:var(--persian-blue);color:#fff;padding:14px 28px;border-radius:30px;text-decoration:none;font-family:'Noto Sans TC',sans-serif;font-size:15px;font-weight:700;box-shadow:0 6px 18px rgba(30,58,95,0.25);">
-      查看行程安排 <span style="font-size:14px;color:var(--uzbek-gold);">▶</span>
+      查看行程安排 <span style="font-size:14px;color:#fff;">▶</span>
     </a>
   </div>
 
@@ -2400,6 +2445,10 @@
 
 <section class="days" id="itinerary" data-tab="trip">
 
+  <div style="max-width:900px;margin:0 auto 24px;padding:14px 18px;background:var(--turquoise-light);border-radius:8px;font-size:13px;color:var(--tile-blue);line-height:1.7;">
+    💡 以下每天列出的景點是「這個城市值得一看」的參考清單，方便大家先掌握有哪些選擇，<strong>不代表每一項都排進行程、也不代表一定要全部去到</strong>。實際順序、去留、停留時間，都可以依大家當天的體力、天氣、興趣彈性調整，走到哪算到哪，不用有壓力。
+  </div>
+
   <div class="day-card" id="day1">
     <div class="day-info">
       <div class="day-number">01</div>
@@ -2408,7 +2457,7 @@
     <div class="day-content">
       <div class="day-route">抵達塔什干 Tashkent</div>
       <div class="day-tagline">踏上中亞心臟，感受現代與傳統的交織。</div>
-      <div class="day-details">13:10 落地後入住飯店。前往喬爾蘇市集 (Chorsu Bazaar) 感受道地氛圍，黃昏於獨立廣場散步。</div>
+      <div class="day-details">13:10 落地後入住飯店。前往喬爾蘇市集 (Chorsu Bazaar) 感受道地氛圍，順路走訪哈斯特伊瑪目建築群與伊斯蘭文明中心，都在步行範圍內。</div>
       <div class="day-photo-strip">
         <div class="gallery-item">
           <img src="https://images.unsplash.com/photo-1654861857666-1e8c438cbe4a?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="哈斯特伊瑪目建築群" loading="lazy">
@@ -2425,18 +2474,19 @@
       </div>
       <div class="highlight-box">
         <ul style="list-style: none; font-size: 14px;">
-          <li>• <strong>哈斯特伊瑪目建築群 Hazrati Imam Complex</strong>：塔什干最美的伊斯蘭建築群，藍色圓頂廣場本身全天開放、免費參觀<button class="deep-guide-btn" onclick="openGuide('hazratiImam')">📖 深度導覽</button>
+          <li>• <strong>哈斯特伊瑪目建築群 Hazrati Imam Complex</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Hazrati%20Imam%20Complex%20Tashkent" target="_blank" rel="noopener">📍</a>：塔什干最美的伊斯蘭建築群，藍色圓頂廣場本身全天開放、免費參觀<button class="deep-guide-btn" onclick="openGuide('hazratiImam')">📖 深度導覽</button>
             <span class="ticket-info">🎫 廣場免費參觀・開放全天</span>
           </li>
-          <li>• <strong>伊斯蘭文明中心 Center for Islamic Civilization</strong><span class="optional-tag">2026/3新開幕</span>：世界最古老古蘭經手抄本之一（奧斯曼古蘭經）已從舊址遷至此處展出，就在哈斯特伊瑪目建築群旁，全球規模最大的伊斯蘭文明博物館
+          <li>• <strong>伊斯蘭文明中心 Center for Islamic Civilization</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Center%20for%20Islamic%20Civilization%20Tashkent" target="_blank" rel="noopener">📍</a><span class="optional-tag">2026/3新開幕</span>：世界最古老古蘭經手抄本之一（奧斯曼古蘭經）已從舊址遷至此處展出，就在哈斯特伊瑪目建築群旁，全球規模最大的伊斯蘭文明博物館
             <span class="ticket-info">🎫 外國成人票約 $25 美金＋$10服務費（約NT$1,100）・開放 09:00–22:00 全年無休，晚上前往人潮較少，這天行程也排得下</span>
           </li>
-          <li>• <strong>Chorsu Bazaar</strong>：中亞最著名的圓頂市集，香料、堅果、乾果應有盡有</li>
-          <li>• <strong>塔什干當代藝術中心 CCA Tashkent</strong><span class="optional-tag">2026/9/6 剛開幕</span>：由1912年電車調度站改建的當代藝術空間，法國 Studio KO 操刀，開幕特展「Hikmah」（智慧）免費參觀<button class="deep-guide-btn" onclick="openGuide('ccaTashkent')">📖 深度導覽</button>
-            <span class="ticket-info">🎫 免費入場・Building B, 6 Amir Temur Street（市中心）・展期至2027年1月31日</span>
+          <li>• <strong>喬爾蘇市集 Chorsu Bazaar</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Chorsu%20Bazaar%20Tashkent" target="_blank" rel="noopener">📍</a>：中亞最著名的圓頂市集，香料、堅果、乾果應有盡有
+            <span class="ticket-info">🎫 免費入場・約 07:00–21:00（各家攤商略有差異），建議上午 9–11 點前往，人潮較少、貨品也最新鮮</span>
           </li>
-          <li>• <strong>Broadway Street</strong>：體驗塔什干夜生活</li>
-          <li>• <strong>獨立廣場</strong>：黃昏散步，感受現代塔什干的氣息</li>
+          <li>• <strong>帖木兒廣場 Amir Timur Square</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Amir%20Timur%20Square%20Tashkent" target="_blank" rel="noopener">📍</a><span class="optional-tag">晚上皆可</span>：塔什干市中心地標，帖木兒騎馬雕像所在，晚上打燈氣氛也不錯</li>
+          <li>• <strong>百老匯街 Broadway Street</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Broadway%20Street%20Tashkent%20Sailgokh" target="_blank" rel="noopener">📍</a><span class="optional-tag">晚上皆可</span>：連接帖木兒廣場的行人徒步區，體驗塔什干夜生活，酒吧、live music、街頭表演都在這一帶
+            <span class="ticket-info">💡 這兩個晚上去最有氣氛，Day1 晚上、Day10-11 晚上都可以，看當天體力和心情決定要哪天去，不用兩天都排；跟這一帶同一區的 CCA Tashkent 當代藝術中心是白天開放的展覽館，建議留到 Day10-11 白天再去，晚上去看不到展</span>
+          </li>
         </ul>
         <p style="font-size:12px;color:var(--earth-brown);opacity:0.75;margin-top:10px;padding-top:8px;border-top:1px dashed var(--line);">💡 烏茲別克近年砸重本邀請國際建築大師打造新地標：<strong>札哈·哈蒂建築事務所（Zaha Hadid Architects）</strong>設計的「阿里舍爾·納沃伊國際科學研究中心」（位於新塔什干，仍在細部設計階段），以及<strong>安藤忠雄</strong>操刀的「烏茲別克國家博物館」（2025年8月動工，預計2028年3月開幕）都還沒完工，這趟還看不到，但如果幾年後重遊，塔什干的天際線又會添兩座新地標了。</p>
       </div>
@@ -2463,7 +2513,7 @@
     <div class="day-content">
       <div class="day-route">塔什干 🛫 希瓦 Khiva</div>
       <div class="day-tagline">走進保存最完整的絲路「露天博物館」。</div>
-      <div class="day-details">下午搭乘國內線班機（HY 55，13:45起飛）飛往烏爾根奇轉希瓦，約16:00-16:30抵達。希瓦是古代花剌子模王國的首都，Day2下午先輕鬆逛，Day3再深度探索伊欽卡拉內城、朱瑪清真寺的古老木柱與藍色未完成塔。</div>
+      <div class="day-details">下午搭乘國內線班機（HY 55，13:45起飛）飛往烏爾根奇轉希瓦，約16:00-16:30抵達。希瓦是古代花剌子模王國的首都，Day2下午先輕鬆逛，Day3再深度探索伊欽卡拉內城、朱瑪清真寺的古老木柱與藍色未完成塔。<br><span style="opacity:0.75;font-size:12.5px;">💡 因為 Day2 中午才出發，如果 Day1 傍晚沒能逛到喬爾蘇市集，Day2 上午還有時間可以再去一趟。</span></div>
       <div class="day-photo-strip">
         <div class="gallery-item">
           <img src="https://images.unsplash.com/photo-1728281522185-0c06b2d7a598?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="希瓦老城窄巷" loading="lazy">
@@ -2484,12 +2534,12 @@
       </div>
       <div class="highlight-box">
         <ul style="list-style: none; font-size: 14px;">
-          <li>• <strong>伊欽卡拉內城 Itchan Kala</strong><span class="unesco-badge">🏛️ UNESCO 1990</span>：希瓦古城牆內的露天博物館，希瓦所有主要景點皆位於城內，一進西門就會看到最搶眼的「卡爾塔米諾爾矮塔」<button class="deep-guide-btn" onclick="openGuide('kaltaMinor')">📖 深度導覽</button>
+          <li>• <strong>伊欽卡拉內城 Itchan Kala</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Itchan%20Kala%20Khiva" target="_blank" rel="noopener">📍</a><span class="unesco-badge">🏛️ UNESCO 1990</span>：希瓦古城牆內的露天博物館，希瓦所有主要景點皆位於城內，一進西門就會看到最搶眼的「卡爾塔米諾爾矮塔」<button class="deep-guide-btn" onclick="openGuide('kaltaMinor')">📖 深度導覽</button>
             <span class="ticket-info">🎫 聯票 250,000 UZS／人（約 $20 美金／NT$655），效期48小時，涵蓋城內大多數清真寺・經學院・宮殿；伊斯蘭霍賈宣禮塔登頂、城牆攀登需另購票（各約 40,000–100,000 UZS，約 $3–8 美金／NT$105–262）</span>
           </li>
-          <li>• <strong>伊斯蘭霍賈宣禮塔</strong>：俯瞰古城最佳制高點，日落前上去拍照</li>
-          <li>• <strong>朱瑪清真寺</strong>：213根古老木柱，光線美到令人窒息<button class="deep-guide-btn" onclick="openGuide('jumaMosque')">📖 深度導覽</button></li>
-          <li>• <strong>西門城牆</strong>：看一場如史詩般的古城夕陽</li>
+          <li>• <strong>伊斯蘭霍賈宣禮塔 Islam Khodja Minaret</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Islam%20Khodja%20Minaret%20Khiva" target="_blank" rel="noopener">📍</a>：俯瞰古城最佳制高點，日落前上去拍照</li>
+          <li>• <strong>朱瑪清真寺 Juma Mosque</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Juma%20Mosque%20Khiva" target="_blank" rel="noopener">📍</a>：213根古老木柱，光線美到令人窒息<button class="deep-guide-btn" onclick="openGuide('jumaMosque')">📖 深度導覽</button></li>
+          <li>• <strong>西門城牆 Ota Darvoza</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Ota%20Darvoza%20Khiva" target="_blank" rel="noopener">📍</a>：看一場如史詩般的古城夕陽</li>
         </ul>
       </div>
       <div class="food-box">
@@ -2499,12 +2549,12 @@
         <div class="restaurant-card">
           <span class="r-tag">★ 網友激推</span>
           <div class="r-name">Terrassa Cafe & Restaurant</div>
-          <p>希瓦古城景觀第一排，二樓露台可俯瞰 Kalta Minor 矮宣禮塔與古城全景，日落藍調時刻最美。必點希瓦限定綠麵 Shivit Oshi、希瓦八味套餐（人多划算）。<br>📍 Chiva, Khorezm, 220900（西門 Ota Darvoza 步行約2分鐘）<br>📞 <a href="tel:+998556039111">+998 55 603 9111</a>・🕐 07:00–23:00</p>
+          <p>希瓦古城景觀第一排，二樓露台可俯瞰 Kalta Minor 矮宣禮塔與古城全景，日落藍調時刻最美。必點希瓦限定綠麵 Shivit Oshi、希瓦八味套餐（人多划算）。<br>📍 <a class="addr-link" href="https://www.google.com/maps/search/?api=1&query=Terrassa%20Cafe%20Restaurant%20Khiva" target="_blank" rel="noopener">Chiva, Khorezm, 220900（西門 Ota Darvoza 步行約2分鐘）</a><br>📞 <a href="tel:+998556039111">+998 55 603 9111</a>・🕐 07:00–23:00</p>
           <span class="r-book">10人訂位：露台景觀座位競爭激烈，強烈建議<strong>出發前先電話或請飯店協助預訂</strong>，並指定「露台區 Terrace」＋告知人數10人；若訂不到露台，室內區也能透過大片景觀窗看到矮塔。</span>
         </div>
         <div class="restaurant-card">
           <div class="r-name">Cafe Zarafshon</div>
-          <p>緊鄰伊斯蘭霍賈宣禮塔旁的古蹟建築餐廳，露台正對宣禮塔，夜晚打燈氣氛絕佳。招牌蒔蘿餃子、南瓜湯評價高。<br>📍 Islomxoʻja ko'chasi 89/3, Khiva（伊斯蘭霍賈宣禮塔旁）<br>📞 <a href="tel:+998623757051">+998 62 375 7051</a>・🕐 08:00–22:00</p>
+          <p>緊鄰伊斯蘭霍賈宣禮塔旁的古蹟建築餐廳，露台正對宣禮塔，夜晚打燈氣氛絕佳。招牌蒔蘿餃子、南瓜湯評價高。<br>📍 <a class="addr-link" href="https://www.google.com/maps/search/?api=1&query=Cafe%20Zarafshon%20Khiva" target="_blank" rel="noopener">Islomxoʻja ko'chasi 89/3, Khiva（伊斯蘭霍賈宣禮塔旁）</a><br>📞 <a href="tel:+998623757051">+998 62 375 7051</a>・🕐 08:00–22:00</p>
           <span class="r-book">10人訂位：晚餐時段常客滿，建議提前電話預訂或請飯店代訂，並抓寬鬆一點的用餐時間避免撲空。</span>
         </div>
       </div>
@@ -2549,19 +2599,19 @@
       </div>
       <div class="highlight-box">
         <ul style="list-style: none; font-size: 14px;">
-          <li>• <strong>布哈拉歷史中心</strong><span class="unesco-badge">🏛️ UNESCO 1993</span>：老城區整體被列為遺產，以下景點皆在步行範圍內</li>
-          <li>• <strong>阿爾克城堡 Ark Fortress</strong>：布哈拉最古老建築，內有多座小型博物館
+          <li>• <strong>布哈拉歷史中心 Historic Centre of Bukhara</strong><span class="unesco-badge">🏛️ UNESCO 1993</span>：老城區整體被列為遺產，以下景點皆在步行範圍內</li>
+          <li>• <strong>阿爾克城堡 Ark Fortress</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Ark%20Fortress%20Bukhara" target="_blank" rel="noopener">📍</a>：布哈拉最古老建築，內有多座小型博物館
             <span class="ticket-info">🎫 約 60,000 UZS／人（約 $5 美金／NT$157）・開放 09:00–20:00（全年）</span>
           </li>
-          <li>• <strong>卡揚宣禮塔＋卡揚清真寺 Po-i-Kalyan</strong>：布哈拉地標，46.5公尺高塔<button class="deep-guide-btn" onclick="openGuide('kalyanMinaret')">📖 深度導覽</button>
+          <li>• <strong>卡揚宣禮塔＋卡揚清真寺 Po-i-Kalyan</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Po-i-Kalyan%20Bukhara" target="_blank" rel="noopener">📍</a>：布哈拉地標，46.5公尺高塔<button class="deep-guide-btn" onclick="openGuide('kalyanMinaret')">📖 深度導覽</button>
             <span class="ticket-info">🎫 清真寺約 20,000 UZS／人（約 $1.6 美金／NT$52）；宣禮塔目前不開放攀登</span>
           </li>
-          <li>• <strong>Bolo Hauz 清真寺</strong>：20根木柱倒映水池的經典畫面，人稱「布哈拉的鏡子清真寺」，就在阿爾克城堡正對面，順路必拍<button class="deep-guide-btn" onclick="openGuide('boloHauz')">📖 深度導覽</button>
+          <li>• <strong>博羅浩茲清真寺 Bolo Hauz</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Bolo%20Hauz%20Mosque%20Bukhara" target="_blank" rel="noopener">📍</a>：20根木柱倒映水池的經典畫面，人稱「布哈拉的鏡子清真寺」，就在阿爾克城堡正對面，順路必拍<button class="deep-guide-btn" onclick="openGuide('boloHauz')">📖 深度導覽</button>
             <span class="ticket-info">🎫 免費參觀（仍為運作中的清真寺，可隨喜捐獻）・開放約 08:00–19:00，請注意當地祈禱時間、保持安靜與服裝端莊</span>
           </li>
-          <li>• <strong>Mir-i-Arab 神學院</strong>：至今仍在運行的活建築，卡揚宣禮塔正對面</li>
-          <li>• <strong>三圓頂市集</strong>：挑選精美的手工剪刀與地毯</li>
-          <li>• <strong>夏宮 Sitorai Mohi Xosa</strong>：末代可汗的俄式豪華行宮，近郊半日遊</li>
+          <li>• <strong>米爾阿拉伯神學院 Mir-i-Arab</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Mir-i-Arab%20Madrasah%20Bukhara" target="_blank" rel="noopener">📍</a>：至今仍在運行的活建築，卡揚宣禮塔正對面</li>
+          <li>• <strong>三圓頂市集 Trading Domes</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Trading%20Domes%20Bukhara" target="_blank" rel="noopener">📍</a>：挑選精美的手工剪刀與地毯</li>
+          <li>• <strong>夏宮 Sitorai Mohi Xosa</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Sitorai%20Mohi%20Xosa%20Bukhara" target="_blank" rel="noopener">📍</a>：末代可汗的俄式豪華行宮，近郊半日遊</li>
         </ul>
       </div>
       <div class="food-box">
@@ -2570,18 +2620,18 @@
       <div class="restaurant-box"><div class="restaurant-list">
         <div class="restaurant-card">
           <div class="r-name">Xon Atlas Restaurant</div>
-          <p>二樓露台區＋玻璃屋，可俯瞰古城圓頂建築與宣禮塔，古城風情濃厚。招牌手抓飯 Plov 約45,000 som，湯品22,000–28,000 som，價格透明實在。<br>📍 Ibadova 8, Bukhara（距亞克要塞約600公尺，步行7-10分鐘；入口藏在小巷，建議用 Google Maps 導航或搭 Yandex Go 直接導航店名）</p>
+          <p>二樓露台區＋玻璃屋，可俯瞰古城圓頂建築與宣禮塔，古城風情濃厚。招牌手抓飯 Plov 約45,000 som，湯品22,000–28,000 som，價格透明實在。<br>📍 <a class="addr-link" href="https://www.google.com/maps/search/?api=1&query=Xon%20Atlas%20Restaurant%20Bukhara" target="_blank" rel="noopener">Ibadova 8, Bukhara（距亞克要塞約600公尺，步行7-10分鐘；入口藏在小巷，建議用 Google Maps 導航或搭 Yandex Go 直接導航店名）</a></p>
           <span class="r-book">10人訂位：入口低調巷弄不易找，建議請飯店協助電話預訂並確認10人座位，用車前往時提醒司機把巷口位置抓準。</span>
         </div>
         <div class="restaurant-card">
           <span class="r-tag">★ 需提前訂位</span>
           <div class="r-name">Labi Hovuz</div>
-          <p>就在拉比豪茲水池畔，布哈拉老城最經典的地標餐廳，戶外水池座位＋夜晚live music，適合團體聚餐氣氛。招牌烤肉串份量大。<br>📍 Lyabi-Hauz 廣場（老城核心，步行可達所有主要景點）</p>
+          <p>就在拉比豪茲水池畔，布哈拉老城最經典的地標餐廳，戶外水池座位＋夜晚live music，適合團體聚餐氣氛。招牌烤肉串份量大。<br>📍 <a class="addr-link" href="https://www.google.com/maps/search/?api=1&query=Labi%20Hovuz%20restaurant%20Bukhara" target="_blank" rel="noopener">Lyabi-Hauz 廣場（老城核心，步行可達所有主要景點）</a></p>
           <span class="r-book">10人訂位：熱門時段（晚餐、有live music的夜晚）常客滿，且服務生忙碌時較難招呼到，建議提前透過飯店或當地包車司機協助電話占位，或提早30分鐘到場候位。</span>
         </div>
         <div class="restaurant-card">
           <div class="r-name">Oriental Tea House</div>
-          <p>藏在老城巷弄裡的絲路風情茶館，木雕天花板很美，主打道地烤包子（Samsa）與手拉麵，氣氛悠閒適合中午休息。<br>📍 布哈拉老城區中心，距市集（Bazaar）步行數分鐘</p>
+          <p>藏在老城巷弄裡的絲路風情茶館，木雕天花板很美，主打道地烤包子（Samsa）與手拉麵，氣氛悠閒適合中午休息。<br>📍 <a class="addr-link" href="https://www.google.com/maps/search/?api=1&query=Oriental%20Tea%20House%20Bukhara" target="_blank" rel="noopener">布哈拉老城區中心，距市集（Bazaar）步行數分鐘</a></p>
           <span class="r-book">10人訂位：屬於較悠閒的中小型茶館，人多建議提前告知店家或請飯店代訂，避免現場併桌久候。</span>
         </div>
       </div>
@@ -2628,25 +2678,27 @@
       <div class="highlight-box">
         <ul style="list-style: none; font-size: 14px;">
           <li>• <strong>撒馬爾罕：文化交匯的十字路口</strong><span class="unesco-badge">🏛️ UNESCO 2001</span>：撒馬爾罕舊城整體被列為遺產，以下景點皆屬其中<button class="deep-guide-btn" onclick="openGuide('samarkandCity')">📖 深度導覽</button></li>
-          <li>• <strong>雷吉斯坦廣場 Registan</strong>：清晨無人時拍照最美；夜晚燈光秀 ★ 必看<button class="deep-guide-btn" onclick="openGuide('registan')">📖 深度導覽</button>
+          <li>• <strong>雷吉斯坦廣場 Registan</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Registan%20Samarkand" target="_blank" rel="noopener">📍</a>：清晨無人時拍照最美；夜晚燈光秀 ★ 必看<button class="deep-guide-btn" onclick="openGuide('registan')">📖 深度導覽</button>
             <span class="ticket-info">🎫 100,000 UZS／人（約 $8 美金／NT$262）・開放約 08:00–19:00・夜晚燈光秀約 20:00–21:00 於廣場外免費觀賞</span>
           </li>
-          <li>• <strong>夏赫靜達陵墓群 Shah-i-Zinda</strong>：全球最美藍色陶磚走廊，穿越千年<button class="deep-guide-btn" onclick="openGuide('shahIZinda')">📖 深度導覽</button>
+          <li>• <strong>夏赫靜達陵墓群 Shah-i-Zinda</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Shah-i-Zinda%20Samarkand" target="_blank" rel="noopener">📍</a>：全球最美藍色陶磚走廊，穿越千年<button class="deep-guide-btn" onclick="openGuide('shahIZinda')">📖 深度導覽</button>
             <span class="ticket-info">🎫 約 50,000–75,000 UZS／人（約 $4–6 美金／NT$131–197）・開放約 08:00–19:00</span>
           </li>
-          <li>• <strong>阿弗拉西阿卜博物館 Afrasiyab Museum</strong>：典藏7世紀粟特壁畫「大使廳」，就在夏赫靜達陵墓群旁，順遊性高<button class="deep-guide-btn" onclick="openGuide('afrasiyabMuseum')">📖 深度導覽</button>
+          <li>• <strong>阿弗拉西阿卜博物館 Afrasiyab Museum</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Afrasiyab%20Museum%20Samarkand" target="_blank" rel="noopener">📍</a>：典藏7世紀粟特壁畫「大使廳」，就在夏赫靜達陵墓群旁，順遊性高<button class="deep-guide-btn" onclick="openGuide('afrasiyabMuseum')">📖 深度導覽</button>
             <span class="ticket-info">🎫 約 80,000 UZS／人（約 $6 美金／NT$210，外國人票價）・開放約 09:00–18:00</span>
           </li>
-          <li>• <strong>比比哈努姆清真寺 Bibi-Khanym</strong>：帖木兒為愛妻建造的宏偉清真寺
+          <li>• <strong>比比哈努姆清真寺 Bibi-Khanym</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Bibi-Khanym%20Mosque%20Samarkand" target="_blank" rel="noopener">📍</a>：帖木兒為愛妻建造的宏偉清真寺
             <span class="ticket-info">🎫 約 75,000 UZS／人（約 $6 美金／NT$197）</span>
           </li>
-          <li>• <strong>古爾埃米爾陵墓 Gur-e-Amir</strong>：帖木兒長眠之處，藍色肋骨圓頂<button class="deep-guide-btn" onclick="openGuide('gurEAmir')">📖 深度導覽</button>
+          <li>• <strong>古爾埃米爾陵墓 Gur-e-Amir</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Gur-e-Amir%20Samarkand" target="_blank" rel="noopener">📍</a>：帖木兒長眠之處，藍色肋骨圓頂<button class="deep-guide-btn" onclick="openGuide('gurEAmir')">📖 深度導覽</button>
             <span class="ticket-info">🎫 約 75,000 UZS／人（約 $6 美金／NT$197）</span>
           </li>
-          <li>• <strong>兀魯伯天文台 Ulugbek Observatory</strong>：帖木兒孫兀魯伯建造的15世紀天文台遺址，內有小型博物館
-            <span class="ticket-info">🎫 約 40,000 UZS／人（約 $3 美金／NT$105）</span>
+          <li>• <strong>兀魯伯天文台 Ulugbek Observatory</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Ulugbek%20Observatory%20Samarkand" target="_blank" rel="noopener">📍</a>：帖木兒孫兀魯伯建造的15世紀天文台遺址，內有小型博物館
+            <span class="ticket-info">🎫 約 40,000 UZS／人（約 $3 美金／NT$105）・距雷吉斯坦廣場約3-4公里，建議搭計程車前往（車程約10-15分鐘）</span>
           </li>
-          <li>• <strong>Meros Paper Mill</strong>：體驗傳承千年的手工造紙術</li>
+          <li>• <strong>梅羅斯造紙坊 Meros Paper Mill</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Meros%20Paper%20Mill%20Konigil%20Samarkand" target="_blank" rel="noopener">📍</a>：體驗傳承千年的手工造紙術
+            <span class="ticket-info">📍 位於 Konigil 村，跟兀魯伯天文台方向相近，都不在老城步行範圍內，建議安排同一趟計程車順遊，不用分兩趟跑</span>
+          </li>
           <li>• <strong style="color:var(--accent-red);">〔選配〕沙赫里薩布茲 Shakhrisyabz</strong><span class="optional-tag">半日/一日遊</span><span class="unesco-badge danger">🏛️ UNESCO 2000・瀕危名錄</span>：帖木兒出生地，阿克薩萊宮遺跡（僅存巨型城門），2016年因過度開發被列入瀕危世界遺產名錄，古蹟保存狀況不如布哈拉、撒馬爾罕完整
             <span class="ticket-info">📍 距撒馬爾罕約90公里，車程1.5–2h（單程），建議包車來回並預留半天以上・門票約 20,000–40,000 UZS（約 $2–3 美金／NT$52–105），戶外遺跡全年開放</span>
           </li>
@@ -2659,12 +2711,12 @@
         <div class="restaurant-card">
           <span class="r-tag">★ 雷吉斯坦景觀</span>
           <div class="r-name">Emirhan Restaurant</div>
-          <p>就在雷吉斯坦廣場旁，三樓露台可正對廣場全景，日落時分是撒馬爾罕最搶手的位子。招牌撒馬爾罕抓飯、烤羊舌評價高，可刷卡。網友評價服務尖峰時段較慢，需耐心。<br>📍 Makhmudzhanova 1/18, Samarkand（雷吉斯坦廣場正後方）<br>📞 <a href="tel:+998888916000">+998 88 891 6000</a>・🕐 11:00–23:00</p>
+          <p>就在雷吉斯坦廣場旁，三樓露台可正對廣場全景，日落時分是撒馬爾罕最搶手的位子。招牌撒馬爾罕抓飯、烤羊舌評價高，可刷卡。網友評價服務尖峰時段較慢，需耐心。<br>📍 <a class="addr-link" href="https://www.google.com/maps/search/?api=1&query=Emirhan%20Restaurant%20Samarkand" target="_blank" rel="noopener">Makhmudzhanova 1/18, Samarkand（雷吉斯坦廣場正後方）</a><br>📞 <a href="tel:+998888916000">+998 88 891 6000</a>・🕐 11:00–23:00</p>
           <span class="r-book">10人訂位：<strong>強烈建議提前電話預訂並指定「廣場邊露台座位」</strong>，日落前（約18:00前）入座才搶得到最佳邊角位；10人建議提早15-30分鐘到，避免旺季客滿被拆桌。</span>
         </div>
         <div class="restaurant-card">
           <div class="r-name">Bibikhanum Teahouse</div>
-          <p>比比哈努姆清真寺正南側，傳統 Tapchan 高台座位（盤腿或桌椅區皆有），適合團體圍坐用餐，抓飯、拉格曼、烤蔬菜串選擇多。<br>📍 Street 22A, Samarkand（比比哈努姆清真寺旁）<br>📞 <a href="tel:+998915378473">+998 91 537 8473</a>・🕐 11:00–23:00</p>
+          <p>比比哈努姆清真寺正南側，傳統 Tapchan 高台座位（盤腿或桌椅區皆有），適合團體圍坐用餐，抓飯、拉格曼、烤蔬菜串選擇多。<br>📍 <a class="addr-link" href="https://www.google.com/maps/search/?api=1&query=Bibikhanum%20Teahouse%20Samarkand" target="_blank" rel="noopener">Street 22A, Samarkand（比比哈努姆清真寺旁）</a><br>📞 <a href="tel:+998915378473">+998 91 537 8473</a>・🕐 11:00–23:00</p>
           <span class="r-book">10人訂位：戶外棚架座位多、彈性大，10人團體較容易併桌安排，仍建議提前致電告知人數，尖峰時段（中午參觀完清真寺後）容易滿座。</span>
         </div>
       </div>
@@ -2689,8 +2741,8 @@
     </div>
     <div class="day-content">
       <div class="day-route"><span style="display:inline-block;transform:scaleX(-1);">🚌</span> 回歸塔什干 🛬 賦歸</div>
-      <div class="day-tagline">最後的地鐵藝術之旅與天山風光。</div>
-      <div class="day-details">包車返塔什干（約4–4.5h，時間彈性配合撒馬爾罕最後行程）。進行「地鐵藝術站之旅」，每一站都是不同風格的地下宮殿。最後一天可前往天山 Chimgan 或 Charvak 水庫。23:00 搭機返程。</div>
+      <div class="day-tagline">最後的地鐵藝術之旅與市中心散策。</div>
+      <div class="day-details">包車返塔什干（約4–4.5h，時間彈性配合撒馬爾罕最後行程）。回到市區後可進行「地鐵藝術站之旅」，順路走訪帖木兒廣場、CCA Tashkent 當代藝術中心一帶的市中心街區。23:00 搭機返程。</div>
       <div class="day-photo-strip">
         <div class="gallery-item">
           <img src="https://images.unsplash.com/photo-1659469688035-d4381fd67b8f?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="詩人站 Alisher Navoiy" loading="lazy">
@@ -2711,7 +2763,7 @@
       </div>
       <div class="highlight-box">
         <ul style="list-style: none; font-size: 14px;">
-          <li>• <strong>🚇 塔什干地鐵</strong>：中亞第一座地鐵，蘇聯時期建造，每站都是不同風格的地下宮殿，2018年6月才解禁開放拍照（禁拍超過40年，因為兼具核子避難所功能）<button class="deep-guide-btn" onclick="openGuide('tashkentMetro')">📖 深度導覽</button>
+          <li>• <strong>🚇 塔什干地鐵 Tashkent Metro</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Tashkent%20Metro" target="_blank" rel="noopener">📍</a>：中亞第一座地鐵，蘇聯時期建造，每站都是不同風格的地下宮殿，2018年6月才解禁開放拍照（禁拍超過40年，因為兼具核子避難所功能）<button class="deep-guide-btn" onclick="openGuide('tashkentMetro')">📖 深度導覽</button>
             <span class="ticket-info">🎫 感應卡（ATTO交通卡）1,700 UZS（約 $0.1 美金／NT$4.5）／現金購票 3,000 UZS，2025年起車站/月台不再收現金投幣，須在站內資訊亭購買單次票或儲值交通卡，不限時間距離、票價不因搭乘站數變動</span>
             <div style="margin-top:8px;padding:10px 12px;background:var(--turquoise-light);border-radius:6px;font-size:13px;line-height:1.8;">
               <strong style="color:var(--tile-blue);">必去8站：</strong><br>
@@ -2722,16 +2774,46 @@
               <a href="https://www.instagram.com/p/DasRiLpnQjG/" target="_blank" rel="noopener" class="ref-link" style="margin-top:6px;">📷 參考路線圖與實拍照片</a>
             </div>
           </li>
-          <li>• <strong>Charvak 水庫</strong><span class="optional-tag">選配</span><span class="unesco-badge nature">🌲 UNESCO 2016 自然遺產（部分涵蓋）</span>：碧藍湖景，距市區約 1.5h，輕鬆選項
-            <span class="ticket-info">📍 位於 Ugam-Chatkal 國家公園內，即「西天山」世界自然遺產範圍（與哈薩克、吉爾吉斯共有）・湖區本身免費，部分景點/國家公園入口需付環境維護費</span>
+          <li>• <strong>塔什干當代藝術中心 CCA Tashkent</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=CCA%20Tashkent" target="_blank" rel="noopener">📍</a><span class="optional-tag">2026/9/6 剛開幕</span>：由1912年電車調度站改建的當代藝術空間，法國 Studio KO 操刀，開幕特展「Hikmah」（智慧）免費參觀，就在帖木兒廣場旁<button class="deep-guide-btn" onclick="openGuide('ccaTashkent')">📖 深度導覽</button>
+            <span class="ticket-info">🎫 免費入場・Building B, 6 Amir Temur Street（市中心）・展期至2027年1月31日・這個是白天開放的展覽館，晚上去看不到展，建議白天排這站</span>
           </li>
-          <li>• <strong>Chimgan 天山</strong><span class="optional-tag">選配</span><span class="unesco-badge nature">🌲 UNESCO 2016 自然遺產（部分涵蓋）</span>：壯麗山景，適合喜歡健行的旅人
-            <span class="ticket-info">📍 同屬 Ugam-Chatkal 國家公園／西天山世界遺產範圍，距塔什干約80–100公里，車程1.5–2h</span>
+          <li>• <strong>獨立廣場 Mustaqillik Square</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Mustaqillik%20Square%20Tashkent" target="_blank" rel="noopener">📍</a>：黃昏散步，感受現代塔什干的氣息，同樣鄰近「必去8站」的獨立廣場站</li>
+          <li>• <strong>恰爾瓦克水庫 Charvak Reservoir</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Charvak%20Reservoir" target="_blank" rel="noopener">📍</a><span class="optional-tag">選配</span><span class="unesco-badge nature">🌲 UNESCO 2016 自然遺產（部分涵蓋）</span>：碧藍湖景，距市區約 1.5h，輕鬆選項
+            <span class="ticket-info">📍 位於 Ugam-Chatkal 國家公園內，即「西天山」世界自然遺產範圍（與哈薩克、吉爾吉斯共有）・湖區本身免費，部分景點/國家公園入口需付環境維護費・這天時間偏緊，建議視實際狀況再決定要不要排</span>
+          </li>
+          <li>• <strong>欽姆干山 Chimgan</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Chimgan%20Uzbekistan" target="_blank" rel="noopener">📍</a><span class="optional-tag">選配</span><span class="unesco-badge nature">🌲 UNESCO 2016 自然遺產（部分涵蓋）</span>：壯麗山景，適合喜歡健行的旅人
+            <span class="ticket-info">📍 同屬 Ugam-Chatkal 國家公園／西天山世界遺產範圍，距塔什干約80–100公里，車程1.5–2h・這天時間偏緊，建議視實際狀況再決定要不要排</span>
           </li>
         </ul>
       </div>
       <div class="food-box">
-        <strong>🎁 必買伴手禮：</strong>烏茲別克乾果禮盒（杏乾、開心果、核桃）、果醬夾心餅乾、真空包裝 Non 烤餅。機場前：Caravan 餐廳最後一餐。
+        <strong>🎁 必買伴手禮：</strong>回程前可再去一趟<strong>喬爾蘇市集 Chorsu Bazaar</strong>（二樓圓頂內是乾果堅果香料最集中的地方）採購烏茲別克乾果禮盒（杏乾、開心果、核桃）、果醬夾心餅乾、真空包裝 Non 烤餅。機場前：Caravan 餐廳最後一餐。
+        <br><span style="font-size:12px;opacity:0.75;">⚠️ 入境台灣海關：建議挑「已烘焙／已調味」的堅果比較保險，生堅果可能需要額外檢疫文件；乾果類（杏乾、無花果乾等）入境時記得走紅線主動申報給檢疫人員看過，沒申報反而可能被罰款（NT$3,000–15,000），申報過關就沒問題；農畜水產品類總重量上限6公斤。</span>
+      </div>
+      <div class="restaurant-box"><div class="restaurant-list">
+        <div class="restaurant-card">
+          <span class="r-tag">★ 住處步行可達</span>
+          <div class="r-name">BOBOY Uzbek Eatery</div>
+          <p>道地烏茲別克料理，適合當作在烏茲別克的最後一餐。<br>📍 <a class="addr-link" href="https://www.google.com/maps/search/?api=1&query=BOBOY%20Uzbek%20Eatery%20Tashkent" target="_blank" rel="noopener">距 NOVA HOME／Nest One 住處步行約 9 分鐘</a></p>
+        </div>
+        <div class="restaurant-card">
+          <div class="r-name">City 21 Pan Asian Restaurant &amp; Lounge</div>
+          <p>泛亞洲料理，口味選擇較多元。<br>📍 <a class="addr-link" href="https://www.google.com/maps/search/?api=1&query=City%2021%20Pan%20Asian%20Restaurant%20Tashkent" target="_blank" rel="noopener">距住處步行約 6 分鐘</a></p>
+        </div>
+        <div class="restaurant-card">
+          <div class="r-name">Cucucina</div>
+          <p>義式料理。<br>📍 <a class="addr-link" href="https://www.google.com/maps/search/?api=1&query=Cucucina%20Tashkent" target="_blank" rel="noopener">距住處步行約 10 分鐘</a></p>
+        </div>
+        <div class="restaurant-card">
+          <div class="r-name">Paul</div>
+          <p>法式烘焙連鎖店，想吃麵包配咖啡簡單解決一餐時適合。<br>📍 <a class="addr-link" href="https://www.google.com/maps/search/?api=1&query=Paul%20bakery%20Tashkent" target="_blank" rel="noopener">距住處步行約 6 分鐘</a></p>
+        </div>
+        <div class="restaurant-card">
+          <div class="r-name">Mandarin Café Bar</div>
+          <p>咖啡酒吧，適合晚上小酌放鬆。<br>📍 <a class="addr-link" href="https://www.google.com/maps/search/?api=1&query=Mandarin%20Cafe%20Bar%20Tashkent" target="_blank" rel="noopener">距住處步行約 11 分鐘</a></p>
+        </div>
+      </div>
+        <p style="font-size:12px;color:var(--earth-brown);opacity:0.75;margin-top:10px;padding-top:8px;border-top:1px dashed var(--line);">💡 以上是從訂房頁面「鄰近設施」抓到的參考資訊，詳細地址、電話、營業時間建議用 Google Maps 或 Yandex Maps 現場再確認一次；Nest One 大樓本身樓下也有商場與餐廳，懶得出門走遠也有選擇。</p>
       </div>
       <div class="yt-embeds">
         <a class="yt-embed-item" href="https://www.youtube.com/watch?v=eYiLV1mlPRA" target="_blank" rel="noopener"><div class="yt-embed-label">▶ 塔什干地鐵藝術站</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/eYiLV1mlPRA/hqdefault.jpg" alt="▶ 塔什干地鐵藝術站" loading="lazy"><span class="yt-embed-play"></span></div></a>
@@ -2754,11 +2836,15 @@
       <div class="accom-card">
         <div class="accom-city">🔵 塔什干 Tashkent</div>
         <div class="accom-name">Day 1</div>
-        <div class="accom-nights">共 1 晚（9/18）</div>
+        <div class="accom-nights">共 1 晚（9/18）・9/19 退房．前往希瓦</div>
         <div class="accom-confirmed">
           <div class="ac-row ac-hotel-row"><strong>Hotel Marwa Tashkent Pool&amp;Spa</strong></div>
           <img class="ac-photo" src="https://hotelmarwatashkent.uz/img/07d93ef1498fe5e3.webp" alt="Hotel Marwa Tashkent Pool&amp;Spa" loading="lazy">
-          <div class="ac-row">3間2人房（1間加床）<br>1間4人房<br>含早餐・每位成人每天 SPA 1 小時</div>
+          <ul class="ac-rooms">
+            <li><span class="ac-room-icon">🛏️</span>3間2人房（1間加床）</li>
+            <li><span class="ac-room-icon">🛏️</span>1間4人房</li>
+          </ul>
+          <span class="ac-breakfast-badge">🍳 含早餐・每位成人每天 SPA 1 小時</span>
           <a class="ac-map-btn" href="https://www.google.com/maps/search/?api=1&query=Hotel+Marwa+Tashkent+Pool+Spa" target="_blank" rel="noopener">📍 Google Maps</a>
           <button class="ac-details-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open');">訂房明細（訂房連結・價格・訂單編號） <span class="adt-caret">▾</span></button>
           <div class="ac-details-body">
@@ -2775,11 +2861,16 @@
       <div class="accom-card">
         <div class="accom-city">🟡 希瓦 Khiva</div>
         <div class="accom-name">Day 2–3</div>
-        <div class="accom-nights">共 2 晚（9/19–20）</div>
+        <div class="accom-nights">共 2 晚（9/19–20）・9/21 退房．前往布哈拉</div>
         <div class="accom-confirmed">
           <div class="ac-row ac-hotel-row"><strong>Grand Vizir Hotel</strong></div>
           <img class="ac-photo" src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/316736042.jpg?k=3f997cf99af998754870248036e6d3d74a929c58c793a5c12cf6d8fe6956a27d&o=" alt="Grand Vizir Hotel Khiva" loading="lazy">
-          <div class="ac-row">2間雙床房（Twin）＋1間豪華雙人房（Deluxe Double）<br>2間3人房（Triple，其中1間限2人）<br>含早餐</div>
+          <ul class="ac-rooms">
+            <li><span class="ac-room-icon">🛏️</span>2間雙床房（Twin）</li>
+            <li><span class="ac-room-icon">🛏️</span>1間豪華雙人房（Deluxe Double）</li>
+            <li><span class="ac-room-icon">🛏️</span>2間3人房（Triple，其中1間限2人）</li>
+          </ul>
+          <span class="ac-breakfast-badge">🍳 含早餐</span>
           <a class="ac-map-btn" href="https://www.google.com/maps/search/?api=1&query=Grand+Vizir+Hotel+Khiva" target="_blank" rel="noopener">📍 Google Maps</a>
           <button class="ac-details-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open');">訂房明細（訂房連結・價格・訂單編號） <span class="adt-caret">▾</span></button>
           <div class="ac-details-body">
@@ -2795,7 +2886,11 @@
           <span class="backup-badge">🔄 備用・可免費取消</span>
           <div class="ac-row ac-hotel-row"><strong>Orient Star Khiva Hotel</strong></div>
           <img class="ac-photo" src="https://hotelorientstarkhiva.uz/img/a57923def9d3d4fb.webp" alt="Orient Star Khiva Hotel" loading="lazy">
-          <div class="ac-row">2間雙床房＋2間三床房（10人）<br>含早餐</div>
+          <ul class="ac-rooms">
+            <li><span class="ac-room-icon">🛏️</span>2間雙床房</li>
+            <li><span class="ac-room-icon">🛏️</span>2間三床房（10人）</li>
+          </ul>
+          <span class="ac-breakfast-badge">🍳 含早餐</span>
           <a class="ac-map-btn" href="https://www.google.com/maps/search/?api=1&query=Orient+Star+Khiva+Hotel" target="_blank" rel="noopener">📍 Google Maps</a>
           <button class="ac-details-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open');">訂房明細（訂房連結・價格・訂單編號） <span class="adt-caret">▾</span></button>
           <div class="ac-details-body">
@@ -2820,11 +2915,16 @@
       <div class="accom-card">
         <div class="accom-city">🟠 布哈拉 Bukhara</div>
         <div class="accom-name">Day 4–6</div>
-        <div class="accom-nights">共 3 晚（9/21–23）</div>
+        <div class="accom-nights">共 3 晚（9/21–23）・9/24 退房．前往撒馬爾罕</div>
         <div class="accom-confirmed">
           <div class="ac-row ac-hotel-row"><strong>Asl Boutique Hotel</strong></div>
           <img class="ac-photo" src="https://aslhotel.uz/img/e04fd92095144eb4.webp" alt="Asl Hotel Bukhara" loading="lazy">
-          <div class="ac-row">1間2人房（Twin）<br>1間3人家庭房（雙人+單人）<br>2間3人房（3單人床）<br>含早餐</div>
+          <ul class="ac-rooms">
+            <li><span class="ac-room-icon">🛏️</span>1間2人房（Twin）</li>
+            <li><span class="ac-room-icon">🛏️</span>1間3人家庭房（雙人+單人）</li>
+            <li><span class="ac-room-icon">🛏️</span>2間3人房（3單人床）</li>
+          </ul>
+          <span class="ac-breakfast-badge">🍳 含早餐</span>
           <a class="ac-map-btn" href="https://maps.app.goo.gl/P1qrR8n5wqQE8seV8" target="_blank" rel="noopener">📍 Google Maps</a>
           <button class="ac-details-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open');">訂房明細（訂房連結・價格・訂單編號） <span class="adt-caret">▾</span></button>
           <div class="ac-details-body">
@@ -2842,11 +2942,15 @@
       <div class="accom-card">
         <div class="accom-city">🟣 撒馬爾罕 Samarkand</div>
         <div class="accom-name">Day 7–9</div>
-        <div class="accom-nights">共 3 晚（9/24–26）</div>
+        <div class="accom-nights">共 3 晚（9/24–26）・9/27 退房．前往塔什干</div>
         <div class="accom-confirmed">
           <div class="ac-row ac-hotel-row"><strong>SULTANAT Samarkand</strong></div>
           <img class="ac-photo" src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/473561807.jpg?k=7ca332edae4c9e8fd9f9c7c28ad27bebd463e3f6b102f0c39d96dbc297db6b87&o=" alt="SULTANAT Samarkand" loading="lazy">
-          <div class="ac-row">4間雙人房<br>1間3人房<br>含早餐</div>
+          <ul class="ac-rooms">
+            <li><span class="ac-room-icon">🛏️</span>4間雙人房</li>
+            <li><span class="ac-room-icon">🛏️</span>1間3人房</li>
+          </ul>
+          <span class="ac-breakfast-badge">🍳 含早餐</span>
           <a class="ac-map-btn" href="https://www.google.com/maps/search/?api=1&query=SULTANAT+Samarkand+hotel" target="_blank" rel="noopener">📍 Google Maps</a>
           <button class="ac-details-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open');">訂房明細（訂房連結・價格・訂單編號） <span class="adt-caret">▾</span></button>
           <div class="ac-details-body">
@@ -2863,11 +2967,13 @@
       <div class="accom-card">
         <div class="accom-city">🔵 塔什干 Tashkent</div>
         <div class="accom-name">Day 10–11</div>
-        <div class="accom-nights">共 1 晚（9/27）・9/28 退房</div>
+        <div class="accom-nights">共 1 晚（9/27）・9/28 退房．返回曼谷</div>
         <div class="accom-confirmed">
           <div class="ac-row ac-hotel-row"><strong>NOVA HOME Apartments – NEST ONE, Tashkent City</strong></div>
           <img class="ac-photo" src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/825835322.jpg?k=ca64d7dd4311b59e2208a0b4a04c8f2af95543a8a12654fd8f3de71e47b92388&o=" alt="NOVA HOME Apartments NEST ONE Tashkent City" loading="lazy">
-          <div class="ac-row">3間4人房（無早餐）</div>
+          <ul class="ac-rooms">
+            <li><span class="ac-room-icon">🛏️</span>3間4人房（無早餐）</li>
+          </ul>
           <a class="ac-map-btn" href="https://www.google.com/maps/search/?api=1&query=NEST+ONE+Tashkent+City+tower" target="_blank" rel="noopener">📍 Google Maps</a>
           <button class="ac-details-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open');">訂房明細（訂房連結・價格・訂單編號） <span class="adt-caret">▾</span></button>
           <div class="ac-details-body">

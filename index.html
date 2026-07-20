@@ -292,6 +292,123 @@
     margin: 0;
   }
 
+  /* ===== History Notes (認識烏茲別克 背景故事,文章式排版) ===== */
+  .history-notes {
+    margin-top: 40px;
+    padding-top: 36px;
+    border-top: 1px solid var(--line);
+  }
+  .history-notes-title {
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 700;
+    color: var(--persian-blue);
+    font-size: 28px;
+    margin-bottom: 28px;
+    border-bottom: 2px solid var(--uzbek-gold);
+    display: inline-block;
+    padding-bottom: 8px;
+  }
+  .history-note {
+    margin-bottom: 32px;
+  }
+  .history-note::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+  .history-note:last-child {
+    margin-bottom: 0;
+  }
+  .history-note h4 {
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 700;
+    font-size: 19px;
+    color: var(--persian-blue);
+    margin-bottom: 12px;
+  }
+  .history-note p {
+    font-size: 15px;
+    color: #333;
+    line-height: 1.9;
+    margin-top: 0;
+    margin-bottom: 12px;
+  }
+  .history-note p:last-child {
+    margin-bottom: 0;
+  }
+  .history-figure {
+    float: right;
+    margin: -84px 0 16px 28px;
+  }
+  .history-figure.figure-wide {
+    width: 380px;
+  }
+  .history-figure.figure-narrow {
+    width: 300px;
+  }
+  .history-figure img {
+    width: 100%;
+    border-radius: 6px;
+    display: block;
+    cursor: zoom-in;
+  }
+  @media (min-width: 701px) and (max-width: 960px) {
+    .history-figure {
+      margin-top: 4px;
+    }
+  }
+  @media (max-width: 700px) {
+    .history-figure.figure-wide,
+    .history-figure.figure-narrow {
+      float: none;
+      width: 100%;
+      margin: 16px 0;
+    }
+  }
+  /* Lightbox for history-note images */
+  .lightbox-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(20,20,20,0.88);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    cursor: zoom-out;
+  }
+  .lightbox-overlay.active {
+    display: flex;
+  }
+  .lightbox-overlay img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 4px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  }
+  .history-figure figcaption {
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    color: var(--earth-brown);
+    opacity: 0.75;
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+  .history-figure figcaption a {
+    color: var(--persian-blue);
+    text-decoration: underline;
+  }
+  .history-note .further-reading {
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    color: var(--earth-brown);
+    margin-top: 4px;
+  }
+  .history-note .further-reading a {
+    color: var(--persian-blue);
+    text-decoration: underline;
+  }
+
   /* ===== Overview ===== */
   .overview { padding: 48px 40px; max-width: 1200px; margin: 0 auto; }
   .section-label { font-family: 'Manrope', sans-serif; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--tile-blue); margin-bottom: 16px; }
@@ -2472,11 +2589,66 @@
     </div>
   </div>
 
+  <div class="history-notes">
+    <div class="history-notes-title">絲路的另一面</div>
+
+    <div class="history-note">
+      <h4>被劃定的疆域，被改寫的文字</h4>
+      <p>1924年以前，中亞並沒有「烏茲別克」這個國家概念，只有撒馬爾罕、布哈拉這些綠洲城市與流動的汗國。是蘇聯政府依照民族學調查，用地圖硬生生劃出了今天的國界，許多混居的村莊與民族因此被強行切割。</p>
+      <p>之後，蘇聯政府又把這片土地打造成蘇聯的棉花田，大量抽乾阿姆河、錫爾河灌溉，讓曾是世界第四大湖的鹹海幾近消失。</p>
+      <p>語言文字上，蘇聯政府也接連出手：1920年代末先把烏茲別克語從阿拉伯字母改為拉丁字母，1940年再度下令改為西里爾字母——目的是切斷這片土地與土耳其、伊斯蘭世界的文字連結，轉而拉近與俄語的距離。</p>
+    </div>
+
+    <div class="history-note">
+      <h4>帖木兒：突厥世界借來的征服者</h4>
+      <figure class="history-figure figure-wide">
+        <img src="https://www.worldhistory.org/uploads/images/17689.png" alt="帖木兒帝國疆域圖，約1404年">
+        <figcaption>帖木兒帝國疆域圖（約1404年）。圖片來源：World History Encyclopedia</figcaption>
+      </figure>
+      <p>烏茲別克語屬於突厥語族的一支，和土耳其語、維吾爾語系出同源。1991年獨立後，烏茲別克政府把帖木兒——那位曾建立橫跨中亞大帝國的征服者——捧成了民族英雄的象徵，雷吉斯坦廣場的藍色穹頂便是他留下的遺產。</p>
+      <p>但嚴格來說，帖木兒是突厥化的蒙古貴族，並非現代定義的「烏茲別克人」（歷史上「烏茲別克」原指跟隨昔班尼汗南下的欽察突厥部落）。這座廣場的輝煌，某種程度上是烏茲別克政府為建構國族認同，「借歷史說故事」的展示。</p>
+    </div>
+
+    <div class="history-note">
+      <h4>從遠東到中亞：中亞高麗人的迫遷之路</h4>
+      <p>1937年，蘇聯領導人史達林以「防範日本間諜滲透」為由，下令將居住在俄羅斯遠東濱海邊疆區的十七萬朝鮮族人，強制遷往中亞。蘇聯當局用運送牲畜的悶罐火車廂載運他們，長途跋涉數週，許多老弱在途中或抵達後的第一個冬天病死凍死。</p>
+      <p>之後，高麗人把水稻種植技術帶進乾旱的中亞，建立起聞名蘇聯全國的模範集體農場。塔什干至今仍是全球中亞高麗人最大聚居地之一，街頭常見的「韓式胡蘿蔔沙拉」，正是這段離散歷史留下的味覺印記。</p>
+      <p class="further-reading">延伸閱讀：<a href="https://www.bbc.com/zhongwen/trad/world-69219532" target="_blank" rel="noopener">韓國：為什麼失散一個多世紀後回歸的高麗家庭受到冷遇</a>（BBC中文網）</p>
+    </div>
+
+    <div class="history-note">
+      <h4>從伊斯蘭穹頂到史達林式公寓：社會主義地景的形成</h4>
+      <figure class="history-figure figure-narrow">
+        <img src="https://photos.smugmug.com/photos/i-KLBDn5h/2/LDLBGQ5LR9xbf82hmg4ccDvq7mtNHx7QxnhsQKD3D/XL/i-KLBDn5h-XL.jpg" alt="塔什干蘇聯建築">
+        <figcaption>攝影：Wilhelm Chang，原文與更多照片見<a href="https://www.wilhelmchang.com/zh/tashkent/" target="_blank" rel="noopener">塔什干歷史、景點與拍攝建議</a></figcaption>
+      </figure>
+      <p>撒馬爾罕、布哈拉的琉璃穹頂與幾何星紋，是14世紀帖木兒下令擄來波斯、敘利亞工匠打造的黃金時代遺產。</p>
+      <p>1966年的大地震幾乎震毀塔什干，蘇聯政府藉機把它重建成寬闊筆直、水泥預製板公寓林立的社會主義示範城市。這場重建也讓塔什干成為蘇聯建築最集中的城市——粗獷主義的烏茲別克飯店、藏著大理石與馬賽克浮雕的地鐵站，都是這個時期的產物。相較之下，布哈拉、撒馬爾罕的舊城區大致被保留下來，蘇聯風格的街廓多半是另闢在旁邊的新城裡。</p>
+      <p>1991年獨立後，烏茲別克政府反過來大力修復帖木兒時代的古蹟。今天走在這幾座城市裡，你會同時看到兩層歷史疊在一起：帖木兒的藍色穹頂，與蘇聯的方正水泥。</p>
+    </div>
+  </div>
+
+  <div class="lightbox-overlay" id="historyLightbox" onclick="this.classList.remove('active')">
+    <img id="historyLightboxImg" src="" alt="">
+  </div>
+
   <div style="text-align:center;margin-top:30px;padding-top:30px;border-top:1px solid var(--line);">
     <a href="#trip" style="display:inline-flex;align-items:center;gap:8px;background:var(--persian-blue);color:#fff;padding:14px 28px;border-radius:30px;text-decoration:none;font-family:'Noto Sans TC',sans-serif;font-size:15px;font-weight:700;box-shadow:0 6px 18px rgba(30,58,95,0.25);">
       查看行程安排 <span style="font-size:14px;color:#fff;">▶</span>
     </a>
   </div>
+
+  <script>
+    document.querySelectorAll('.history-note img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        var overlay = document.getElementById('historyLightbox');
+        var overlayImg = document.getElementById('historyLightboxImg');
+        overlayImg.src = img.src;
+        overlayImg.alt = img.alt;
+        overlay.classList.add('active');
+      });
+    });
+  </script>
 
 </section>
 
@@ -3029,7 +3201,7 @@
         <div class="accom-confirmed">
           <div class="ac-row ac-hotel-row"><strong>Hotel Marwa Tashkent Pool&amp;Spa</strong></div>
           <div class="ac-gallery">
-          <div class="ac-gallery-slides"><div class="ac-gallery-slide"><img src="https://hotelmarwatashkent.uz/img/07d93ef1498fe5e3.webp" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/470340379.jpg?k=06a469005a5a508383e9ebe49339949485a7997d4dfdd6a4093110928826010c&o=" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/639472541.jpg?k=8c9a09b7a9baf4d932727d8a517f62e607f798582d2e154b2e9a288bc56f172b&o=" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/470340409.jpg?k=abd42f75cd296e5134fb7a7ed231f7a4c1b9e66457a5abcfdd75d8506c64991b&o=" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/471806401.jpg?k=629a1ea760e1ad3fff4bb87888cb7dae8f010209a1439badc1b10ece6cf9dbb7&o=" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/639471816.jpg?k=8c325a3f41cf81ed955b3af90b854035b6fcf4d3c874358cd5fb58911c90d3dd&o=" loading="lazy"></div></div>
+          <div class="ac-gallery-slides"><div class="ac-gallery-slide"><img src="https://hotelmarwatashkent.uz/img/07d93ef1498fe5e3.webp" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/470340379.jpg?k=06a469005a5a508383e9ebe49339949485a7997d4dfdd6a4093110928826010c&o=" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/639472541.jpg?k=8c9a09b7a9baf4d932727d8a517f62e607f798582d2e154b2e9a288bc56f172b&o=" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/470340409.jpg?k=abd42f75cd296e5134fb7a7ed231f7a4c1b9e66457a5abcfdd75d8506c64991b&o=" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/471806401.jpg?k=629a1ea760e1ad3fff4bb87888cb7dae8f010209a1439badc1b10ece6cf9dbb7&o=" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/639471816.jpg?k=8c325a3f41cf81ed955b3af90b854035b6fcf4d3c874358cd5fb58911c90d3dd&o=" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnaUuKE8dfbbTFIo3RMBUWsyt679-ejjmwhaUO-NN5PREQU2yaGuI0ToSAabBBhw5fVnKa0hlgXDYp6th62HcXoXDzj-MQr3d2qwdiykO-MHh8qH-8V4o8VZjbUC2nQLNyC8I_V1Q=w400-h267-k-no" loading="lazy"></div></div>
           <button class="ac-gallery-prev">‹</button>
           <button class="ac-gallery-next">›</button>
           <div class="ac-gallery-dots"></div>
@@ -3059,7 +3231,7 @@
         <div class="accom-confirmed">
           <div class="ac-row ac-hotel-row"><strong>Grand Vizir Hotel</strong></div>
           <div class="ac-gallery">
-          <div class="ac-gallery-slides"><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/316736042.jpg?k=3f997cf99af998754870248036e6d3d74a929c58c793a5c12cf6d8fe6956a27d&o=" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://images.trvl-media.com/lodging/118000000/117990000/117982000/117981958/6f813c97.jpg?impolicy=resizecrop&rw=575&rh=575&ra=fill" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://images.trvl-media.com/lodging/118000000/117990000/117982000/117981958/a71b114b.jpg?impolicy=resizecrop&rw=575&rh=575&ra=fill" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://images.trvl-media.com/lodging/118000000/117990000/117982000/117981958/fd5a0772.jpg?impolicy=resizecrop&rw=575&rh=575&ra=fill" loading="lazy"></div></div>
+          <div class="ac-gallery-slides"><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/316736042.jpg?k=3f997cf99af998754870248036e6d3d74a929c58c793a5c12cf6d8fe6956a27d&o=" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://images.trvl-media.com/lodging/118000000/117990000/117982000/117981958/6f813c97.jpg?impolicy=resizecrop&rw=575&rh=575&ra=fill" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://images.trvl-media.com/lodging/118000000/117990000/117982000/117981958/a71b114b.jpg?impolicy=resizecrop&rw=575&rh=575&ra=fill" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://images.trvl-media.com/lodging/118000000/117990000/117982000/117981958/fd5a0772.jpg?impolicy=resizecrop&rw=575&rh=575&ra=fill" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkpskaTorgx9zJw8ZAxrbW4ZtiOeFs_zHSJrjqC3Y7FmqAzrEVTE_HVtPbd10rAUb1ekY6nhIedFQuwRCeqo1dnj3ASu144YGgLhHZebwHhhl72Az76F1YYpVubUJY5BBycLGHF=w500-h375-k-no" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkPh_fsX2qQvz6L3MAwx_nyUX4Wyu8ffD3oHTEfGatJwp9vQ0LT64JABW4KkSzZe9sBqosNFICuNW8edgxHCRoqtGV5npIq9K6CEqlhQ6aOIwcXnBD1pa_6WHphVod-OkDb2wI=w500-h665-k-no" loading="lazy"></div></div>
           <button class="ac-gallery-prev">‹</button>
           <button class="ac-gallery-next">›</button>
           <div class="ac-gallery-dots"></div>
@@ -3085,7 +3257,7 @@
           <span class="backup-badge">🔄 備用・可免費取消</span>
           <div class="ac-row ac-hotel-row"><strong>Orient Star Khiva Hotel</strong></div>
           <div class="ac-gallery">
-          <div class="ac-gallery-slides"><div class="ac-gallery-slide"><img src="https://hotelorientstarkhiva.uz/img/a57923def9d3d4fb.webp" loading="lazy"></div></div>
+          <div class="ac-gallery-slides"><div class="ac-gallery-slide"><img src="https://hotelorientstarkhiva.uz/img/a57923def9d3d4fb.webp" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWk8bvx1_mefReClv-E-9uNO1r3zJQMjRirn-St4GiPksXGyo8-udRhHZpAP5VgeAj6Mn48TlayVAUphVH5ujBZ-qJBIs-hpsqsDvDd9aPcWSjumRvYx1qfxX9FqoxLphhQbCRI48qJwnz9B=w500-h375-k-no" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/149858924.jpg?k=4ff7ec8d3a847041caddb581d9e7a5a1572088821389d0718c9215d7a68832bf&o=&s=1024x" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnUOlYO8xyaDNvQB4ldRy7Fq63JZnVmt9PyFp4LkJ2ET91DCa9ekKg5i0mn_Zm2HTPolWHoL8ObRDUHqHSgumeE5BeNE78_iOFKK3-lqQVnix6gbawN9EErX4spazOFThb63zey=w500-h360-k-no" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://pix6.agoda.net/generic/3740793283ce5602eb539e4e9311d8b7.jpeg?ce=3&s=1024x" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://q-xx.bstatic.com/xdata/images/hotel/max500/99522972.jpg?k=8af68bf20f4b4c15cc460d869b2e744f350b9e0a13fcfc953ebcd4bada4c51f6&o=" loading="lazy"></div></div>
           <button class="ac-gallery-prev">‹</button>
           <button class="ac-gallery-next">›</button>
           <div class="ac-gallery-dots"></div>

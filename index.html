@@ -1471,6 +1471,128 @@
   .accom-confirmed .ac-note { display: block; color: #888; font-size: 11px; margin-top: 4px; }
 
   /* 飯店照片 */
+  /* ===== 住宿照片輪播 ===== */
+  .ac-gallery {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    background: #eee;
+    cursor: pointer;
+  }
+  .ac-gallery-slides {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.35s ease;
+  }
+  .ac-gallery-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+  }
+  .ac-gallery-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+  }
+  .ac-gallery-prev, .ac-gallery-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.45);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+    z-index: 2;
+    padding: 0;
+  }
+  .ac-gallery-prev { left: 8px; }
+  .ac-gallery-next { right: 8px; }
+  .ac-gallery-dots {
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 5px;
+    z-index: 2;
+  }
+  .ac-gallery-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.55);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .ac-gallery-dot.active { background: #fff; }
+
+  /* ===== Lightbox ===== */
+  .ac-lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    z-index: 9000;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .ac-lightbox.open { display: flex; }
+  .ac-lightbox-img {
+    max-width: 92vw;
+    max-height: 82vh;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+  .ac-lightbox-close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    color: #fff;
+    font-size: 28px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+  }
+  .ac-lightbox-prev, .ac-lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    font-size: 22px;
+    line-height: 42px;
+    text-align: center;
+    cursor: pointer;
+    padding: 0;
+  }
+  .ac-lightbox-prev { left: 16px; }
+  .ac-lightbox-next { right: 16px; }
+  .ac-lightbox-counter {
+    position: absolute;
+    bottom: 20px;
+    color: rgba(255,255,255,0.7);
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+  }
+
   .ac-photo {
     width: 100%;
     aspect-ratio: 16 / 10;
@@ -2850,7 +2972,17 @@
         <div class="restaurant-card">
           <span class="r-tag">★ 住處步行可達</span>
           <div class="r-name">BOBOY Uzbek Eatery<a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=BOBOY%20Uzbek%20Eatery%20Tashkent" target="_blank" rel="noopener">📍</a></div>
-          <p>道地烏茲別克料理，適合當作在烏茲別克的最後一餐。<br>• 距 NOVA HOME／Nest One 住處步行約 9 分鐘</p>
+          <p>道地烏茲別克料理，適合當作在烏茲別克的最後一餐。<br>• 距 Nest One 住處步行約 9 分鐘</p>
+        </div>
+        <div class="restaurant-card">
+          <span class="r-tag">★ Tashkent City Park 景觀露台</span>
+          <div class="r-name">Novikov Café<a class="spot-map-link" href="https://maps.app.goo.gl/hKvEKh1KX2rBPLxV9" target="_blank" rel="noopener">📍</a></div>
+          <p>知名餐飲品牌 Novikov 授權，泛亞洲＋地中海融合料理，兩層樓空間配 Tashkent City Park 露台景觀。早餐、午餐、晚餐全天皆有，服務穩定口碑好，就在 Nest One 附近。若想要舒適環境輕鬆結束旅程，這間很適合。<br>• 距住處步行可達・🕐 08:00 起</p>
+        </div>
+        <div class="restaurant-card">
+          <span class="r-tag">📸 打卡拍照</span>
+          <div class="r-name">Bazar Tashkent<a class="spot-map-link" href="https://maps.app.goo.gl/NwC5pewJSAwNuYNXA" target="_blank" rel="noopener">📍</a></div>
+          <p>位於 Tashkent City Boulevard，烏茲別克＋中東混搭木雕裝潢，氣氛設計感十足，IG 上評價極高。但有評論指出食物表現平平，建議把這間列為「喝杯飲料拍照打卡」的選項，若要認真吃飯則不列為首選。</p>
         </div>
         <div class="restaurant-card">
           <div class="r-name">City 21 Pan Asian Restaurant &amp; Lounge<a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=City%2021%20Pan%20Asian%20Restaurant%20Tashkent" target="_blank" rel="noopener">📍</a></div>
@@ -2869,7 +3001,7 @@
           <p>咖啡酒吧，適合晚上小酌放鬆。<br>• 距住處步行約 11 分鐘</p>
         </div>
       </div>
-        <p style="font-size:12px;color:var(--earth-brown);opacity:0.75;margin-top:10px;padding-top:8px;border-top:1px dashed var(--line);">💡 以上是從訂房頁面「鄰近設施」抓到的參考資訊，詳細地址、電話、營業時間建議用 Google Maps 或 Yandex Maps 現場再確認一次；Nest One 大樓本身樓下也有商場與餐廳，懶得出門走遠也有選擇。</p>
+        <p style="font-size:12px;color:var(--earth-brown);opacity:0.75;margin-top:10px;padding-top:8px;border-top:1px dashed var(--line);">💡 詳細地址、電話、營業時間建議用 Google Maps 或 Yandex Maps 現場再確認一次；Nest One 大樓本身樓下也有商場與餐廳，懶得出門走遠也有選擇。</p>
       </div>
       <div class="yt-embeds">
         <a class="yt-embed-item" href="https://www.youtube.com/watch?v=eYiLV1mlPRA" target="_blank" rel="noopener"><div class="yt-embed-label">▶ 塔什干地鐵藝術站</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/eYiLV1mlPRA/hqdefault.jpg" alt="▶ 塔什干地鐵藝術站" loading="lazy"><span class="yt-embed-play"></span></div></a>
@@ -2896,7 +3028,12 @@
         <div class="accom-nights">共 1 晚（9/18）・9/19 退房．前往希瓦</div>
         <div class="accom-confirmed">
           <div class="ac-row ac-hotel-row"><strong>Hotel Marwa Tashkent Pool&amp;Spa</strong></div>
-          <img class="ac-photo" src="https://hotelmarwatashkent.uz/img/07d93ef1498fe5e3.webp" alt="Hotel Marwa Tashkent Pool&amp;Spa" loading="lazy">
+          <div class="ac-gallery">
+          <div class="ac-gallery-slides"><div class="ac-gallery-slide"><img src="https://hotelmarwatashkent.uz/img/07d93ef1498fe5e3.webp" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/470340379.jpg?k=06a469005a5a508383e9ebe49339949485a7997d4dfdd6a4093110928826010c&o=" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/639472541.jpg?k=8c9a09b7a9baf4d932727d8a517f62e607f798582d2e154b2e9a288bc56f172b&o=" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/470340409.jpg?k=abd42f75cd296e5134fb7a7ed231f7a4c1b9e66457a5abcfdd75d8506c64991b&o=" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/471806401.jpg?k=629a1ea760e1ad3fff4bb87888cb7dae8f010209a1439badc1b10ece6cf9dbb7&o=" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/639471816.jpg?k=8c325a3f41cf81ed955b3af90b854035b6fcf4d3c874358cd5fb58911c90d3dd&o=" loading="lazy"></div></div>
+          <button class="ac-gallery-prev">‹</button>
+          <button class="ac-gallery-next">›</button>
+          <div class="ac-gallery-dots"></div>
+        </div>
           <ul class="ac-rooms">
             <li><span class="ac-room-icon">🛏️</span>2人房 × 3間</li>
             <li><span class="ac-room-icon">🛏️</span>4人房 × 1間</li>
@@ -2921,18 +3058,23 @@
         <div class="accom-nights">共 2 晚（9/19–20）・9/21 退房．前往布哈拉</div>
         <div class="accom-confirmed">
           <div class="ac-row ac-hotel-row"><strong>Grand Vizir Hotel</strong></div>
-          <img class="ac-photo" src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/316736042.jpg?k=3f997cf99af998754870248036e6d3d74a929c58c793a5c12cf6d8fe6956a27d&o=" alt="Grand Vizir Hotel Khiva" loading="lazy">
+          <div class="ac-gallery">
+          <div class="ac-gallery-slides"><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/316736042.jpg?k=3f997cf99af998754870248036e6d3d74a929c58c793a5c12cf6d8fe6956a27d&o=" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://images.trvl-media.com/lodging/118000000/117990000/117982000/117981958/6f813c97.jpg?impolicy=resizecrop&rw=575&rh=575&ra=fill" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://images.trvl-media.com/lodging/118000000/117990000/117982000/117981958/a71b114b.jpg?impolicy=resizecrop&rw=575&rh=575&ra=fill" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://images.trvl-media.com/lodging/118000000/117990000/117982000/117981958/fd5a0772.jpg?impolicy=resizecrop&rw=575&rh=575&ra=fill" loading="lazy"></div></div>
+          <button class="ac-gallery-prev">‹</button>
+          <button class="ac-gallery-next">›</button>
+          <div class="ac-gallery-dots"></div>
+        </div>
           <ul class="ac-rooms">
-            <li><span class="ac-room-icon">🛏️</span>雙床房 × 2間</li>
-            <li><span class="ac-room-icon">🛏️</span>豪華雙人房 × 1間</li>
-            <li><span class="ac-room-icon">🛏️</span>3人房 × 2間（其中1間限2人）</li>
+            <li><span class="ac-room-icon">🛏️</span>雙床房 × 1間</li>
+            <li><span class="ac-room-icon">🛏️</span>大床房 × 1間（2人）</li>
+            <li><span class="ac-room-icon">🛏️</span>3人房 × 2間</li>
           </ul>
           <span class="ac-breakfast-badge">🍳 含早餐</span>
           <a class="ac-map-btn" href="https://www.google.com/maps/search/?api=1&query=Grand+Vizir+Hotel+Khiva" target="_blank" rel="noopener">📍 Google Maps</a>
           <button class="ac-details-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open');">訂房明細（訂房連結・價格・訂單編號） <span class="adt-caret">▾</span></button>
           <div class="ac-details-body">
           <div class="ac-row"><a href="https://grandvizirhotel.com/" target="_blank" rel="noopener">官網 →</a></div>
-          <div class="ac-row"><span class="ac-price">9,540,000 UZS ≈ 25,125 TWD</span></div>
+          <div class="ac-row"><span class="ac-price">8,280,000 UZS ≈ 20,370 TWD</span></div>
           <div class="ac-row">
             <span class="ac-code">訂單編號：20260919-508227-1256327462</span>
             <span class="ac-code">現場付現・Derek 已訂</span>
@@ -2942,7 +3084,13 @@
         <div class="accom-confirmed">
           <span class="backup-badge">🔄 備用・可免費取消</span>
           <div class="ac-row ac-hotel-row"><strong>Orient Star Khiva Hotel</strong></div>
-          <img class="ac-photo" src="https://hotelorientstarkhiva.uz/img/a57923def9d3d4fb.webp" alt="Orient Star Khiva Hotel" loading="lazy">
+          <div class="ac-gallery">
+          <div class="ac-gallery-slides"><div class="ac-gallery-slide"><img src="https://hotelorientstarkhiva.uz/img/a57923def9d3d4fb.webp" loading="lazy"></div></div>
+          <button class="ac-gallery-prev">‹</button>
+          <button class="ac-gallery-next">›</button>
+          <div class="ac-gallery-dots"></div>
+        </div>
+          <p style="font-size:12.5px;color:var(--tile-blue);background:var(--turquoise-light);border-radius:6px;padding:8px 12px;margin:6px 0;">🏛️ 位於 UNESCO 世界遺產伊欽卡拉（Ichan-Kala）城牆內，入住一棟建於 19 世紀的古老神學院（Madrasah）建築，每個房間原本都是古代學生的住房，住進來等於真正睡進絲路古城的歷史裡。</p>
           <ul class="ac-rooms">
             <li><span class="ac-room-icon">🛏️</span>雙床房 × 2間</li>
             <li><span class="ac-room-icon">🛏️</span>三床房 × 2間</li>
@@ -2975,7 +3123,12 @@
         <div class="accom-nights">共 3 晚（9/21–23）・9/24 退房．前往撒馬爾罕</div>
         <div class="accom-confirmed">
           <div class="ac-row ac-hotel-row"><strong>Asl Boutique Hotel</strong></div>
-          <img class="ac-photo" src="https://aslhotel.uz/img/e04fd92095144eb4.webp" alt="Asl Hotel Bukhara" loading="lazy">
+          <div class="ac-gallery">
+          <div class="ac-gallery-slides"><div class="ac-gallery-slide"><img src="https://aslhotel.uz/img/e04fd92095144eb4.webp" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/879622298.jpg?k=1b128fd7aef91688070c267f6371e9d86a075bd1ca406003b5566686fc3722e6&o=" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/879621544.jpg?k=a021c20ab1f16820f6e8d97122e39d6cecc6a88f90cd59db42db039872a1de9b&o=" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/896174240.jpg?k=29325a7a6a040549f5a11bcdeaa8307ae305abf85ee4b37aa483d56ee601aae5&o=" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/879619511.jpg?k=70ae5fbcfff58387127fed3ae7f08373b49658301ee553bf3ccb975b9ad65254&o=" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/879618186.jpg?k=c875bad0be0fa460489648a4429d41ec2bc93628786f7a0e398087e20e3d70dd&o=" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/879621551.jpg?k=7274908591ecfe7681a135fbabad6ab1d6df9b0f653d063d1d1da8978c3a93d9&o=" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/639581495.jpg?k=3985318bf6292914192a36e0d55fffa3510685beb3304bdf8e13c2364ac8937c&o=" loading="lazy"></div></div>
+          <button class="ac-gallery-prev">‹</button>
+          <button class="ac-gallery-next">›</button>
+          <div class="ac-gallery-dots"></div>
+        </div>
           <ul class="ac-rooms">
             <li><span class="ac-room-icon">🛏️</span>3人房 × 2間</li>
             <li><span class="ac-room-icon">🛏️</span>2人房 × 2間</li>
@@ -3001,7 +3154,12 @@
         <div class="accom-nights">共 3 晚（9/24–26）・9/27 退房．前往塔什干</div>
         <div class="accom-confirmed">
           <div class="ac-row ac-hotel-row"><strong>SULTANAT Samarkand</strong></div>
-          <img class="ac-photo" src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/473561807.jpg?k=7ca332edae4c9e8fd9f9c7c28ad27bebd463e3f6b102f0c39d96dbc297db6b87&o=" alt="SULTANAT Samarkand" loading="lazy">
+          <div class="ac-gallery">
+          <div class="ac-gallery-slides"><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/473561807.jpg?k=7ca332edae4c9e8fd9f9c7c28ad27bebd463e3f6b102f0c39d96dbc297db6b87&o=" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlaBclW-UEXJVmgwcBnPK9Kl2q85Wq-4kBG7vJGn4hJpc7dztkYYnzDL4uxPye_ICIBaW0CqObAkTidWcgDvzfyX2oT0cVxG7-E97r-iHwO2m_tSB9NlrS18fdMx46OHFiYJ2uQCQb6HvGV=s1360-w1360-h1020-rw" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/473561634.jpg?k=9bec356a266f3c9913bdbbf6b8cad9896919c39342f6503b5a9b9f8533d6410a&o=" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/473561826.jpg?k=77cb44bcd3d0c54a6a919786428bcad1788bd6d6923aec5758001722585cf413&o=" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/473561707.jpg?k=f8ee89f68ccd0ecf80acad44e35b8b98c8ed85113970a47175c91975970ba44d&o=" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/473561733.jpg?k=abd183dbf521993b3833dcdf1f14e80bf84598161a64dcaeec6d06be5b64b2cd&o=" loading="lazy"></div></div>
+          <button class="ac-gallery-prev">‹</button>
+          <button class="ac-gallery-next">›</button>
+          <div class="ac-gallery-dots"></div>
+        </div>
           <ul class="ac-rooms">
             <li><span class="ac-room-icon">🛏️</span>2人房 × 4間</li>
             <li><span class="ac-room-icon">🛏️</span>3人房 × 1間</li>
@@ -3025,8 +3183,14 @@
         <div class="accom-name">Day 10–11</div>
         <div class="accom-nights">共 2 晚（9/27–28）・9/29 退房，但9/28夜間23:00即出發．返回曼谷</div>
         <div class="accom-confirmed">
-          <div class="ac-row ac-hotel-row"><strong>NOVA HOME Apartments – NEST ONE, Tashkent City</strong></div>
-          <img class="ac-photo" src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/825835322.jpg?k=ca64d7dd4311b59e2208a0b4a04c8f2af95543a8a12654fd8f3de71e47b92388&o=" alt="NOVA HOME Apartments NEST ONE Tashkent City" loading="lazy">
+          <div class="ac-row ac-hotel-row"><strong>NOVA HOME Apartments – NEST ONE</strong></div>
+          <div class="ac-gallery">
+          <div class="ac-gallery-slides"><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/825835322.jpg?k=ca64d7dd4311b59e2208a0b4a04c8f2af95543a8a12654fd8f3de71e47b92388&o=" loading="lazy"></div><div class="ac-gallery-slide"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/826217469.jpg?k=bda64b0cc7b7937fd1f30a80940136e1f9f7ab361d6e82e8162a812f036344cc&o=" loading="lazy"></div></div>
+          <button class="ac-gallery-prev">‹</button>
+          <button class="ac-gallery-next">›</button>
+          <div class="ac-gallery-dots"></div>
+        </div>
+          <p style="font-size:12.5px;color:var(--tile-blue);background:var(--turquoise-light);border-radius:6px;padding:8px 12px;margin:6px 0;">🏙️ Nest One 是烏茲別克目前最高建築，266.5 公尺、51 層，2023 年完工。48 樓與 52 樓設有觀景台，可俯瞰整個塔什干。</p>
           <ul class="ac-rooms">
             <li><span class="ac-room-icon">🛏️</span>舒適4人房 × 1間</li>
             <li><span class="ac-room-icon">🛏️</span>家庭房－附陽台 × 1間（4人）</li>
@@ -4377,5 +4541,91 @@
     });
   }
 </script>
+<!-- ===== 住宿照片 Lightbox ===== -->
+<div class="ac-lightbox" id="acLightbox">
+  <button class="ac-lightbox-close" onclick="closeLightbox()">✕</button>
+  <button class="ac-lightbox-prev" onclick="lightboxNav(-1)">‹</button>
+  <img class="ac-lightbox-img" id="acLightboxImg" src="" alt="">
+  <button class="ac-lightbox-next" onclick="lightboxNav(1)">›</button>
+  <div class="ac-lightbox-counter" id="acLightboxCounter"></div>
+</div>
+
+<script>
+// ===== 住宿照片輪播 + Lightbox =====
+(function () {
+  var lb = document.getElementById('acLightbox');
+  var lbImg = document.getElementById('acLightboxImg');
+  var lbCounter = document.getElementById('acLightboxCounter');
+  var lbImages = [];
+  var lbIndex = 0;
+
+  window.openLightbox = function (images, startIndex) {
+    lbImages = images;
+    lbIndex = startIndex || 0;
+    updateLightbox();
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+  window.closeLightbox = function () {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  };
+  window.lightboxNav = function (dir) {
+    lbIndex = (lbIndex + dir + lbImages.length) % lbImages.length;
+    updateLightbox();
+  };
+  function updateLightbox() {
+    lbImg.src = lbImages[lbIndex];
+    lbCounter.textContent = (lbIndex + 1) + ' / ' + lbImages.length;
+  }
+  lb.addEventListener('click', function (e) {
+    if (e.target === lb) closeLightbox();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') lightboxNav(-1);
+    if (e.key === 'ArrowRight') lightboxNav(1);
+  });
+
+  // 初始化所有輪播
+  document.querySelectorAll('.ac-gallery').forEach(function (gallery) {
+    var slides = gallery.querySelectorAll('.ac-gallery-slide');
+    var dotsEl = gallery.querySelector('.ac-gallery-dots');
+    var slidesEl = gallery.querySelector('.ac-gallery-slides');
+    var images = Array.from(slides).map(function (s) { return s.querySelector('img').src; });
+    var current = 0;
+
+    function goTo(i) {
+      current = (i + slides.length) % slides.length;
+      slidesEl.style.transform = 'translateX(-' + current * 100 + '%)';
+      dotsEl.querySelectorAll('.ac-gallery-dot').forEach(function (d, idx) {
+        d.classList.toggle('active', idx === current);
+      });
+    }
+
+    // 建立 dots
+    slides.forEach(function (_, i) {
+      var dot = document.createElement('div');
+      dot.className = 'ac-gallery-dot' + (i === 0 ? ' active' : '');
+      dot.onclick = function (e) { e.stopPropagation(); goTo(i); };
+      dotsEl.appendChild(dot);
+    });
+
+    gallery.querySelector('.ac-gallery-prev').onclick = function (e) { e.stopPropagation(); goTo(current - 1); };
+    gallery.querySelector('.ac-gallery-next').onclick = function (e) { e.stopPropagation(); goTo(current + 1); };
+    gallery.onclick = function () { openLightbox(images, current); };
+
+    // 觸控滑動
+    var touchStartX = 0;
+    gallery.addEventListener('touchstart', function (e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+    gallery.addEventListener('touchend', function (e) {
+      var diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) goTo(current + (diff > 0 ? 1 : -1));
+    });
+  });
+})();
+</script>
+
 </body>
 </html>

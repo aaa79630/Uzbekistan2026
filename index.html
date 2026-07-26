@@ -2553,8 +2553,8 @@
   </div>
 
   <figure style="max-width:720px;margin:24px auto 32px;">
-    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Silk%20route.jpg?width=800" alt="連接歐洲與東亞的絲綢之路，紅色為陸路，藍色為海路" style="width:100%;border-radius:6px;display:block;">
-    <figcaption style="font-family:'Manrope',sans-serif;font-size:12px;color:var(--earth-brown);opacity:0.75;margin-top:8px;text-align:center;">連接歐洲與東亞的<a href="https://zh.wikipedia.org/wiki/絲綢之路" target="_blank" rel="noopener" style="color:var(--tile-blue);">絲綢之路</a>，紅色為陸路，藍色為海路。圖片來源：Wikimedia Commons（公有領域）</figcaption>
+    <img id="introSilkRoadMap" src="https://www.worldhistory.org/uploads/images/146.png?v=1782966547-1770966882" alt="8世紀晚期絲路網絡示意圖" style="width:100%;border-radius:6px;display:block;">
+    <figcaption style="font-family:'Manrope',sans-serif;font-size:12px;color:var(--earth-brown);opacity:0.75;margin-top:8px;text-align:center;">8世紀晚期絲路網絡示意圖，彼時唐帝國與阿拔斯王朝雙雙強盛，這片路網也正是烏茲別克這片土地最繁榮的黃金年代。作者：Simeon Netchev，圖片來源：<a href="https://www.worldhistory.org/image/146/map-of-the-silk-road-during-the-late-8th-century/" target="_blank" rel="noopener" style="color:var(--tile-blue);">World History Encyclopedia</a>（CC BY-NC-ND 4.0）</figcaption>
   </figure>
 
   <div class="info-grid">
@@ -2578,7 +2578,7 @@
         <li>8 世紀：阿拉伯帝國征服，伊斯蘭文化傳入</li>
         <li>13 世紀：成吉思汗橫掃，撒馬爾罕幾近廢墟</li>
         <li>14–15 世紀：帖木兒大帝重建帝國，絲路文明最輝煌時代</li>
-        <li>19 世紀：淪為沙俄帝國附庸</li>
+        <li>19 世紀：布哈拉、希瓦成為沙俄保護國，塔什干一帶直接併入俄屬突厥斯坦</li>
         <li>1991 年：蘇聯解體，宣布獨立至今</li>
       </ul>
       <p style="font-size:12px;opacity:0.7;margin-top:8px;">💡 小知識：「西域」一詞在漢代原指玉門關、陽關以西的區域，到了唐代範圍擴展到整個中亞——換句話說，行程裡會去的撒馬爾罕、布哈拉、塔什干，在千年前的漢唐史書裡，統統都算是「西域」的一部分。</p>
@@ -2662,7 +2662,8 @@
   </div>
 
   <script>
-    document.querySelectorAll('.history-note img').forEach(function(img) {
+    document.querySelectorAll('.history-note img, #introSilkRoadMap').forEach(function(img) {
+      img.style.cursor = 'zoom-in';
       img.addEventListener('click', function() {
         var overlay = document.getElementById('historyLightbox');
         var overlayImg = document.getElementById('historyLightboxImg');
@@ -2835,7 +2836,7 @@
         <p style="font-size:13px;color:var(--earth-brown);margin-bottom:12px;">💡 以下這幾個景點其實都在塔什干老城同一個街區，用走的就能全部串起來，不用擔心是分散的景點。</p>
         <ul style="list-style: none; font-size: 14px;">
           <li>• <strong>喬爾蘇市集 Chorsu Bazaar</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Chorsu%20Bazaar%20Tashkent" target="_blank" rel="noopener">📍</a>：中亞最著名的圓頂市集，香料、堅果、乾果應有盡有
-            <div class="chip-row"><span class="chip chip-tip">🕐 約 07:00–21:00（各家攤商略有差異）</span><span class="chip chip-tip">💰 烏茲別克市集議價是常態，大部分旅客建議可以從對方開價的半價開始還，接下來幾天逛的市集都適用</span></div>
+            <div class="chip-row"><span class="chip chip-tip">🕐 約 07:00–21:00（各家攤商略有差異）</span><span class="chip chip-tip">💰 烏茲別克市集議價是常態，大部分旅客建議可以從對方開價的半價開始還，接下來幾天逛的市集都適用</span><span class="chip chip-tip">🍇 9月正值石榴、葡萄、哈密瓜盛產季，蔬果攤位可以直接買現切水果試吃</span></div>
             <button class="deep-guide-btn" onclick="openGuide('chorsuBazaar')">🔍 深度導覽</button>
           </li>
           <li>• <strong>庫克達什經學院 Kukeldash Madrasah</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Kukeldash%20Madrasah%20Tashkent" target="_blank" rel="noopener">📍</a>：就在喬爾蘇市集旁，建於約1570年，1966年塔什干大地震中少數倖存的宗教建築之一，黃磚打造、門樓高20公尺，蘇聯時期曾被挪用成無神論展覽館與民族樂器博物館，獨立後才恢復宗教教育功能，至今仍有學生在裡面研習
@@ -2868,7 +2869,7 @@
       <div class="yt-embeds">
         <a class="yt-embed-item" href="https://www.youtube.com/watch?v=jpS57zjs4N8" target="_blank" rel="noopener"><div class="yt-embed-label">▶ 塔什干全攻略</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/jpS57zjs4N8/hqdefault.jpg" alt="▶ 塔什干全攻略" loading="lazy"><span class="yt-embed-play"></span></div></a>
         <a class="yt-embed-item" href="https://www.youtube.com/watch?v=LydeWaKK0Uo&t=176" target="_blank" rel="noopener"><div class="yt-embed-label">▶ 塔什干吃350公斤的抓飯</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/LydeWaKK0Uo/hqdefault.jpg" alt="▶ 塔什干吃350公斤的抓飯" loading="lazy"><span class="yt-embed-play"></span></div></a>
-        <a class="yt-embed-item" href="https://www.youtube.com/watch?v=9GMJ_2_xZc8" target="_blank" rel="noopener"><div class="yt-embed-label">▶ Chorsu Bazaar 市集散步</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/9GMJ_2_xZc8/hqdefault.jpg" alt="▶ Chorsu Bazaar 市集散步" loading="lazy"><span class="yt-embed-play"></span></div></a>
+        <a class="yt-embed-item" href="https://www.youtube.com/watch?v=hG-ekv5tLMI" target="_blank" rel="noopener"><div class="yt-embed-label">▶ Chorsu Bazaar 市集散步</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/hG-ekv5tLMI/hqdefault.jpg" alt="▶ Chorsu Bazaar 市集散步" loading="lazy"><span class="yt-embed-play"></span></div></a>
       </div>
       <div class="day-map">
         <div class="day-map-label"><span class="title">🗾 塔什干景點地圖</span><span class="hint">可拖曳縮放，點左上角圖示切換圖層／景點清單</span></div>
@@ -3167,7 +3168,7 @@
             <button class="deep-guide-btn" onclick="openGuide('bibiKhanym')">🔍 深度導覽</button>
           </li>
           <li>• <strong>西亞卜市集 Siyob Bazaar</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Siyob%20Bazaar%20Samarkand" target="_blank" rel="noopener">📍</a>：就在比比哈努姆清真寺旁，撒馬爾罕最大市集，穹頂大廳裡蔬果、香料、堅果乾果、手工藝品應有盡有，必買撒馬爾罕烤饢（當地公認全烏茲別克最好吃）
-            <div class="chip-row"><span class="chip chip-tip">🕐 07:00–19:00，週一公休</span><span class="chip chip-tip">💡 建議早上去，蔬果最新鮮、人潮也較少；議價方式同喬爾蘇市集</span></div>
+            <div class="chip-row"><span class="chip chip-tip">🕐 07:00–19:00，週一公休</span><span class="chip chip-tip">💡 建議早上去，蔬果最新鮮、人潮也較少；議價方式同喬爾蘇市集</span><span class="chip chip-tip">🍇 9月正值石榴、葡萄、哈密瓜盛產季，蔬果攤位可以直接買現切水果試吃</span></div>
           </li>
           <li>• <strong>古爾埃米爾陵墓 Gur-e-Amir</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Gur-e-Amir%20Samarkand" target="_blank" rel="noopener">📍</a>：帖木兒長眠之處，藍色肋骨圓頂
             <div class="chip-row"><span class="chip">🎫 約 75,000 UZS／人（約 $6 美金／NT$197）</span></div>
@@ -3191,10 +3192,21 @@
       <div class="restaurant-box"><div class="restaurant-list">
         <div class="restaurant-card">
           <span class="r-tag">★ 雷吉斯坦景觀</span>
-          <div class="r-name">Emirhan Restaurant<a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Emirhan%20Restaurant%20Samarkand" target="_blank" rel="noopener">📍</a></div>
+          <div class="r-name">Emirhan Restaurant<a class="spot-map-link" href="https://www.google.com/maps/place/Emirhan+Restaurant/@39.6561796,66.9746706,17z" target="_blank" rel="noopener">📍</a></div>
           <p>就在雷吉斯坦廣場旁，三樓露台可正對廣場全景，日落時分是撒馬爾罕最搶手的位子。招牌撒馬爾罕抓飯、烤羊舌評價高，可刷卡。網友評價服務尖峰時段較慢，需耐心。<br>• Makhmudzhanova 1/18, Samarkand（雷吉斯坦廣場正後方）<br>📞 <a href="tel:+998888916000">+998 88 891 6000</a>・🕐 11:00–23:00</p>
           <span class="r-book">10人訂位：<strong>強烈建議提前電話預訂並指定「廣場邊露台座位」</strong>，日落前（約18:00前）入座才搶得到最佳邊角位；10人建議提早15-30分鐘到，避免旺季客滿被拆桌。</span>
           <span class="r-book">🌕 中秋提醒：9/25 你們人在撒馬爾罕，這裡露台正對雷吉斯坦廣場，建議18:00–19:00入座，吃到天色轉暗、月亮升起，順便賞月。</span>
+        </div>
+        <div class="restaurant-card">
+          <div class="r-name">Samarkand Restaurant<a class="spot-map-link" href="https://www.google.com/maps/place/Samarkand+Restaurant/@39.6547798,66.9509219,17z" target="_blank" rel="noopener">📍</a></div>
+          <p>市中心人氣老字號，2015年開業至今裝潢風格未變，水晶吊燈＋傳統雕花裝飾，走烏茲別克＋俄式＋歐式融合路線。招牌抓飯份量大、評價穩定，適合團體聚餐。<br>• Pushkin St, Samarkand（市中心）<br>🕐 約 10:00–23:00</p>
+          <span class="r-book">10人訂位：熱門老店建議提前訂位；帳單常會加收15%服務費，結帳時可主動確認費用明細。</span>
+        </div>
+        <div class="restaurant-card">
+          <span class="r-tag">🍷 百年酒莊</span>
+          <div class="r-name">Khovrenko Winery<a class="spot-map-link" href="https://www.google.com/maps/place/Museum+of+Wine-Making+named+after+Khovrenko/@39.6538388,66.9509507,17z" target="_blank" rel="noopener">📍</a></div>
+          <p>正式名稱是「霍夫連科葡萄酒釀造博物館」，酒莊與博物館合一，1868年創立，烏茲別克歷史最悠久的酒莊，撒馬爾罕所在的澤拉夫尚河谷自古就是釀酒葡萄產區。生產紅白葡萄酒、白蘭地、伏特加，招牌是用無籽葡萄釀造的特色酒款「Gullakandoz」，可入內參觀酒窖、了解釀酒歷史，也能現場試飲。<br>• 選配景點，適合安排半小時到一小時</p>
+          <span class="r-book">建議事先查詢或電話確認開放時間與試飲方案，旺季建議提前預約團體導覽。</span>
         </div>
         <div class="restaurant-card">
           <div class="r-name">Bibikhanum Teahouse<a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Bibikhanum%20Teahouse%20Samarkand" target="_blank" rel="noopener">📍</a></div>
@@ -3207,7 +3219,6 @@
         <a class="yt-embed-item" href="https://www.youtube.com/watch?v=QWwQagy2l5I" target="_blank" rel="noopener"><div class="yt-embed-label">▶ 雷吉斯坦廣場介紹</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/QWwQagy2l5I/hqdefault.jpg" alt="▶ 雷吉斯坦廣場介紹" loading="lazy"><span class="yt-embed-play"></span></div></a>
         <a class="yt-embed-item" href="https://www.youtube.com/watch?v=2nKrN0wb52g" target="_blank" rel="noopener"><div class="yt-embed-label">▶ 撒馬爾罕中文介紹</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/2nKrN0wb52g/hqdefault.jpg" alt="▶ 撒馬爾罕中文介紹" loading="lazy"><span class="yt-embed-play"></span></div></a>
         <a class="yt-embed-item" href="https://www.youtube.com/watch?v=6AgewtYC3vs" target="_blank" rel="noopener"><div class="yt-embed-label">▶ 撒馬爾罕深度旅遊（中亞旅行Vlog）</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/6AgewtYC3vs/hqdefault.jpg" alt="▶ 撒馬爾罕深度旅遊" loading="lazy"><span class="yt-embed-play"></span></div></a>
-        <a class="yt-embed-item" href="https://www.youtube.com/watch?v=Ml_jJQSgikc" target="_blank" rel="noopener"><div class="yt-embed-label">▶ 夏赫靜達走廊</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/Ml_jJQSgikc/hqdefault.jpg" alt="▶ 夏赫靜達走廊" loading="lazy"><span class="yt-embed-play"></span></div></a>
       </div>
       <div class="day-map">
         <div class="day-map-label"><span class="title">🗾 撒馬爾罕景點地圖</span><span class="hint">可拖曳縮放，點左上角圖示切換圖層／景點清單</span></div>
@@ -3280,7 +3291,7 @@
         </ul>
       </div>
       <div class="food-box">
-        <strong>🎁 必買伴手禮：</strong>回程前可再去一趟<strong>喬爾蘇市集 Chorsu Bazaar</strong>（二樓圓頂內是乾果堅果香料最集中的地方）採購烏茲別克乾果禮盒（杏乾、開心果、核桃）、果醬夾心餅乾、真空包裝 Non 烤餅。機場前的最後一餐建議見下方 <strong>Caravan</strong>。
+        <strong>🎁 必買伴手禮：</strong>回程前可再去一趟<strong>喬爾蘇市集 Chorsu Bazaar</strong>（二樓圓頂內是乾果堅果香料最集中的地方）採購烏茲別克乾果禮盒（杏乾、開心果、核桃）、果醬夾心餅乾、真空包裝 Non 烤餅，9月也是新鮮石榴、葡萄、哈密瓜產季，蔬果攤位可以買現切水果解解饞。機場前的最後一餐建議見下方 <strong>Caravan</strong>。
         <br><span style="font-size:12px;opacity:0.75;">⚠️ 入境台灣海關：建議挑「已烘焙／已調味」的堅果比較保險，生堅果可能需要額外檢疫文件；乾果類（杏乾、無花果乾等）入境時記得走紅線主動申報給檢疫人員看過，沒申報反而可能被罰款（NT$3,000–15,000），申報過關就沒問題；農畜水產品類總重量上限6公斤。</span>
       </div>
       <div class="restaurant-box"><div class="restaurant-list">

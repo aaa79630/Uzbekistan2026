@@ -387,6 +387,25 @@
     box-shadow: 0 10px 40px rgba(0,0,0,0.5);
   }
   .gallery-item img, .day-photo-strip .gallery-item img { cursor: zoom-in; }
+  #metroMapZoomToggle { display: none; }
+  .metro-map-zoom-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(20,20,20,0.9);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    cursor: zoom-out;
+  }
+  .metro-map-zoom-overlay img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 4px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  }
+  #metroMapZoomToggle:checked ~ .metro-map-zoom-overlay { display: flex; }
   .history-figure figcaption {
     font-family: 'Manrope', sans-serif;
     font-size: 12px;
@@ -3328,10 +3347,14 @@
               🔴 紅線：<strong>Paxtakor</strong> 棉花站・<strong>Mustaqillik Maydoni</strong> 獨立廣場站<br>
               🟢 綠線：<strong>Bodomzor</strong> 杏樹林站・<strong>Yunus Rajabiy</strong> 音樂家站<br>
               <span style="opacity:0.75;">💡 詩人站／棉花站出站可順遊阿里舍爾·納沃伊電影宮，太空人站出站可順遊珍珠公寓，都是UNESCO構成點、不繞路</span><br>
-              <a href="https://oss.metrolinehub.com/maps/uzbekistan/tashkent-metro-map.png" target="_blank" rel="noopener" style="display:block;margin-top:8px;">
-                <img id="tashkentMetroMapImg" src="https://oss.metrolinehub.com/maps/uzbekistan/tashkent-metro-map.png" alt="塔什干地鐵全圖" loading="lazy" style="width:100%;border-radius:6px;border:1px solid var(--line);cursor:zoom-in;">
-              </a>
-              <div style="font-size:11px;color:var(--earth-brown);opacity:0.7;margin-top:4px;">🗺️ 塔什干地鐵全圖（點圖在新分頁開啟原圖，可自由縮放）</div>
+              <input type="checkbox" id="metroMapZoomToggle">
+              <label for="metroMapZoomToggle" style="display:block;margin-top:8px;cursor:zoom-in;">
+                <img id="tashkentMetroMapImg" src="https://oss.metrolinehub.com/maps/uzbekistan/tashkent-metro-map.png" alt="塔什干地鐵全圖" loading="lazy" style="width:100%;border-radius:6px;border:1px solid var(--line);">
+              </label>
+              <label for="metroMapZoomToggle" class="metro-map-zoom-overlay">
+                <img src="https://oss.metrolinehub.com/maps/uzbekistan/tashkent-metro-map.png" alt="塔什干地鐵全圖">
+              </label>
+              <div style="font-size:11px;color:var(--earth-brown);opacity:0.7;margin-top:4px;">🗺️ 塔什干地鐵全圖（點圖放大，再點一次關閉）</div>
               <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:6px;">
                 <a href="https://www.instagram.com/p/DasRiLpnQjG/" target="_blank" rel="noopener" class="ref-link">📷 參考路線圖與實拍照片</a>
                 <a href="https://nanashares.com/%E5%A1%94%E4%BB%80%E5%B9%B2%E5%9C%B0%E9%90%B5%E7%AB%99/" target="_blank" rel="noopener" class="ref-link">📋 塔什干地鐵站景點整理（娜娜來了）</a>

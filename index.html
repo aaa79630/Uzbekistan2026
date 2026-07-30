@@ -799,14 +799,12 @@
     font-family: 'Manrope', sans-serif;
   }
   .day-map-label .title {
-    display: block;
     font-size: 13px;
     color: var(--tile-blue);
     font-weight: 700;
   }
   .day-map-label .hint {
-    display: block;
-    margin-top: 3px;
+    margin-left: 8px;
     font-size: 11px;
     font-weight: 400;
     color: var(--earth-brown);
@@ -822,23 +820,23 @@
     .day-map iframe { height: 300px; }
   }
 
-  /* 裁掉 Google 我的地圖內嵌版頂部的標題列（地圖名稱／擁有者資訊） */
+  /* 裁掉 Google 我的地圖內嵌版頂部的標題列＋鍵盤快速鍵提示列 */
   .day-map-crop {
-    height: 380px;
+    height: 480px;
     overflow: hidden;
     position: relative;
   }
   .day-map-crop iframe {
     position: absolute;
-    top: -59px;
+    top: -97px;
     left: 0;
     width: 100%;
-    height: calc(100% + 59px);
+    height: calc(100% + 97px);
     border: 0;
   }
   @media (max-width: 768px) {
-    .day-map-crop { height: 300px; }
-    .day-map-crop iframe { height: calc(100% + 59px); }
+    .day-map-crop { height: 400px; }
+    .day-map-crop iframe { height: calc(100% + 97px); }
   }
 
   /* ===== YouTube 影片縮圖卡片（點擊開新分頁播放） ===== */
@@ -2892,6 +2890,10 @@
           <div class="gallery-caption">帖木兒廣場 · Hit the Road Ket</div>
         </div>
       </div>
+      <div class="day-map">
+        <div class="day-map-label"><span class="title">🗺️ 塔什干景點地圖</span><span class="hint">可拖曳縮放</span></div>
+        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=12pBfBnxL5R9jYV7GKH4PkD90WiP7ZXQ&ll=41.2995%2C69.2401&z=12&ehbc=2E312F&noprof=1" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
+      </div>
       <div class="highlight-box">
         <p style="font-size:13px;color:var(--earth-brown);margin-bottom:12px;">💡 以下這幾個景點其實都在塔什干老城同一個街區，用走的就能全部串起來，不用擔心是分散的景點。</p>
         <ul style="list-style: none; font-size: 14px;">
@@ -2934,10 +2936,6 @@
         <a class="yt-embed-item" href="https://www.youtube.com/watch?v=LydeWaKK0Uo&t=176" target="_blank" rel="noopener"><div class="yt-embed-label">▶ 塔什干吃350公斤的抓飯</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/LydeWaKK0Uo/hqdefault.jpg" alt="▶ 塔什干吃350公斤的抓飯" loading="lazy"><span class="yt-embed-play"></span></div></a>
         <a class="yt-embed-item" href="https://www.youtube.com/watch?v=hG-ekv5tLMI" target="_blank" rel="noopener"><div class="yt-embed-label">▶ Chorsu Bazaar 市集散步</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/hG-ekv5tLMI/hqdefault.jpg" alt="▶ Chorsu Bazaar 市集散步" loading="lazy"><span class="yt-embed-play"></span></div></a>
       </div>
-      <div class="day-map">
-        <div class="day-map-label"><span class="title">🗾 塔什干景點地圖</span><span class="hint">可拖曳縮放</span></div>
-        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=17IT9t4hKBIDCmZb8K3V7kCLv-5HH7JQ&ll=41.2995%2C69.2401&z=12" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
-      </div>
     </div>
   </div>
 
@@ -2968,6 +2966,10 @@
           <img src="https://images.unsplash.com/photo-1766133334847-7a9cd4dfca8f?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="希瓦傳統服飾人群" loading="lazy">
           <div class="gallery-caption">傳統服飾 · Nicola Poluzzi</div>
         </div>
+      </div>
+      <div class="day-map">
+        <div class="day-map-label"><span class="title">🗺️ 希瓦景點地圖</span><span class="hint">可拖曳縮放</span></div>
+        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=12pBfBnxL5R9jYV7GKH4PkD90WiP7ZXQ&ll=41.3775%2C60.3589&z=15&ehbc=2E312F&noprof=1" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
       </div>
       <div class="highlight-box">
         <ul style="list-style: none; font-size: 14px;">
@@ -3022,10 +3024,6 @@
         <a class="yt-embed-item" href="https://www.youtube.com/watch?v=ujVb11U6v2Q" target="_blank" rel="noopener"><div class="yt-embed-label">▶ 希瓦中文介紹</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/ujVb11U6v2Q/hqdefault.jpg" alt="▶ 希瓦中文介紹" loading="lazy"><span class="yt-embed-play"></span></div></a>
         <a class="yt-embed-item" href="https://www.youtube.com/watch?v=SrdZF-JNZ1A" target="_blank" rel="noopener"><div class="yt-embed-label">▶ 希瓦・花剌子模旅遊分享</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/SrdZF-JNZ1A/hqdefault.jpg" alt="▶ 希瓦花剌子模旅遊分享" loading="lazy"><span class="yt-embed-play"></span></div></a>
       </div>
-      <div class="day-map">
-        <div class="day-map-label"><span class="title">🗾 希瓦景點地圖</span><span class="hint">可拖曳縮放</span></div>
-        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=17IT9t4hKBIDCmZb8K3V7kCLv-5HH7JQ&ll=41.3775%2C60.3589&z=15" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
-      </div>
     </div>
   </div>
 
@@ -3057,6 +3055,10 @@
         </div>
       </div>
       <div style="font-size:13px;color:var(--earth-brown);margin-bottom:16px;">這片沙漠城堡群烏茲別克語稱 Ellik-Kala（五十座城堡），2008年已提報UNESCO世界遺產暫定名單，尚未正式列入。原本逾50座，因風沙侵蝕與蘇聯時代農業開發破壞，如今僅存約20座——與前述蘇聯抽乾河水種棉花、鹹海乾涸是同一條脈絡。</div>
+      <div class="day-map">
+        <div class="day-map-label"><span class="title">🗺️ 沙漠古堡地圖</span><span class="hint">可拖曳縮放</span></div>
+        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=12pBfBnxL5R9jYV7GKH4PkD90WiP7ZXQ&ll=42.0200%2C60.8500&z=10&ehbc=2E312F&noprof=1" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
+      </div>
       <div class="highlight-box">
         <ul style="list-style: none; font-size: 14px;">
           <li>• <strong>紅堡 Kyzyl Kala</strong><a class="spot-map-link" href="https://maps.app.goo.gl/zQ2Z3vvfwUqUQWtH8" target="_blank" rel="noopener">📍</a>：停留約30分鐘。方形軍事要塞，紅色泥磚外牆與雙層防禦牆保存完整，是三座古堡中唯一緊鄰阿姆河灌溉渠道的一座
@@ -3077,10 +3079,6 @@
           </li>
         </ul>
         <div style="margin-top:10px;font-size:13px;color:var(--earth-brown);">💡 三座古堡皆露天無開放時間，門票現場現金支付；時間有限可縮短前兩座、留時間給 Ayaz Kala；午餐後還有約5.5小時車程到布哈拉，建議先跟司機確認行李廂夠大。</div>
-      </div>
-      <div class="day-map">
-        <div class="day-map-label"><span class="title">🗾 沙漠古堡地圖</span><span class="hint">可拖曳縮放</span></div>
-        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=17IT9t4hKBIDCmZb8K3V7kCLv-5HH7JQ&ll=42.0200%2C60.8500&z=10" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
       </div>
     </div>
   </div>
@@ -3111,6 +3109,10 @@
           <img src="https://images.unsplash.com/photo-1742463116209-2b2cd0190396?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="布哈拉木窗雕花建築" loading="lazy">
           <div class="gallery-caption">歷史建築內院 · Olga Kovalski</div>
         </div>
+      </div>
+      <div class="day-map">
+        <div class="day-map-label"><span class="title">🗺️ 布哈拉景點地圖</span><span class="hint">可拖曳縮放</span></div>
+        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=12pBfBnxL5R9jYV7GKH4PkD90WiP7ZXQ&ll=39.7760%2C64.4180&z=15&ehbc=2E312F&noprof=1" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
       </div>
       <div class="highlight-box">
         <ul style="list-style: none; font-size: 14px;">
@@ -3187,10 +3189,6 @@
         <a class="yt-embed-item" href="https://www.youtube.com/watch?v=E2Db4NkupSY" target="_blank" rel="noopener"><div class="yt-embed-label">▶ 布哈拉中文介紹</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/E2Db4NkupSY/hqdefault.jpg" alt="▶ 布哈拉中文介紹" loading="lazy"><span class="yt-embed-play"></span></div></a>
         <a class="yt-embed-item" href="https://www.youtube.com/watch?v=Q80b6KuPp1U" target="_blank" rel="noopener"><div class="yt-embed-label">▶ 布哈拉旅遊分享</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/Q80b6KuPp1U/hqdefault.jpg" alt="▶ 布哈拉旅遊分享" loading="lazy"><span class="yt-embed-play"></span></div></a>
       </div>
-      <div class="day-map">
-        <div class="day-map-label"><span class="title">🗾 布哈拉景點地圖</span><span class="hint">可拖曳縮放</span></div>
-        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=17IT9t4hKBIDCmZb8K3V7kCLv-5HH7JQ&ll=39.7747%2C64.4286&z=15" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
-      </div>
     </div>
   </div>
 
@@ -3224,6 +3222,10 @@
           <img src="https://images.unsplash.com/photo-1728565721620-fefb198160be?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="夏赫靜達陵墓群清晨" loading="lazy">
           <div class="gallery-caption">夏赫靜達陵墓群 · Aleksander Stypczynski</div>
         </div>
+      </div>
+      <div class="day-map">
+        <div class="day-map-label"><span class="title">🗺️ 撒馬爾罕景點地圖</span><span class="hint">可拖曳縮放</span></div>
+        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=12pBfBnxL5R9jYV7GKH4PkD90WiP7ZXQ&ll=39.6550%2C66.9820&z=15&ehbc=2E312F&noprof=1" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
       </div>
       <div class="highlight-box">
         <ul style="list-style: none; font-size: 14px;">
@@ -3293,10 +3295,6 @@
         <a class="yt-embed-item" href="https://www.youtube.com/watch?v=2nKrN0wb52g" target="_blank" rel="noopener"><div class="yt-embed-label">▶ 撒馬爾罕中文介紹</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/2nKrN0wb52g/hqdefault.jpg" alt="▶ 撒馬爾罕中文介紹" loading="lazy"><span class="yt-embed-play"></span></div></a>
         <a class="yt-embed-item" href="https://www.youtube.com/watch?v=6AgewtYC3vs" target="_blank" rel="noopener"><div class="yt-embed-label">▶ 撒馬爾罕深度旅遊（中亞旅行Vlog）</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/6AgewtYC3vs/hqdefault.jpg" alt="▶ 撒馬爾罕深度旅遊" loading="lazy"><span class="yt-embed-play"></span></div></a>
       </div>
-      <div class="day-map">
-        <div class="day-map-label"><span class="title">🗾 撒馬爾罕景點地圖</span><span class="hint">可拖曳縮放</span></div>
-        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=17IT9t4hKBIDCmZb8K3V7kCLv-5HH7JQ&ll=39.6550%2C66.9820&z=15" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
-      </div>
     </div>
   </div>
 
@@ -3346,6 +3344,10 @@
           <img src="https://images.pexels.com/photos/19227972/pexels-photo-19227972.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="太空人站" loading="lazy">
           <div class="gallery-caption">太空人站 Kosmonavtlar · AXP Photography</div>
         </div>
+      </div>
+      <div class="day-map">
+        <div class="day-map-label"><span class="title">🗺️ 塔什干景點地圖</span><span class="hint">可拖曳縮放</span></div>
+        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=12pBfBnxL5R9jYV7GKH4PkD90WiP7ZXQ&ll=41.2995%2C69.2401&z=12&ehbc=2E312F&noprof=1" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
       </div>
       <div class="highlight-box">
         <ul style="list-style: none; font-size: 14px;">
@@ -3469,10 +3471,6 @@
         <a class="yt-embed-item" href="https://www.youtube.com/watch?v=eYiLV1mlPRA" target="_blank" rel="noopener"><div class="yt-embed-label">▶ 塔什干地鐵藝術站</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/eYiLV1mlPRA/hqdefault.jpg" alt="▶ 塔什干地鐵藝術站" loading="lazy"><span class="yt-embed-play"></span></div></a>
         <a class="yt-embed-item" href="https://www.youtube.com/watch?v=VsgAtxxSFs4" target="_blank" rel="noopener"><div class="yt-embed-label">▶ 塔什干地鐵巡禮</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/VsgAtxxSFs4/hqdefault.jpg" alt="▶ 塔什干地鐵巡禮" loading="lazy"><span class="yt-embed-play"></span></div></a>
         <a class="yt-embed-item" href="https://www.youtube.com/watch?v=yir7DiaMM-Q&t=1500" target="_blank" rel="noopener"><div class="yt-embed-label">▶ 蘇聯設計的亞洲首都，藏著伊斯蘭版迪士尼</div><div class="yt-embed-thumb"><img src="https://img.youtube.com/vi/yir7DiaMM-Q/hqdefault.jpg" alt="▶ 蘇聯設計的亞洲首都，藏著伊斯蘭版迪士尼" loading="lazy"><span class="yt-embed-play"></span></div></a>
-      </div>
-      <div class="day-map">
-        <div class="day-map-label"><span class="title">🗾 塔什干景點地圖</span><span class="hint">可拖曳縮放</span></div>
-        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=17IT9t4hKBIDCmZb8K3V7kCLv-5HH7JQ&ll=41.2995%2C69.2401&z=12" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
       </div>
     </div>
   </div>

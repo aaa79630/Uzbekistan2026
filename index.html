@@ -810,6 +810,25 @@
     color: var(--earth-brown);
     opacity: 0.75;
   }
+  .day-map-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    margin-top: 6px;
+  }
+  .day-map-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: var(--earth-brown);
+  }
+  .day-map-legend .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    display: inline-block;
+  }
   .day-map iframe {
     display: block;
     width: 100%;
@@ -820,23 +839,23 @@
     .day-map iframe { height: 300px; }
   }
 
-  /* 裁掉 Google 我的地圖內嵌版頂部的標題列＋鍵盤快速鍵提示列 */
+  /* 裁掉 Google 我的地圖內嵌版頂部的標題列＋鍵盤快速鍵提示列＋景點彈窗露出的殘影 */
   .day-map-crop {
-    height: 480px;
+    height: 520px;
     overflow: hidden;
     position: relative;
   }
   .day-map-crop iframe {
     position: absolute;
-    top: -97px;
+    top: -140px;
     left: 0;
     width: 100%;
-    height: calc(100% + 97px);
+    height: calc(100% + 140px);
     border: 0;
   }
   @media (max-width: 768px) {
-    .day-map-crop { height: 400px; }
-    .day-map-crop iframe { height: calc(100% + 97px); }
+    .day-map-crop { height: 440px; }
+    .day-map-crop iframe { height: calc(100% + 140px); }
   }
 
   /* ===== YouTube 影片縮圖卡片（點擊開新分頁播放） ===== */
@@ -2891,8 +2910,8 @@
         </div>
       </div>
       <div class="day-map">
-        <div class="day-map-label"><span class="title">🗺️ 塔什干景點地圖</span><span class="hint">可拖曳縮放</span></div>
-        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=12pBfBnxL5R9jYV7GKH4PkD90WiP7ZXQ&ll=41.3160%2C69.2480&z=13&ehbc=2E312F&noprof=1" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
+        <div class="day-map-label"><span class="title">🗺️ 塔什干景點地圖</span><span class="hint">可拖曳縮放</span><div class="day-map-legend"><span><i class="dot" style="background:#0288D1;"></i>UNESCO世界遺產</span><span><i class="dot" style="background:#E65100;"></i>景點</span><span><i class="dot" style="background:#F9A825;"></i>餐廳推薦</span><span><i class="dot" style="background:#424242;"></i>住宿</span><span><i class="dot" style="background:#558B2F;"></i>交通站點</span></div></div>
+        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=12pBfBnxL5R9jYV7GKH4PkD90WiP7ZXQ&ll=41.3250%2C69.2480&z=13&ehbc=2E312F&noprof=1" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
       </div>
       <div class="highlight-box">
         <p style="font-size:13px;color:var(--earth-brown);margin-bottom:12px;">💡 以下這幾個景點其實都在塔什干老城同一個街區，用走的就能全部串起來，不用擔心是分散的景點。</p>
@@ -2946,7 +2965,7 @@
     </div>
     <div class="day-content">
       <div class="day-route">塔什干 🛫 希瓦 Khiva</div>
-      <div class="day-tagline">凝結在希瓦汗國全盛時期的絲路古城，走進保存最完整的「露天博物館」。</div>
+      <div class="day-tagline">阿姆河下游沖積出的花剌子模綠洲，凝結在希瓦汗國全盛時期的絲路古城，走進保存最完整的「露天博物館」。</div>
       <div class="day-details">下午搭乘國內線班機（HY 55，13:45起飛）飛往烏爾根奇轉希瓦，約16:00-16:30抵達。希瓦是16世紀後希瓦汗國的首都，也是花剌子模綠洲文明保存最完整的古城，Day2下午先輕鬆逛，Day3再深度探索伊欽卡拉內城、朱瑪清真寺的古老木柱與藍色未完成塔。</div>
       <p style="font-size:13px;color:var(--earth-brown);margin-bottom:12px;">💡 小知識：希瓦離土庫曼邊境只有約5-30公里，近到甚至有人專程來這裡「順便踏出國門」。</p>
       <div class="day-photo-strip">
@@ -2968,13 +2987,13 @@
         </div>
       </div>
       <div class="day-map">
-        <div class="day-map-label"><span class="title">🗺️ 希瓦景點地圖</span><span class="hint">可拖曳縮放</span></div>
+        <div class="day-map-label"><span class="title">🗺️ 希瓦景點地圖</span><span class="hint">可拖曳縮放</span><div class="day-map-legend"><span><i class="dot" style="background:#0288D1;"></i>UNESCO世界遺產</span><span><i class="dot" style="background:#E65100;"></i>景點</span><span><i class="dot" style="background:#F9A825;"></i>餐廳推薦</span><span><i class="dot" style="background:#424242;"></i>住宿</span><span><i class="dot" style="background:#558B2F;"></i>交通站點</span></div></div>
         <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=12pBfBnxL5R9jYV7GKH4PkD90WiP7ZXQ&ll=41.3800%2C60.3589&z=16&ehbc=2E312F&noprof=1" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
       </div>
       <div class="highlight-box">
         <ul style="list-style: none; font-size: 14px;">
           <li>• <strong>伊欽卡拉內城 Itchan Kala</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Itchan%20Kala%20Khiva" target="_blank" rel="noopener">📍</a><span class="unesco-badge">🏛 UNESCO 1990</span>：希瓦古城牆內的露天博物館，希瓦所有主要景點皆位於城內，一進西門就會看到最搶眼的「卡爾塔米諾爾矮塔」
-            <div class="chip-row"><span class="chip">🎫 聯票 250,000 UZS／人（約 $20 美金／NT$655），效期48小時，涵蓋城內大多數清真寺、經學院、宮殿</span><span class="chip chip-tip">💡 伊斯蘭霍賈宣禮塔登頂、城牆攀登需另購票（各約 40,000–100,000 UZS，約 $3–8 美金／NT$105–262）</span></div>
+            <div class="chip-row"><span class="chip">🎫 聯票 250,000 UZS／人（約 $20 美金／NT$655），效期48小時，涵蓋城內大多數清真寺、經學院、宮殿</span><span class="chip chip-tip">💡 伊斯蘭霍賈宣禮塔登頂、城牆攀登需另購票（各約 40,000–100,000 UZS，約 $3–8 美金／NT$105–262）</span><span class="chip chip-tip">💡 Grand Vizir 就在城牆內，入住期間門票可能免費，建議check-in時跟櫃檯確認</span></div>
             <button class="deep-guide-btn" onclick="openGuide('kaltaMinor')">🔍 深度導覽</button>
           </li>
           <li>• <strong>伊斯蘭霍賈宣禮塔 Islam Khodja Minaret</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Islam%20Khodja%20Minaret%20Khiva" target="_blank" rel="noopener">📍</a>：俯瞰古城最佳制高點，日落前上去拍照
@@ -3056,7 +3075,7 @@
       </div>
       <div style="font-size:13px;color:var(--earth-brown);margin-bottom:16px;">這片沙漠城堡群烏茲別克語稱 Ellik-Kala（五十座城堡），2008年已提報UNESCO世界遺產暫定名單，尚未正式列入。原本逾50座，因風沙侵蝕與蘇聯時代農業開發破壞，如今僅存約20座——與前述蘇聯抽乾河水種棉花、鹹海乾涸是同一條脈絡。</div>
       <div class="day-map">
-        <div class="day-map-label"><span class="title">🗺️ 沙漠古堡地圖</span><span class="hint">可拖曳縮放</span></div>
+        <div class="day-map-label"><span class="title">🗺️ 沙漠古堡地圖</span><span class="hint">可拖曳縮放</span><div class="day-map-legend"><span><i class="dot" style="background:#0288D1;"></i>UNESCO世界遺產</span><span><i class="dot" style="background:#E65100;"></i>景點</span><span><i class="dot" style="background:#F9A825;"></i>餐廳推薦</span><span><i class="dot" style="background:#424242;"></i>住宿</span><span><i class="dot" style="background:#558B2F;"></i>交通站點</span></div></div>
         <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=12pBfBnxL5R9jYV7GKH4PkD90WiP7ZXQ&ll=42.0070%2C60.8830&z=11&ehbc=2E312F&noprof=1" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
       </div>
       <div class="highlight-box">
@@ -3090,7 +3109,7 @@
     </div>
     <div class="day-content">
       <div class="day-route">布哈拉 Bukhara</div>
-      <div class="day-tagline">聖地布哈拉：清真寺、宣禮塔與千年巴札。</div>
+      <div class="day-tagline">澤拉夫尚河下游綠洲上的聖地布哈拉：清真寺、宣禮塔與千年巴札。</div>
       <div class="day-details">昨晚已抵達布哈拉，今天全日市區遊覽。朝聖中亞最雄偉的卡揚宣禮塔，在萊比豪斯廣場水池旁享受悠閒。近郊亦有夏宮與聖祠值得半日遊。</div>
       <div class="day-photo-strip">
         <div class="gallery-item">
@@ -3111,8 +3130,8 @@
         </div>
       </div>
       <div class="day-map">
-        <div class="day-map-label"><span class="title">🗺️ 布哈拉景點地圖</span><span class="hint">可拖曳縮放</span></div>
-        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=12pBfBnxL5R9jYV7GKH4PkD90WiP7ZXQ&ll=39.7760%2C64.4180&z=15&ehbc=2E312F&noprof=1" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
+        <div class="day-map-label"><span class="title">🗺️ 布哈拉景點地圖</span><span class="hint">可拖曳縮放</span><div class="day-map-legend"><span><i class="dot" style="background:#0288D1;"></i>UNESCO世界遺產</span><span><i class="dot" style="background:#E65100;"></i>景點</span><span><i class="dot" style="background:#F9A825;"></i>餐廳推薦</span><span><i class="dot" style="background:#424242;"></i>住宿</span><span><i class="dot" style="background:#558B2F;"></i>交通站點</span></div></div>
+        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=12pBfBnxL5R9jYV7GKH4PkD90WiP7ZXQ&ll=39.7774%2C64.4180&z=15&ehbc=2E312F&noprof=1" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
       </div>
       <div class="highlight-box">
         <ul style="list-style: none; font-size: 14px;">
@@ -3160,27 +3179,35 @@
       </div>
       <div class="restaurant-box"><div class="restaurant-list">
         <div class="restaurant-card">
-          <span class="r-tag">★ 需提前訂位</span>
+          <span class="r-tag">🍽 正式餐廳 · ★ 需提前訂位</span>
           <div class="r-name">Labi Hovuz<a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Labi%20Hovuz%20restaurant%20Bukhara" target="_blank" rel="noopener">📍</a></div>
           <p>就在拉比豪茲水池畔，布哈拉老城最經典的地標餐廳，戶外水池座位＋夜晚live music，適合團體聚餐氣氛。招牌烤肉串份量大。<br>• Lyabi-Hauz 廣場（老城核心，步行可達所有主要景點）</p>
           <span class="r-book">10人訂位：熱門時段（晚餐、有live music的夜晚）常客滿，且服務生忙碌時較難招呼到，建議提前透過飯店或當地包車司機協助電話占位，或提早30分鐘到場候位。</span>
         </div>
         <div class="restaurant-card">
-          <span class="r-tag">★ 現場表演</span>
+          <span class="r-tag">🍽 正式餐廳 · ★ 現場表演</span>
           <div class="r-name">Aladdin's Lamp<a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Aladdin%27s%20Lamp%20restaurant%20Bukhara" target="_blank" rel="noopener">📍</a></div>
           <p>位於賽菲丁商隊驛站（Sayfiddin Caravansaray）內，白天悠閒、晚上有現場樂團與傳統舞蹈表演，氣氛濃厚，是在地人與遊客都愛去的一間。招牌烤肉串（Kebab）、手工餃子評價高。<br>• Bahouddin Naqshbandi Ko'chasi 48, Bukhara（老城核心區）</p>
           <span class="r-book">10人訂位：晚上有表演的時段較熱門，建議提前訂位；部分評論提到現場音樂會另收「贊助費」但店家未必主動告知，入座前可先問清楚是否收費。</span>
         </div>
         <div class="restaurant-card">
-          <span class="r-tag">📸 卡揚宣禮塔景觀第一排</span>
+          <span class="r-tag">🍽 正式餐廳 · ★ 評價很高</span>
+          <div class="r-name">Ayvan<a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Ayvan%20Bukhara" target="_blank" rel="noopener">📍</a></div>
+          <p>位於萊比豪茲廣場旁一棟1886年老宅（現為Lyabi House飯店），歐式＋烏茲別克融合料理，烤肉、義大利麵、燉菜評價都很高，中午11:00-16:00限定招牌布哈拉抓飯，晚上常有現場鋼琴演奏，被部分評論譽為布哈拉最好的兩間餐廳之一。<br>• N. Husainova 街7號（萊比豪茲廣場旁）</p>
+          <span class="r-book">熱門時段一位難求，建議提前訂位；用餐體驗較悠閒，可抓1.5-2.5小時。</span>
+        </div>
+        <div class="restaurant-card">
+          <span class="r-tag">☕ 景觀輕食</span>
           <div class="r-name">Pavillon Kalon<a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Pavillon%20Kalon%20Bukhara" target="_blank" rel="noopener">📍</a></div>
           <p>正對卡揚宣禮塔的景觀咖啡廳／餐廳，是拍宣禮塔日落最搶手的位置，適合傍晚喝杯飲料、慢慢等光線變化。餐點選擇不算多，以景觀為主要賣點。<br>• 卡揚宣禮塔對面，步行可達</p>
           <span class="r-book">建議日落前1小時左右入座卡位，才搶得到正對宣禮塔的最佳角度。</span>
         </div>
         <div class="restaurant-card">
+          <span class="r-tag">🫖 茶館 · 有輕食</span>
           <div class="r-name">Oriental Tea House<a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Oriental%20Tea%20House%20Bukhara" target="_blank" rel="noopener">📍</a></div>
           <p>藏在老城巷弄裡的絲路風情茶館，木雕天花板很美，主打道地烤包子（Samsa）與手拉麵，氣氛悠閒適合中午休息。<br>• 布哈拉老城區中心，距市集（Bazaar）步行數分鐘</p>
           <span class="r-book">10人訂位：屬於較悠閒的中小型茶館，人多建議提前告知店家或請飯店代訂，避免現場併桌久候。</span>
+          <p style="font-size:12px;opacity:0.75;margin-top:6px;">💡 同樣在萊比豪茲廣場周邊，也可以參考 <strong>Silk Road Teahouse</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Silk%20Road%20Teahouse%20Bukhara" target="_blank" rel="noopener">📍</a>——純喝茶配傳統點心（蜜餞、堅果、糖漬水果），固定價喝到飽，但不供應正餐，適合排在下午茶歇腳時段，不要排在正餐時間。</p>
         </div>
       </div>
       </div>
@@ -3199,11 +3226,12 @@
     </div>
     <div class="day-content">
       <div class="day-route">布哈拉 <span style="display:inline-block;transform:scaleX(-1);">🚄</span> 撒馬爾罕 Samarkand</div>
-      <div class="day-tagline">中亞最古老城市之一：絲路最閃耀的藍色寶石。</div>
-      <p style="font-size:13px;color:var(--earth-brown);margin-bottom:0;">💡 你們搭來的高鐵「Afrosiyob」，名字就是取自撒馬爾罕的古名——阿夫拉西亞卜（Afrasiyab）。
-        <button class="deep-guide-btn" onclick="openGuide('afrasiyabHistory')" style="margin:4px 0 0;">🔍 深度導覽</button>
-      </p>
+      <div class="day-tagline">澤拉夫尚河灌溉出的中亞最古老城市之一：絲路最閃耀的藍色寶石。</div>
       <div class="day-details">搭乘 Afrosiyob 高鐵（約1.5h）快速抵達。走進令人震撼的雷吉斯坦廣場與宛如走入《一千零一夜》場景的沙赫靜達藍色陶磚走廊。近郊可參觀千年造紙坊與絲綢工坊。</div>
+      <div style="overflow:hidden;font-size:13px;color:var(--earth-brown);margin-bottom:12px;">
+        <button class="deep-guide-btn" onclick="openGuide('afrasiyabHistory')" style="float:right;margin:2px 0 6px 10px;">🔍 深度導覽</button>
+        <span>💡 你們搭來的高鐵「Afrosiyob」，名字就是取自撒馬爾罕的古名——阿夫拉西亞卜（Afrasiyab）。</span>
+      </div>
       <p style="font-size:13px;color:var(--earth-brown);margin-bottom:12px;">💡 小知識：撒馬爾罕距離塔吉克邊境只有約40公里，市區日常對話很多當地人其實說的是塔吉克語（波斯語方言），不是烏茲別克語——這座城市的文化根源，某種程度上比烏茲別克其他地方更靠近波斯世界。</p>
       <div class="day-photo-strip">
         <div class="gallery-item">
@@ -3224,25 +3252,24 @@
         </div>
       </div>
       <div class="day-map">
-        <div class="day-map-label"><span class="title">🗺️ 撒馬爾罕景點地圖</span><span class="hint">可拖曳縮放</span></div>
-        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=12pBfBnxL5R9jYV7GKH4PkD90WiP7ZXQ&ll=39.6600%2C66.9780&z=16&ehbc=2E312F&noprof=1" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
+        <div class="day-map-label"><span class="title">🗺️ 撒馬爾罕景點地圖</span><span class="hint">可拖曳縮放</span><div class="day-map-legend"><span><i class="dot" style="background:#0288D1;"></i>UNESCO世界遺產</span><span><i class="dot" style="background:#E65100;"></i>景點</span><span><i class="dot" style="background:#F9A825;"></i>餐廳推薦</span><span><i class="dot" style="background:#424242;"></i>住宿</span><span><i class="dot" style="background:#558B2F;"></i>交通站點</span></div></div>
+        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=12pBfBnxL5R9jYV7GKH4PkD90WiP7ZXQ&ll=39.6600%2C66.9830&z=15&ehbc=2E312F&noprof=1" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
       </div>
       <div class="highlight-box">
         <ul style="list-style: none; font-size: 14px;">
           <li>• <strong>撒馬爾罕：文化交匯的十字路口</strong><span class="unesco-badge">🏛 UNESCO 2001</span>：撒馬爾罕舊城整體被列為遺產，以下景點皆屬其中
             <button class="deep-guide-btn" onclick="openGuide('samarkandCity')">🔍 深度導覽</button>
           </li>
-          <li>• <strong>雷吉斯坦廣場 Registan</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Registan%20Samarkand" target="_blank" rel="noopener">📍</a>：清晨無人時拍照最美；夜晚燈光秀 ★ 必看
+          <li>• <strong>古爾埃米爾陵墓 Gur-e-Amir</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Gur-e-Amir%20Samarkand" target="_blank" rel="noopener">📍</a>：帖木兒長眠之處，藍色肋骨圓頂
+            <div class="chip-row"><span class="chip">🎫 約 75,000 UZS／人（約 $6 美金／NT$197）</span></div>
+            <button class="deep-guide-btn" onclick="openGuide('gurEAmir')">🔍 深度導覽</button>
+          </li>
+          <li>• <strong>雷吉斯坦廣場 Registan</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Registan%20Samarkand" target="_blank" rel="noopener">📍</a>：清晨無人時拍照最美；日落金光灑在磚面上又是另一種美；夜晚燈光秀 ★ 必看，距古爾埃米爾陵墓步行約10分鐘
             <div class="chip-row"><span class="chip">🎫 100,000 UZS／人（約 $8 美金／NT$262）</span><span class="chip chip-tip">🕐 開放約 08:00–19:00</span><span class="chip chip-tip">🕐 夜晚燈光秀約 20:00–21:00 於廣場外免費觀賞</span></div>
             <button class="deep-guide-btn" onclick="openGuide('registan')">🔍 深度導覽</button>
           </li>
-          <li>• <strong>夏赫靜達陵墓群 Shah-i-Zinda</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Shah-i-Zinda%20Samarkand" target="_blank" rel="noopener">📍</a>：全球最美藍色陶磚走廊，穿越千年
-            <div class="chip-row"><span class="chip">🎫 約 50,000–75,000 UZS／人（約 $4–6 美金／NT$131–197）</span><span class="chip chip-tip">🕐 開放約 08:00–19:00</span></div>
-            <button class="deep-guide-btn" onclick="openGuide('shahIZinda')">🔍 深度導覽</button>
-          </li>
-          <li>• <strong>阿弗拉西阿卜博物館 Afrasiyab Museum</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Afrasiyab%20Museum%20Samarkand" target="_blank" rel="noopener">📍</a>：典藏7世紀粟特壁畫「大使廳」，就在夏赫靜達陵墓群旁，順遊性高
-            <div class="chip-row"><span class="chip">🎫 約 80,000 UZS／人（約 $6 美金／NT$210，外國人票價）</span><span class="chip chip-tip">🕐 開放約 09:00–18:00</span></div>
-            <button class="deep-guide-btn" onclick="openGuide('afrasiyabMuseum')">🔍 深度導覽</button>
+          <li>• <strong>Happy Bird Art Gallery</strong><a class="spot-map-link" href="https://maps.app.goo.gl/XbTeUoVDShZ8XZL28" target="_blank" rel="noopener">📍</a><span class="optional-tag">網友推薦</span>：就在雷吉斯坦廣場旁一棟歷史商隊驛站（caravanserai）改建的「撒馬爾罕工藝中心」庭院裡，Elena Ladik 用復古蘇聯布料＋Fergana河谷Ikat絲棉布，手工訂製融合民族元素的現代服裝，也賣配件、蘇薩尼刺繡、當地藝術家畫作，是中亞工藝品支持協會（CACSA）與工匠共和國協會的會員。Tripadvisor撒馬爾罕景點排名第一（248則評論），很多人一進去就泡上好幾小時，邊喝土耳其咖啡邊試穿
+            <div class="chip-row"><span class="chip chip-tip">🕐 約 10:00–19:00</span><span class="chip chip-tip">💡 逛完雷吉斯坦廣場可順路過去，價位偏精品（單件手工製作），適合找有質感的紀念品或送禮</span></div>
           </li>
           <li>• <strong>比比哈努姆清真寺 Bibi-Khanym</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Bibi-Khanym%20Mosque%20Samarkand" target="_blank" rel="noopener">📍</a>：帖木兒為愛妻建造的宏偉清真寺
             <div class="chip-row"><span class="chip">🎫 約 75,000 UZS／人（約 $6 美金／NT$197）</span></div>
@@ -3251,9 +3278,13 @@
           <li>• <strong>西亞卜市集 Siyob Bazaar</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Siyob%20Bazaar%20Samarkand" target="_blank" rel="noopener">📍</a>：就在比比哈努姆清真寺旁，撒馬爾罕最大市集，穹頂大廳裡蔬果、香料、堅果乾果、手工藝品應有盡有，必買撒馬爾罕烤饢（當地公認全烏茲別克最好吃）
             <div class="chip-row"><span class="chip chip-tip">🕐 07:00–19:00，週一公休</span><span class="chip chip-tip">💡 建議早上去，蔬果最新鮮、人潮也較少；議價方式同喬爾蘇市集</span><span class="chip chip-tip">🍇 9月正值石榴、葡萄、哈密瓜盛產季，蔬果攤位可以直接買現切水果試吃</span></div>
           </li>
-          <li>• <strong>古爾埃米爾陵墓 Gur-e-Amir</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Gur-e-Amir%20Samarkand" target="_blank" rel="noopener">📍</a>：帖木兒長眠之處，藍色肋骨圓頂
-            <div class="chip-row"><span class="chip">🎫 約 75,000 UZS／人（約 $6 美金／NT$197）</span></div>
-            <button class="deep-guide-btn" onclick="openGuide('gurEAmir')">🔍 深度導覽</button>
+          <li>• <strong>夏赫靜達陵墓群 Shah-i-Zinda</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Shah-i-Zinda%20Samarkand" target="_blank" rel="noopener">📍</a>：全球最美藍色陶磚走廊，穿越千年，距西亞卜市集步行約15-20分鐘
+            <div class="chip-row"><span class="chip">🎫 約 50,000–75,000 UZS／人（約 $4–6 美金／NT$131–197）</span><span class="chip chip-tip">🕐 開放約 08:00–19:00</span><span class="chip chip-tip">💡 建議開門就到，避開人潮，晨光下的藍磚也最美</span></div>
+            <button class="deep-guide-btn" onclick="openGuide('shahIZinda')">🔍 深度導覽</button>
+          </li>
+          <li>• <strong>阿弗拉西阿卜博物館 Afrasiyab Museum</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Afrasiyab%20Museum%20Samarkand" target="_blank" rel="noopener">📍</a>：典藏7世紀粟特壁畫「大使廳」，就在夏赫靜達陵墓群旁，順遊性高
+            <div class="chip-row"><span class="chip">🎫 約 80,000 UZS／人（約 $6 美金／NT$210，外國人票價）</span><span class="chip chip-tip">🕐 開放約 09:00–18:00</span></div>
+            <button class="deep-guide-btn" onclick="openGuide('afrasiyabMuseum')">🔍 深度導覽</button>
           </li>
           <li>• <strong>兀魯伯天文台 Ulugbek Observatory</strong><a class="spot-map-link" href="https://www.google.com/maps/search/?api=1&query=Ulugbek%20Observatory%20Samarkand" target="_blank" rel="noopener">📍</a>：帖木兒孫兀魯伯建造的15世紀天文台遺址，內有小型博物館
             <div class="chip-row"><span class="chip">🎫 約 40,000 UZS／人（約 $3 美金／NT$105）</span><span class="chip chip-tip">💡 距雷吉斯坦廣場約3-4公里，建議搭計程車前往（車程約10-15分鐘）</span></div>
@@ -3346,8 +3377,8 @@
         </div>
       </div>
       <div class="day-map">
-        <div class="day-map-label"><span class="title">🗺️ 塔什干景點地圖</span><span class="hint">可拖曳縮放</span></div>
-        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=12pBfBnxL5R9jYV7GKH4PkD90WiP7ZXQ&ll=41.3160%2C69.2480&z=13&ehbc=2E312F&noprof=1" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
+        <div class="day-map-label"><span class="title">🗺️ 塔什干景點地圖</span><span class="hint">可拖曳縮放</span><div class="day-map-legend"><span><i class="dot" style="background:#0288D1;"></i>UNESCO世界遺產</span><span><i class="dot" style="background:#E65100;"></i>景點</span><span><i class="dot" style="background:#F9A825;"></i>餐廳推薦</span><span><i class="dot" style="background:#424242;"></i>住宿</span><span><i class="dot" style="background:#558B2F;"></i>交通站點</span></div></div>
+        <div class="day-map-crop"><iframe src="https://www.google.com/maps/d/embed?mid=12pBfBnxL5R9jYV7GKH4PkD90WiP7ZXQ&ll=41.3250%2C69.2480&z=13&ehbc=2E312F&noprof=1" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
       </div>
       <div class="highlight-box">
         <ul style="list-style: none; font-size: 14px;">

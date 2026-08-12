@@ -2001,10 +2001,18 @@
     margin-bottom: 30px;
   }
   .city-card {
+    display: block;
     background: #fff;
     border: 1px solid var(--line);
     border-radius: 6px;
     padding: 18px 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.2s, transform 0.15s;
+  }
+  .city-card:hover {
+    box-shadow: 0 6px 16px rgba(30,58,95,0.12);
+    transform: translateY(-2px);
   }
   .city-card-tag {
     font-family: 'Manrope', sans-serif;
@@ -2841,31 +2849,31 @@
   </div>
 
   <div class="city-cards-grid">
-    <div class="city-card" style="border-top:3px solid #1E3A5F;">
+    <a href="#day1" class="city-card" style="border-top:3px solid #1E3A5F;">
       <div class="city-card-tag" style="color:#1E3A5F;">🔵 Day 1 · 10–11</div>
       <div class="city-card-name">塔什干 Tashkent</div>
       <p>現代化首都，蘇聯風格地鐵藝術站是中亞獨一無二的地下宮殿；喬爾蘇市集是進入烏茲別克氣息的最佳入口。</p>
-    </div>
-    <div class="city-card" style="border-top:3px solid #C9973A;">
+    </a>
+    <a href="#day2-3" class="city-card" style="border-top:3px solid #C9973A;">
       <div class="city-card-tag" style="color:#8a6500;">🟡 Day 2–3</div>
       <div class="city-card-name">希瓦 Khiva</div>
       <p>整座城是露天博物館，伊欽卡拉古城保留最完整的土磚城牆與迷宮般的絲路巷弄，如穿越千年的夢境。</p>
-    </div>
-    <div class="city-card" style="border-top:3px solid #8a6500;">
+    </a>
+    <a href="#day4" class="city-card" style="border-top:3px solid #8a6500;">
       <div class="city-card-tag" style="color:#8a6500;">🏜 Day 4</div>
       <div class="city-card-name">沙漠古堡 Ellik-Kala</div>
       <p>希瓦與布哈拉之間的中繼站，克孜勒庫姆沙漠裡散落著花剌子模留下的古堡群，三座堡壘＋蒙古包午餐，是這趟移動日最壯觀的風景。</p>
-    </div>
-    <div class="city-card" style="border-top:3px solid #A8322A;">
+    </a>
+    <a href="#day5-6" class="city-card" style="border-top:3px solid #A8322A;">
       <div class="city-card-tag" style="color:#A8322A;">🟠 Day 5–6</div>
       <div class="city-card-name">布哈拉 Bukhara</div>
       <p>曾是宗教與學術重鎮，卡揚宣禮塔是其不朽標誌；連成吉思汗都不忍拆毀的聖地，擁有兩千年歷史。</p>
-    </div>
-    <div class="city-card" style="border-top:3px solid #5A30A0;">
+    </a>
+    <a href="#day7-9" class="city-card" style="border-top:3px solid #5A30A0;">
       <div class="city-card-tag" style="color:#5A30A0;">🟣 Day 7–9</div>
       <div class="city-card-name">撒馬爾罕 Samarkand</div>
       <p>帖木兒帝國的心臟，「東方的明珠」。雷吉斯坦廣場三座神學院的藍色陶磚，在陽光下閃耀著文明的巔峰。</p>
-    </div>
+    </a>
   </div>
 
   <div id="route-map"></div>
@@ -4612,10 +4620,13 @@
     var btn = card.querySelector('.phrase-play') || card;
     btn.classList.add('playing');
     utter.onend = function () { btn.classList.remove('playing'); };
-    utter.onerror = function () {
+    utter.onerror = function (event) {
       btn.classList.remove('playing');
-      if (lang === 'uz-UZ') {
-        alert('這台裝置可能沒有烏茲別克語語音庫，請直接參考空耳注音發音即可。');
+      // event.error 為 'canceled'/'interrupted' 時，代表是使用者快速連點、被自己前一個播放中的語音蓋掉，
+      // 不是真的找不到語音庫，這種狀況不用跳出教學，避免正常使用時被誤判打擾
+      var isRealVoiceError = event.error && event.error !== 'canceled' && event.error !== 'interrupted';
+      if (isRealVoiceError && (lang === 'uz-UZ' || lang === 'ru-RU')) {
+        openGuide('ttsVoiceHelp');
       }
     };
     window.speechSynthesis.speak(utter);
@@ -4647,9 +4658,9 @@
 <div class="guide-modal-overlay" id="guideModalOverlay">
   <div class="guide-modal">
     <button class="guide-modal-close" id="guideModalClose">✕</button>
-    <div class="guide-modal-eyebrow">深度導覽 · ON-SITE GUIDE</div>
+    <div class="guide-modal-eyebrow" id="guideModalEyebrow">深度導覽 · ON-SITE GUIDE</div>
     <div class="guide-modal-title" id="guideModalTitle"></div>
-    <p style="font-size:11px;color:var(--earth-brown);opacity:0.65;margin-bottom:14px;">🔊 點段落旁的圓鈕可單獨播放該段語音</p>
+    <p id="guideModalHint" style="font-size:11px;color:var(--earth-brown);opacity:0.65;margin-bottom:14px;">🔊 點段落旁的圓鈕可單獨播放該段語音</p>
     <div class="guide-modal-body" id="guideModalBody"></div>
   </div>
 </div>
@@ -4660,6 +4671,11 @@
     tangWesternRegion: {
       title: '唐朝史書裡的西域 · 昭武九姓與羈縻州',
       body: '<strong>史書上的正式編制：</strong>翻開《舊唐書》《新唐書》的西域傳，會發現一件有趣的事——你們現在走訪的撒馬爾罕（康國）、布哈拉（安國）、塔什干（石國），在西元7世紀中葉唐滅西突厥後，都曾被正式編入唐朝的行政體系：康國為「康居都督府」、安國（布哈拉）為「安息州」、石國（塔什干）為「大宛都督府」，統一歸唐朝安西都護管轄。<img src="https://upload.wikimedia.org/wikipedia/commons/4/43/%E5%94%90%E6%9C%9D%E7%96%86%E5%9F%9F%EF%BC%88%E7%B9%81%EF%BC%89.png" alt="唐朝疆域圖，顯示安西都護府與河中地區羈縻範圍"><div class="guide-img-caption" data-no-speak="1">唐朝疆域圖，右側河中地區（今烏茲別克一帶）當年即以羈縻方式劃入版圖。圖片來源：Wikimedia Commons</div><br><br><strong>「昭武九姓」是誰：</strong>這片區域當時有九個以「昭武」為姓的城邦（康、安、曹、石、米、何、火尋、戊地、史），統稱「昭武九姓」。據《隋書》記載，他們的祖先原是月氏人，曾住在祁連山下的「昭武城」（今甘肅張掖一帶），被匈奴擊敗後西遷至此，但歷代國王都沿用「昭武」為姓，作為記憶原鄉的傳承標記（也有學者認為「昭武」其實是某個突厥語或伊朗語詞彙的音譯，未有定論）。這些城邦商隊使節頻繁往來長安，胡旋舞、汗血馬、獅子這些長安人熟悉的異域符號，很多都是經由這條路線傳入的。<br><br><strong>「羈縻」是什麼意思：</strong>不過唐朝跟這些城邦的關係，用的是「羈縻」制度——字面上「羈」是馬籠頭、「縻」是牛繮繩，意指一種鬆散管理：當地國王照樣統治、保有實際權力，只是名義上接受唐朝冊封的官銜印信，唐朝並沒有派官員實際治理，也沒有留下任何建築或制度痕跡，跟安西四鎮（龜茲、疏勒等）那種有唐軍駐紮、有唐朝官員坐鎮的直轄地完全是不同等級。<br><br><strong>名存實亡：</strong>這個安排大概只維持到8世紀初，阿拉伯勢力東擴後就迅速瓦解——阿拉伯將領屈底波在712年前後已經實際攻下布哈拉、撒馬爾罕，等於這層「羈縻」關係早在751年怛羅斯之戰前幾十年就已經名存實亡。怛羅斯之戰是唐朝軍隊實際西進的最遠點，但戰場在今天哈薩克／吉爾吉斯交界的塔拉茲一帶，離布哈拉還有一大段距離；戰敗後，唐朝西擴徹底畫下句點。<br><br><strong>這是中文史書的視角：</strong>這段「唐朝羈縻西域」的敘事框架，主要是中文史書、以唐帝國為主體回望絲路的視角，在烏茲別克當地或國際中亞史學界的歷史敘事裡，這段關係通常不被視為重要篇章——真正深刻形塑這片土地的，是8世紀阿拉伯人帶來的伊斯蘭化、13世紀蒙古西征、14-15世紀帖木兒帝國（接下來會看到的藍色穹頂建築幾乎都源自這個時期），以及19世紀後俄羅斯帝國到蘇聯的統治，這些才是當地歷史敘事真正的主幹。這段記載，更多反映的是唐帝國看待西域的方式，而非當地人理解自身歷史的方式。'
+    },
+    ttsVoiceHelp: {
+      title: '手機沒聲音？教你補上語音包',
+      noSpeech: true,
+      body: '<strong>先別慌，這是裝置本身的限制：</strong>很多手機預設沒有安裝烏茲別克語／俄語的語音包，導致按了發音按鈕沒聲音，這是手機系統層級的限制，不是頁面壞掉。可以直接參考空耳注音欄位念出來即可，不影響溝通。<br><br><strong>如果想讓手機真的發出聲音，可以試試看：</strong><br>1. 開啟手機「設定」<br>2. 搜尋「文字轉語音」（或路徑：設定 → 協助工具／無障礙 → 文字轉語音輸出）<br>3. 檢查目前使用的引擎——如果是三星、小米等廠牌自己的引擎，建議切換成「Google文字轉語音引擎」，語言支援度通常比較完整<br>4. 點選引擎旁的⚙️設定圖示 → 「安裝語音數據」<br>5. 在語言清單裡找「Uzbek」或「Russian」，點選下載<br><br><strong>如果清單裡真的找不到這個語言：</strong>代表這台裝置的語音引擎確實不支援，可以試著改安裝「Russian」語音包替代（部分詞彙發音接近度可用），或直接用空耳發音就好，不影響溝通。'
     },
     ccaTashkent: {
       title: '塔什干當代藝術中心 · 百年電車站的新生',
@@ -4804,7 +4820,9 @@
     if (!data) return;
     stopGuideVoice();
     document.getElementById('guideModalTitle').textContent = data.title;
-    renderGuideBody(data.body);
+    document.getElementById('guideModalEyebrow').textContent = data.noSpeech ? '使用小提示 · TIPS' : '深度導覽 · ON-SITE GUIDE';
+    document.getElementById('guideModalHint').style.display = data.noSpeech ? 'none' : 'block';
+    renderGuideBody(data.body, data.noSpeech);
     document.getElementById('guideModalOverlay').classList.add('active');
   }
   function closeGuide() {
@@ -4821,7 +4839,7 @@
 
   // 把整段導覽文字，依 <strong>小標題</strong> 的分界拆成好幾個小段，
   // 每一段各自配一顆小圓鈕，可以單獨播放，不用整篇聽到底
-  function renderGuideBody(bodyHtml) {
+  function renderGuideBody(bodyHtml, noSpeech) {
     var container = document.getElementById('guideModalBody');
     container.innerHTML = '';
     var parts = bodyHtml.split(/(?=<strong>)/);
@@ -4832,22 +4850,24 @@
       var seg = document.createElement('div');
       seg.className = 'guide-segment';
 
-      var btn = document.createElement('button');
-      btn.className = 'guide-segment-play';
-      btn.innerHTML = '<span class="gsp-icon">▶</span>';
-
       var textDiv = document.createElement('div');
       textDiv.className = 'guide-segment-text';
       textDiv.innerHTML = part;
 
-      btn.addEventListener('click', function () {
-        var clone = textDiv.cloneNode(true);
-        clone.querySelectorAll('[data-no-speak]').forEach(function (el) { el.remove(); });
-        var text = clone.textContent; // clone 未掛載到畫面上，innerText 在部分瀏覽器會抓不到內容，改用 textContent
-        playSegment(btn, text);
-      });
-
-      seg.appendChild(btn);
+      if (!noSpeech) {
+        var btn = document.createElement('button');
+        btn.className = 'guide-segment-play';
+        btn.innerHTML = '<span class="gsp-icon">▶</span>';
+        btn.addEventListener('click', function () {
+          var clone = textDiv.cloneNode(true);
+          clone.querySelectorAll('[data-no-speak]').forEach(function (el) { el.remove(); });
+          var text = clone.textContent; // clone 未掛載到畫面上，innerText 在部分瀏覽器會抓不到內容，改用 textContent
+          playSegment(btn, text);
+        });
+        seg.appendChild(btn);
+      } else {
+        seg.classList.add('no-speech');
+      }
       seg.appendChild(textDiv);
       container.appendChild(seg);
     });
